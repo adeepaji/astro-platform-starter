@@ -128,3 +128,28 @@ For automatic paid membership and bookings within the app, add a secure backend,
 - Finalise privacy notice, client terms, cancellation/refund policies, insurance, trainer verification and payment terms.
 - Approve all listed plans and proposed prices. Don't collect payments until the actual product/service terms are clear.
 - Test the Netlify deployment and live form delivery before advertising the new app.
+
+
+## Curated YouTube workout demonstrations (added)
+
+- The **/app/workouts/** page provides **64 curated video links** from PureGym, Nuffield Health and Fitness Blender, grouped into weight/strength training (31), cardio (17) and HIIT (16).
+- You can search by exercise name, muscle group, creator, or equipment. Filter by category, difficulty (beginner/intermediate/advanced), equipment or **saved favourites**.
+- Each exercise displays the original video's thumbnail, published creator name, a brief form cue, and an **OPEN YOUTUBE** link.
+- **WATCH DEMO** opens the original video in YouTube's privacy-enhanced embedded player. If creators restrict embeds, viewers can open the same video on YouTube.
+- The app does not download or rehost YouTube videos and does not claim ownership. Availability can change if a creator deletes a video or restricts playback.
+- Favourites are stored locally on the visitor's phone in localStorage; they are not synced or shared.
+- The library includes both individual movement demos and several complete coached workouts for strength and HIIT.
+
+### Editorial maintenance
+
+Video inventory lives at \`src/data/workoutVideos.ts\`. Each entry includes the creator, YouTube ID, category, level, equipment and a general form tip.
+
+Before public launch, manually review each external video's continued availability, its actual form and appropriateness, and whether embedded playback is enabled. Do not use these videos as a substitute for individual screening or coaching. Re-review links periodically as creators retain control over their content.
+
+Video sources for editorial research:
+- https://www.fitnessblender.com/exercises
+- https://www.puregym.com/lets-get-started/workout-builder/equipment-how-tos/
+- https://www.puregym.com/exercises/
+- Nuffield Health official YouTube workouts
+
+YouTube videos use their official player and links; no paid training content is bypassed. The site does not imply endorsement by the video creators.
