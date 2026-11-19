@@ -10,5 +10,7 @@ export const commercialServicesEnabled =
   businessReviewCompleted && privacyNoticeCompleted &&
   import.meta.env.PUBLIC_BF_ENABLE_PAID_SERVICES === 'true';
 export const brand = 'BF GYM Global';
+// Owner-defined expansion of BF; keep the public-facing short brand unchanged.
+export const brandExpandedName = 'Best Fitness Gym Global';
 export const businessRegion = 'United Kingdom';
 export const primaryDelivery = 'Online fitness education, with global coaching planned';
