@@ -16,8 +16,8 @@ jobs:
         run: |
           set -euo pipefail
           base="https://bfgym.netlify.app"
-          urls=("/" "/kerala-uk/" "/start/" "/trainer/" "/programmes/" "/sample-plan/" "/app/" "/app/dashboard/" "/app/membership/" "/app/member-card/" "/app/workouts/" "/privacy/" "/manifest.webmanifest" "/images/members/demo-member.svg")
-          expected=("BF GYM" "MALAYALI FOUNDED" "MAKE FITNESS" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "MY PROGRAMME" "CONCEPT PREVIEW" "ONE CARD" "VIDEO LIBRARY" "Digital membership card and dashboard demonstration" "BF GYM" "data:image/jpeg;base64")
+          urls=("/" "/kerala-uk/" "/ml/kerala-uk/" "/start/" "/trainer/" "/programmes/" "/sample-plan/" "/app/" "/app/dashboard/" "/app/membership/" "/app/member-card/" "/app/workouts/" "/privacy/" "/manifest.webmanifest" "/images/members/demo-member.svg" "/sitemap.xml")
+          expected=("BF GYM" "MALAYALI FOUNDED" "കേരളത്തിൽ നിന്ന്" "MAKE FITNESS" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "MY PROGRAMME" "CONCEPT PREVIEW" "ONE CARD" "VIDEO LIBRARY" "Digital membership card and dashboard demonstration" "BF GYM" "data:image/jpeg;base64" "ml/kerala-uk/")
           for i in "${!urls[@]}"; do
             path="${urls[$i]}"
             needle="${expected[$i]}"
@@ -39,7 +39,7 @@ jobs:
               exit 1
             fi
           done
-          echo "All fourteen public BF GYM paths passed."
+          echo "All sixteen public BF GYM paths passed."
           photo_status="$(curl --location --silent --show-error --max-time 18 --output /tmp/bfgym-trainer-portrait --write-out "%{http_code}" "$base/images/trainer/adeep-portrait.jpg" || echo 000)"
           photo_type="$(file --brief --mime-type /tmp/bfgym-trainer-portrait 2>/dev/null || echo unknown)"
           if [ "$photo_status" != "200" ] || [ "$photo_type" != "image/jpeg" ] || [ "$(wc -c </tmp/bfgym-trainer-portrait)" -lt 1000 ]; then
@@ -133,3 +133,22 @@ jobs:
             exit 1
           fi
           echo "Instagram-compatible JPEG is live on Netlify."
+
+
+          # Ensure both localized founder pages link to each other so search engines
+          # and visitors can select the right language.
+          english_founder="$(curl --location --silent --show-error --max-time 18 "$base/kerala-uk/")"
+          malayalam_founder="$(curl --location --silent --show-error --max-time 18 "$base/ml/kerala-uk/")"
+          if ! grep -Fq 'hreflang="ml"' <<< "$english_founder"; then
+            echo "::error::English founder page is missing Malayalam alternate"
+            exit 1
+          fi
+          if ! grep -Fq 'hreflang="en-GB"' <<< "$malayalam_founder"; then
+            echo "::error::Malayalam founder page is missing English alternate"
+            exit 1
+          fi
+          if ! grep -Fq '<html lang="ml">' <<< "$malayalam_founder"; then
+            echo "::error::Malayalam page is missing the language attribute"
+            exit 1
+          fi
+          echo "Bilingual page alternates and Malayalam language declaration verified."
