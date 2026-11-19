@@ -147,7 +147,7 @@ jobs:
             echo "::error::Malayalam founder page is missing English alternate"
             exit 1
           fi
-          if ! grep -Fq '<html lang="ml">' <<< "$malayalam_founder"; then
+          if ! grep -Eiq '<html[[:space:]][^>]*lang="ml"([[:space:]>])' <<< "$malayalam_founder"; then
             echo "::error::Malayalam page is missing the language attribute"
             exit 1
           fi
