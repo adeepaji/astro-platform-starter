@@ -50,6 +50,12 @@ jobs:
               dating_home_ready=1
               break
             fi
+            for tag in 'id="match-card"' 'id="like-match"' 'id="match-data"' 'href="/join/"'; do
+              if grep -Fq "$tag" <<< "$homepage_html"; then echo "HOME OK $tag"; else echo "HOME MISSING $tag"; fi
+            done
+            for tag in 'id="member-form"' 'id="instagram"' 'DEMO ONLY' 'not a registered online member account'; do
+              if grep -Fq "$tag" <<< "$join_html"; then echo "JOIN OK $tag"; else echo "JOIN MISSING $tag"; fi
+            done
             echo "Attempt $attempt/6: dating-inspired homepage and private preview pending deploy"
             if [ "$attempt" -lt 6 ]; then sleep 15; fi
           done
