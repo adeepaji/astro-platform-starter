@@ -46,7 +46,7 @@ jobs:
           for attempt in 1 2 3 4 5 6; do
             homepage_html="$(curl --location --silent --show-error --max-time 18 "$base/" || true)"
             join_html="$(curl --location --silent --show-error --max-time 18 "$base/join/" || true)"
-            if grep -Fq 'id="match-card"' <<< "$homepage_html" && grep -Fq 'id="like-match"' <<< "$homepage_html" && grep -Fq 'id="match-data"' <<< "$homepage_html" && grep -Fq 'href="/join/"' <<< "$homepage_html" && grep -Fq 'id="member-form"' <<< "$join_html" && grep -Fq 'id="instagram"' <<< "$join_html" && grep -Fq 'PREVIEW ONLY' <<< "$join_html" && grep -Fq 'This is not a registered online member account' <<< "$join_html"; then
+            if grep -Fq 'id="match-card"' <<< "$homepage_html" && grep -Fq 'id="like-match"' <<< "$homepage_html" && grep -Fq 'id="match-data"' <<< "$homepage_html" && grep -Fq 'href="/join/"' <<< "$homepage_html" && grep -Fq 'id="member-form"' <<< "$join_html" && grep -Fq 'id="instagram"' <<< "$join_html" && grep -Fq 'DEMO ONLY' <<< "$join_html" && grep -Fq 'not a registered online member account' <<< "$join_html"; then
               dating_home_ready=1
               break
             fi
