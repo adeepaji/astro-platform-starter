@@ -1,6 +1,6 @@
 /* BF GYM PWA: cache public app shell only. Never intercept POST or third-party payments. */
-const CACHE = 'bf-gym-shell-v1';
-const PRECACHE = ['/app/', '/offline/', '/manifest.webmanifest', '/app-icon-192.png', '/app-icon-512.png', '/bf-icon.svg'];
+const CACHE = 'bf-gym-shell-v2';
+const PRECACHE = ['/app/', '/app/dashboard/', '/app/membership/', '/offline/', '/manifest.webmanifest', '/app-icon-192.png', '/app-icon-512.png', '/bf-icon.svg'];
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(PRECACHE)).then(() => self.skipWaiting()));
 });
@@ -19,7 +19,7 @@ self.addEventListener('fetch', (event) => {
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request).then((response) => {
-        if (response.ok && (url.pathname === '/app/' || url.pathname === '/')) {
+        if (response.ok && (url.pathname === '/app/' || url.pathname === '/app/dashboard/' || url.pathname === '/app/membership/' || url.pathname === '/')) {
           const copy = response.clone();
           event.waitUntil(caches.open(CACHE).then((cache) => cache.put(request, copy)));
         }
