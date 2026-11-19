@@ -41,6 +41,25 @@ jobs:
           done
           echo "All sixteen public BF GYM paths passed."
 
+          # The homepage is now a public mobile-friendly fitness feed, not a login portal.
+          # Check actual published HTML so that a successful build alone is not mistaken for deployment.
+          social_feed_ready=0
+          for attempt in 1 2 3 4 5 6; do
+            homepage_html="$(curl --location --silent --show-error --max-time 18 "$base/" || true)"
+            if grep -Fq 'The BF feed' <<< "$homepage_html" && grep -Fq 'id="feed-search"' <<< "$homepage_html" && grep -Fq 'class="bottom-nav"' <<< "$homepage_html" && grep -Fq 'no login, no pressure and no payment' <<< "$homepage_html"; then
+              social_feed_ready=1
+              break
+            fi
+            echo "Attempt $attempt/6: friendly feed homepage not yet deployed on Netlify"
+            if [ "$attempt" -lt 6 ]; then sleep 15; fi
+          done
+          if [ "$social_feed_ready" -ne 1 ]; then
+            echo "::error::Social-style BF GYM homepage is not yet live"
+            exit 1
+          fi
+          echo "Social-style feed, mobile nav, search input, and no-login welcome are live."
+
+
           # Google Search Console URL-prefix ownership: verify deployed homepage tag.
           google_tag_ready=0
           for attempt in 1 2 3 4 5 6; do
