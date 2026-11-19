@@ -50,9 +50,9 @@ jobs:
             if grep -Fq 'id="hero-title"' <<< "$homepage_html" &&
                grep -Fq 'class="hero-photo"' <<< "$homepage_html" &&
                grep -Fq 'id="programmes"' <<< "$homepage_html" &&
-               grep -Fq 'class="features-layout"' <<< "$homepage_html" &&
-               grep -Fq 'class="process-layout"' <<< "$homepage_html" &&
-               grep -Fq 'class="coach-layout"' <<< "$homepage_html" &&
+               grep -Fq 'class="container features-layout"' <<< "$homepage_html" &&
+               grep -Fq 'class="container process-layout"' <<< "$homepage_html" &&
+               grep -Fq 'class="container coach-layout"' <<< "$homepage_html" &&
                grep -Fq 'class="mobile-menu"' <<< "$homepage_html" &&
                grep -Fq 'href="/programmes/"' <<< "$homepage_html" &&
                grep -Fq 'href="/app/workouts/"' <<< "$homepage_html" &&
