@@ -40,6 +40,24 @@ jobs:
             fi
           done
           echo "All sixteen public BF GYM paths passed."
+
+          # Google Search Console URL-prefix ownership: verify deployed homepage tag.
+          google_tag_ready=0
+          for attempt in 1 2 3 4 5 6; do
+            home_html="$(curl --location --silent --show-error --max-time 18 "$base/" || true)"
+            if grep -Fq 'name="google-site-verification" content="--7gUnBNnZpqeBYDpyAtk7VVAAE0Uvzu4O2QODevqr4"' <<< "$home_html"; then
+              google_tag_ready=1
+              break
+            fi
+            echo "Attempt $attempt/6: Google verification tag not deployed yet"
+            if [ "$attempt" -lt 6 ]; then sleep 15; fi
+          done
+          if [ "$google_tag_ready" -ne 1 ]; then
+            echo "::error::Google Search Console ownership meta tag is not live"
+            exit 1
+          fi
+          echo "Google verification tag is live on Netlify."
+
           photo_status="$(curl --location --silent --show-error --max-time 18 --output /tmp/bfgym-trainer-portrait --write-out "%{http_code}" "$base/images/trainer/adeep-portrait.jpg" || echo 000)"
           photo_type="$(file --brief --mime-type /tmp/bfgym-trainer-portrait 2>/dev/null || echo unknown)"
           if [ "$photo_status" != "200" ] || [ "$photo_type" != "image/jpeg" ] || [ "$(wc -c </tmp/bfgym-trainer-portrait)" -lt 1000 ]; then
