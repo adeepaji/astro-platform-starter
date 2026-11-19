@@ -1,0 +1,108 @@
+---
+const roles = [
+ {id:'client', label:'Fitness member',subtitle:'Track workouts and explore future member benefits'},
+ {id:'coach',label:'Fitness coach',subtitle:'A future workspace for approved independent trainers'},
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#121a13"/>
+<meta name="description" content="BF GYM Global membership concept: future client accounts, coach profiles, member cards and rewards. Demonstration only: no live wallet, payments, payouts or bank cards."/>
+<title>Membership & Rewards Preview | BF GYM Global</title>
+<link rel="icon" href="/bf-icon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<link rel="apple-touch-icon" href="/app-icon-192.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<a class="skip" href="#main">Skip to membership preview</a>
+<header class="topbar wrap"><a href="/app/dashboard/" class="brand">BF<span>.</span> <small>GYM GLOBAL</small></a><nav aria-label="Member preview navigation"><a href="/app/dashboard/">MY DASHBOARD</a><a href="/programmes/">FREE PLANS</a><a href="/trainer/">TRAINER</a></nav></header>
+<main id="main" class="wrap">
+<section class="hero" aria-labelledby="hero-title">
+<p class="eyebrow">THE NEXT CHAPTER / BF GYM GLOBAL</p>
+<h1 id="hero-title">ONE COMMUNITY.<br/><em>MORE POSSIBILITIES.</em></h1>
+<p>We're designing a future fitness community where clients can learn, train and access meaningful member benefits, and approved coaches can provide paid services when the business is legally ready.</p>
+<div class="notice"><strong>CONCEPT PREVIEW — NOT LIVE FINANCIAL SERVICES</strong><p>There are no real user accounts, member balances, commissions, bank cards, funds, withdrawals, rewards, payouts or payments in this preview. No money is collected or transferred.</p></div>
+</section>
+<section class="roles" aria-labelledby="roles-title">
+<div class="section-heading"><div><p class="eyebrow">01 / EXPLORE YOUR ROLE</p><h2 id="roles-title">YOUR FUTURE<br/><em>MEMBERSHIP.</em></h2></div><p>Switch between the two examples. These are product concepts, not invitations to open a financial account or join a paid programme.</p></div>
+<div class="role-tabs" role="tablist" aria-label="Member roles">
+{roles.map((r,i)=><button type="button" role="tab" aria-selected={i===0?'true':'false'} aria-controls="role-panel" tabindex={i===0?0:-1} class:list={['role-tab',{active:i===0}]} data-role={r.id}><strong>{r.label}</strong><small>{r.subtitle}</small></button>)}
+</div>
+<div class="role-details" role="tabpanel" id="role-panel">
+  <div class="concept-card" aria-label="BF GYM Global digital membership card illustration, not a payment card">
+    <div class="card-top"><strong>BF<span>.</span> GYM</strong><span>GLOBAL</span></div>
+    <div class="card-center"><span>MEMBERSHIP DESIGN CONCEPT</span><strong id="card-role">FITNESS MEMBER</strong></div>
+    <div class="card-bottom"><span>DIGITAL MEMBER PASS · FUTURE FEATURE</span><span>✳</span></div>
+    <div class="card-warning">NOT A DEBIT, PREPAID OR ATM CARD</div>
+  </div>
+  <div class="role-copy"><p class="eyebrow" id="role-kicker">CLIENT EXPERIENCE / PLANNED</p><h3 id="role-title">YOUR FITNESS,<br/>ALL IN ONE PLACE.</h3><p id="role-description">In the future, members could log in securely, see approved benefits, access personal programmes and receive rewards under clear terms. None are active now.</p>
+    <div class="feature-list" id="role-features">
+      <div><span>✓</span> Future secure sign-in and personal profile</div>
+      <div><span>✓</span> Digital member pass for participating gym services</div>
+      <div><span>✓</span> Transparent referral benefits, subject to approval</div>
+      <div><span>✓</span> View verified activity and transaction history</div>
+    </div>
+    <a href="/app/dashboard/" class="solid-link">USE FREE WORKOUT DASHBOARD ↗</a>
+  </div>
+</div>
+</section>
+<section class="wallet" id="wallet" aria-labelledby="wallet-title">
+<div class="section-heading"><div><p class="eyebrow">02 / WALLET CONCEPT</p><h2 id="wallet-title">A FUTURE<br/><em>REWARDS SPACE.</em></h2></div><p>A professional-looking membership card does not make a product a bank or payment service. Any real-money wallet requires separate legal, financial and security infrastructure.</p></div>
+<div class="wallet-grid">
+<div class="wallet-card"><span>WALLET / COMING LATER</span><strong>NOT ACTIVE</strong><p>No balance is displayed because no real funds or rewards exist in this preview.</p><div class="wallet-footer"><span>TOP-UP</span><span>TRANSFER</span><span>WITHDRAW</span></div><small>ALL ACTIONS DISABLED</small></div>
+<div class="reward-options">
+<article><div class="reward-icon">◉</div><div><strong>TRAIN & TRACK</strong><p>Current free workout progress stays on your device. It is not redeemable money.</p></div></article>
+<article><div class="reward-icon">✳</div><div><strong>GENUINE REFERRALS</strong><p>Future rewards could be linked to eligible completed purchases, subject to published terms and fraud controls—not paid recruitment.</p></div></article>
+<article><div class="reward-icon">▤</div><div><strong>COACH EARNINGS</strong><p>Approved coaches could later be paid for actual services delivered through a properly contracted marketplace.</p></div></article>
+</div>
+</div>
+</section>
+<section class="launch" id="roadmap" aria-labelledby="roadmap-title">
+<div class="section-heading"><div><p class="eyebrow">03 / BUILDING RESPONSIBLY</p><h2 id="roadmap-title">THE PATH TO<br/><em>LAUNCH.</em></h2></div><p>First build a helpful fitness product, then add secure identity, business operations, and regulated payment capabilities in stages.</p></div>
+<ol class="phases">
+<li><span>01</span><div><strong>FREE FITNESS PLATFORM</strong><p>Available now: training programmes, exercise searches, workout dashboard and device-only history.</p></div><small>AVAILABLE</small></li>
+<li><span>02</span><div><strong>SECURE CLIENT & COACH ACCOUNTS</strong><p>Future: authentication, coach approval, safeguarding and privacy arrangements, consent, account recovery and secure databases.</p></div><small>NOT LIVE</small></li>
+<li><span>03</span><div><strong>BOOKING & MARKETPLACE PAYOUTS</strong><p>Future: lawful coaching business model, contracts, verified services, tax records, refunds, disputes and payment-provider onboarding.</p></div><small>NOT LIVE</small></li>
+<li><span>04</span><div><strong>REAL WALLET OR ATM-COMPATIBLE CARD</strong><p>Only if commercially justified: work with appropriately authorised banks, electronic-money or payment firms, with financial, fraud and customer-protection controls.</p></div><small>NOT LIVE</small></li>
+</ol>
+<div class="legal"><strong>FINANCIAL AND REWARDS SAFETY</strong><p>A real payment card, stored-value wallet or ability to transfer/withdraw money may require FCA authorisation or an appropriately regulated issuer/partner. Earnings advertising must be substantiated. Recruitment-led pyramid rewards are not an acceptable business model. None of these services are being offered here.</p><p>UK-based paid coaching and international tax arrangements also need review before commercial launch. We will not enable a paid service simply by changing a website setting.</p></div>
+</section>
+<section class="cta"><div><p class="eyebrow">START WITH WHAT'S REAL</p><h2>TRAIN TODAY.<br/><em>BUILD THE FUTURE.</em></h2><p>Open the free BF GYM dashboard, follow a workout and save your progress on your phone.</p></div><a href="/app/dashboard/">OPEN MY WORKOUT DASHBOARD ↗</a></section>
+</main>
+<footer class="footer wrap"><a href="/">BF<span>.</span> GYM GLOBAL</a><a href="/privacy/">PRIVACY</a></footer>
+<script>
+const roles={
+  client:{card:'FITNESS MEMBER',kicker:'CLIENT EXPERIENCE / PLANNED',title:'YOUR FITNESS, ALL IN ONE PLACE.',description:'In the future, members could log in securely, see approved benefits, access personal programmes and receive rewards under clear terms. None are active now.',features:['Future secure sign-in and personal profile','Digital member pass for participating gym services','Transparent referral benefits, subject to approval','View verified activity and transaction history']},
+  coach:{card:'FITNESS COACH',kicker:'COACH EXPERIENCE / PLANNED',title:'HELP PEOPLE. BUILD YOUR PRACTICE.',description:'In the future, properly approved coaches could manage clients, publish available services, and receive payment for genuine sessions after a compliant marketplace launches. Applications and payouts are not live.',features:['Coach identity and qualification reviews','Client scheduling and agreed service terms','Verified session completion and payment records','Secure payment-provider payouts after approval']}
+};
+const tabs=Array.from(document.querySelectorAll('[data-role]'));
+function render(role){
+  const item=roles[role];if(!item)return;
+  for(const tab of tabs){const active=tab.dataset.role===role;tab.classList.toggle('active',active);tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;}
+  for(const [selector,value] of [['#card-role',item.card],['#role-kicker',item.kicker],['#role-title',item.title],['#role-description',item.description]]){const el=document.querySelector(selector);if(el)el.textContent=value;}
+  const features=document.querySelector('#role-features');if(features){features.replaceChildren();for(const feature of item.features){const row=document.createElement('div');const mark=document.createElement('span');mark.textContent='✓';row.append(mark,document.createTextNode(' '+feature));features.append(row);}}
+}
+tabs.forEach((tab,index)=>{
+  tab.addEventListener('click',()=>render(tab.dataset.role));
+  tab.addEventListener('keydown',event=>{
+    if(event.key!=='ArrowLeft'&&event.key!=='ArrowRight')return;
+    event.preventDefault();const target=(index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;render(tabs[target].dataset.role);tabs[target].focus();
+  });
+});
+</script>
+</body>
+</html>
+<style>
+:root{--bg:#111912;--surface:#202b22;--lime:#c9ff64;--cream:#f5f7ec;--muted:#bbccaf;--display:Oswald,Impact,Arial,sans-serif;--body:'DM Sans',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--cream);margin:0;font:14px/1.75 var(--body)}a{color:inherit;text-decoration:none}button{cursor:pointer;font:inherit}a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offset:3px}[hidden]{display:none!important}.wrap{max-width:1180px;margin-inline:auto;width:calc(100% - 32px)}.skip{position:absolute;top:-100px;left:10px;background:var(--lime);color:#172514;padding:10px}.skip:focus{top:10px}h1,h2,h3,p{margin-top:0}em{font-style:normal;color:var(--lime)}.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;gap:25px;border-bottom:1px solid #475d40}.brand{font:700 29px var(--display)}.brand span,.footer>a span{color:var(--lime)}.brand small{font:900 10px var(--body);letter-spacing:.1em}.topbar nav{display:flex;gap:22px}.topbar nav a{font-size:10px;font-weight:900}.eyebrow{color:var(--lime);font-size:10px;font-weight:900;letter-spacing:.13em}.hero{padding:95px 0 55px}.hero h1{font:650 clamp(66px,8vw,112px)/1 var(--display);margin:21px 0}.hero>p:not(.eyebrow){font-size:16px;color:#c9d8c3;max-width:790px}.notice{background:#263b24;border-left:3px solid var(--lime);margin-top:28px;padding:20px;max-width:890px}.notice strong{font-size:11px;color:var(--lime);letter-spacing:.06em}.notice p{font-size:12px;color:#c2d7b9;line-height:1.8;margin:9px 0 0}
+.roles,.wallet,.launch{padding:65px 0 75px;border-top:1px solid #3f5639}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:32px}.section-heading h2,.cta h2{font:650 clamp(50px,6vw,77px)/1 var(--display);margin:12px 0}.section-heading>p{max-width:350px;font-size:12px;color:var(--muted)}.role-tabs{display:flex;gap:10px;margin:22px 0}.role-tab{flex:1;text-align:left;color:var(--cream);padding:17px;background:#243322;border:1px solid #4f7047;border-radius:14px}.role-tab.active{background:var(--lime);border-color:var(--lime);color:#1c2c14}.role-tab strong,.role-tab small{display:block}.role-tab strong{font-size:13px}.role-tab small{font-size:10px;line-height:1.6;margin-top:5px;opacity:.85}.role-details{display:grid;grid-template-columns:.85fr 1.15fr;gap:35px;align-items:center;padding:34px;background:#1c2c1b;border:1px solid #4d6c47;border-radius:23px}.concept-card{aspect-ratio:1.65/1;min-height:240px;border-radius:20px;background:radial-gradient(circle at 75% 10%,#799a68,#21412d 52%,#12291e);padding:25px;position:relative;overflow:hidden;border:1px solid #85b575;box-shadow:0 20px 35px #050c0666}.concept-card:before{content:'✳';font-size:230px;color:#c7ff5217;position:absolute;right:-25px;top:-130px}.card-top,.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:15px;position:relative}.card-top strong{font:700 28px var(--display)}.card-top strong span{color:var(--lime)}.card-top>span{font-size:10px;font-weight:900;letter-spacing:.14em}.card-center{margin-top:44px;position:relative}.card-center span{display:block;font-size:10px;color:#d2e9cd;letter-spacing:.13em;font-weight:800}.card-center strong{display:block;font:650 34px var(--display);margin-top:8px}.card-bottom{margin-top:22px;font-size:9px;font-weight:800;letter-spacing:.1em;color:#d2e9c8}.card-bottom span:last-child{font-size:24px;color:var(--lime)}.card-warning{position:relative;font-size:9px;font-weight:900;letter-spacing:.05em;color:#f4ffef;border-top:1px solid #c1e6b64f;margin-top:9px;padding-top:7px}.role-copy .eyebrow{margin-bottom:13px}.role-copy h3{font:650 45px/1.03 var(--display);margin:0 0 17px}.role-copy p:not(.eyebrow){font-size:12px;color:#c4d5bd;line-height:1.85}.feature-list{display:grid;gap:10px;margin:18px 0 25px}.feature-list>div{display:flex;gap:12px;align-items:start;font-size:12px;color:#d0dfc7}.feature-list span{color:var(--lime);font-weight:900}.solid-link{display:inline-block;background:var(--lime);padding:15px 19px;color:#1b2d16;font-size:11px;font-weight:900}
+.wallet-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:21px}.wallet-card{border:1px solid #6b925d;border-radius:18px;padding:30px;background:#283e28;display:flex;flex-direction:column;justify-content:center;min-height:310px}.wallet-card>span,.wallet-card>small{font-size:10px;letter-spacing:.12em;font-weight:900;color:#d1ecc6}.wallet-card>strong{font:700 53px var(--display);color:var(--lime);margin:16px 0}.wallet-card>p{font-size:12px;color:#c6d9bf}.wallet-footer{display:flex;gap:7px;margin:23px 0}.wallet-footer span{flex:1;text-align:center;padding:10px 6px;font-size:9px;border:1px dashed #698663;color:#a9bea1}.wallet-card>small{font-size:9px}.reward-options{display:grid;gap:10px}.reward-options article{display:flex;align-items:start;gap:16px;background:#243423;border:1px solid #4a6444;border-radius:14px;padding:19px}.reward-icon{width:43px;height:43px;border-radius:11px;background:#3b5933;display:grid;place-items:center;color:var(--lime);font-size:21px;flex-shrink:0}.reward-options strong{font-size:12px}.reward-options p{font-size:12px;color:#b4caae;margin:6px 0 0;line-height:1.75}
+.phases{list-style:none;padding:0;margin:25px 0 40px;display:grid;gap:10px}.phases li{display:grid;grid-template-columns:55px 1fr auto;gap:15px;align-items:start;padding:21px;border-radius:12px;border:1px solid #455e3f;background:#20301e}.phases li>span{color:var(--lime);font:700 31px var(--display)}.phases li strong{font-size:12px}.phases li p{font-size:12px;color:#bccdb5;line-height:1.8;margin:6px 0 0}.phases li small{color:var(--lime);font-size:10px;font-weight:900;white-space:nowrap}.legal{border-left:3px solid var(--lime);padding:20px;background:#273b23}.legal strong{font-size:11px;color:var(--lime)}.legal p{font-size:12px;color:#c4d3bb;line-height:1.85;margin:10px 0 0}
+.cta{display:flex;gap:35px;align-items:center;justify-content:space-between;background:var(--lime);padding:35px 40px;color:#1b2c12;margin-bottom:60px}.cta .eyebrow{color:#456627}.cta h2 em{color:#f2ffdc}.cta p:not(.eyebrow){font-size:12px}.cta a{background:#162914;color:var(--lime);padding:18px 20px;font-size:10px;font-weight:900;white-space:nowrap}.footer{border-top:1px solid #49623e;padding:26px 0;display:flex;justify-content:space-between;gap:20px}.footer>a{font-size:11px;font-weight:900}
+@media(max-width:900px){.role-details{grid-template-columns:1fr}.concept-card{max-width:520px}.wallet-grid{grid-template-columns:1fr}.section-heading{display:block}.cta{display:block}.cta a{display:inline-block;margin-top:20px}.section-heading>p{max-width:100%}}
+@media(max-width:600px){.topbar nav{display:none}.hero{padding:60px 0 40px}.hero h1{font-size:clamp(54px,12vw,79px)}.roles,.wallet,.launch{padding:45px 0}.section-heading h2,.cta h2{font-size:55px}.role-details{padding:16px}.concept-card{padding:20px;min-height:210px}.card-center{margin-top:24px}.card-center strong{font-size:31px}.role-copy h3{font-size:37px}.role-tab{padding:12px}.role-tab small{font-size:9px}.wallet-card{min-height:245px}.wallet-card>strong{font-size:42px}.phases li{grid-template-columns:35px 1fr;gap:9px}.phases li small{grid-column:2}.cta{padding:26px 20px}.cta a{white-space:normal}}
+</style>
