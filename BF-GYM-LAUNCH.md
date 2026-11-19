@@ -33,3 +33,62 @@ npm install
 npm run dev
 npm run build
 \`\`\`
+
+
+## Pricing, booking and payments (added for launch)
+
+**PROPOSED launch prices, not approved for public sale**
+- One-to-one personal training: GBP 50 per 60-minute session.
+- Small group fitness: GBP 12 per person per 45-minute class.
+- Online coaching: GBP 89/month, subject to approved subscription terms.
+
+Edit the single pricing source at src/data/services.ts. Before publishing, confirm the services, exact session length, inclusions, location, class capacity, group timetable, package and subscription terms.
+
+### Calendly booking setup
+
+1. Sign up to https://calendly.com using your business account and connect your actual calendar.
+2. Create three event types: Personal Training (60 mins), Group Fitness (45 mins, with correctly configured capacity) and Online Consultation (with an agreed duration).
+3. Set business hours, availability, buffers, location, booking/cancellation rules and timezone.
+4. To accept payment at booking, use a Calendly plan supporting Stripe payments, connect your own Stripe account and set the agreed price on each paid event.
+5. Copy the public HTTPS Calendly event URLs and add these PUBLIC build environment variables in Netlify:
+   - PUBLIC_BF_CALENDLY_PERSONAL = your actual personal training booking URL
+   - PUBLIC_BF_CALENDLY_GROUP = your actual group event URL
+   - PUBLIC_BF_CALENDLY_ONLINE = your actual online event URL
+6. Redeploy. Each corresponding price card will then link to the actual Calendly event. Until configured, customers can send a booking request using /book/. This is NOT an appointment confirmation.
+
+### Stripe payment setup
+
+1. Open https://dashboard.stripe.com, verify your account and connect your payout bank account.
+2. If you approve the GBP 89/month online subscription, create a recurring Online Coaching product with agreed service description, renewal terms, refunds and cancellation policy.
+3. Generate a Stripe Payment Link and copy its live buy.stripe.com URL (not a secret key).
+4. Add the public Netlify build environment variable PUBLIC_BF_STRIPE_ONLINE = your live Stripe payment link.
+5. Redeploy. The Online Coaching price card will show START ONLINE SUBSCRIPTION only when its valid public link exists.
+6. Test the live prices, currency, receipts, customer email, renewal/cancellation workflow and onboarding. For in-person paid sessions, use paid Calendly events, not a standalone early-charge link.
+
+**Never put payment secret keys, customer data or bank credentials in your public GitHub repo.** The website only accepts HTTPS Calendly booking URLs and HTTPS Stripe checkout links for these features.
+
+### Booking forms and confirmations
+
+The existing homepage enquiry form is named bf-gym-enquiries. The new /book/ form is named bf-gym-booking. Both use Netlify Forms, with the acknowledgement page /thanks/.
+- Turn on Netlify Forms detection before deploying, then test submitting each form on the hosted website.
+- Set up notifications for new enquiries. A form submission does not automatically confirm availability, send a calendar invitation or collect money.
+- No customer health history or other sensitive details should go into these general enquiry forms.
+
+### Netlify publication workflow
+
+1. Review the GitHub draft PR with service details, contact information and policies.
+2. Merge only after you approve the business content.
+3. At https://app.netlify.com choose Add new project > Import existing project > GitHub > adeepaji/astro-platform-starter.
+4. Set build command npm run build, follow Astro/Netlify deploy defaults, and set Node 22 if required.
+5. Configure public environment variables above (if you already have the links), then deploy.
+6. In Forms, enable form detection; redeploy as necessary. Verify submission records and email notifications.
+7. Check the live site, mobile display, session requests, external booking, and any enabled payments before promotion.
+8. Add a purchased domain if desired, confirm HTTPS and make a test booking through the customer journey.
+
+### Before taking clients or payments
+
+- The /privacy/ page is a provisional draft. Replace it with the correct business/operator identity, contact email, lawful basis, retention, vendor disclosures, rights and other UK privacy requirements.
+- Set accurate booking terms, cancellations, refunds and subscriptions. Obtain appropriate business insurance and any venue permissions.
+- Check any relevant work/immigration restrictions and self-employment tax requirements. Don't accept paid orders until you can provide the advertised services.
+
+The website is not automatically published by a GitHub commit or pull request.
