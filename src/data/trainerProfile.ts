@@ -20,7 +20,7 @@ export const trainer = {
   // Only paths under /images/trainer/ are accepted. Keep originals private
   // until the owner supplies the precise photos they approve for publication.
   photos: [
-    {type:'portrait', label:'Trainer portrait', alt:'Portrait of fitness trainer Adeep Aji', url: safePhoto(import.meta.env.PUBLIC_BF_TRAINER_PHOTO || '/images/trainer/adeep-portrait.jpg')},
+    {type:'portrait', label:'Trainer portrait', alt:'Trainer Adeep Aji smiling and giving two thumbs up, wearing a black shirt and amber sunglasses', url: safePhoto(import.meta.env.PUBLIC_BF_TRAINER_PHOTO || '/images/trainer/adeep-portrait-new.webp')},
     {type:'training', label:'Gym training', alt:'Adeep Aji demonstrating a fitness movement', url: safePhoto(import.meta.env.PUBLIC_BF_TRAINING_PHOTO)},
     {type:'class', label:'Coaching session', alt:'Adeep Aji leading a fitness session', url: safePhoto(import.meta.env.PUBLIC_BF_CLASS_PHOTO)},
   ],
