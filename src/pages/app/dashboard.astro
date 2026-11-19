@@ -30,7 +30,7 @@ const planOptions = [
 <main id="main">
   <section class="welcome" aria-labelledby="welcome-heading">
     <div class="eyebrow-row"><span class="eyebrow">YOUR FITNESS / YOUR PACE</span><span class="date-label" id="date-label">TODAY</span></div>
-    <h1 id="welcome-heading">YOUR DAY.<br /><em>YOUR PROGRESS.</em></h1>
+    <h1 id="welcome-heading"><span id="hello-line">WELCOME BACK.</span><br /><em>YOUR PROGRESS.</em></h1>
     <p>Everything you need to get moving, all in one place. Start small, stay consistent, and track your wins.</p>
     <a class="hero-cta" href="#today-workout">VIEW TODAY'S SESSION <span aria-hidden="true">↘</span></a>
   </section>
@@ -132,9 +132,8 @@ const levelSelect=document.querySelector<HTMLSelectElement>('#level-select');
 if(levelSelect)levelSelect.value=data.level;
 const dateLabel=find('#date-label');
 if(dateLabel)dateLabel.textContent=today.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short'}).toUpperCase();
-const greeting=find('#welcome-heading');
-function setupGreeting(){const hour=today.getHours();const word=hour<12?'GOOD MORNING.':hour<17?'GOOD AFTERNOON.':'GOOD EVENING.';const first=greeting?.querySelector('span');if(first)first.textContent=word;}
-if(greeting){const a=document.createElement('span');a.textContent='';greeting.prepend(a);const firstText=greeting.firstChild?.nextSibling;if(firstText?.nodeType===Node.TEXT_NODE)firstText.textContent='';setupGreeting();}
+const hello=find('#hello-line');
+if(hello){const hour=today.getHours();hello.textContent=hour<12?'GOOD MORNING.':hour<17?'GOOD AFTERNOON.':'GOOD EVENING.';}
 function current(){return safePlan(data.level);}
 function currentDay(){return current().schedule[data.day];}
 function setText(selector:string,text:string){const item=find(selector);if(item)item.textContent=text;}
