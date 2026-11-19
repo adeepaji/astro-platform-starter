@@ -108,6 +108,12 @@ const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.sch
  try{const value=localStorage.getItem(key);const parsed=value?JSON.parse(value):{};if(parsed && typeof parsed==='object' && !Array.isArray(parsed)){for(const [k,v] of Object.entries(parsed)){if(typeof v==='boolean')saved[k]=v;}}}catch{/* Browsing in privacy mode may prevent storage. */}
  let selected='beginner';
  const weeks:Record<string,number>={beginner:1,intermediate:1,advanced:1};
+ try{
+   const lastWeek=Number(localStorage.getItem('bf-gym-dashboard-week-v1'));
+   if(Number.isInteger(lastWeek)&&lastWeek>=1&&lastWeek<=4){
+     weeks.beginner=lastWeek;weeks.intermediate=lastWeek;weeks.advanced=lastWeek;
+   }
+ }catch{/* No local storage available */}
  function save(){try{localStorage.setItem(key,JSON.stringify(saved));}catch{/* Interactive state lasts for this tab only. */}}
  function renderPlan(plan:string){
    const panel=panels.find(p=>p.dataset.planPanel===plan);if(!panel)return;
@@ -147,7 +153,9 @@ const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.sch
    try{const last=localStorage.getItem('bf-gym-last-plan-v1');if(last && ['beginner','intermediate','advanced'].includes(last))selectPlan(last,false);}catch{/* No storage */}
  }
  document.querySelectorAll<HTMLButtonElement>('[data-plan-week]').forEach(b=>b.addEventListener('click',()=>{
-   const plan=b.dataset.planWeek||'beginner';weeks[plan]=Number(b.dataset.week)||1;renderPlan(plan);
+   const plan=b.dataset.planWeek||'beginner';weeks[plan]=Number(b.dataset.week)||1;
+   try{localStorage.setItem('bf-gym-dashboard-week-v1',String(weeks[plan]));}catch{/* No local storage available */}
+   renderPlan(plan);
  }));
  document.querySelectorAll<HTMLButtonElement>('[data-plan-day]').forEach(b=>b.addEventListener('click',()=>{
    const plan=b.dataset.planDay||'beginner',day=b.dataset.day||'';
