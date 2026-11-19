@@ -16,8 +16,8 @@ jobs:
         run: |
           set -euo pipefail
           base="https://bfgym.netlify.app"
-          urls=("/" "/kerala-uk/" "/ml/kerala-uk/" "/start/" "/trainer/" "/programmes/" "/sample-plan/" "/app/" "/app/dashboard/" "/app/membership/" "/app/member-card/" "/app/workouts/" "/privacy/" "/manifest.webmanifest" "/images/members/demo-member.svg" "/sitemap.xml")
-          expected=("BF GYM" "MALAYALI FOUNDED" "കേരളത്തിൽ നിന്ന്" "MAKE FITNESS" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "MY PROGRAMME" "CONCEPT PREVIEW" "ONE CARD" "VIDEO LIBRARY" "Digital membership card and dashboard demonstration" "BF GYM" "data:image/jpeg;base64" "ml/kerala-uk/")
+          urls=("/" "/kerala-uk/" "/ml/kerala-uk/" "/join/" "/start/" "/trainer/" "/programmes/" "/sample-plan/" "/app/" "/app/dashboard/" "/app/membership/" "/app/member-card/" "/app/workouts/" "/privacy/" "/manifest.webmanifest" "/images/members/demo-member.svg" "/sitemap.xml")
+          expected=("BF GYM" "MALAYALI FOUNDED" "കേരളത്തിൽ നിന്ന്" "Make it yours" "MAKE FITNESS" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "MY PROGRAMME" "CONCEPT PREVIEW" "ONE CARD" "VIDEO LIBRARY" "Digital membership card and dashboard demonstration" "BF GYM" "data:image/jpeg;base64" "ml/kerala-uk/")
           for i in "${!urls[@]}"; do
             path="${urls[$i]}"
             needle="${expected[$i]}"
@@ -39,26 +39,25 @@ jobs:
               exit 1
             fi
           done
-          echo "All sixteen public BF GYM paths passed."
+          echo "All seventeen public BF GYM paths passed."
 
-          # The homepage is now a public mobile-friendly fitness feed, not a login portal.
-          # Check actual published HTML so that a successful build alone is not mistaken for deployment.
-          social_feed_ready=0
+          # BF GYM homepage is dating-inspired workout discovery — not real dating or public accounts.
+          dating_home_ready=0
           for attempt in 1 2 3 4 5 6; do
             homepage_html="$(curl --location --silent --show-error --max-time 18 "$base/" || true)"
-            if grep -Fq 'The BF feed' <<< "$homepage_html" && grep -Fq 'id="feed-search"' <<< "$homepage_html" && grep -Fq 'class="bottom-nav"' <<< "$homepage_html" && grep -Fq 'no login, no pressure and no payment' <<< "$homepage_html"; then
-              social_feed_ready=1
+            join_html="$(curl --location --silent --show-error --max-time 18 "$base/join/" || true)"
+            if grep -Fq 'id="match-card"' <<< "$homepage_html" && grep -Fq 'id="like-match"' <<< "$homepage_html" && grep -Fq 'id="match-data"' <<< "$homepage_html" && grep -Fq 'href="/join/"' <<< "$homepage_html" && grep -Fq 'id="member-form"' <<< "$join_html" && grep -Fq 'id="instagram"' <<< "$join_html" && grep -Fq 'PREVIEW ONLY' <<< "$join_html" && grep -Fq 'This is not a registered online member account' <<< "$join_html"; then
+              dating_home_ready=1
               break
             fi
-            echo "Attempt $attempt/6: friendly feed homepage not yet deployed on Netlify"
+            echo "Attempt $attempt/6: dating-inspired homepage and private preview pending deploy"
             if [ "$attempt" -lt 6 ]; then sleep 15; fi
           done
-          if [ "$social_feed_ready" -ne 1 ]; then
-            echo "::error::Social-style BF GYM homepage is not yet live"
+          if [ "$dating_home_ready" -ne 1 ]; then
+            echo "::error::Dating-inspired workout matcher or local profile preview is not live"
             exit 1
           fi
-          echo "Social-style feed, mobile nav, search input, and no-login welcome are live."
-
+          echo "Swipe-style fitness matcher, optional Instagram input, and explicitly non-registered card preview are live."
 
           # Google Search Console URL-prefix ownership: verify deployed homepage tag.
           google_tag_ready=0
