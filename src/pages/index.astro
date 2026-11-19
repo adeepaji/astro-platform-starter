@@ -1,357 +1,243 @@
 ---
-const topics = [
-  {id:'all',name:'For you'},
-  {id:'beginner',name:'Beginners'},
-  {id:'workout',name:'Workouts'},
-  {id:'learning',name:'Learn'},
-  {id:'coach',name:'Coach'},
-  {id:'saved',name:'Saved'}
+const matches = [
+  {id:'first-step',label:'Beginner',type:'beginner',title:'Your first gym chapter',tagline:'Slow starts. Strong stories.',subtitle:'New to training? This is your starting point.',description:'Simple workouts, a manageable plan and a little confidence each day.',href:'/start/',cta:'Start my journey',background:'sunset',glyph:'✦',score:'EASY TO START'},
+  {id:'strength',label:'Strength',type:'strength',title:'Fall for feeling stronger',tagline:'Built at your own pace.',subtitle:'You + a four-week strength routine.',description:'Explore free beginner-to-advanced training examples and find a level that fits.',href:'/programmes/',cta:'See strength plans',background:'lilac',glyph:'♥',score:'FOUR-WEEK PLANS'},
+  {id:'move',label:'Cardio',type:'cardio',title:'Make a move.',tagline:'Good energy looks good on you.',subtitle:'Movement you can enjoy.',description:'Find cardio ideas and guided exercise searches without a subscription.',href:'/app/workouts/',cta:'Browse movement videos',background:'sky',glyph:'↗',score:'FREE VIDEO IDEAS'},
+  {id:'daily',label:'Track',type:'track',title:'A date with consistency',tagline:'Show up for yourself.',subtitle:'Your progress, your own device.',description:'Track completed workouts privately in your browser. No online account needed.',href:'/app/dashboard/',cta:'Open my tracker',background:'butter',glyph:'✓',score:'DEVICE-ONLY PROGRESS'},
+  {id:'story',label:'Discover',type:'discover',title:'Meet the person behind BF',tagline:'Kerala roots. UK perspective.',subtitle:'A welcome from Coach Adeep.',description:'Discover the story behind Best Fitness Gym Global, the free fitness learning space.',href:'/kerala-uk/',cta:'Meet the founder',background:'photo',glyph:'☺',score:'FROM KERALA TO THE UK'},
+  {id:'learn',label:'Learn',type:'learn',title:'Good form is attractive',tagline:'Learn it. Love it. Repeat.',subtitle:'Find your next favourite movement.',description:'Explore demonstrations before trying new strength, cardio and HIIT exercises.',href:'/app/workouts/',cta:'Discover workouts',background:'peach',glyph:'★',score:'MOVEMENT BASICS'}
 ];
-const moments = [
-  {label:'Start here',short:'Start',icon:'✦',href:'/start/',tone:'green'},
-  {label:'Free plans',short:'Plans',icon:'▤',href:'/programmes/',tone:'peach'},
-  {label:'Workout videos',short:'Videos',icon:'▶',href:'/app/workouts/',tone:'lilac'},
-  {label:'My dashboard',short:'Track',icon:'✓',href:'/app/dashboard/',tone:'blue'},
-  {label:'Our story',short:'Story',icon:'♡',href:'/kerala-uk/',tone:'yellow'}
+const features = [
+ {icon:'♥',title:'Match with a routine',copy:'Swipe through training ideas until one feels right.'},
+ {icon:'✦',title:'Make your BF card',copy:'Create a private profile preview with an optional Instagram handle.'},
+ {icon:'↗',title:'Move when you’re ready',copy:'Free plans, workout videos and progress tools — no subscriptions.'}
 ];
-const posts = [
-  {
-    id:'hello',
-    topic:'coach',
-    label:'A note from BF GYM',
-    title:'Hi, welcome to your fitness space 👋',
-    text:'BF means Best Fitness. BF GYM Global is a free fitness learning space started by Coach Adeep Aji, a Malayali trainer from Kerala now based in the UK. Look around, learn something new and move at your own pace.',
-    cta:'Read our Kerala → UK story',
-    href:'/kerala-uk/',
-    secondary:'മലയാളത്തിൽ വായിക്കാം',
-    secondaryHref:'/ml/kerala-uk/',
-    visual:'coach',
-    image:'/images/trainer/adeep-portrait-new.webp',
-    alt:'Coach Adeep Aji, founder of BF GYM Global, smiling and giving two thumbs up',
-    graphicTitle:'',
-    graphicSub:''
-  },
-  {
-    id:'starting',
-    topic:'beginner',
-    label:'Beginner friendly',
-    title:'New to the gym? You belong here.',
-    text:'No perfect body, no complicated plan and no need to sign up. Start with an approachable routine and build consistency little by little.',
-    cta:'Find my free starting plan',
-    href:'/start/',
-    secondary:'Explore all plans',
-    secondaryHref:'/programmes/',
-    visual:'beginner',
-    image:'',
-    alt:'',
-    graphicTitle:'START SMALL.',
-    graphicSub:'SHOW UP. LEARN. REPEAT.'
-  },
-  {
-    id:'plans',
-    topic:'workout',
-    label:'Free workouts',
-    title:'Pick a plan that fits your level 💪',
-    text:'Explore free four-week example programmes for beginner, intermediate and advanced levels. Your workout completion marks are kept on your own device.',
-    cta:'Explore free workout plans',
-    href:'/programmes/',
-    secondary:'Track my progress',
-    secondaryHref:'/app/dashboard/',
-    visual:'plans',
-    image:'',
-    alt:'',
-    graphicTitle:'04 WEEKS',
-    graphicSub:'THREE LEVELS · ONE STARTING POINT'
-  },
-  {
-    id:'form',
-    topic:'learning',
-    label:'Learn something today',
-    title:'Good movement comes before heavier weights.',
-    text:'Use the exercise video directory to find demonstrations and learn the basics of strength training, cardio and HIIT. Begin with what feels manageable for you.',
-    cta:'Browse workout demonstrations',
-    href:'/app/workouts/',
-    secondary:'See a sample plan',
-    secondaryHref:'/sample-plan/',
-    visual:'learn',
-    image:'',
-    alt:'',
-    graphicTitle:'LEARN THE MOVE.',
-    graphicSub:'THEN BUILD THE HABIT.'
-  },
-  {
-    id:'myspace',
-    topic:'workout',
-    label:'Your own progress',
-    title:'A little progress is still progress.',
-    text:'Open the free training dashboard, mark completed sessions and revisit your progress on this device. No account or membership card is required.',
-    cta:'Open my workout dashboard',
-    href:'/app/dashboard/',
-    secondary:'Explore the mobile hub',
-    secondaryHref:'/app/',
-    visual:'progress',
-    image:'',
-    alt:'',
-    graphicTitle:'YOUR PACE.',
-    graphicSub:'YOUR PROGRESS. YOUR DEVICE.'
-  },
-  {
-    id:'member',
-    topic:'learning',
-    label:'Behind the scenes',
-    title:'Curious about a digital member card?',
-    text:'You can explore our interactive card concept using fictional sample details. Real accounts, paid subscriptions, bookings and wallet passes are not active.',
-    cta:'View the card demo',
-    href:'/app/membership/',
-    secondary:'Read privacy information',
-    secondaryHref:'/privacy/',
-    visual:'member',
-    image:'',
-    alt:'',
-    graphicTitle:'BF / DEMO',
-    graphicSub:'A CONCEPT — NOT A REAL MEMBERSHIP'
-  }
-];
-const shortLinks=[
-  {label:'Home feed',href:'/',mark:'⌂'},
-  {label:'Free programmes',href:'/programmes/',mark:'▤'},
-  {label:'Start here',href:'/start/',mark:'✦'},
-  {label:'Workout videos',href:'/app/workouts/',mark:'▷'},
-  {label:'My workout tracker',href:'/app/dashboard/',mark:'◉'},
-  {label:'Meet Coach Adeep',href:'/trainer/',mark:'☺'}
+const quickLinks = [
+ {label:'Free plans',href:'/programmes/'},
+ {label:'Workout videos',href:'/app/workouts/'},
+ {label:'My dashboard',href:'/app/dashboard/'},
+ {label:'Coach Adeep',href:'/trainer/'}
 ];
 ---
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <meta name="theme-color" content="#fcfcfa"/>
-  <meta name="google-site-verification" content="--7gUnBNnZpqeBYDpyAtk7VVAAE0Uvzu4O2QODevqr4"/>
-  <meta name="description" content="Welcome to BF GYM Global (Best Fitness Gym Global): a friendly, free UK-based fitness learning space by Kerala-born Coach Adeep Aji. Explore free workout plans, easy workout videos and your own device-only progress tracker without signing up."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="BF GYM Global | Your Friendly Free Fitness Feed"/>
-  <meta property="og:description" content="Start simple. Explore free workouts, videos and training tips from BF GYM Global. No sign-up or payment needed."/>
-  <meta property="og:url" content="https://bfgym.netlify.app/"/>
-  <meta property="og:image" content="https://bfgym.netlify.app/images/trainer/adeep-instagram.jpg"/>
-  <meta property="og:image:alt" content="Coach Adeep Aji, the founder of BF GYM Global"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <link rel="canonical" href="https://bfgym.netlify.app/"/>
-  <link rel="icon" href="/bf-icon.svg" type="image/svg+xml"/>
-  <link rel="manifest" href="/manifest.webmanifest"/>
-  <link rel="apple-touch-icon" href="/app-icon-192.png"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <script type="application/ld+json" set:html={JSON.stringify({
-    '@context':'https://schema.org',
-    '@type':'WebSite',
-    name:'BF GYM Global',
-    alternateName:'Best Fitness Gym Global',
-    url:'https://bfgym.netlify.app/',
-    description:'Free fitness education founded by Kerala-born Coach Adeep Aji, based in the United Kingdom.',
-    inLanguage:['en','ml'],
-    sameAs:['https://www.instagram.com/fitwithaadhi/']
-  })}></script>
-  <title>BF GYM Global — Free Fitness Feed | Best Fitness</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#fff8fb"/>
+<meta name="google-site-verification" content="--7gUnBNnZpqeBYDpyAtk7VVAAE0Uvzu4O2QODevqr4"/>
+<meta name="description" content="BF GYM Global (Best Fitness Gym Global) is a free fitness space with a playful dating-app-style workout matcher, a private profile-card preview with optional Instagram and free workout programmes. No login, real member accounts or payments needed."/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="BF GYM Global | Find Your Fitness Match"/>
+<meta property="og:description" content="Your type? Feeling good. Swipe through free fitness plans, discover workouts and preview your BF card — no signup pressure."/>
+<meta property="og:url" content="https://bfgym.netlify.app/"/>
+<meta property="og:image" content="https://bfgym.netlify.app/images/trainer/adeep-instagram.jpg"/>
+<meta property="og:image:alt" content="Coach Adeep Aji, founder of BF GYM Global"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="canonical" href="https://bfgym.netlify.app/"/>
+<link rel="icon" href="/bf-icon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<link rel="apple-touch-icon" href="/app-icon-192.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<script type="application/ld+json" set:html={JSON.stringify({
+ '@context':'https://schema.org','@type':'WebSite',name:'BF GYM Global',
+ alternateName:'Best Fitness Gym Global',url:'https://bfgym.netlify.app/',
+ description:'Free fitness education from Coach Adeep Aji, based in the United Kingdom.',
+ inLanguage:['en','ml'],sameAs:['https://www.instagram.com/fitwithaadhi/']
+})}></script>
+<title>BF GYM Global — Find Your Fitness Match | Best Fitness</title>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to workouts and posts</a>
-<header class="topbar">
+<a class="skip" href="#main">Skip to fitness matching</a>
+<header class="header">
   <div class="top-inner">
-    <a class="brand" href="/" aria-label="BF GYM Global home">
-      <span class="brand-symbol">BF<span>.</span></span>
-      <span class="brand-label"><strong>BF GYM</strong><small>BEST FITNESS · GLOBAL</small></span>
-    </a>
-    <div class="header-search">
-      <label class="sr-only" for="feed-search">Search the BF GYM fitness feed</label>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.7" cy="10.7" r="6.7"/><path d="m16 16 4.5 4.5"/></svg>
-      <input type="search" id="feed-search" placeholder="Search workouts and tips…" autocomplete="off"/>
-      <kbd aria-hidden="true">⌕</kbd>
-    </div>
-    <nav class="header-actions" aria-label="Quick links">
-      <a href="/programmes/" class="header-icon" title="Free workout plans" aria-label="Free workout plans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16M8 15h3"/></svg></a>
-      <a href="https://www.instagram.com/fitwithaadhi/" target="_blank" rel="noopener noreferrer" class="header-icon instagram-header" title="Visit @fitwithaadhi on Instagram" aria-label="Visit @fitwithaadhi on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-      <a href="/trainer/" class="profile-mini" title="Meet Coach Adeep" aria-label="Meet Coach Adeep"><img src="/images/trainer/adeep-portrait-new.webp" alt="" width="38" height="38"/></a>
-    </nav>
+    <a class="brand" href="/" aria-label="BF GYM Global homepage"><span class="brand-icon">bf<span>♥</span></span><span>BF GYM <small>BEST FITNESS · GLOBAL</small></span></a>
+    <nav class="top-links" aria-label="Main navigation"><a href="#discover">Discover</a><a href="#how-it-works">How it works</a><a href="/programmes/">Workouts</a><a href="/trainer/">Our coach</a></nav>
+    <a class="top-join" href="/join/">Make my BF card <span aria-hidden="true">↗</span></a>
   </div>
 </header>
-<div class="page-layout">
-  <aside class="left-sidebar" aria-label="Site sections">
-    <nav class="side-nav" aria-label="Primary navigation">
-      {shortLinks.map((link,index)=>(
-        <a href={link.href} class:list={['side-link',{'selected':index===0}]} aria-current={index===0?'page':undefined}><span aria-hidden="true" class="side-glyph">{link.mark}</span><span>{link.label}</span></a>
-      ))}
-    </nav>
-    <div class="side-note"><span class="note-dot" aria-hidden="true"></span><strong>A place to start, not to compare.</strong><p>Explore at your pace. No sign-up or payment needed.</p></div>
-    <div class="side-footer"><a href="/privacy/">Privacy</a><span>·</span><a href="/ml/kerala-uk/" lang="ml">മലയാളം</a><span>·</span><a href="/kerala-uk/">Our story</a></div>
-  </aside>
 
-  <main class="main-feed" id="main">
-    <section class="welcome" aria-labelledby="welcome-heading">
-      <div class="welcome-copy">
-        <span class="eyebrow"><span class="welcome-spark" aria-hidden="true">✳</span> YOUR FREE FITNESS SPACE</span>
-        <h1 id="welcome-heading">Fitness starts <em>here.</em></h1>
-        <p>Come as you are. Explore workouts, learn new moves and build good habits at your own pace — <strong>no login, no pressure and no payment.</strong></p>
-        <div class="welcome-actions">
-          <a href="/start/" class="btn-primary">Find my first workout <span aria-hidden="true">↗</span></a>
-          <a href="#feed" class="btn-quiet">Explore the feed ↓</a>
-        </div>
-        <div class="trust-chips" aria-label="What to expect"><span>✓ 100% free learning</span><span>✓ No sign-up</span><span>✓ Beginner friendly</span></div>
-      </div>
-      <div class="welcome-art" aria-hidden="true">
-        <div class="art-ring art-ring-a"></div><div class="art-ring art-ring-b"></div>
-        <span class="art-word">MOVE<br/>MORE<span>.</span></span>
-        <span class="art-sticker">BEST FITNESS / GLOBAL</span>
-      </div>
-    </section>
+<main id="main">
+<section class="hero wrap" aria-labelledby="hero-title">
+ <div class="hero-copy">
+  <span class="eyebrow"><span class="eyebrow-dot"></span> BF GYM GLOBAL PRESENTS · FIT FINDER</span>
+  <div class="hero-tag">♡ A little more love for your fitness journey</div>
+  <h1 id="hero-title">Find your<br/><em>fitness</em> match<span class="heart-period">♥</span></h1>
+  <p class="hero-desc">Like a dating app, but for your goals. Discover a workout that gets you, save your favourite ideas and start when you feel ready. No judgment. No pressure.</p>
+  <div class="hero-actions"><a class="primary-btn" href="#discover">Discover my match <span aria-hidden="true">→</span></a><a class="secondary-btn" href="/join/">Preview my BF card <span aria-hidden="true">↗</span></a></div>
+  <p class="under-actions"><span aria-hidden="true">♡</span> Everyone is welcome · All workout tools are free · No online account required</p>
+  <div class="face-strip"><div class="founder-avatar"><img src="/images/trainer/adeep-portrait-new.webp" width="46" height="46" alt="Coach Adeep Aji"/></div><div><strong>Made by Coach Adeep</strong><span>Kerala roots · Based in the UK</span></div><a href="/kerala-uk/" aria-label="Learn about Coach Adeep's Kerala to UK story">→</a></div>
+ </div>
+ <div class="hero-visual">
+  <div class="orbit orbit-one" aria-hidden="true"></div><div class="orbit orbit-two" aria-hidden="true"></div>
+  <div class="hero-card">
+   <div class="hero-card-top"><span><span class="tiny-heart" aria-hidden="true">♥</span> BEST FITNESS</span><span class="dot-menu" aria-hidden="true">•••</span></div>
+   <div class="hero-photo"><img src="/images/trainer/adeep-portrait-new.webp" alt="Coach Adeep welcomes everyone to BF GYM Global" width="430" height="475" fetchpriority="high"/><div class="hero-photo-gradient"></div><div class="hero-photo-caption"><small>THE PERSON BEHIND BF GYM</small><strong>Coach Adeep <span aria-hidden="true">✓</span></strong><span>Kerala 🇮🇳 → UK 🇬🇧</span></div></div>
+   <div class="hero-card-bottom"><span>YOUR FITNESS JOURNEY STARTS WITH A MATCH.</span><span class="heart-bubble" aria-hidden="true">♥</span></div>
+  </div>
+  <span class="float-like" aria-hidden="true">♥</span><span class="float-spark" aria-hidden="true">✧</span>
+ </div>
+</section>
 
-    <section class="quick-stories" aria-labelledby="explore-label">
-      <div class="section-line"><h2 id="explore-label">Start exploring</h2><span>No account needed</span></div>
-      <div class="story-scroll">
-        {moments.map(item=>(
-          <a class="story-link" href={item.href}>
-            <span class:list={['story-ring',item.tone]}><span aria-hidden="true">{item.icon}</span></span>
-            <span class="story-name">{item.short}</span>
-          </a>
-        ))}
-      </div>
-    </section>
+<section class="pill-section wrap" aria-label="What you can do"><div class="pillar"><span>♡</span> Find a routine you enjoy</div><div class="pillar"><span>✦</span> Build a private BF card</div><div class="pillar"><span>✓</span> All free to explore</div></section>
 
-    <section id="feed" class="feed-section" aria-labelledby="feed-heading">
-      <div class="section-line feed-title-line"><div><p class="mini-label">MADE FOR REAL LIFE</p><h2 id="feed-heading">The BF feed <span class="spark">✳</span></h2></div><span class="daily-note">Explore at your pace</span></div>
-      <div class="filter-scroll" aria-label="Filter posts by topic">
-        {topics.map(item=>(
-          <button type="button" class:list={['filter',{'active':item.id==='all'}]} data-filter={item.id} aria-pressed={item.id==='all'?'true':'false'}>{item.id==='saved'?'♡ ':''}{item.name}</button>
-        ))}
+<section class="discover-section" id="discover" aria-labelledby="discover-title">
+ <div class="discover-wrap wrap">
+  <div class="section-heading"><div><span class="eyebrow"><span class="eyebrow-dot"></span> SWIPE · SAVE · EXPLORE</span><h2 id="discover-title">Who’s your <em>type?</em></h2><p>Forget swiping on people. Swipe through free BF GYM fitness experiences to discover what suits you.</p></div><div class="heading-badge">6 FITNESS VIBES <span aria-hidden="true">♥</span></div></div>
+  <div class="filter-row" role="group" aria-label="Choose your fitness mood">
+   <button type="button" class="mood active" data-mood="all" aria-pressed="true">♡ For you</button>
+   <button type="button" class="mood" data-mood="beginner" aria-pressed="false">New here</button>
+   <button type="button" class="mood" data-mood="strength" aria-pressed="false">Strength</button>
+   <button type="button" class="mood" data-mood="cardio" aria-pressed="false">Movement</button>
+   <button type="button" class="mood" data-mood="learn" aria-pressed="false">Learning</button>
+  </div>
+  <div class="match-layout">
+   <div class="match-area">
+    <div class="deck-wrap">
+     <div class="deck-back back-one" aria-hidden="true"></div><div class="deck-back back-two" aria-hidden="true"></div>
+     <article id="match-card" class="match-card" aria-label="Current fitness match">
+      <div class="match-media sunset" id="match-media">
+       <div class="match-top"><span class="match-corner">BF<span>♥</span> / GYM</span><span class="match-type" id="match-type">BEGINNER</span></div>
+       <div class="match-center"><span class="match-glyph" id="match-glyph" aria-hidden="true">✦</span><span class="match-vibe" id="match-vibe">EASY TO START</span></div>
+       <div class="match-bottom"><span id="match-tagline">Slow starts. Strong stories.</span><h3 id="match-title">Your first gym chapter</h3></div>
       </div>
-      <p class="feed-info">Simple fitness ideas, useful links and real BF GYM updates — not a public social network. Saves stay on this device.</p>
-      <div class="post-list" id="post-list">
-        {posts.map(post=>(
-          <article class="post" data-post-id={post.id} data-topic={post.topic} data-search={(post.title+' '+post.text+' '+post.label).toLowerCase()}>
-            <header class="post-header">
-              <a class="post-avatar" href="/trainer/" aria-label="Meet Coach Adeep"><img src="/images/trainer/adeep-portrait-new.webp" width="45" height="45" alt=""/></a>
-              <div class="post-meta"><div class="post-author"><strong>BF GYM Global</strong><span class="verified-meaning" title="BF means Best Fitness">BF</span></div><span class="post-subtitle">{post.label} · <span>by Coach Adeep</span></span></div>
-              <span class="post-type" aria-label={'Post topic: '+post.topic}>{post.topic}</span>
-            </header>
-            <div class="post-copy"><h3>{post.title}</h3><p>{post.text}</p></div>
-            {post.visual==='coach' ? (
-              <a class="post-media coach-media" href={post.href} aria-label="Read the founder's Kerala to UK story">
-                <img src={post.image} width="680" height="340" alt={post.alt} loading="lazy"/>
-                <span class="photo-strap">FROM KERALA TO THE UK <span aria-hidden="true">↗</span></span>
-              </a>
-            ):(
-              <a href={post.href} class:list={['post-media','graphic-media',post.visual]} aria-label={post.cta}>
-                <span class="graphic-kicker">BF GYM GLOBAL <span>✳</span> BEST FITNESS</span>
-                <strong>{post.graphicTitle}</strong>
-                <span class="graphic-sub">{post.graphicSub}</span>
-                <span class="graphic-circle" aria-hidden="true"></span>
-              </a>
-            )}
-            <footer class="post-footer">
-              <div class="post-controls">
-                <button class="save-post" type="button" data-save={post.id} aria-pressed="false" aria-label={'Save '+post.title+' on this device'}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h14v17l-7-4.5-7 4.5z"/></svg><span>Save</span></button>
-                <span class="local-note">Private to this device</span>
-              </div>
-              <a href={post.href} class="post-link">{post.cta} <span aria-hidden="true">↗</span></a>
-            </footer>
-            <div class="post-secondary"><a href={post.secondaryHref} lang={post.secondaryHref.startsWith('/ml/')?'ml':undefined}>{post.secondary} <span aria-hidden="true">→</span></a></div>
-          </article>
-        ))}
-      </div>
-      <div id="empty-feed" class="empty-feed" hidden><span class="empty-symbol" aria-hidden="true">♡</span><h3>Nothing here yet.</h3><p>Try another topic or search term. You can save useful posts to find them here later.</p><button type="button" id="reset-feed">Show all posts</button></div>
-    </section>
-    <section class="community-card" aria-labelledby="community-heading"><div class="community-icon" aria-hidden="true">♡</div><div><span class="mini-label">KEEP IN TOUCH</span><h2 id="community-heading">Follow the journey on Instagram.</h2><p>See Coach Adeep at <strong>@fitwithaadhi</strong>. The BF GYM site itself doesn't ask you to connect a social account.</p></div><a href="https://www.instagram.com/fitwithaadhi/" target="_blank" rel="noopener noreferrer" class="btn-outline">Visit Instagram ↗</a></section>
-    <footer class="main-footer"><strong>BF GYM GLOBAL</strong><span>Best Fitness · Free fitness education</span><div><a href="/privacy/">Privacy</a><a href="/trainer/">Meet the coach</a><a href="/ml/kerala-uk/" lang="ml">മലയാളം</a><a href="/app/membership/">Member card demo</a></div><p>Paid coaching, bookings, real membership registration and Wallet passes are not active. Workout progress and saved posts are device-only. BF GYM is an independent site and is not affiliated with Instagram or Threads.</p></footer>
-  </main>
+      <div class="match-body"><p class="match-intro" id="match-subtitle">New to training? This is your starting point.</p><p class="match-description" id="match-description">Simple workouts, a manageable plan and a little confidence each day.</p><div class="match-action-bar"><button id="pass-match" class="round-action pass" type="button" aria-label="Pass to next fitness match" title="See another fitness match"><span>×</span></button><button id="like-match" class="round-action like" type="button" aria-label="Save this fitness match" title="Save this fitness match"><span>♥</span></button><a id="open-match" class="open-match" href="/start/">Explore <span aria-hidden="true">↗</span></a></div><p class="swipe-hint" id="match-hint" aria-live="polite">Tap × for next · ♥ to save · or swipe left / right</p></div>
+     </article>
+    </div>
+    <div class="deck-footer"><span id="match-counter">01 / 06</span><div class="progress-dots" id="match-dots" aria-label="Fitness match position"><span class="on"></span><span></span><span></span><span></span><span></span><span></span></div><span>ALL FREE ♥</span></div>
+   </div>
+   <div class="match-side">
+    <div class="side-greeting"><span class="mini-heart">♥</span><h3>It's a match… with <em>yourself.</em></h3><p>Fitness isn't about impressing strangers. It's about finding movement you actually want to return to.</p></div>
+    <div class="saved-box"><div class="saved-head"><h3>♡ Your likes</h3><small>Private to this device</small></div><ul id="liked-list"><li class="no-likes">Tap the heart to save a fitness idea here.</li></ul><button id="clear-likes" type="button" hidden>Clear saved ideas</button></div>
+    <div class="profile-nudge"><div class="nudge-emoji" aria-hidden="true">✦</div><div><strong>Make it personal.</strong><p>A BF card with your nickname and optional Instagram handle — just for this device.</p></div><a href="/join/">Try the card ↗</a></div>
+   </div>
+  </div>
+ </div>
+ <script type="application/json" id="match-data" set:html={JSON.stringify(matches)}></script>
+</section>
 
-  <aside class="right-sidebar" aria-label="Coach and site information">
-    <div class="coach-panel"><div class="panel-title"><span class="panel-dot" aria-hidden="true"></span> MEET THE FOUNDER</div><div class="coach-top"><img src="/images/trainer/adeep-portrait-new.webp" width="66" height="66" alt="Coach Adeep Aji"/><div><h2>Coach Adeep</h2><p>Kerala <span aria-hidden="true">→</span> UK 🇮🇳🇬🇧</p></div></div><p>A fitness learning space created to help people start simply and build sustainable habits.</p><a href="/trainer/">Read the coach profile <span aria-hidden="true">↗</span></a></div>
-    <div class="safe-panel"><span class="safe-symbol" aria-hidden="true">✓</span><h2>Feel free to explore.</h2><p>There is no sign-in gate, no subscription checkout and no public profile to create.</p><ul><li>Free workout plans</li><li>Easy exercise learning</li><li>Device-only saved posts</li></ul><a href="/privacy/">How privacy works ↗</a></div>
-    <a class="malayalam-panel" href="/ml/kerala-uk/" hreflang="ml"><span lang="ml">മലയാളത്തിൽ വായിക്കാം</span><small>Our Kerala → UK story ↗</small></a>
-  </aside>
-</div>
-<nav class="bottom-nav" aria-label="Mobile navigation">
-  <a href="/" aria-current="page"><span aria-hidden="true">⌂</span><small>Home</small></a>
-  <a href="/programmes/"><span aria-hidden="true">▤</span><small>Plans</small></a>
-  <a href="/start/" class="bottom-start"><span aria-hidden="true">✦</span><small>Start</small></a>
-  <a href="/app/workouts/"><span aria-hidden="true">▷</span><small>Videos</small></a>
-  <a href="/trainer/"><span aria-hidden="true">☺</span><small>Coach</small></a>
-</nav>
+<section id="how-it-works" class="how-section wrap" aria-labelledby="how-title">
+ <div class="center-head"><span class="eyebrow"><span class="eyebrow-dot"></span> THE BF GYM EXPERIENCE</span><h2 id="how-title">An easier way to <em>begin.</em></h2><p>You don't have to be a fitness expert to fit in here.</p></div>
+ <div class="feature-grid">{features.map((item,i)=>(
+  <div class="feature"><div class="feature-top"><span class="feature-icon">{item.icon}</span><span class="feature-number">0{i+1}</span></div><h3>{item.title}</h3><p>{item.copy}</p></div>
+ ))}</div>
+</section>
+
+<section class="join-section wrap" aria-labelledby="join-heading">
+ <div class="join-main"><span class="eyebrow"><span class="eyebrow-dot"></span> YOUR LITTLE CORNER OF BF GYM</span><h2 id="join-heading">You've got a vibe.<br/><em>Now make it yours.</em></h2><p>Choose your display name, select your fitness interest and add your Instagram username if you want to. You'll get a beautiful BF membership-card <strong>preview</strong> that stays on your device.</p><a href="/join/" class="primary-btn">Create my card preview <span aria-hidden="true">♥</span></a><span class="join-disclaimer">No real online account or membership is created yet. Nothing is uploaded or shown to other visitors.</span></div>
+ <div class="card-showcase" aria-label="Example BF GYM card preview"><div class="show-card"><div class="show-top"><strong>BF<span>♥</span> GYM <small>GLOBAL</small></strong><small>PREVIEW ONLY</small></div><div class="show-avatar">A</div><div class="show-small">MY FITNESS VIBE</div><h3>Your BF era</h3><p>♡ Starting my fitness journey</p><div class="show-bottom"><span>BF / PERSONAL PREVIEW</span><span>BEST FITNESS ♥</span></div></div><span class="show-sticker" aria-hidden="true">♡ yours, privately</span></div>
+</section>
+
+<section class="meet-section wrap" aria-labelledby="meet-title">
+ <div class="meet-photo"><img src="/images/trainer/adeep-portrait-new.webp" width="450" height="480" loading="lazy" alt="Coach Adeep Aji, founder of BF GYM Global"/></div>
+ <div class="meet-copy"><span class="eyebrow"><span class="eyebrow-dot"></span> SAY HI TO THE FOUNDER</span><h2 id="meet-title">Hi, I'm <em>Adeep.</em></h2><p>I'm a Malayali fitness trainer from Kerala, now living in the UK. I created Best Fitness Gym Global to make everyday fitness less intimidating, more welcoming and easier to explore.</p><p>This is a free fitness-learning space. You don't have to be at any particular fitness level to belong.</p><div class="meet-links"><a href="/trainer/">Meet your coach ↗</a><a href="/ml/kerala-uk/" lang="ml">മലയാളത്തിൽ വായിക്കാം ↗</a><a href="https://www.instagram.com/fitwithaadhi/" target="_blank" rel="noopener noreferrer">Instagram @fitwithaadhi ↗</a></div></div>
+</section>
+
+<section class="explore-footer wrap" aria-label="Explore free BF GYM tools"><h2>Your next move <span aria-hidden="true">♥</span></h2><div class="quick-grid">{quickLinks.map(link=><a href={link.href}>{link.label} <span aria-hidden="true">↗</span></a>)}</div></section>
+</main>
+<footer class="footer"><div class="wrap footer-inner"><div class="footer-brand"><a href="/">BF<span>♥</span> GYM GLOBAL</a><small>Best Fitness · Open to everyone</small></div><div class="footer-links"><a href="/privacy/">Privacy</a><a href="/app/membership/">Member-card concept</a><a href="/kerala-uk/">Our story</a><a href="/ml/kerala-uk/" lang="ml">മലയാളം</a></div><p>BF GYM is an independent fitness-learning site, not a dating service. Fitness 'matches' are curated programme suggestions, not connections between people. Saved likes and profile-card previews remain on your device. There are no live online accounts, public user profiles, payments, or active membership cards.</p></div></footer>
+<nav class="mobile-nav" aria-label="Mobile navigation"><a href="/" aria-current="page"><span aria-hidden="true">⌂</span><small>Home</small></a><a href="#discover"><span aria-hidden="true">♥</span><small>Discover</small></a><a href="/join/" class="mobile-card"><span aria-hidden="true">✦</span><small>My card</small></a><a href="/programmes/"><span aria-hidden="true">▤</span><small>Plans</small></a><a href="/trainer/"><span aria-hidden="true">☺</span><small>Coach</small></a></nav>
 <script>
-  // Editorial feed only: no login, no public posts, no analytics and no network requests.
-  // Save preferences are stored in this browser only and can be cleared with browser data.
-  const saveKey = 'bfgym-feed-saved-v1';
-  const filters = Array.from(document.querySelectorAll('[data-filter]'));
-  const cards = Array.from(document.querySelectorAll('[data-post-id]'));
-  const saveButtons = Array.from(document.querySelectorAll('[data-save]'));
-  const search = document.getElementById('feed-search');
-  const empty = document.getElementById('empty-feed');
-  const reset = document.getElementById('reset-feed');
-  let selected = 'all';
-  let saved = new Set();
-  try {
-    const stored = JSON.parse(localStorage.getItem(saveKey) || '[]');
-    if (Array.isArray(stored)) saved = new Set(stored.filter(id => typeof id === 'string'));
-  } catch (_) { /* storage may be blocked; in-memory saves still work */ }
-  function renderSaved() {
-    saveButtons.forEach(button => {
-      const on = saved.has(button.dataset.save);
-      button.setAttribute('aria-pressed', String(on));
-      button.classList.toggle('is-saved', on);
-      const label = button.querySelector('span');
-      if (label) label.textContent = on ? 'Saved' : 'Save';
-      button.setAttribute('aria-label', on ? 'Remove this post from saved on this device' : 'Save this post on this device');
-    });
-  }
-  function renderFeed() {
-    const query = (search && search.value ? search.value : '').trim().toLowerCase();
-    let visible = 0;
-    cards.forEach(card => {
-      const topic = card.dataset.topic || '';
-      const matchTopic = selected === 'all' || (selected === 'saved' ? saved.has(card.dataset.postId) : selected === topic);
-      const matchSearch = !query || (card.dataset.search || '').includes(query);
-      card.hidden = !(matchTopic && matchSearch);
-      if (!card.hidden) visible += 1;
-    });
-    if (empty) empty.hidden = visible !== 0;
-  }
-  filters.forEach(button => button.addEventListener('click', () => {
-    selected = button.dataset.filter || 'all';
-    filters.forEach(item => { const active = item === button; item.classList.toggle('active',active); item.setAttribute('aria-pressed',String(active)); });
-    renderFeed();
-  }));
-  saveButtons.forEach(button => button.addEventListener('click', () => {
-    const id = button.dataset.save;
-    if (!id) return;
-    if (saved.has(id)) saved.delete(id); else saved.add(id);
-    try { localStorage.setItem(saveKey, JSON.stringify(Array.from(saved))); } catch (_) {}
-    renderSaved();
-    renderFeed();
-  }));
-  if (search) search.addEventListener('input',renderFeed);
-  if (reset) reset.addEventListener('click', () => {
-    if (search) search.value = '';
-    const allButton = filters.find(button => button.dataset.filter === 'all');
-    if (allButton) allButton.click();
-    if (search) search.focus();
+ const raw = document.getElementById('match-data');
+ let matches = [];
+ try { matches = JSON.parse(raw.textContent || '[]'); } catch (_) {}
+ const screen = document.getElementById('match-card');
+ const media = document.getElementById('match-media');
+ const els = {
+  type:document.getElementById('match-type'),
+  glyph:document.getElementById('match-glyph'),
+  vibe:document.getElementById('match-vibe'),
+  tagline:document.getElementById('match-tagline'),
+  title:document.getElementById('match-title'),
+  subtitle:document.getElementById('match-subtitle'),
+  description:document.getElementById('match-description'),
+  link:document.getElementById('open-match'),
+  count:document.getElementById('match-counter'),
+  dots:document.getElementById('match-dots'),
+  hint:document.getElementById('match-hint'),
+  liked:document.getElementById('liked-list'),
+  clear:document.getElementById('clear-likes')
+ };
+ const key = 'bfgym-workout-matches-v1';
+ let liked = new Set();
+ try { const a = JSON.parse(localStorage.getItem(key)||'[]'); if(Array.isArray(a)) liked=new Set(a.filter(v=>typeof v==='string'));} catch (_) {}
+ let selectedMood='all', active=0;
+ const moods=Array.from(document.querySelectorAll('[data-mood]'));
+ function getPool(){const pool=selectedMood==='all'?matches:matches.filter(m=>m.type===selectedMood);return pool.length?pool:matches;}
+ function current(){const pool=getPool();return pool[active%pool.length];}
+ function renderLiked(){
+  const list=Array.from(liked).map(id=>matches.find(m=>m.id===id)).filter(Boolean);
+  els.liked.textContent='';
+  if(!list.length){const row=document.createElement('li');row.className='no-likes';row.textContent='Tap the heart to save a fitness idea here.';els.liked.append(row);}
+  else list.forEach(m=>{
+   const row=document.createElement('li');
+   const a=document.createElement('a');a.href=m.href;a.textContent=m.title+' ↗';
+   const button=document.createElement('button');button.type='button';button.setAttribute('aria-label','Remove '+m.title+' from saved');button.textContent='×';
+   button.addEventListener('click',()=>{liked.delete(m.id);persist();renderLiked();});
+   row.append(a,button);els.liked.append(row);
   });
-  renderSaved();
-  renderFeed();
+  els.clear.hidden=!list.length;
+ }
+ function persist(){try {localStorage.setItem(key,JSON.stringify(Array.from(liked)));}catch(_){}}
+ function render(){
+  const pool=getPool();const m=current();
+  if(!m)return;
+  media.className='match-media '+m.background;
+  els.type.textContent=m.label;
+  els.glyph.textContent=m.glyph;
+  els.vibe.textContent=m.score;
+  els.tagline.textContent=m.tagline;
+  els.title.textContent=m.title;
+  els.subtitle.textContent=m.subtitle;
+  els.description.textContent=m.description;
+  els.link.href=m.href;
+  els.count.textContent=String((active%pool.length)+1).padStart(2,'0')+' / '+String(pool.length).padStart(2,'0');
+  els.dots.textContent='';
+  pool.forEach((p,i)=>{const dot=document.createElement('span');if(i===active%pool.length)dot.className='on';els.dots.append(dot);});
+  const isSaved=liked.has(m.id);
+  els.hint.textContent=isSaved?'♥ Saved to your private likes · Keep exploring':'Tap × for next · ♥ to save · or swipe left / right';
+  const like=document.getElementById('like-match');
+  like.setAttribute('aria-label',isSaved?'Saved fitness match — tap to save again':'Save this fitness match');
+ }
+ function next(){const pool=getPool();if(!pool.length)return;active=(active+1)%pool.length;render();}
+ document.getElementById('pass-match').addEventListener('click',next);
+ document.getElementById('like-match').addEventListener('click',()=>{
+  const m=current();if(!m)return;
+  liked.add(m.id);persist();renderLiked();next();
+ });
+ els.clear.addEventListener('click',()=>{liked.clear();persist();renderLiked();render();});
+ moods.forEach(b=>b.addEventListener('click',()=>{selectedMood=b.dataset.mood||'all';active=0;moods.forEach(btn=>{const on=btn===b;btn.classList.toggle('active',on);btn.setAttribute('aria-pressed',String(on));});render();}));
+ let touch=null;
+ screen.addEventListener('touchstart',e=>{if(e.touches.length===1)touch={x:e.touches[0].clientX,y:e.touches[0].clientY};},{passive:true});
+ screen.addEventListener('touchend',e=>{
+  if(!touch||!e.changedTouches.length)return;
+  const dx=e.changedTouches[0].clientX-touch.x;
+  const dy=e.changedTouches[0].clientY-touch.y;
+  touch=null;
+  if(Math.abs(dx)<65||Math.abs(dx)<Math.abs(dy)*1.3)return;
+  if(dx>0){const m=current();if(m){liked.add(m.id);persist();renderLiked();next();}}
+  else next();
+ },{passive:true});
+ renderLiked();render();
 </script>
 <style is:global>
-:root{--ink:#141a15;--muted:#68726a;--line:#e7ebe5;--bg:#f7f9f5;--paper:#fff;--mint:#d9fba9;--green:#335f2d;--lime:#b9f06c;--sans:'DM Sans',Arial,sans-serif;--head:'Outfit','DM Sans',sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:94px}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.58 var(--sans);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed}img{max-width:100%}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #457c3a;outline-offset:3px}h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:var(--head)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip-link{position:fixed;z-index:200;top:-100px;left:10px;padding:12px 18px;background:#151a15;color:#fff;border-radius:12px}.skip-link:focus{top:10px}
-.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(16px)}.top-inner{height:74px;max-width:1450px;margin:0 auto;padding:0 35px;display:grid;grid-template-columns:260px minmax(290px,600px) 1fr;gap:32px;align-items:center}.brand{display:inline-flex;gap:9px;align-items:center;white-space:nowrap;width:max-content}.brand-symbol{font:900 31px/1 var(--head);letter-spacing:-.12em;padding:8px 12px 8px 8px;background:#1b291a;color:#f8fff3;border-radius:14px}.brand-symbol span{color:var(--lime)}.brand-label{display:flex;flex-direction:column;gap:1px}.brand-label strong{font:900 18px/1 var(--head);letter-spacing:-.04em}.brand-label small{font-size:9px;font-weight:800;color:#728073;letter-spacing:.09em}.header-search{height:44px;display:flex;align-items:center;gap:9px;border:1px solid #e5e9e4;background:#f4f6f3;border-radius:100px;padding:0 15px}.header-search:focus-within{border-color:#9bc97f;box-shadow:0 0 0 3px #d9f7c7}.header-search svg{width:18px;height:18px;color:#838f83;flex:none}.header-search input{width:100%;background:transparent;border:0;outline:0;color:var(--ink);min-width:0;font-size:13px}.header-search input::placeholder{color:#7b867b}.header-search kbd{color:#9eaaa0;font:600 16px var(--sans)}.header-actions{display:flex;gap:13px;justify-content:flex-end;align-items:center}.header-icon{width:41px;height:41px;border-radius:50%;display:grid;place-items:center;background:#f2f5f0}.header-icon svg{width:22px;height:22px}.header-icon:hover{background:#e7f2e1}.profile-mini{width:39px;height:39px;border-radius:50%;overflow:hidden;border:2px solid #b8e6ac;display:block}.profile-mini img{width:100%;height:100%;object-fit:cover}
-.page-layout{max-width:1450px;margin:0 auto;padding:29px 35px 80px;display:grid;grid-template-columns:240px minmax(0,680px) minmax(240px,300px);gap:32px;align-items:start}.left-sidebar{position:sticky;top:107px;align-self:start}.side-nav{display:grid;gap:4px}.side-link{padding:12px 15px;display:flex;align-items:center;gap:13px;border-radius:13px;color:#414c40;font-weight:750;font-size:13px;transition:background .15s}.side-link:hover,.side-link.selected{background:#e8f3df;color:#233921}.side-glyph{font:600 24px/1 var(--head);width:25px;text-align:center}.side-note{margin:33px 6px 20px;background:#e8f6db;border:1px solid #d8ecc7;padding:20px;border-radius:19px}.note-dot{display:inline-block;width:10px;height:10px;background:#6aa43f;border-radius:50%;margin:0 7px 0 0}.side-note strong{font:750 15px/1.4 var(--head)}.side-note p{color:#50674b;font-size:12px;margin:10px 0 0}.side-footer{display:flex;gap:8px;flex-wrap:wrap;padding:10px;color:#67766a;font-size:11px}.side-footer a:hover{text-decoration:underline}.main-feed{min-width:0}
-.welcome{border-radius:22px;background:#e6f2df;min-height:310px;display:grid;grid-template-columns:1.3fr .7fr;overflow:hidden;box-shadow:0 6px 30px rgba(32,59,22,.04)}.welcome-copy{padding:33px 0 30px 32px;position:relative;z-index:1}.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:.1em;color:#496e40}.welcome-spark{font-size:17px}.welcome h1{font-size:clamp(33px,4vw,49px);line-height:1.04;letter-spacing:-.052em;margin:15px 0}.welcome h1 em{color:#518039;font-style:normal}.welcome p{font-size:13px;line-height:1.72;color:#53694f;max-width:470px;margin:0 0 20px}.welcome p strong{color:#314d2c}.welcome-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn-primary,.btn-quiet,.btn-outline{display:inline-flex;justify-content:center;align-items:center;gap:8px;font-weight:800;font-size:12px;border-radius:10px;min-height:42px;padding:11px 15px}.btn-primary{background:#203e20;color:#fff}.btn-primary:hover{background:#355a31}.btn-quiet{color:#395734}.btn-quiet:hover{text-decoration:underline}.trust-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:19px}.trust-chips span{border-radius:100px;background:#ffffffa6;color:#47603d;padding:5px 9px;font-size:10px;font-weight:800;white-space:nowrap}.welcome-art{position:relative;overflow:hidden;background:radial-gradient(circle at 56% 48%,#d6faaa 0%,#9fc879 48%,#699b5e 100%);min-width:0}.art-ring{position:absolute;border:2px solid #efffda8f;border-radius:50%;aspect-ratio:1}.art-ring-a{width:320px;top:-30px;left:-115px}.art-ring-b{width:260px;right:-100px;bottom:-100px}.art-word{position:absolute;z-index:1;right:15px;top:35%;transform:rotate(-12deg);font:900 clamp(31px,4.5vw,62px)/.9 var(--head);letter-spacing:-.08em;color:#1e421b;text-shadow:4px 5px 0 #e3f8c4}.art-word span{color:#fff}.art-sticker{position:absolute;bottom:22px;right:14px;transform:rotate(-7deg);background:#f6ffdd;border:1px solid #274d24;color:#33582b;padding:7px 12px;border-radius:5px;font-size:9px;font-weight:900;white-space:nowrap}
-.quick-stories{margin-top:27px;padding:23px 25px 15px;border:1px solid var(--line);border-radius:20px;background:var(--paper)}.section-line{display:flex;justify-content:space-between;align-items:center;gap:12px}.section-line h2{font-size:18px;letter-spacing:-.035em;margin:0}.section-line>span{font-size:11px;color:#809080}.story-scroll{display:flex;gap:19px;overflow-x:auto;scrollbar-width:thin;padding:18px 0 7px}.story-link{display:grid;justify-items:center;gap:9px;flex:0 0 86px}.story-ring{width:67px;height:67px;display:grid;place-items:center;border:3px solid #fff;outline:2px solid #aacc8f;border-radius:50%;box-shadow:0 2px 10px #dae9d4}.story-ring>span{font:700 28px var(--head)}.story-ring.green{background:#ddf8ca;color:#2d6a38}.story-ring.peach{background:#ffebd7;color:#994f30}.story-ring.lilac{background:#f2ddfa;color:#754f8d}.story-ring.blue{background:#d9ebff;color:#3c6690}.story-ring.yellow{background:#fff7c9;color:#8b731c}.story-link:hover .story-ring{transform:translateY(-2px)}.story-name{font-size:12px;font-weight:750}
-.feed-section{margin-top:30px}.feed-title-line{padding:0 3px 15px}.mini-label{font-size:10px;color:#758574;font-weight:850;letter-spacing:.1em;margin:0 0 5px}.feed-title-line h2{font-size:28px;line-height:1.1;letter-spacing:-.05em}.spark{color:#87b96b}.daily-note{color:#809080;font-size:11px}.filter-scroll{display:flex;overflow-x:auto;gap:8px;padding:3px 2px 12px;scrollbar-width:thin}.filter{border:1px solid #e2e9df;background:#fff;white-space:nowrap;padding:9px 14px;border-radius:100px;font-size:12px;font-weight:800;color:#627060;flex:none;min-height:40px}.filter:hover{background:#f4f9f0}.filter.active{background:#233a22;color:#fff;border-color:#233a22}.feed-info{font-size:11px;color:#768476;margin:2px 4px 14px}.post-list{display:grid;gap:16px}.post{border-radius:19px;border:1px solid var(--line);background:#fff;padding:23px;box-shadow:0 4px 14px #32432b05}.post[hidden]{display:none!important}.post-header{display:flex;align-items:center;gap:10px}.post-avatar{width:44px;height:44px;flex:none;border-radius:50%;overflow:hidden;border:1px solid #e4e7dc}.post-avatar img{height:100%;width:100%;object-fit:cover}.post-meta{flex:1;min-width:0}.post-author{display:flex;align-items:center;gap:7px;font-size:13px}.verified-meaning{color:#376c2f;background:#def5d1;border-radius:100px;padding:2px 6px;font-size:9px;font-weight:900}.post-subtitle{display:block;color:#839083;font-size:11px;margin-top:1px}.post-type{border:1px solid #e3ebe0;color:#82917f;padding:4px 9px;border-radius:100px;text-transform:capitalize;font-size:10px;font-weight:750}.post-copy{margin:15px 0 17px}.post-copy h3{font-size:21px;letter-spacing:-.038em;line-height:1.3;margin-bottom:7px}.post-copy p{font-size:13px;line-height:1.75;color:#596659;margin:0}.post-media{display:flex;width:100%;height:clamp(170px,32vw,287px);border-radius:14px;overflow:hidden;position:relative}.coach-media{background:#e0e5db;align-items:center;justify-content:center}.coach-media img{height:100%;width:100%;object-fit:cover;object-position:50% 27%;transition:transform .25s}.coach-media:hover img{transform:scale(1.02)}.photo-strap{position:absolute;left:14px;bottom:14px;background:#213421e8;color:#fff;padding:10px 12px;border-radius:8px;font-size:11px;font-weight:900;letter-spacing:.06em}.photo-strap span{color:#d4ffab}.graphic-media{flex-direction:column;justify-content:space-between;padding:23px 25px;color:#1b361f;isolation:isolate}.graphic-kicker{position:relative;z-index:1;font-size:9px;letter-spacing:.13em;font-weight:950}.graphic-kicker span{padding:0 6px}.graphic-media strong{position:relative;z-index:1;font:900 clamp(38px,6vw,72px)/.92 var(--head);letter-spacing:-.075em;max-width:80%;text-wrap:balance}.graphic-sub{position:relative;z-index:1;font-size:10px;font-weight:900;letter-spacing:.12em}.graphic-circle{position:absolute;right:-15%;top:-50%;width:65%;aspect-ratio:1;border:30px solid #ffffff44;border-radius:50%;z-index:0}.graphic-media.beginner{background:linear-gradient(135deg,#dcf9cb,#9dcc9c)}.graphic-media.plans{background:linear-gradient(135deg,#c8f3e2,#a1d5de);color:#1d4e55}.graphic-media.learn{background:linear-gradient(135deg,#ffead8,#e6bba5);color:#694330}.graphic-media.progress{background:linear-gradient(135deg,#ede0fb,#c4b1ea);color:#453063}.graphic-media.member{background:linear-gradient(135deg,#f6f0c9,#ddd0a5);color:#594e28}.post-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px}.post-controls{display:flex;align-items:center;gap:9px}.save-post{border:1px solid #e0e7dd;background:#fff;color:#596759;display:inline-flex;align-items:center;gap:6px;border-radius:9px;padding:9px 11px;font-size:12px;font-weight:800;min-height:40px}.save-post svg{height:18px;width:18px}.save-post.is-saved{color:#315e30;background:#e5f8dc;border-color:#b5dcae}.save-post.is-saved svg{fill:#315e30}.local-note{font-size:10px;color:#8e9b8e}.post-link{font-size:12px;font-weight:850;color:#305c2e;text-align:right}.post-link:hover{text-decoration:underline}.post-secondary{padding-top:10px}.post-secondary a{color:#788679;font-size:11px;font-weight:750}.post-secondary a:hover{text-decoration:underline}.empty-feed{background:white;border:1px dashed #bdd4b6;text-align:center;border-radius:18px;padding:50px 20px}.empty-feed[hidden]{display:none}.empty-symbol{font-size:37px;color:#73906a}.empty-feed h3{font-size:21px;margin:6px 0}.empty-feed p{max-width:360px;margin:0 auto 16px;color:#758575}.empty-feed button{background:#284a25;color:#fff;border:0;border-radius:9px;padding:11px 18px;font-size:12px;font-weight:800}
-.community-card{margin-top:24px;border:1px solid #cee5c0;background:#e6f6df;border-radius:19px;padding:23px;display:grid;grid-template-columns:45px 1fr;gap:15px}.community-icon{width:45px;height:45px;background:#d0ecbe;border:1px solid #bfe1a9;border-radius:13px;display:grid;place-items:center;font-size:29px;color:#37612d}.community-card h2{font-size:19px;letter-spacing:-.03em;margin-bottom:7px}.community-card p{font-size:12px;color:#5d6f58;margin:0}.community-card>.btn-outline{grid-column:2;justify-self:start;border:1px solid #a4c693;color:#284921;background:#fff}.main-footer{padding:25px 5px 0;color:#819081;font-size:11px}.main-footer strong{font-size:14px;color:#344d33}.main-footer>span{display:block;margin-top:2px}.main-footer>div{display:flex;flex-wrap:wrap;gap:15px;margin:13px 0}.main-footer a{text-decoration:underline;text-underline-offset:3px}.main-footer p{font-size:10px;line-height:1.7;max-width:620px;margin:10px 0}
-.right-sidebar{position:sticky;top:108px;display:grid;gap:18px}.coach-panel,.safe-panel{background:#fff;border:1px solid #e4eae1;border-radius:18px;padding:21px}.panel-title{font-size:10px;font-weight:900;color:#73916a;letter-spacing:.09em;display:flex;align-items:center;gap:8px}.panel-dot{width:8px;height:8px;background:#86be62;border-radius:50%}.coach-top{display:flex;gap:12px;align-items:center;margin:15px 0}.coach-top img{width:62px;height:62px;border-radius:15px;object-fit:cover}.coach-top h2{font-size:19px;margin:0;letter-spacing:-.04em}.coach-top p{color:#7a877a;font-size:11px;margin:3px 0 0}.coach-panel>p,.safe-panel>p{color:#6c796b;font-size:12px;line-height:1.75}.coach-panel>a,.safe-panel>a{color:#3e7137;font-size:12px;font-weight:850}.safe-panel{background:#f2f9ed}.safe-symbol{display:grid;place-items:center;height:36px;width:36px;border-radius:50%;background:#d7eccb;color:#346c35;font-size:24px;margin-bottom:11px}.safe-panel h2{font-size:19px;margin:0 0 7px}.safe-panel ul{padding-left:18px;color:#5e6c5b;font-size:12px;line-height:2.1}.malayalam-panel{display:flex;flex-direction:column;gap:6px;padding:20px;background:#252f28;color:#fff;border-radius:18px}.malayalam-panel span{font-size:17px;font-weight:850}.malayalam-panel small{font-size:11px;color:#c2dbb9}.bottom-nav{display:none}
-@media(max-width:1250px){.top-inner{grid-template-columns:210px minmax(250px,600px) auto;gap:22px;padding:0 24px}.page-layout{grid-template-columns:198px minmax(0,680px) 235px;gap:22px;padding-inline:24px}.brand-label small{font-size:8px}.side-link{padding:11px 9px}}
-@media(max-width:1030px){.top-inner{grid-template-columns:190px minmax(230px,1fr) auto}.page-layout{grid-template-columns:200px minmax(0,680px);justify-content:center}.right-sidebar{display:none}}
-@media(max-width:740px){html{scroll-padding-top:72px}.top-inner{height:62px;display:flex;gap:12px;padding:0 16px}.brand-symbol{font-size:25px;border-radius:11px;padding:8px}.brand-label strong{font-size:15px}.brand-label small{font-size:7px}.header-search{margin-left:auto;height:38px;max-width:220px;flex:1;padding:0 10px}.header-search input{font-size:11px}.header-search kbd{display:none}.header-actions{gap:5px}.header-actions .instagram-header{display:none}.header-actions .header-icon{display:none}.profile-mini{height:34px;width:34px}.page-layout{display:block;padding:14px 11px 90px}.left-sidebar{display:none}.main-feed{max-width:680px;margin:0 auto}.welcome{grid-template-columns:1fr minmax(85px,.33fr);border-radius:17px;min-height:258px}.welcome-copy{padding:24px 0 20px 21px}.welcome h1{font-size:clamp(29px,7.1vw,40px);margin:9px 0}.welcome p{font-size:12px;max-width:370px}.welcome-art{opacity:.8}.art-word{right:8px;font-size:30px}.art-sticker{font-size:7px;right:7px;bottom:12px}.trust-chips{margin-top:12px}.trust-chips span{font-size:9px}.quick-stories{margin-top:13px;padding:16px 14px 9px;border-radius:16px}.story-scroll{gap:11px}.story-link{flex-basis:70px}.story-ring{width:58px;height:58px}.section-line h2{font-size:16px}.feed-section{margin-top:23px}.post{padding:15px;border-radius:16px}.post-copy h3{font-size:19px}.post-copy p{font-size:12px}.post-media{height:clamp(174px,44vw,290px)}.graphic-media{padding:15px 18px}.graphic-media strong{font-size:clamp(34px,9vw,59px)}.post-footer{flex-wrap:wrap}.post-link{margin-left:auto}.local-note{display:none}.community-card{padding:15px}.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:80;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;background:#fffffff2;backdrop-filter:blur(15px);border-top:1px solid #e1e8de;padding:7px 4px max(7px,env(safe-area-inset-bottom));box-shadow:0 -6px 20px #2235210a}.bottom-nav a{min-height:50px;display:grid;gap:1px;place-content:center;justify-items:center;color:#6f7b6c}.bottom-nav a[aria-current=page]{color:#2e622d}.bottom-nav a>span{font:700 23px/1.1 var(--head)}.bottom-nav small{font-size:10px;font-weight:850}.bottom-nav .bottom-start{color:#2c5425}.bottom-nav .bottom-start span{background:#d9f5c9;border-radius:10px;min-width:37px;min-height:30px;text-align:center;padding-top:4px}}
-@media(max-width:480px){.welcome{grid-template-columns:1fr;position:relative}.welcome-copy{padding:23px}.welcome-art{position:absolute;inset:auto 0 0 auto;width:115px;height:135px;opacity:.22;border-radius:100% 0 17px 0;pointer-events:none}.welcome h1{font-size:35px}.welcome p{max-width:330px}.welcome-actions{gap:7px}.btn-primary,.btn-quiet{font-size:11px;padding:9px 11px}.trust-chips{gap:5px}.header-search{max-width:160px}.feed-title-line h2{font-size:24px}.section-line>span{font-size:10px}.post-type{display:none}.post-footer{align-items:stretch}.post-link{align-self:center}.graphic-media{height:203px}.story-scroll{gap:9px}.story-link{flex-basis:65px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition-duration:0.01ms!important;animation-duration:0.01ms!important}}
+:root{--text:#271e2c;--soft:#716473;--pink:#eb427e;--berry:#b62a70;--line:#f0e3ee;--bg:#fff8fb;--font:'DM Sans',Arial,sans-serif;--display:'Outfit','DM Sans',sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:85px}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.65 var(--font);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}a:focus-visible,button:focus-visible{outline:3px solid #d73e7c;outline-offset:3px}p,h1,h2,h3{margin-top:0}h1,h2,h3{font-family:var(--display)}.wrap{width:min(1180px,calc(100% - 40px));margin-inline:auto}.skip{position:fixed;left:10px;top:-100px;padding:11px 17px;background:#291f2e;color:white;z-index:200}.skip:focus{top:10px}
+.header{position:sticky;top:0;z-index:80;background:#fffefaed;border-bottom:1px solid #f5e9ef;backdrop-filter:blur(16px)}.top-inner{max-width:1240px;padding:0 30px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:20px;height:78px}.brand{display:flex;align-items:center;gap:12px;font:900 21px/1 var(--display);white-space:nowrap}.brand small{display:block;font:800 9px/1.5 var(--font);color:#a08c9b;letter-spacing:.14em;margin-top:3px}.brand-icon{background:#312336;color:#fff;padding:10px 9px;border-radius:13px;font:900 26px/1 var(--display);letter-spacing:-.08em}.brand-icon span{color:#ff8aaa;margin-left:1px;font-size:14px}.top-links{display:flex;gap:28px;align-items:center}.top-links a{font-size:12px;font-weight:800;color:#68566a}.top-links a:hover{color:var(--pink)}.top-join{padding:13px 20px;border-radius:100px;color:#fff;background:#df477d;font-weight:900;font-size:12px;white-space:nowrap;box-shadow:0 4px 13px #ea69923d}.top-join span{margin-left:7px}
+.hero{display:grid;grid-template-columns:1.04fr .96fr;gap:68px;align-items:center;min-height:665px;padding-top:58px;padding-bottom:60px}.eyebrow{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.15em;color:#a15d86;font-weight:900}.eyebrow-dot{width:9px;height:9px;border-radius:50%;background:#ef6f9d}.hero-tag{display:inline-block;color:#a4577e;background:#ffe8f1;border:1px solid #ffdae8;padding:10px 15px;border-radius:100px;font-weight:850;font-size:11px;margin:29px 0 17px}.hero h1{font-size:clamp(58px,6.3vw,90px);font-weight:900;letter-spacing:-.075em;line-height:.98;margin-bottom:23px}.hero h1 em{font-style:normal;color:var(--pink)}.heart-period{color:#ed5c95;font-size:.54em;vertical-align:top;margin-left:5px}.hero-desc{font-size:16px;line-height:1.85;color:#716374;max-width:490px;margin-bottom:26px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.primary-btn,.secondary-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:100px;padding:15px 23px;font-size:12px;font-weight:900;min-height:48px}.primary-btn{background:linear-gradient(110deg,#f15189,#d52c8d);color:#fff;box-shadow:0 10px 25px #ec6a9b40}.secondary-btn{border:1px solid #ebc5da;background:#fff;color:#b44e83}.under-actions{font-size:10px;color:#92778a;margin:15px 0 25px}.under-actions span{font-size:14px;color:#ed498b;margin-right:6px}.face-strip{display:flex;gap:11px;align-items:center;background:#fff;max-width:370px;border:1px solid #f2e5ed;padding:10px 13px;border-radius:15px}.founder-avatar{height:46px;width:46px;border-radius:13px;overflow:hidden;background:#efece5}.founder-avatar img{width:100%;height:100%;object-fit:cover}.face-strip>div:nth-child(2){display:grid;gap:1px;flex:1}.face-strip strong{font-size:12px}.face-strip span{font-size:10px;color:#998898}.face-strip>a{height:28px;width:28px;display:grid;place-items:center;border-radius:50%;background:#fff0f6;color:#cd4d85}
+.hero-visual{position:relative;min-height:520px;display:flex;justify-content:center;align-items:center;background:radial-gradient(circle at center,#fff0f6 0%,#fff0f6 43%,transparent 73%)}.orbit{position:absolute;border:2px dashed #f9c4db;border-radius:50%;transform:rotate(-15deg)}.orbit-one{height:490px;width:490px;left:0;top:14px}.orbit-two{height:580px;width:360px;left:60px;top:-20px;border-color:#f6d8eb}.hero-card{background:#fff;padding:11px;border-radius:30px;box-shadow:0 25px 65px #75264724;transform:rotate(5deg);width:min(350px,85%);z-index:2}.hero-card-top{display:flex;justify-content:space-between;align-items:center;padding:8px 13px 13px;font-size:10px;font-weight:900;letter-spacing:.1em}.tiny-heart{color:#ea5b8e}.dot-menu{letter-spacing:3px;font-size:15px;color:#a394a2}.hero-photo{border-radius:22px;position:relative;overflow:hidden;height:385px;background:#f4f1ec}.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 26%}.hero-photo-gradient{position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#2b1b2cdb)}.hero-photo-caption{position:absolute;bottom:20px;left:20px;right:20px;display:grid;color:#fff}.hero-photo-caption small{font-size:10px;font-weight:800;letter-spacing:.1em;color:#ffcbdf}.hero-photo-caption strong{font:850 30px var(--display);letter-spacing:-.04em}.hero-photo-caption strong span{display:inline-grid;place-items:center;font:900 10px var(--font);height:19px;width:19px;border-radius:50%;background:#ff78a2;vertical-align:middle}.hero-photo-caption>span{font-size:12px}.hero-card-bottom{display:flex;justify-content:space-between;align-items:center;gap:9px;padding:13px 8px 6px 13px;font-size:8px;font-weight:900;color:#998394;letter-spacing:.05em}.heart-bubble{display:grid;place-items:center;border-radius:50%;height:36px;width:36px;background:#fff0f6;color:#e74382;font-size:22px}.float-like{position:absolute;top:32px;right:23px;font-size:57px;color:#ff77ad;transform:rotate(16deg)}.float-spark{position:absolute;bottom:20px;left:17px;font-size:68px;color:#f3a5cd}
+.pill-section{display:flex;justify-content:space-between;gap:12px;background:#fff;border-radius:15px;border:1px solid #f3e7ef;padding:19px 27px;margin-bottom:52px}.pillar{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:850;color:#6a5065}.pillar span{font-size:23px;color:#e8679d}
+.discover-section{background:#fdf0f7;padding:85px 0 95px;border-top:1px solid #f6e1ee;border-bottom:1px solid #f6e1ee}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:25px}.section-heading h2,.center-head h2,.join-section h2,.meet-copy h2{font-size:clamp(42px,5.5vw,69px);letter-spacing:-.065em;line-height:1.08;margin:13px 0}.section-heading h2 em,.center-head em,.join-section em,.meet-copy h2 em{font-style:normal;color:#e94b87}.section-heading p{max-width:540px;font-size:14px;color:#837183}.heading-badge{white-space:nowrap;border:1px solid #f1cede;border-radius:100px;background:#fff;color:#ae6588;font-size:10px;font-weight:900;padding:11px 17px;letter-spacing:.1em}.heading-badge span{font-size:16px}
+.filter-row{display:flex;gap:9px;overflow-x:auto;padding:22px 0 35px;scrollbar-width:thin}.mood{flex:none;white-space:nowrap;border-radius:100px;padding:11px 17px;border:1px solid #efd4e3;background:#fff;color:#94738a;font-weight:850;font-size:12px}.mood.active{background:#39253a;color:#fff;border-color:#39253a}.match-layout{display:grid;grid-template-columns:minmax(0,540px) minmax(250px,1fr);gap:80px;justify-content:center;align-items:center}.deck-wrap{position:relative;max-width:510px;margin:10px auto 0}.deck-back{position:absolute;left:28px;right:28px;top:-14px;bottom:10px;border-radius:29px;border:1px solid #ead7e7;background:#fff;transform:rotate(6deg)}.back-two{left:18px;right:18px;transform:rotate(-5deg);background:#f8dce9}.match-card{position:relative;z-index:1;border-radius:28px;background:#fff;overflow:hidden;padding:10px;box-shadow:0 23px 58px #62304b28;touch-action:pan-y}.match-media{height:388px;border-radius:22px;padding:19px 24px 22px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative;isolation:isolate;color:#fff;background:#d44584}.match-media:before{content:'';position:absolute;z-index:-1;width:330px;height:330px;border:55px solid #ffffff1a;border-radius:50%;right:-75px;top:-110px}.match-media:after{content:'';position:absolute;z-index:-1;height:250px;width:250px;border-radius:50%;background:#ffffff17;bottom:-125px;left:-40px}.match-media.sunset{background:linear-gradient(135deg,#ff769b,#d43c9a 65%,#713b9f)}.match-media.lilac{background:linear-gradient(135deg,#8265cb,#5441aa 55%,#db6598)}.match-media.sky{background:linear-gradient(135deg,#49a4c8,#5798cc 54%,#9273c2)}.match-media.butter{background:linear-gradient(135deg,#e0a043,#d97d69 50%,#c0509c)}.match-media.photo{background:linear-gradient(135deg,#b86ab0,#774b98 55%,#c97892)}.match-media.learn{background:linear-gradient(135deg,#f28573,#e2588b 55%,#8e4ba8)}.match-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.match-corner{font:900 18px var(--display)}.match-corner span{color:#ffd7e5}.match-type{padding:8px 13px;border-radius:100px;background:#ffffff38;border:1px solid #ffffff65;font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.08em}.match-center{display:grid;place-items:center;align-content:center;flex:1;gap:6px}.match-glyph{font:900 128px/.95 var(--display);text-shadow:0 8px 12px #37142c29}.match-vibe{font-size:11px;font-weight:900;letter-spacing:.13em;background:#ffffff2a;padding:8px 15px;border-radius:30px}.match-bottom>span{font-size:13px;font-weight:750;color:#fff1f8}.match-bottom h3{font-size:clamp(30px,4vw,45px);letter-spacing:-.065em;line-height:1.04;max-width:420px;margin:8px 0 0;text-wrap:balance}.match-body{padding:18px 14px 10px}.match-intro{font-weight:850;font-size:15px;margin:0 0 5px}.match-description{font-size:12px;color:#8c7a8b;margin:0}.match-action-bar{display:flex;gap:15px;align-items:center;justify-content:center;padding:20px 0 6px}.round-action{height:59px;width:59px;display:grid;place-items:center;border-radius:50%;border:1px solid #ebdae6;background:#fff;font:800 34px var(--display);transition:transform .16s}.round-action:hover{transform:translateY(-3px)}.round-action.pass{color:#9a8b9f}.round-action.like{color:#fff;background:linear-gradient(145deg,#f86394,#df3986);border-color:#ee5a92;box-shadow:0 7px 15px #eb56933e}.open-match{flex:1;max-width:215px;padding:17px 21px;background:#2c2033;color:#fff;border-radius:100px;font-weight:900;font-size:12px;display:flex;justify-content:space-between;align-items:center}.swipe-hint{text-align:center;color:#9e8b9f;font-size:10px;margin:12px 0 0}.deck-footer{max-width:470px;margin:25px auto 0;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:900;letter-spacing:.08em;color:#ac839e}.progress-dots{display:flex;gap:5px}.progress-dots span{width:6px;height:6px;background:#e6c9da;border-radius:100px}.progress-dots .on{background:#dc4c87;width:18px}.match-side{display:grid;gap:18px}.side-greeting,.saved-box,.profile-nudge{border:1px solid #f0dce8;background:#fff;border-radius:24px;padding:26px}.mini-heart{font-size:36px;color:#ea568d}.side-greeting h3{font-size:34px;line-height:1.1;letter-spacing:-.052em;margin:13px 0}.side-greeting h3 em{font-style:normal;color:#e24e86}.side-greeting p{font-size:13px;color:#8f7b8b;margin:0}.saved-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.saved-head h3{font-size:19px;margin:0}.saved-head small{font-size:10px;color:#a58da2}.saved-box ul{margin:13px 0 0;padding:0;list-style:none;display:grid;gap:6px}.saved-box li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #f7ebf1;font-size:12px}.saved-box li a{font-weight:800;color:#a34679}.saved-box li button{border:0;background:#fce9f0;color:#ba4c80;font-size:21px;line-height:1;border-radius:50%;width:26px;height:26px}.saved-box li.no-likes{color:#a491a2;font-size:12px;border:0}.saved-box #clear-likes{background:transparent;border:0;color:#ac6c93;font-weight:800;font-size:11px;margin-top:10px;text-decoration:underline}.saved-box #clear-likes[hidden]{display:none}.profile-nudge{background:#433045;color:#fff;display:grid;grid-template-columns:37px 1fr;gap:11px}.nudge-emoji{background:#ffffff29;border-radius:12px;display:grid;place-items:center;height:35px;width:35px;font-size:25px;color:#ffa9d3}.profile-nudge strong{font-size:14px}.profile-nudge p{font-size:12px;color:#ecd3e3;margin:5px 0 0}.profile-nudge a{grid-column:2;font-weight:900;color:#ffb6d6;font-size:12px}
+.how-section{padding:105px 0}.center-head{text-align:center;max-width:720px;margin:0 auto 39px}.center-head .eyebrow{justify-content:center}.center-head>p{color:#837383}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.feature{border:1px solid var(--line);padding:30px;border-radius:24px;background:#fff}.feature-top{display:flex;align-items:center;justify-content:space-between}.feature-icon{height:55px;width:55px;border-radius:17px;background:#ffebf3;color:#e34c8c;display:grid;place-items:center;font-size:28px}.feature-number{font:900 14px var(--display);color:#e8c9dd}.feature h3{font-size:24px;letter-spacing:-.035em;margin:25px 0 12px}.feature p{font-size:13px;color:#88798a;line-height:1.75;margin:0}
+.join-section{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:55px 65px;border-radius:32px;background:#f8e3f0;overflow:hidden}.join-main>p{font-size:14px;color:#765c73;max-width:490px;line-height:1.8;margin:20px 0}.join-main>p strong{color:#9f3e74}.join-disclaimer{display:block;max-width:450px;color:#8f7589;font-size:10px;margin-top:15px}.card-showcase{position:relative;padding:35px 8px;display:flex;justify-content:center}.show-card{transform:rotate(9deg);position:relative;width:min(350px,100%);min-height:255px;padding:25px;background:linear-gradient(130deg,#352b42,#884476 64%,#ed729f);color:#fff;border:1px solid #ffffff55;box-shadow:0 15px 30px #6d2c6450;border-radius:24px}.show-top{display:flex;justify-content:space-between;align-items:center}.show-top>strong{font:900 20px var(--display)}.show-top>strong span{color:#ffc3de}.show-top small{font-size:8px;letter-spacing:.09em}.show-avatar{width:57px;height:57px;border-radius:16px;background:#ffe5f2;color:#a44f81;display:grid;place-items:center;font:900 35px var(--display);margin:20px 0 6px}.show-small{font-size:9px;letter-spacing:.1em;color:#fce1f2}.show-card h3{font-size:25px;letter-spacing:-.04em;margin:1px 0}.show-card p{font-size:11px;color:#ffe0f1;margin-bottom:14px}.show-bottom{display:flex;justify-content:space-between;gap:5px;border-top:1px solid #ffffff4a;padding-top:12px;font-size:8px;font-weight:800;letter-spacing:.08em}.show-sticker{position:absolute;bottom:15px;left:-10px;background:#fff;color:#d34d8a;transform:rotate(-10deg);padding:10px 14px;border-radius:10px;font-size:12px;font-weight:900;box-shadow:0 6px 15px #b14f7a24}
+.meet-section{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:center;padding-top:110px;padding-bottom:100px}.meet-photo{height:400px;border-radius:30px;overflow:hidden;background:#edeae6;box-shadow:15px 18px 0 #ffe5f0}.meet-photo img{height:100%;width:100%;object-fit:cover;object-position:50% 28%}.meet-copy p{font-size:14px;color:#827382;max-width:570px}.meet-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.meet-links a{background:#fff;border:1px solid #efd8e5;color:#b54c83;border-radius:100px;padding:10px 14px;font-size:11px;font-weight:850}.explore-footer{padding:25px 0 90px}.explore-footer h2{font-size:33px;letter-spacing:-.05em}.explore-footer h2 span{color:#e45c91}.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.quick-grid a{background:#fff;border:1px solid #f3e5ee;border-radius:14px;padding:18px;display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;font-weight:800}.quick-grid a span{color:#d95890}
+.footer{background:#302433;color:#f8eef8}.footer-inner{display:grid;grid-template-columns:1fr 2fr;gap:13px;padding:43px 0}.footer-brand{display:grid;gap:5px}.footer-brand>a{font:900 22px var(--display)}.footer-brand>a span{color:#f78ab5}.footer-brand small{font-size:11px;color:#d2bccd}.footer-links{display:flex;gap:18px;justify-content:flex-end;flex-wrap:wrap}.footer-links a{font-size:11px;color:#efd5e8}.footer p{grid-column:1/-1;border-top:1px solid #5b445b;padding-top:16px;color:#cab5c6;font-size:10px;max-width:900px}.mobile-nav{display:none}
+@media(max-width:1100px){.hero{gap:30px}.match-layout{gap:32px}.top-links{gap:12px}.meet-section{gap:35px}}
+@media(max-width:900px){.top-links{display:none}.hero{grid-template-columns:1fr 1fr;gap:14px}.hero h1{font-size:clamp(52px,7vw,75px)}.hero-visual{min-height:465px}.hero-photo{height:335px}.orbit-one{width:390px;height:390px;left:-10px}.orbit-two{height:450px}.match-layout{grid-template-columns:minmax(0,510px);gap:35px}.match-side{grid-template-columns:1fr 1fr}.profile-nudge{grid-column:1/-1}.side-greeting h3{font-size:27px}.feature{padding:20px}.join-section{padding:38px 31px;gap:15px}}
+@media(max-width:670px){html{scroll-padding-top:70px}.wrap{width:calc(100% - 28px)}.header .top-inner{height:65px;padding:0 15px}.brand{font-size:17px}.brand small{font-size:7px}.brand-icon{font-size:22px;padding:9px;border-radius:11px}.top-join{font-size:10px;padding:11px 13px}.hero{display:block;padding-top:38px;padding-bottom:20px;min-height:0}.hero-tag{margin:18px 0 15px}.hero h1{font-size:clamp(52px,11.5vw,74px)}.hero-desc{font-size:13px;line-height:1.75}.hero-actions{gap:8px}.primary-btn,.secondary-btn{font-size:11px;padding:13px 16px;min-height:45px}.under-actions{font-size:10px}.face-strip{max-width:none}.hero-visual{min-height:455px;margin-top:20px}.hero-card{max-width:310px}.hero-photo{height:310px}.orbit-one{width:370px;height:370px;left:calc(50% - 185px);top:35px}.orbit-two{height:440px;left:calc(50% - 140px)}.float-like{right:calc(50% - 190px)}.float-spark{left:calc(50% - 190px)}.pill-section{display:grid;gap:0;margin-bottom:0;padding:4px 19px}.pillar{padding:10px 0;border-bottom:1px solid #f8ecf3;font-size:11px}.pillar:last-child{border:0}.discover-section{padding:60px 0}.section-heading{display:block}.heading-badge{display:none}.section-heading p{font-size:12px}.section-heading h2,.center-head h2,.join-section h2,.meet-copy h2{font-size:clamp(39px,9vw,58px)}.filter-row{padding:17px 0 30px}.match-layout{gap:30px}.match-media{height:350px}.match-media h3{font-size:37px}.match-glyph{font-size:110px}.match-card{padding:9px}.match-body{padding:16px 10px 9px}.match-area{min-width:0}.deck-back{left:18px;right:18px}.match-side{grid-template-columns:1fr;gap:12px}.side-greeting,.saved-box,.profile-nudge{padding:19px;border-radius:17px}.profile-nudge{grid-column:auto}.how-section{padding:70px 0}.feature-grid{grid-template-columns:1fr;gap:10px}.feature{padding:22px}.feature h3{margin:12px 0 7px}.join-section{grid-template-columns:1fr;padding:29px 22px;border-radius:24px}.join-main>p{font-size:12px;margin:14px 0}.card-showcase{padding:10px 8px 20px}.show-card{transform:rotate(4deg)}.meet-section{grid-template-columns:1fr;gap:35px;padding-top:70px;padding-bottom:60px}.meet-photo{height:350px}.meet-copy p{font-size:12px}.explore-footer{padding-bottom:70px}.quick-grid{grid-template-columns:1fr 1fr}.footer-inner{padding:32px 0 95px;grid-template-columns:1fr}.footer-links{justify-content:flex-start}.mobile-nav{position:fixed;z-index:100;bottom:0;left:0;right:0;padding:5px 6px max(7px,env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,1fr);background:#fffefaf2;border-top:1px solid #f3e3ec;backdrop-filter:blur(16px)}.mobile-nav a{display:grid;justify-items:center;align-content:center;gap:1px;min-height:52px;color:#947688}.mobile-nav a>span{font:900 24px var(--display)}.mobile-nav a small{font-size:9px;font-weight:850}.mobile-nav a[aria-current=page],.mobile-nav .mobile-card{color:#d74782}}
+@media(max-width:400px){.hero h1{font-size:52px}.top-join{padding:10px}.hero-visual{min-height:425px}.match-media{height:315px}.round-action{width:51px;height:51px}.match-action-bar{gap:10px}.open-match{padding:14px 16px}.quick-grid{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 </style>
