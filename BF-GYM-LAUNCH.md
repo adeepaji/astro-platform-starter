@@ -153,3 +153,16 @@ Video sources for editorial research:
 - Nuffield Health official YouTube workouts
 
 YouTube videos use their official player and links; no paid training content is bypassed. The site does not imply endorsement by the video creators.
+
+
+## Expanded YouTube exercise directory
+
+The mobile app's `/app/workouts/` page now has **two separate video-discovery features**:
+
+1. **64 curated video links** (31 strength, 17 cardio, 16 HIIT): each includes a YouTube video ID, thumbnail, creator credit, direct YouTube link and optional standard embed.
+2. **418 exercise demo search entries** (278 strength, 68 cardio, 72 HIIT) at the new *Explore All Exercises* directory. Entries include exercise name, equipment, training area and difficulty. They produce a current YouTube results page for the selected movement; these are NOT 418 preselected videos. Search/filter by any part of the name, muscle group, equipment, level or training category. Results are paginated in groups of 24.
+3. **Search all YouTube** opens a broad exercise demonstration search for whatever term a customer types, covering movements not in our initial catalogue.
+
+The catalogue is stored in `src/data/exerciseQueries.ts`; edit it to add or remove exercise names. The curated specific YouTube IDs remain stored in `src/data/workoutVideos.ts`.
+
+Important accuracy and copyright distinctions: YouTube is vast and continually changing; BF GYM cannot literally import every video. Demo searches are independent YouTube results, which may contain mixed quality and do not imply BF GYM verification or endorsement. Video-specific embedded playback depends on the creator's settings and YouTube policies. The app does not scrape or download videos. Check the 64 curated videos for availability and appropriate instruction before public launch.
