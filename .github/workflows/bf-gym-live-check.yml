@@ -47,6 +47,24 @@ jobs:
             exit 1
           fi
           echo "Trainer portrait JPEG is accessible on Netlify."
+          new_photo_ok=0
+          for attempt in 1 2 3 4 5 6; do
+            new_status="$(curl --location --silent --show-error --max-time 18 --output /tmp/bfgym-new-portrait --write-out "%{http_code}" "$base/images/trainer/adeep-portrait-new.webp" || echo 000)"
+            new_type="$(file --brief --mime-type /tmp/bfgym-new-portrait 2>/dev/null || echo unknown)"
+            if [ "$new_status" = "200" ] && [ "$new_type" = "image/webp" ] && [ "$(wc -c </tmp/bfgym-new-portrait)" -ge 6000 ]; then
+              if curl --location --silent --show-error --max-time 18 "$base/trainer/" | grep -Fq '/images/trainer/adeep-portrait-new.webp'; then
+                new_photo_ok=1
+                break
+              fi
+            fi
+            echo "Attempt $attempt/6: new portrait or trainer page not updated yet (HTTP $new_status / $new_type)"
+            if [ "$attempt" -lt 6 ]; then sleep 15; fi
+          done
+          if [ "$new_photo_ok" -ne 1 ]; then
+            echo "::error::New uploaded trainer portrait is not served or linked on the live trainer profile"
+            exit 1
+          fi
+          echo "New trainer portrait WEBP and trainer page reference are live."
           # Confirm the five-pose image asset is actually published, not just the trainer HTML.
           pose_ok=0
           for attempt in 1 2 3 4 5 6; do
