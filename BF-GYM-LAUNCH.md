@@ -92,3 +92,39 @@ The existing homepage enquiry form is named bf-gym-enquiries. The new /book/ for
 - Check any relevant work/immigration restrictions and self-employment tax requirements. Don't accept paid orders until you can provide the advertised services.
 
 The website is not automatically published by a GitHub commit or pull request.
+
+
+## BF GYM mobile app — installable PWA
+
+The first app version is built into this Astro repository at **/app/**. It is a **Progressive Web App (PWA)**, not yet an Apple App Store or Google Play Store listing.
+
+### Included in the mobile app
+- Full-screen, phone-first home, coaching plans and proposed GBP pricing
+- Request-session buttons that use the existing booking enquiry forms until your own Calendly event links are configured
+- Online subscription button appears **only when** a valid public Stripe link is configured
+- Simple personal workout logger (daily check-off, this-week count, current streak)
+- Workout log lives in **localStorage on the visitor's device**; it is not synced across devices or shared with BF GYM
+- Group fitness calendar is clearly labelled **COMING SOON** until real timetables and venues exist
+- PWA install manifest, service worker, offline notice, 192px and 512px PNG icons
+- Website links to /app/ to promote installation
+
+### Install after the site is published with HTTPS
+
+**iPhone:** Open the live URL ending in /app/ in Safari. Tap **Share** > **Add to Home Screen**, choose **Add**, then open the BF GYM icon.
+
+**Android:** Open /app/ in Chrome. In the browser menu choose **Install app** or **Add to Home screen** if offered. After installation, open the BF GYM icon.
+
+The mobile site still works in a normal browser when installation is unavailable. Payment/booking links need a working internet connection. The workout log should not be used as official proof of booked or paid sessions.
+
+### Further development for a native app or member portal
+
+To publish a downloadable iOS or Android **store app**, this PWA needs further packaging/native development and acceptance through Apple / Google app review. A simple web wrapper may not meet store-quality requirements. An official native build could use a cross-platform framework such as React Native / Expo or Capacitor, with dedicated testing on devices.
+
+For automatic paid membership and bookings within the app, add a secure backend, member authentication, booking-provider API integrations, terms and privacy controls. Payment handling must follow the relevant store billing policies when applicable. No backend login, live calendars, push notifications or subscription management is claimed in this version.
+
+### To-do before business launch
+
+- Verify business activities are permitted under your own immigration/work conditions. The restriction around professional sports coaching warrants an immigration adviser assessment.
+- Finalise privacy notice, client terms, cancellation/refund policies, insurance, trainer verification and payment terms.
+- Approve all listed plans and proposed prices. Don't collect payments until the actual product/service terms are clear.
+- Test the Netlify deployment and live form delivery before advertising the new app.
