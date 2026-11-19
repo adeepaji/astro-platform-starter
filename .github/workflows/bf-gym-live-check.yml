@@ -16,8 +16,8 @@ jobs:
         run: |
           set -euo pipefail
           base="https://bfgym.netlify.app"
-          urls=("/" "/trainer/" "/sample-plan/" "/app/" "/app/workouts/" "/manifest.webmanifest")
-          expected=("BF GYM" "Adeep Aji" "YOUR PLAN" "BF GYM" "VIDEO LIBRARY" "BF GYM")
+          urls=("/" "/trainer/" "/programmes/" "/sample-plan/" "/app/" "/app/workouts/" "/manifest.webmanifest")
+          expected=("BF GYM" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "VIDEO LIBRARY" "BF GYM")
           for i in "${!urls[@]}"; do
             path="${urls[$i]}"
             needle="${expected[$i]}"
@@ -39,4 +39,4 @@ jobs:
               exit 1
             fi
           done
-          echo "All six public BF GYM paths passed."
+          echo "All seven public BF GYM paths passed."
