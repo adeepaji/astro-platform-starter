@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://bfgym.netlify.app/</loc></url>
   <url><loc>https://bfgym.netlify.app/kerala-uk/</loc></url>
+  <url><loc>https://bfgym.netlify.app/ml/kerala-uk/</loc></url>
   <url><loc>https://bfgym.netlify.app/trainer/</loc></url>
   <url><loc>https://bfgym.netlify.app/start/</loc></url>
   <url><loc>https://bfgym.netlify.app/programmes/</loc></url>
@@ -10,5 +11,6 @@
   <url><loc>https://bfgym.netlify.app/app/dashboard/</loc></url>
   <url><loc>https://bfgym.netlify.app/app/workouts/</loc></url>
   <url><loc>https://bfgym.netlify.app/app/membership/</loc></url>
+  <url><loc>https://bfgym.netlify.app/app/member-card/</loc></url>
   <url><loc>https://bfgym.netlify.app/privacy/</loc></url>
 </urlset>
