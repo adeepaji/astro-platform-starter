@@ -1,43 +1,32 @@
-# BF GYM Global — trainer profile publishing guide
+# BF GYM Global — trainer profile maintenance
 
-## Trainer profile
+## Public presentation
+- Live page: /trainer/
+- Coach name: Adeep Aji
+- Original personal headshot: cropped from owner-supplied gym resume; publicly displayed as /images/trainer/adeep-portrait.jpg.
+- Only a cropped and compressed image was uploaded. No unredacted resume or original certificate PDF has been uploaded to the public website.
+- Gym action and teaching photos are still placeholders pending suitable owner-approved originals.
 
-The live route is /trainer/. Display name is Coach Adeep / Adeep Aji.
+## Course documentation received
+- K11 School of Fitness Sciences: Diploma in Personal Training.
+- Gold's Gym Fitness Institute: Advanced Personal Training, Female Fitness Training and Special Population training.
+- Australian Life Saving Academy, NSW: CPR and AED training.
 
-The biography is based on the trainer CV supplied by the owner: more than five years of personal training and small-group experience in India. The site remains a free fitness education project, with no active paid coaching or payments.
+Original-looking document copies have been inspected, but issuer authenticity has NOT been independently checked. Several course/first aid certificates are historical, not currently valid professional credentials. Do not advertise them as active licences, current CPR competence or registered UK professional status.
 
-## Photographs: owner action required
+The previous CV also mentioned Level 4 Personal Trainer, but no separate evidence for a Level 4 qualification was supplied; it is therefore omitted from the public credentials list.
 
-No clearly identifiable, unedited original trainer photos were available among the accessible files, so the page uses branded initials and photo placeholders instead of fabricating a portrait.
+## Display requirements
+- By the owner's request, do not publish certificate award or expiry dates.
+- This does NOT permit implying that historic credentials remain current.
+- Never upload full certificates or resumes containing private identification details to public GitHub or Netlify.
+- More detailed issuer verification should be completed before describing credentials as independently verified.
 
-To replace them with owner-approved real photographs:
-1. Choose an original professional portrait and optionally one training-action and one coaching-action photograph.
-2. Strip EXIF GPS and other private metadata. Get consent from any other identifiable people.
-3. Upload web-optimised originals to the public GitHub project under: public/images/trainer/
-4. Suggested filenames: adeep-portrait.webp, adeep-training.webp, adeep-coaching.webp
-5. Add these *public build* environment variables in Netlify:
-   PUBLIC_BF_TRAINER_PHOTO=/images/trainer/adeep-portrait.webp
-   PUBLIC_BF_TRAINING_PHOTO=/images/trainer/adeep-training.webp
-   PUBLIC_BF_CLASS_PHOTO=/images/trainer/adeep-coaching.webp
-6. Redeploy and inspect crops on mobile and desktop.
+## Optional photo replacements
+- New, approved photographs may be placed under public/images/trainer/ after removing location metadata.
+- Existing portrait is used by default when no PUBLIC_BF_TRAINER_PHOTO environment override exists.
+- Public configuration accepts relative image paths under /images/trainer/ only.
+- If other people are recognizable in future session photos, obtain their consent first.
 
-The URL restrictions are configured in src/data/trainerProfile.ts. Only simple paths under /images/trainer/ are accepted. Never upload private image originals or identification documents to a public repository.
-
-## Certificates: independent verification pending
-
-Reported educational background from earlier CV and conversations:
-- Diploma in Personal Training (K11 School of Fitness Sciences, India)
-- Level 4 Personal Trainer (precise awarding and registration details unconfirmed)
-- Advanced Personal Training
-- Female Fitness Training
-- Special Population Fitness Training
-- CPR & AED Training (current validity unconfirmed)
-
-The precise certificate titles, awarding organisations and dates require original documentary evidence and, where possible, checking with the awarding body. A CV alone is not independent verification.
-
-Privately send photographs/scans of the real certificates or authoritative verification URLs. Do not commit unredacted certificates, identifying numbers, home addresses or other private personal data to GitHub. Only change the site to say "verified" after actual independent checking; never claim current CPR status without confirmation.
-
-## Business launch controls unchanged
-
-The site remains in pre-launch mode by default. Source: src/data/businessLaunch.ts. Paid services and customer enquiry forms remain disabled. The coach profile does not grant immigration, legal or tax permission to commence paid coaching.
-
+## Commercial settings
+Keep PUBLIC_BF_ENABLE_PAID_SERVICES and public enquiry settings off by default until immigration, tax and privacy readiness is confirmed. The public trainer page is educational, not a paid booking platform.
