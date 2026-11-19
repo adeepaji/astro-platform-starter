@@ -1,9 +1,9 @@
 {
   "id": "/app/",
-  "name": "BF GYM Global — Online Fitness",
+  "name": "BF GYM Global — My Fitness",
   "short_name": "BF GYM",
-  "description": "Worldwide fitness education and a personal workout tracker. Online coaching opening later, operated from the UK.",
-  "start_url": "/app/",
+  "description": "Free fitness dashboard, daily workout demos, progress history and sample training programmes. Future membership concept is not a live financial product.",
+  "start_url": "/app/dashboard/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#101310",
