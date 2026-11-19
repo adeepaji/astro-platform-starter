@@ -28,9 +28,11 @@ Read https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-sk
 
 ## Pre-launch website switches (DEFAULT OFF)
 Source: src/data/businessLaunch.ts
-- PUBLIC_BF_ENABLE_PAID_SERVICES = true — enables approved GBP prices and valid Calendly / Stripe links.
-- PUBLIC_BF_PRIVACY_NOTICE_APPROVED = true — when paid services are also enabled, allows pre-existing customer enquiry forms to render.
-- Both variables default to false if omitted.
+- PUBLIC_BF_BUSINESS_REVIEW_COMPLETED = true — owner confirms the immigration, business-structure and tax checks are complete, and required obligations have been reviewed. This variable is only a manual confirmation, not proof of legality.
+- PUBLIC_BF_PRIVACY_NOTICE_APPROVED = true — the actual published privacy notice, business contact and handling arrangements have been reviewed.
+- PUBLIC_BF_ENABLE_ENQUIRIES = true — permits public form enquiries only when the first two checks are also enabled.
+- PUBLIC_BF_ENABLE_PAID_SERVICES = true — permits visible pricing and external booking/payment links only when the first two checks are also enabled.
+- All four variables default to false when omitted.
 
 **These flags are technical safeguards, not substitutes for legal approval.** Do not set either to true until business activities, prices, subscriptions, insurance, cancellation terms, data protection notices, processing and cross-border tax obligations have been reviewed.
 
@@ -57,8 +59,8 @@ In pre-launch mode:
 3. Select truthful business structure, complete tax/insurance/privacy/payment-provider setup.
 4. Finalise terms and international checkout compliance (including consumer protection obligations).
 5. Add your official legal business details and contact email to /privacy/ and other legal pages.
-6. Enable PUBLIC_BF_ENABLE_PAID_SERVICES only after clear approval, and configure verified public Calendly links and hosted Stripe payment URLs.
-7. Enable PUBLIC_BF_PRIVACY_NOTICE_APPROVED only when the actual published privacy notice is complete and accurate; test Netlify Forms if used.
+6. Set PUBLIC_BF_BUSINESS_REVIEW_COMPLETED and PUBLIC_BF_PRIVACY_NOTICE_APPROVED only after genuine review and confirmation; then optionally enable PUBLIC_BF_ENABLE_PAID_SERVICES and configure verified public Calendly links and hosted Stripe payment URLs.
+7. To accept enquiries, additionally set PUBLIC_BF_ENABLE_ENQUIRIES only after the privacy notice is complete and accurate; test Netlify Forms if used.
 8. Run GitHub Actions builds and browser acceptance tests. Merge draft PR and deploy to Netlify only when appropriate.
 
 **This is a development checklist, not personalised legal or tax advice.**
