@@ -16,8 +16,8 @@ jobs:
         run: |
           set -euo pipefail
           base="https://bfgym.netlify.app"
-          urls=("/" "/trainer/" "/programmes/" "/sample-plan/" "/app/" "/app/workouts/" "/manifest.webmanifest")
-          expected=("BF GYM" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "VIDEO LIBRARY" "BF GYM")
+          urls=("/" "/start/" "/trainer/" "/programmes/" "/sample-plan/" "/app/" "/app/workouts/" "/manifest.webmanifest")
+          expected=("BF GYM" "MAKE FITNESS" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "VIDEO LIBRARY" "BF GYM")
           for i in "${!urls[@]}"; do
             path="${urls[$i]}"
             needle="${expected[$i]}"
@@ -39,7 +39,7 @@ jobs:
               exit 1
             fi
           done
-          echo "All seven public BF GYM paths passed."
+          echo "All eight public BF GYM paths passed."
           photo_status="$(curl --location --silent --show-error --max-time 18 --output /tmp/bfgym-trainer-portrait --write-out "%{http_code}" "$base/images/trainer/adeep-portrait.jpg" || echo 000)"
           photo_type="$(file --brief --mime-type /tmp/bfgym-trainer-portrait 2>/dev/null || echo unknown)"
           if [ "$photo_status" != "200" ] || [ "$photo_type" != "image/jpeg" ] || [ "$(wc -c </tmp/bfgym-trainer-portrait)" -lt 1000 ]; then
