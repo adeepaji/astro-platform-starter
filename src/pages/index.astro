@@ -1,225 +1,357 @@
 ---
-import { services } from '../data/services';
-import { commercialServicesEnabled, publicEnquiriesEnabled } from '../data/businessLaunch';
-import { quickStartLinks, uiLabels } from '../data/siteContent';
-const year = new Date().getFullYear();
-const programmes = [
-  {number: '01', name: '1:1 Personal Training', tag: 'PERSONAL', text: 'Individual coaching built around your goals, experience and lifestyle.', details: ['Personalised sessions', 'Technique & accountability']},
-  {number: '02', name: 'Small Group Fitness', tag: 'COMMUNITY', text: 'Train with others in energetic, supportive, coach-led sessions.', details: ['Strength & conditioning', 'Motivation together']},
-  {number: '03', name: 'Online Coaching', tag: 'ANYWHERE', text: 'Get expert guidance and a flexible routine wherever you train.', details: ['Flexible training approach', 'Ongoing progression']},
+const topics = [
+  {id:'all',name:'For you'},
+  {id:'beginner',name:'Beginners'},
+  {id:'workout',name:'Workouts'},
+  {id:'learning',name:'Learn'},
+  {id:'coach',name:'Coach'},
+  {id:'saved',name:'Saved'}
+];
+const moments = [
+  {label:'Start here',short:'Start',icon:'✦',href:'/start/',tone:'green'},
+  {label:'Free plans',short:'Plans',icon:'▤',href:'/programmes/',tone:'peach'},
+  {label:'Workout videos',short:'Videos',icon:'▶',href:'/app/workouts/',tone:'lilac'},
+  {label:'My dashboard',short:'Track',icon:'✓',href:'/app/dashboard/',tone:'blue'},
+  {label:'Our story',short:'Story',icon:'♡',href:'/kerala-uk/',tone:'yellow'}
+];
+const posts = [
+  {
+    id:'hello',
+    topic:'coach',
+    label:'A note from BF GYM',
+    title:'Hi, welcome to your fitness space 👋',
+    text:'BF means Best Fitness. BF GYM Global is a free fitness learning space started by Coach Adeep Aji, a Malayali trainer from Kerala now based in the UK. Look around, learn something new and move at your own pace.',
+    cta:'Read our Kerala → UK story',
+    href:'/kerala-uk/',
+    secondary:'മലയാളത്തിൽ വായിക്കാം',
+    secondaryHref:'/ml/kerala-uk/',
+    visual:'coach',
+    image:'/images/trainer/adeep-portrait-new.webp',
+    alt:'Coach Adeep Aji, founder of BF GYM Global, smiling and giving two thumbs up',
+    graphicTitle:'',
+    graphicSub:''
+  },
+  {
+    id:'starting',
+    topic:'beginner',
+    label:'Beginner friendly',
+    title:'New to the gym? You belong here.',
+    text:'No perfect body, no complicated plan and no need to sign up. Start with an approachable routine and build consistency little by little.',
+    cta:'Find my free starting plan',
+    href:'/start/',
+    secondary:'Explore all plans',
+    secondaryHref:'/programmes/',
+    visual:'beginner',
+    image:'',
+    alt:'',
+    graphicTitle:'START SMALL.',
+    graphicSub:'SHOW UP. LEARN. REPEAT.'
+  },
+  {
+    id:'plans',
+    topic:'workout',
+    label:'Free workouts',
+    title:'Pick a plan that fits your level 💪',
+    text:'Explore free four-week example programmes for beginner, intermediate and advanced levels. Your workout completion marks are kept on your own device.',
+    cta:'Explore free workout plans',
+    href:'/programmes/',
+    secondary:'Track my progress',
+    secondaryHref:'/app/dashboard/',
+    visual:'plans',
+    image:'',
+    alt:'',
+    graphicTitle:'04 WEEKS',
+    graphicSub:'THREE LEVELS · ONE STARTING POINT'
+  },
+  {
+    id:'form',
+    topic:'learning',
+    label:'Learn something today',
+    title:'Good movement comes before heavier weights.',
+    text:'Use the exercise video directory to find demonstrations and learn the basics of strength training, cardio and HIIT. Begin with what feels manageable for you.',
+    cta:'Browse workout demonstrations',
+    href:'/app/workouts/',
+    secondary:'See a sample plan',
+    secondaryHref:'/sample-plan/',
+    visual:'learn',
+    image:'',
+    alt:'',
+    graphicTitle:'LEARN THE MOVE.',
+    graphicSub:'THEN BUILD THE HABIT.'
+  },
+  {
+    id:'myspace',
+    topic:'workout',
+    label:'Your own progress',
+    title:'A little progress is still progress.',
+    text:'Open the free training dashboard, mark completed sessions and revisit your progress on this device. No account or membership card is required.',
+    cta:'Open my workout dashboard',
+    href:'/app/dashboard/',
+    secondary:'Explore the mobile hub',
+    secondaryHref:'/app/',
+    visual:'progress',
+    image:'',
+    alt:'',
+    graphicTitle:'YOUR PACE.',
+    graphicSub:'YOUR PROGRESS. YOUR DEVICE.'
+  },
+  {
+    id:'member',
+    topic:'learning',
+    label:'Behind the scenes',
+    title:'Curious about a digital member card?',
+    text:'You can explore our interactive card concept using fictional sample details. Real accounts, paid subscriptions, bookings and wallet passes are not active.',
+    cta:'View the card demo',
+    href:'/app/membership/',
+    secondary:'Read privacy information',
+    secondaryHref:'/privacy/',
+    visual:'member',
+    image:'',
+    alt:'',
+    graphicTitle:'BF / DEMO',
+    graphicSub:'A CONCEPT — NOT A REAL MEMBERSHIP'
+  }
+];
+const shortLinks=[
+  {label:'Home feed',href:'/',mark:'⌂'},
+  {label:'Free programmes',href:'/programmes/',mark:'▤'},
+  {label:'Start here',href:'/start/',mark:'✦'},
+  {label:'Workout videos',href:'/app/workouts/',mark:'▷'},
+  {label:'My workout tracker',href:'/app/dashboard/',mark:'◉'},
+  {label:'Meet Coach Adeep',href:'/trainer/',mark:'☺'}
 ];
 ---
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#101310" />
-  <meta name="google-site-verification" content="--7gUnBNnZpqeBYDpyAtk7VVAAE0Uvzu4O2QODevqr4" />
-  <meta name="description" content="BF GYM Global (Best Fitness Gym Global) — free UK-based fitness learning created by Malayali trainer Coach Adeep Aji, originally from Kerala, India. Explore free plans, workout videos, a digital member-card demo and our Kerala-to-UK fitness story." />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="BF GYM Global | From Kerala to the UK, Train With Purpose" />
-  <meta property="og:description" content="Discover free fitness education from a Kerala-born Malayali trainer now based in the UK. Workout programmes, demonstrations and digital membership card concept." />
-  <meta property="og:url" content="https://bfgym.netlify.app/" />
-  <link rel="canonical" href="https://bfgym.netlify.app/" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="theme-color" content="#fcfcfa"/>
+  <meta name="google-site-verification" content="--7gUnBNnZpqeBYDpyAtk7VVAAE0Uvzu4O2QODevqr4"/>
+  <meta name="description" content="Welcome to BF GYM Global (Best Fitness Gym Global): a friendly, free UK-based fitness learning space by Kerala-born Coach Adeep Aji. Explore free workout plans, easy workout videos and your own device-only progress tracker without signing up."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="BF GYM Global | Your Friendly Free Fitness Feed"/>
+  <meta property="og:description" content="Start simple. Explore free workouts, videos and training tips from BF GYM Global. No sign-up or payment needed."/>
+  <meta property="og:url" content="https://bfgym.netlify.app/"/>
+  <meta property="og:image" content="https://bfgym.netlify.app/images/trainer/adeep-instagram.jpg"/>
+  <meta property="og:image:alt" content="Coach Adeep Aji, the founder of BF GYM Global"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <link rel="canonical" href="https://bfgym.netlify.app/"/>
+  <link rel="icon" href="/bf-icon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="apple-touch-icon" href="/app-icon-192.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <script type="application/ld+json" set:html={JSON.stringify({
     '@context':'https://schema.org',
     '@type':'WebSite',
     name:'BF GYM Global',
     alternateName:'Best Fitness Gym Global',
     url:'https://bfgym.netlify.app/',
-    description:'Free fitness education created by a Malayali fitness trainer based in the United Kingdom.',
+    description:'Free fitness education founded by Kerala-born Coach Adeep Aji, based in the United Kingdom.',
     inLanguage:['en','ml'],
     sameAs:['https://www.instagram.com/fitwithaadhi/']
   })}></script>
-  <title>BF GYM Global — Train With Purpose</title>
-  <link rel="icon" href="/bf-icon.svg" type="image/svg+xml" />
-  <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="apple-touch-icon" href="/app-icon-192.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>BF GYM Global — Free Fitness Feed | Best Fitness</title>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="shell header-inner">
-      <a href="#top" class="brand" aria-label="BF GYM home"><span class="brand-mark">BF<span class="brand-dot">.</span></span><span class="brand-name">GYM<span> / GLOBAL ONLINE FITNESS</span></span></a>
-      <nav aria-label="Main navigation">
-        <a href="/start/">Start Here</a>
-        <a href="/app/dashboard/">Dashboard</a>
-        <a href="/programmes/">Free Plans</a>
-        <a href="/app/member-card/">Member Card</a>
-        <a href="/trainer/">Coach Adeep</a><a href="/kerala-uk/">Our Kerala Roots</a>
-      </nav>
-      <a class="nav-cta" href="/app/dashboard/">OPEN FREE APP <span aria-hidden="true">↗</span></a>
+<a class="skip-link" href="#main">Skip to workouts and posts</a>
+<header class="topbar">
+  <div class="top-inner">
+    <a class="brand" href="/" aria-label="BF GYM Global home">
+      <span class="brand-symbol">BF<span>.</span></span>
+      <span class="brand-label"><strong>BF GYM</strong><small>BEST FITNESS · GLOBAL</small></span>
+    </a>
+    <div class="header-search">
+      <label class="sr-only" for="feed-search">Search the BF GYM fitness feed</label>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.7" cy="10.7" r="6.7"/><path d="m16 16 4.5 4.5"/></svg>
+      <input type="search" id="feed-search" placeholder="Search workouts and tips…" autocomplete="off"/>
+      <kbd aria-hidden="true">⌕</kbd>
     </div>
-  </header>
-  <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="shell hero-layout">
-        <div class="hero-copy">
-          <div class="eyebrow"><span class="live-dot"></span> BF = BEST FITNESS · UK-BASED · WORLDWIDE FITNESS LEARNING</div>
-          <h1 id="hero-title">TRAIN<br /><span class="hollow">WITH</span><br />PURPOSE<span class="lime">.</span></h1>
-          <p class="hero-lede"><strong>BF means Best Fitness.</strong> Free fitness education created by Kerala-born Malayali trainer Coach Adeep Aji, now based in the UK. Explore weight training, cardio and HIIT demonstrations worldwide. Live paid coaching is planned for a later stage.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="/start/">START TRAINING FOR FREE <span aria-hidden="true">↗</span></a>
-            <a class="text-link" href="/programmes/">FREE 4-WEEK TRAINING PLANS <span aria-hidden="true">↗</span></a><a class="text-link" href="/app/dashboard/">MY WORKOUT DASHBOARD <span aria-hidden="true">↗</span></a><a class="text-link" href="/app/workouts/">WATCH WORKOUT DEMOS <span aria-hidden="true">▶</span></a><a class="text-link" href="/sample-plan/">SAMPLE WORKOUT &amp; DIET PLAN <span aria-hidden="true">↗</span></a><a class="text-link" href="/trainer/">MEET COACH ADEEP <span aria-hidden="true">↗</span></a><a class="text-link" href="/app/member-card/">TRY DIGITAL MEMBER CARD <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="micro-trust"><div class="avatar-letters" aria-hidden="true">BF</div><div><strong>Coaching for real life</strong><br />Beginners welcome · Every level supported</div></div>
-        </div>
-        <div class="hero-visual" aria-label="Motivational fitness graphic">
-          <div class="visual-grid"></div>
-          <div class="visual-top">THE WORK YOU PUT IN<br />BECOMES THE PERSON YOU ARE.</div>
-          <div class="visual-rings"><span></span><span></span><span></span><div class="visual-centre"><small>BUILT ON</small><strong>YOU.</strong></div></div>
-          <div class="visual-bottom"><div><span>01 /</span> SHOW UP</div><div><span>02 /</span> GET STRONGER</div><div><span>03 /</span> KEEP GOING</div></div>
-          <div class="visual-side">MOVE WITH INTENTION — BF GYM</div>
-        </div>
-      </div>
-      <div class="shell scroll-indicator"><span>SCROLL TO EXPLORE</span><div></div><span>01 / 04</span></div>
-    </section>
-    <section class="intro-band" aria-label="Our coaching values"><div class="shell band-inner"><span>STRENGTH</span><span class="band-star">✳</span><span>CONFIDENCE</span><span class="band-star">✳</span><span>CONSISTENCY</span><span class="band-star">✳</span><span>PROGRESS</span></div></section>
-    <section class="easy-start" aria-labelledby="easy-start-title"><div class="shell">
-      <div class="easy-start-heading"><div><p class="section-kicker">{uiLabels.quickStartEyebrow}</p><h2 id="easy-start-title">{uiLabels.quickStartTitle}</h2></div><p>New here? Choose a free plan, watch a demonstration or log your progress. No signup needed.</p></div>
-      <div class="easy-start-grid">{quickStartLinks.map(link=><a href={link.href} class="easy-start-card"><div class="easy-start-card-top"><span>{link.number} / BF GYM</span><span class="easy-start-icon" aria-hidden="true">{link.icon}</span></div><strong>{link.label}</strong><p>{link.description}</p><span class="easy-start-arrow" aria-hidden="true">OPEN ↗</span></a>)}</div>
-      <p class="easy-start-note">{uiLabels.prelaunchMessage}</p>
-    </div></section>
-    <section id="programmes" class="section programmes" aria-labelledby="programmes-title">
-      <div class="shell">
-        <div class="section-head">
-          <div><p class="section-kicker">01 / PLANNED ONLINE PROGRAMMES</p><h2 id="programmes-title">YOUR GOALS.<br /><span>YOUR PROGRAMME.</span></h2></div>
-          <p>Built for fitness learners worldwide. Live online sessions will become available only after business launch checks are complete.</p>
-        </div>
-        <div class="programme-grid">
-          {programmes.map((p) => (
-            <article class="programme-card">
-              <div class="card-top"><span>{p.number} /</span><span class="pill">{p.tag}</span></div>
-              <div class="card-graphic" aria-hidden="true"><span class="card-ring"></span><span class="card-symbol">{p.number}</span></div>
-              <h3>{p.name}</h3><p>{p.text}</p>
-              <ul>{p.details.map((d) => <li>{d}</li>)}</ul>
-              <a href="#enquire" aria-label={'Enquire about ' + p.name}>ASK ABOUT THIS PROGRAMME <span aria-hidden="true">↗</span></a>
-            </article>
-          ))}
-        </div>
-        <p class="availability-note">Class times, locations and package prices are provided when you enquire. Programmes are subject to availability.</p>
-      </div>
-    </section>
-    <section class="section pricing-section" id="pricing" aria-labelledby="pricing-title">
-  <div class="shell">
-    <div class="section-head">
-      <div><p class="section-kicker">02 / PLANNED GLOBAL PROGRAMMES</p><h2 id="pricing-title">INVEST IN<br/><span>YOURSELF.</span></h2></div>
-      <p>Our planned services will be delivered online from the UK to international clients. Booking and payments are not yet active.</p>
-    </div>
-    <div class="price-grid">
-      {services.map((service) => (
-        <article class="price-card">
-          <div class="price-top"><span>{service.eyebrow}</span><span>BF / {service.id.toUpperCase()}</span></div>
-          <h3>{service.title}</h3>
-          <p class="price-description">{service.description}</p>
-          {commercialServicesEnabled ? (
-            <div class="price-value">£{service.price}<small>{service.unit}</small></div>
-          ) : (
-            <div class="price-value price-pending">OPENING SOON<small>Price and availability to be confirmed</small></div>
-          )}
-          <ul>{service.details.map((detail) => <li>{detail}</li>)}</ul>
-          <a class="btn btn-primary price-action" href={service.bookingUrl || '/book/?service=' + service.id} target={service.bookingUrl ? '_blank' : undefined} rel={service.bookingUrl ? 'noopener noreferrer' : undefined}>
-            {service.bookingUrl ? 'CHECK AVAILABILITY' : commercialServicesEnabled ? 'REQUEST THIS SERVICE' : 'LEARN ABOUT THIS PLAN'} <span aria-hidden="true">↗</span>
-          </a>
-          {service.id === 'online' && service.paymentUrl && (
-            <a class="secondary-pay" href={service.paymentUrl} target="_blank" rel="noopener noreferrer">START ONLINE SUBSCRIPTION ↗</a>
-          )}
-        </article>
-      ))}
-    </div>
-    <p class="price-fine">No sale or session is currently offered for booking. Prices remain internal draft proposals; online availability, terms and accepted currencies will be confirmed before a commercial launch.</p>
-    <div class="booking-mini"><strong>GLOBAL ONLINE FITNESS</strong><p>Explore the fitness video library while coaching services are in preparation. We will announce pricing and availability after launch review.</p><a href="/app/workouts/">EXPLORE EXERCISES <span aria-hidden="true">↗</span></a></div>
+    <nav class="header-actions" aria-label="Quick links">
+      <a href="/programmes/" class="header-icon" title="Free workout plans" aria-label="Free workout plans"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16M8 15h3"/></svg></a>
+      <a href="https://www.instagram.com/fitwithaadhi/" target="_blank" rel="noopener noreferrer" class="header-icon instagram-header" title="Visit @fitwithaadhi on Instagram" aria-label="Visit @fitwithaadhi on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="/trainer/" class="profile-mini" title="Meet Coach Adeep" aria-label="Meet Coach Adeep"><img src="/images/trainer/adeep-portrait-new.webp" alt="" width="38" height="38"/></a>
+    </nav>
   </div>
-</section>
-<section class="section approach" id="approach" aria-labelledby="approach-title">
-      <div class="shell approach-layout">
-        <div class="approach-panel"><div class="panel-corner">BF / METHOD</div><div class="big-method">BETTER<br />EVERY<br /><span>DAY.</span></div><div class="panel-bottom">NO SHORTCUTS. JUST THE RIGHT SUPPORT.</div></div>
-        <div class="approach-copy"><p class="section-kicker">02 / HOW WE COACH</p><h2 id="approach-title">PROGRESS<br />WITHOUT THE<br /><span>PRESSURE.</span></h2>
-          <div class="method-item"><span>01</span><div><h3>Start where you are</h3><p>We discuss your goals, preferences and training background before shaping an approach.</p></div></div>
-          <div class="method-item"><span>02</span><div><h3>Build habits that stick</h3><p>Focused training, guidance and consistency — designed for a busy life.</p></div></div>
-          <div class="method-item"><span>03</span><div><h3>Keep moving forward</h3><p>Review your progress and adjust your routine as your confidence and abilities grow.</p></div></div>
-          <a href="#enquire" class="text-link">LET'S TALK ABOUT YOUR GOALS <span aria-hidden="true">↗</span></a>
+</header>
+<div class="page-layout">
+  <aside class="left-sidebar" aria-label="Site sections">
+    <nav class="side-nav" aria-label="Primary navigation">
+      {shortLinks.map((link,index)=>(
+        <a href={link.href} class:list={['side-link',{'selected':index===0}]} aria-current={index===0?'page':undefined}><span aria-hidden="true" class="side-glyph">{link.mark}</span><span>{link.label}</span></a>
+      ))}
+    </nav>
+    <div class="side-note"><span class="note-dot" aria-hidden="true"></span><strong>A place to start, not to compare.</strong><p>Explore at your pace. No sign-up or payment needed.</p></div>
+    <div class="side-footer"><a href="/privacy/">Privacy</a><span>·</span><a href="/ml/kerala-uk/" lang="ml">മലയാളം</a><span>·</span><a href="/kerala-uk/">Our story</a></div>
+  </aside>
+
+  <main class="main-feed" id="main">
+    <section class="welcome" aria-labelledby="welcome-heading">
+      <div class="welcome-copy">
+        <span class="eyebrow"><span class="welcome-spark" aria-hidden="true">✳</span> YOUR FREE FITNESS SPACE</span>
+        <h1 id="welcome-heading">Fitness starts <em>here.</em></h1>
+        <p>Come as you are. Explore workouts, learn new moves and build good habits at your own pace — <strong>no login, no pressure and no payment.</strong></p>
+        <div class="welcome-actions">
+          <a href="/start/" class="btn-primary">Find my first workout <span aria-hidden="true">↗</span></a>
+          <a href="#feed" class="btn-quiet">Explore the feed ↓</a>
         </div>
+        <div class="trust-chips" aria-label="What to expect"><span>✓ 100% free learning</span><span>✓ No sign-up</span><span>✓ Beginner friendly</span></div>
+      </div>
+      <div class="welcome-art" aria-hidden="true">
+        <div class="art-ring art-ring-a"></div><div class="art-ring art-ring-b"></div>
+        <span class="art-word">MOVE<br/>MORE<span>.</span></span>
+        <span class="art-sticker">BEST FITNESS / GLOBAL</span>
       </div>
     </section>
-    <section class="section about" id="about" aria-labelledby="about-title">
-      <div class="shell about-layout"><div><p class="section-kicker">03 / WHY BF GYM</p><h2 id="about-title">KNOWLEDGE.<br />ENERGY.<br /><span>ACCOUNTABILITY.</span></h2></div>
-        <div class="about-detail"><a class="about-coach-intro" href="/trainer/" aria-label="Meet Coach Adeep Aji"><img src="/images/trainer/adeep-portrait-new.webp" alt="Coach Adeep smiling and giving two thumbs up" width="90" height="115" loading="lazy"/><span><strong>MEET YOUR TRAINER</strong><small>ADEEP AJI</small><small>VIEW PROFILE ↗</small></span></a><p class="about-lede">From Kerala to the UK: meet Coach Adeep Aji, the Malayali fitness trainer behind BF GYM Global.</p><p class="kerala-intro">കേരളത്തിൽ നിന്ന് യുകെയിലേക്ക് — ഫിറ്റ്നസ് എല്ലാവർക്കും.</p><a class="kerala-link" href="/kerala-uk/">DISCOVER OUR KERALA → UK STORY <span aria-hidden="true">↗</span></a><a class="kerala-link" href="/ml/kerala-uk/" hreflang="ml" lang="ml">മലയാളത്തിൽ വായിക്കാം <span aria-hidden="true">↗</span></a><p>With over five years of trainer-reported personal training and small-group instruction experience in India, Adeep focuses on practical strength, consistency and fitness education for learners worldwide.</p><div class="qualifications"><span>TRAINER BACKGROUND</span><ul><li>Personal and small-group fitness instruction in India</li><li>Strength, functional fitness and HIIT training interests</li><li>Training qualifications listed with documentation status on the profile page</li></ul><p class="trainer-smallprint">Certificate copies reviewed. Awarding-body verification is pending; historical course completions are not described as current credentials.</p><a class="trainer-profile-link" href="/trainer/">VIEW ADEEP'S FULL PROFILE <span aria-hidden="true">↗</span></a></div></div></div>
-    </section>
-    <section class="section enquiry" id="enquire" aria-labelledby="enquire-title">
-      <div class="shell enquiry-layout">
-        <div class="enquiry-copy"><p class="section-kicker">04 / GLOBAL LAUNCH STATUS</p><h2 id="enquire-title">BE PART OF<br /><span>WHAT'S NEXT.</span></h2><p>BF GYM Global is preparing its international online coaching services. In the meantime you can explore the free video library and plan your training.</p><div class="enquiry-aside"><span>NOT SURE WHERE TO START?</span><p>Start with the free demonstrations for strength training, cardio and HIIT. Coaching and paid subscriptions will be introduced after launch checks.</p></div></div>
-        {publicEnquiriesEnabled ? (<div class="form-frame"><div class="form-header"><strong>ENQUIRE ABOUT COACHING</strong><span>BF / CONTACT</span></div>
-          <form name="bf-gym-enquiries" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="website">
-            <input type="hidden" name="form-name" value="bf-gym-enquiries" />
-            <p class="honeypot"><label>Leave this field empty: <input name="website" autocomplete="off" /></label></p>
-            <div class="form-row"><label>Your name <input type="text" name="name" autocomplete="name" placeholder="Full name" required maxlength="100" /></label><label>Email address <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required maxlength="254" /></label></div>
-            <label>Interested in <select name="programme" required><option value="" disabled selected>Select a programme</option><option>1:1 Personal Training</option><option>Small Group Fitness</option><option>Online Coaching</option><option>Not sure yet</option></select></label>
-            <label>Your message (optional) <textarea name="message" rows="4" maxlength="1500" placeholder="Tell us about your preferred sessions or schedule. Please don't include medical information."></textarea></label>
-            <p class="privacy-note">We’ll use your contact details only to respond to this enquiry. Please don't submit sensitive health information. Read our <a href="/privacy/">privacy information</a>.</p>
-            <button type="submit" class="btn btn-primary submit-btn">SEND ENQUIRY <span aria-hidden="true">↗</span></button>
-            <p class="form-help">Enquiries will be processed after the website owner enables Netlify Forms.</p>
-          </form>
-        </div>) : (<div class="form-frame"><div class="form-header"><strong>INTERNATIONAL PRE-LAUNCH</strong><span>BF / GLOBAL</span></div><h3>COACHING ENQUIRIES OPEN LATER</h3><p>Our live coaching, subscriptions and contact forms are temporarily unavailable while business terms and privacy arrangements are finalised.</p><a class="btn btn-primary" href="/app/workouts/">EXPLORE THE FREE EXERCISE LIBRARY <span aria-hidden="true">↗</span></a><p class="form-help">No payments, customer accounts or bookings are being accepted at this stage.</p></div>)}
+
+    <section class="quick-stories" aria-labelledby="explore-label">
+      <div class="section-line"><h2 id="explore-label">Start exploring</h2><span>No account needed</span></div>
+      <div class="story-scroll">
+        {moments.map(item=>(
+          <a class="story-link" href={item.href}>
+            <span class:list={['story-ring',item.tone]}><span aria-hidden="true">{item.icon}</span></span>
+            <span class="story-name">{item.short}</span>
+          </a>
+        ))}
       </div>
     </section>
+
+    <section id="feed" class="feed-section" aria-labelledby="feed-heading">
+      <div class="section-line feed-title-line"><div><p class="mini-label">MADE FOR REAL LIFE</p><h2 id="feed-heading">The BF feed <span class="spark">✳</span></h2></div><span class="daily-note">Explore at your pace</span></div>
+      <div class="filter-scroll" aria-label="Filter posts by topic">
+        {topics.map(item=>(
+          <button type="button" class:list={['filter',{'active':item.id==='all'}]} data-filter={item.id} aria-pressed={item.id==='all'?'true':'false'}>{item.id==='saved'?'♡ ':''}{item.name}</button>
+        ))}
+      </div>
+      <p class="feed-info">Simple fitness ideas, useful links and real BF GYM updates — not a public social network. Saves stay on this device.</p>
+      <div class="post-list" id="post-list">
+        {posts.map(post=>(
+          <article class="post" data-post-id={post.id} data-topic={post.topic} data-search={(post.title+' '+post.text+' '+post.label).toLowerCase()}>
+            <header class="post-header">
+              <a class="post-avatar" href="/trainer/" aria-label="Meet Coach Adeep"><img src="/images/trainer/adeep-portrait-new.webp" width="45" height="45" alt=""/></a>
+              <div class="post-meta"><div class="post-author"><strong>BF GYM Global</strong><span class="verified-meaning" title="BF means Best Fitness">BF</span></div><span class="post-subtitle">{post.label} · <span>by Coach Adeep</span></span></div>
+              <span class="post-type" aria-label={'Post topic: '+post.topic}>{post.topic}</span>
+            </header>
+            <div class="post-copy"><h3>{post.title}</h3><p>{post.text}</p></div>
+            {post.visual==='coach' ? (
+              <a class="post-media coach-media" href={post.href} aria-label="Read the founder's Kerala to UK story">
+                <img src={post.image} width="680" height="340" alt={post.alt} loading="lazy"/>
+                <span class="photo-strap">FROM KERALA TO THE UK <span aria-hidden="true">↗</span></span>
+              </a>
+            ):(
+              <a href={post.href} class:list={['post-media','graphic-media',post.visual]} aria-label={post.cta}>
+                <span class="graphic-kicker">BF GYM GLOBAL <span>✳</span> BEST FITNESS</span>
+                <strong>{post.graphicTitle}</strong>
+                <span class="graphic-sub">{post.graphicSub}</span>
+                <span class="graphic-circle" aria-hidden="true"></span>
+              </a>
+            )}
+            <footer class="post-footer">
+              <div class="post-controls">
+                <button class="save-post" type="button" data-save={post.id} aria-pressed="false" aria-label={'Save '+post.title+' on this device'}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.5h14v17l-7-4.5-7 4.5z"/></svg><span>Save</span></button>
+                <span class="local-note">Private to this device</span>
+              </div>
+              <a href={post.href} class="post-link">{post.cta} <span aria-hidden="true">↗</span></a>
+            </footer>
+            <div class="post-secondary"><a href={post.secondaryHref} lang={post.secondaryHref.startsWith('/ml/')?'ml':undefined}>{post.secondary} <span aria-hidden="true">→</span></a></div>
+          </article>
+        ))}
+      </div>
+      <div id="empty-feed" class="empty-feed" hidden><span class="empty-symbol" aria-hidden="true">♡</span><h3>Nothing here yet.</h3><p>Try another topic or search term. You can save useful posts to find them here later.</p><button type="button" id="reset-feed">Show all posts</button></div>
+    </section>
+    <section class="community-card" aria-labelledby="community-heading"><div class="community-icon" aria-hidden="true">♡</div><div><span class="mini-label">KEEP IN TOUCH</span><h2 id="community-heading">Follow the journey on Instagram.</h2><p>See Coach Adeep at <strong>@fitwithaadhi</strong>. The BF GYM site itself doesn't ask you to connect a social account.</p></div><a href="https://www.instagram.com/fitwithaadhi/" target="_blank" rel="noopener noreferrer" class="btn-outline">Visit Instagram ↗</a></section>
+    <footer class="main-footer"><strong>BF GYM GLOBAL</strong><span>Best Fitness · Free fitness education</span><div><a href="/privacy/">Privacy</a><a href="/trainer/">Meet the coach</a><a href="/ml/kerala-uk/" lang="ml">മലയാളം</a><a href="/app/membership/">Member card demo</a></div><p>Paid coaching, bookings, real membership registration and Wallet passes are not active. Workout progress and saved posts are device-only. BF GYM is an independent site and is not affiliated with Instagram or Threads.</p></footer>
   </main>
-  <footer class="footer"><div class="shell footer-top"><a href="#top" class="brand"><span class="brand-mark">BF<span class="brand-dot">.</span></span><span class="brand-name">GYM</span></a><p>TRAIN WITH PURPOSE.<br />LONDON & ONLINE.</p><a href="#top">BACK TO TOP ↑</a></div><div class="shell footer-bottom"><span>© {year} BF GYM. All rights reserved.</span><span>Website launch edition · <a href="/app/dashboard/">My Dashboard</a> · <a href="/app/membership/">Digital Member Card Demo</a> · <a href="/kerala-uk/">Kerala → UK Story</a> · <a href="/ml/kerala-uk/" hreflang="ml" lang="ml">മലയാളം</a> · <a href="/app/">Mobile App</a> · <a href="/app/workouts/">Workout Videos</a> · <a href="/sample-plan/">Sample Plan</a> · <a href="/programmes/">Free Training Plans</a> · <a href="https://www.instagram.com/fitwithaadhi/" target="_blank" rel="noopener noreferrer" aria-label="Coach Adeep Instagram profile">@fitwithaadhi Instagram</a> · <a href="/trainer/">Trainer Profile</a> · <a href="/privacy/">Privacy information</a> · <a href="/book/">Session requests</a></span></div></footer>
-</body>
-</html>
+
+  <aside class="right-sidebar" aria-label="Coach and site information">
+    <div class="coach-panel"><div class="panel-title"><span class="panel-dot" aria-hidden="true"></span> MEET THE FOUNDER</div><div class="coach-top"><img src="/images/trainer/adeep-portrait-new.webp" width="66" height="66" alt="Coach Adeep Aji"/><div><h2>Coach Adeep</h2><p>Kerala <span aria-hidden="true">→</span> UK 🇮🇳🇬🇧</p></div></div><p>A fitness learning space created to help people start simply and build sustainable habits.</p><a href="/trainer/">Read the coach profile <span aria-hidden="true">↗</span></a></div>
+    <div class="safe-panel"><span class="safe-symbol" aria-hidden="true">✓</span><h2>Feel free to explore.</h2><p>There is no sign-in gate, no subscription checkout and no public profile to create.</p><ul><li>Free workout plans</li><li>Easy exercise learning</li><li>Device-only saved posts</li></ul><a href="/privacy/">How privacy works ↗</a></div>
+    <a class="malayalam-panel" href="/ml/kerala-uk/" hreflang="ml"><span lang="ml">മലയാളത്തിൽ വായിക്കാം</span><small>Our Kerala → UK story ↗</small></a>
+  </aside>
+</div>
+<nav class="bottom-nav" aria-label="Mobile navigation">
+  <a href="/" aria-current="page"><span aria-hidden="true">⌂</span><small>Home</small></a>
+  <a href="/programmes/"><span aria-hidden="true">▤</span><small>Plans</small></a>
+  <a href="/start/" class="bottom-start"><span aria-hidden="true">✦</span><small>Start</small></a>
+  <a href="/app/workouts/"><span aria-hidden="true">▷</span><small>Videos</small></a>
+  <a href="/trainer/"><span aria-hidden="true">☺</span><small>Coach</small></a>
+</nav>
+<script>
+  // Editorial feed only: no login, no public posts, no analytics and no network requests.
+  // Save preferences are stored in this browser only and can be cleared with browser data.
+  const saveKey = 'bfgym-feed-saved-v1';
+  const filters = Array.from(document.querySelectorAll('[data-filter]'));
+  const cards = Array.from(document.querySelectorAll('[data-post-id]'));
+  const saveButtons = Array.from(document.querySelectorAll('[data-save]'));
+  const search = document.getElementById('feed-search');
+  const empty = document.getElementById('empty-feed');
+  const reset = document.getElementById('reset-feed');
+  let selected = 'all';
+  let saved = new Set();
+  try {
+    const stored = JSON.parse(localStorage.getItem(saveKey) || '[]');
+    if (Array.isArray(stored)) saved = new Set(stored.filter(id => typeof id === 'string'));
+  } catch (_) { /* storage may be blocked; in-memory saves still work */ }
+  function renderSaved() {
+    saveButtons.forEach(button => {
+      const on = saved.has(button.dataset.save);
+      button.setAttribute('aria-pressed', String(on));
+      button.classList.toggle('is-saved', on);
+      const label = button.querySelector('span');
+      if (label) label.textContent = on ? 'Saved' : 'Save';
+      button.setAttribute('aria-label', on ? 'Remove this post from saved on this device' : 'Save this post on this device');
+    });
+  }
+  function renderFeed() {
+    const query = (search && search.value ? search.value : '').trim().toLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+      const topic = card.dataset.topic || '';
+      const matchTopic = selected === 'all' || (selected === 'saved' ? saved.has(card.dataset.postId) : selected === topic);
+      const matchSearch = !query || (card.dataset.search || '').includes(query);
+      card.hidden = !(matchTopic && matchSearch);
+      if (!card.hidden) visible += 1;
+    });
+    if (empty) empty.hidden = visible !== 0;
+  }
+  filters.forEach(button => button.addEventListener('click', () => {
+    selected = button.dataset.filter || 'all';
+    filters.forEach(item => { const active = item === button; item.classList.toggle('active',active); item.setAttribute('aria-pressed',String(active)); });
+    renderFeed();
+  }));
+  saveButtons.forEach(button => button.addEventListener('click', () => {
+    const id = button.dataset.save;
+    if (!id) return;
+    if (saved.has(id)) saved.delete(id); else saved.add(id);
+    try { localStorage.setItem(saveKey, JSON.stringify(Array.from(saved))); } catch (_) {}
+    renderSaved();
+    renderFeed();
+  }));
+  if (search) search.addEventListener('input',renderFeed);
+  if (reset) reset.addEventListener('click', () => {
+    if (search) search.value = '';
+    const allButton = filters.find(button => button.dataset.filter === 'all');
+    if (allButton) allButton.click();
+    if (search) search.focus();
+  });
+  renderSaved();
+  renderFeed();
+</script>
 <style is:global>
-:root{--bg:#101310;--surface:#191d19;--surface2:#222822;--line:#343a31;--lime:#c7ff52;--cream:#f2f3e9;--muted:#a4a99d;--display:'Oswald',Impact,sans-serif;--body:'DM Sans',Arial,sans-serif}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--cream);font-family:var(--body);font-size:15px;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}
-button,a,input,select,textarea{outline-offset:4px}button{cursor:pointer}
-::selection{background:var(--lime);color:var(--bg)}
-.shell{width:min(1192px,calc(100% - 72px));margin-inline:auto}
-.skip-link{position:absolute;top:-80px;left:12px;padding:12px;background:var(--lime);color:var(--bg);z-index:100}.skip-link:focus{top:12px}
-.site-header{position:relative;z-index:5;border-bottom:1px solid rgba(255,255,255,.10);background:#101310}
-.header-inner{height:88px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:center;gap:12px}.brand-mark{font:700 36px/.8 var(--display);letter-spacing:-2px}.brand-dot{color:var(--lime)}.brand-name{font-weight:800;font-size:16px;letter-spacing:.05em;line-height:1}.brand-name span{display:block;margin-top:5px;color:var(--muted);font-size:9px;letter-spacing:.16em;font-weight:700}
-nav{display:flex;align-items:center;gap:33px}nav a{font-size:12px;font-weight:700;color:#c3c7bf;transition:color .2s}nav a:hover,.footer a:hover{color:var(--lime)}
-.nav-cta{display:inline-flex;align-items:center;gap:24px;padding:15px 18px;border:1px solid var(--lime);font-weight:800;font-size:11px;letter-spacing:.08em}.nav-cta span{font-size:18px;color:var(--lime)}
-.hero{overflow:hidden;padding-top:74px;background:radial-gradient(ellipse at 5% 30%,#1c2515 0%,transparent 55%),var(--bg)}
-.hero-layout{display:grid;grid-template-columns:1.08fr .92fr;align-items:stretch;min-height:650px;gap:32px}
-.hero-copy{padding:22px 0 56px}.eyebrow,.section-kicker{font-size:11px;letter-spacing:.19em;font-weight:800;color:var(--lime)}.eyebrow{display:flex;align-items:center;gap:11px}.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 5px #c7ff521a}
-h1,h2,h3,p{margin-top:0}h1,h2,.big-method{font-family:var(--display);font-weight:600;line-height:.99;letter-spacing:-.017em}h1{font-size:clamp(92px,10vw,157px);margin:30px 0 24px}.hollow{color:transparent;-webkit-text-stroke:2px var(--cream)}.lime{color:var(--lime)}
-.hero-lede{max-width:420px;color:#bec4b9;font-size:17px;line-height:1.7}.hero-actions{display:flex;align-items:center;gap:25px;margin-top:32px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:36px;padding:19px 24px;border:0;font-weight:800;font-size:12px;letter-spacing:.07em;transition:transform .2s,background-color .2s}.btn:hover{transform:translateY(-3px)}.btn-primary{background:var(--lime);color:var(--bg)}.btn-primary:hover{background:#daff90}.btn span{font-size:19px}.text-link{font-size:11px;font-weight:800;letter-spacing:.07em;border-bottom:1px solid #72796c;padding-bottom:7px;display:inline-flex;align-items:center;gap:12px}.text-link:hover{color:var(--lime);border-color:var(--lime)}
-.micro-trust{display:flex;align-items:center;gap:14px;margin-top:68px;font-size:11px;line-height:1.8;color:var(--muted)}.micro-trust strong{color:var(--cream)}.avatar-letters{width:43px;height:43px;background:#313a2e;border:1px solid #5e6c4d;border-radius:50%;color:var(--lime);display:grid;place-items:center;font:700 17px var(--display)}
-.hero-visual{min-height:620px;position:relative;overflow:hidden;background:linear-gradient(145deg,#283324,#18221b 60%,#141d16);border:1px solid #364335}
-.visual-grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff0c 1px,transparent 1px),linear-gradient(90deg,#ffffff0c 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(135deg,#000,transparent 90%)}
-.visual-top{position:absolute;top:34px;left:34px;color:#d4dfc9;font-size:10px;line-height:1.8;font-weight:800;letter-spacing:.11em}
-.visual-rings{position:absolute;inset:13% -25%;display:grid;place-items:center;transform:rotate(-17deg)}.visual-rings>span{position:absolute;border:2px solid #b6ee4d66;border-radius:50%;width:66%;aspect-ratio:1;transform:scaleX(.80)}.visual-rings>span:nth-child(2){width:87%;border-color:#b6ee4d33}.visual-rings>span:nth-child(3){width:109%;border-color:#b6ee4d18}.visual-centre{position:relative;transform:rotate(17deg);text-align:center;z-index:2}.visual-centre small{display:block;font-size:13px;letter-spacing:.25em;color:var(--lime);font-weight:700}.visual-centre strong{display:block;font:700 clamp(105px,12vw,180px)/1 var(--display);letter-spacing:-.07em;color:var(--lime);text-shadow:0 0 50px #c7ff5228}
-.visual-bottom{position:absolute;bottom:35px;left:34px;right:34px;display:flex;justify-content:space-between;gap:12px;padding-top:20px;border-top:1px solid #798b683e;font-size:9px;letter-spacing:.09em;font-weight:800}.visual-bottom span{color:var(--lime)}.visual-side{position:absolute;right:19px;top:30px;font-size:9px;writing-mode:vertical-rl;letter-spacing:.16em;color:#b9d2a9}
-.scroll-indicator{display:flex;align-items:center;gap:16px;color:#888f85;font-size:9px;letter-spacing:.18em;font-weight:700;padding:18px 0 24px}.scroll-indicator div{width:120px;height:1px;background:#4e5849}.scroll-indicator span:last-child{margin-left:auto}
-.intro-band{background:var(--lime);color:var(--bg);overflow:hidden}.band-inner{min-height:73px;display:flex;align-items:center;justify-content:space-between;gap:24px;font:600 clamp(16px,2.2vw,26px) var(--display);letter-spacing:.01em}.band-star{font:400 23px var(--body)}
-.section{padding:115px 0}.section-kicker{margin-bottom:25px}h2{font-size:clamp(57px,6.2vw,92px);margin-bottom:0}h2 span{color:var(--lime)}
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:60px;margin-bottom:45px}.section-head>p{color:var(--muted);max-width:305px;line-height:1.8;margin:0}
-.programme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.programme-card{background:var(--surface);border:1px solid var(--line);padding:27px;min-width:0;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}.programme-card:hover{transform:translateY(-4px);border-color:#6c8b48}.card-top{display:flex;align-items:center;justify-content:space-between;font-weight:800;font-size:12px;color:var(--lime)}.pill{color:#b4c6a1;border:1px solid #475542;padding:8px 11px;border-radius:40px;font-size:9px;letter-spacing:.15em}.card-graphic{height:190px;position:relative;display:grid;place-items:center;overflow:hidden}.card-ring{position:absolute;width:150px;height:150px;border:1px solid #6b8954;border-radius:50%;transform:rotate(-22deg) scaleX(1.3)}.card-ring:after{content:"";position:absolute;inset:17px;border:1px solid #465b39;border-radius:50%}.card-symbol{font:600 110px var(--display);color:#b1e94e26}.programme-card h3{font:600 28px var(--display);text-transform:uppercase;margin:5px 0 11px}.programme-card>p{color:var(--muted);line-height:1.7;min-height:80px;font-size:13px}.programme-card ul{list-style:none;padding:16px 0 20px;margin:0;border-top:1px solid var(--line)}.programme-card li{font-size:12px;margin:10px 0;color:#d3d8ce}.programme-card li:before{content:"+";color:var(--lime);margin-right:12px}.programme-card>a{border-top:1px solid var(--line);padding-top:24px;font-size:10px;font-weight:800;letter-spacing:.08em;display:flex;align-items:center;justify-content:space-between;margin-top:auto}.programme-card>a span{font-size:18px;color:var(--lime)}.availability-note{font-size:11px;color:#999e96;margin:22px 0 0}
-.approach{background:#1b211a}.approach-layout{display:grid;grid-template-columns:1fr 1fr;gap:10%}.approach-panel{min-height:630px;background:linear-gradient(150deg,#d4ff70,#a6d93c);color:#141812;padding:32px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.approach-panel:before{content:"";width:520px;height:520px;border:1px solid #59742b63;position:absolute;border-radius:50%;top:-150px;right:-180px}.panel-corner,.panel-bottom{font-weight:800;font-size:10px;letter-spacing:.15em;z-index:1}.big-method{font-size:clamp(76px,9vw,126px);z-index:1}.big-method span{color:#f1f6d9}
-.approach-copy{align-self:center;padding:28px 0}.approach-copy h2{font-size:clamp(51px,5.2vw,81px);margin-bottom:40px}.method-item{display:grid;grid-template-columns:42px 1fr;gap:20px;border-top:1px solid #455040;padding:23px 0}.method-item>span{color:var(--lime);font-weight:800;font-size:11px}.method-item h3{font-size:17px;margin-bottom:8px}.method-item p{color:var(--muted);font-size:13px;line-height:1.8;margin:0}.approach-copy>.text-link{margin-top:24px}
-.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:10%}.about-detail{padding-top:72px}.about-lede{font-size:24px;line-height:1.5;font-weight:600}.about-detail>p:not(.about-lede){color:var(--muted);line-height:1.9}.qualifications{border-top:1px solid var(--line);margin-top:36px;padding-top:25px}.qualifications>span{color:var(--lime);font-size:11px;font-weight:800;letter-spacing:.12em}.qualifications ul{list-style:none;padding:0;margin:15px 0}.qualifications li{margin:12px 0;font-size:13px}.qualifications li:before{content:"↗";margin-right:13px;color:var(--lime)}
-.enquiry{background:#232b20}.enquiry-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:9%}.enquiry-copy h2{font-size:clamp(85px,9vw,130px);margin-bottom:30px}.enquiry-copy>p:not(.section-kicker){font-size:15px;line-height:1.8;color:#c2c9bb;max-width:420px}.enquiry-aside{margin-top:100px;padding-top:20px;border-top:1px solid #68725e;max-width:330px}.enquiry-aside span{color:var(--lime);font-size:11px;font-weight:800;letter-spacing:.13em}.enquiry-aside p{color:#aeb9a5;line-height:1.7;font-size:12px}
-.form-frame{background:#f0f1e8;color:#141813;padding:34px}.form-header{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #c9cfc2;padding-bottom:25px;margin-bottom:26px}.form-header strong{font-size:14px}.form-header span{color:#718067;font-size:10px;font-weight:800}.form-frame form{display:grid;gap:21px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}.form-frame label{display:grid;gap:9px;font-weight:800;font-size:11px;letter-spacing:.03em}.form-frame input,.form-frame select,.form-frame textarea{width:100%;background:#fff;color:#1e241c;border:1px solid #c4c9bf;padding:15px;font-size:13px;border-radius:0;min-width:0}.form-frame textarea{resize:vertical}.form-frame input:focus,.form-frame select:focus,.form-frame textarea:focus{outline:2px solid #648132}.privacy-note,.form-help{font-size:11px;color:#626c60;line-height:1.6;margin:0}.submit-btn{width:100%}.honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
-.footer{background:#0b0e0b}.footer-top{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:50px 0;border-bottom:1px solid #30392c}.footer-top p{font:600 24px/1.2 var(--display);margin:0}.footer-top>a:last-child{font-size:11px;font-weight:800;color:var(--lime)}.footer-bottom{display:flex;justify-content:space-between;gap:20px;padding:24px 0;color:#9fa79b;font-size:11px}
-.pricing-section{background:#131913}.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.price-card{border:1px solid #3c4b35;background:#1d261c;padding:28px;display:flex;flex-direction:column;min-width:0}.price-top{display:flex;justify-content:space-between;gap:12px;align-items:center;font-weight:800;font-size:10px;color:var(--lime);letter-spacing:.1em}.price-top span+span{color:#a4b69b}.price-card h3{font:600 29px var(--display);text-transform:uppercase;margin:34px 0 10px}.price-description{font-size:13px;line-height:1.7;color:#b9c7b1;min-height:75px}.price-value{font:600 76px/.95 var(--display);color:var(--lime);padding:22px 0 25px;border-bottom:1px solid #45503e}.price-value small{display:block;font:700 12px var(--body);color:#c4cabc;margin-top:15px}.price-card ul{list-style:none;margin:18px 0 24px;padding:0;flex:1}.price-card li{padding:9px 0;font-size:12px;line-height:1.5;color:#d7ddd1}.price-card li:before{content:"✓";color:var(--lime);font-weight:800;margin-right:11px}.price-action{width:100%;gap:8px;font-size:11px;padding:17px}.secondary-pay{display:block;padding-top:18px;text-align:center;color:var(--lime);font-size:11px;font-weight:800}.price-fine{font-size:12px;color:#a6b2a0;line-height:1.8;margin:25px 0 30px}.booking-mini{display:flex;align-items:center;justify-content:space-between;gap:28px;background:#2b3728;border:1px solid #4a5b43;padding:24px 27px}.booking-mini strong{font-size:13px;white-space:nowrap}.booking-mini p{font-size:12px;color:#bcc8b7;line-height:1.6;max-width:360px;margin:0}.booking-mini a{font-size:11px;font-weight:800;color:var(--lime);white-space:nowrap}.booking-mini a span{margin-left:12px}.privacy-note a,.footer-bottom a{color:inherit;text-decoration:underline;text-underline-offset:3px}
-@media(max-width:800px){.price-grid{grid-template-columns:1fr}.price-description{min-height:auto}.booking-mini{display:block}.booking-mini p{margin:13px 0 22px}.price-card h3{margin-top:25px}}
-.price-value.price-pending{font-size:clamp(30px,3.2vw,42px);line-height:1.15;letter-spacing:0}.price-pending small{font-size:12px}.form-frame>h3{font:600 32px/1.2 var(--display);margin:30px 0 16px}.form-frame>p{font-size:13px;line-height:1.8;color:#55644c}.form-frame>a{margin:18px 0 21px}
-.about-coach-intro{display:flex;align-items:center;gap:18px;max-width:385px;border:1px solid #5e784f;background:#1d291d;padding:13px;margin-bottom:25px;text-decoration:none}.about-coach-intro img{display:block;width:90px;height:115px;object-fit:cover;object-position:center 26%;background:#fff;flex-shrink:0}.about-coach-intro span{display:grid;gap:7px}.about-coach-intro strong{font-size:11px;letter-spacing:.13em;color:var(--lime)}.about-coach-intro small:nth-child(2){font-family:Oswald,Impact,sans-serif;font-size:25px;font-weight:700;color:#f2f5e8}.about-coach-intro small:last-child{font-size:10px;color:#d1e4c5;font-weight:800}.about-coach-intro:hover{border-color:var(--lime)}
-.kerala-intro{color:var(--lime)!important;font-size:14px;line-height:1.8;margin:10px 0 13px}.kerala-link{display:inline-flex;gap:12px;align-items:center;color:var(--lime);font-size:11px;font-weight:900;letter-spacing:.06em;border:1px solid #59754c;padding:10px 14px;margin:5px 0 14px}.kerala-link span{font-size:18px}.kerala-link:hover{border-color:var(--lime)}
-.trainer-profile-link{display:inline-flex;align-items:center;gap:15px;color:var(--lime);font-size:11px;font-weight:800;letter-spacing:.07em;margin-top:14px;border-bottom:1px solid #648757;padding-bottom:11px}.trainer-profile-link span{font-size:18px}.trainer-smallprint{font-size:11px;color:#97a68f;line-height:1.7;margin:6px 0}
-.easy-start{padding:80px 0;background:#192319;border-bottom:1px solid #40533a}.easy-start-heading{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:26px}.easy-start-heading h2{font:700 clamp(42px,5vw,62px)/1 var(--display);letter-spacing:-.02em;margin:10px 0}.easy-start-heading>p{max-width:350px;color:#c0d1b9;font-size:13px;line-height:1.8}.easy-start-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}.easy-start-card{background:#263525;border:1px solid #526e49;padding:19px;display:flex;flex-direction:column;gap:13px;min-height:225px;transition:transform .18s,border-color .18s}.easy-start-card:hover{transform:translateY(-3px);border-color:var(--lime)}.easy-start-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--lime);font-size:10px;font-weight:900;letter-spacing:.07em}.easy-start-icon{font-size:22px}.easy-start-card strong{font:650 27px/1.1 var(--display);text-transform:uppercase}.easy-start-card p{font-size:12px;line-height:1.7;color:#c0d2ba;margin:0}.easy-start-arrow{font-size:10px;color:var(--lime);font-weight:900;margin-top:auto}.easy-start-note{font-size:11px;color:#9cb293;line-height:1.7;margin-top:17px}
-@media(max-width:900px){.easy-start-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.easy-start-heading{display:block}}
-@media(max-width:500px){.easy-start{padding:55px 0}.easy-start-grid{gap:8px}.easy-start-card{min-height:190px;padding:13px}.easy-start-card strong{font-size:22px}.easy-start-card p{font-size:11px}.easy-start-heading h2{font-size:44px}}
-@media(prefers-reduced-motion:reduce){.easy-start-card{transition:none}}
-@media(max-width:1060px){.hero-layout{grid-template-columns:1fr 1fr}.hero-visual{min-height:560px}.visual-centre strong{font-size:130px}h1{font-size:clamp(85px,10vw,120px)}.programme-card{padding:22px}}
-@media(max-width:800px){.shell{width:min(100% - 38px,600px)}.site-header nav{display:none}.header-inner{height:75px}.hero{padding-top:32px}.hero-layout{grid-template-columns:1fr;gap:0}.hero-copy{padding:18px 0 36px}.hero-visual{min-height:420px}.visual-rings{inset:8% 0}.visual-centre strong{font-size:130px}h1{font-size:clamp(85px,17vw,145px)}.micro-trust{margin-top:35px}.band-inner{min-height:65px;flex-wrap:wrap;justify-content:center;padding:17px 0;gap:14px}.band-inner span{font-size:17px}.section{padding:75px 0}.section-head,.approach-layout,.about-layout,.enquiry-layout{display:grid;grid-template-columns:1fr;gap:35px}.section-head>p{max-width:unset}.programme-grid{grid-template-columns:1fr}.programme-card>p{min-height:0}.card-graphic{height:145px}.approach-panel{min-height:430px}.about-detail{padding-top:0}.enquiry-aside{margin-top:40px}.form-frame{padding:25px}.form-row{grid-template-columns:1fr}.footer-top,.footer-bottom{flex-wrap:wrap}.footer-bottom{font-size:10px}}
-@media(max-width:430px){.shell{width:calc(100% - 30px)}.brand-mark{font-size:30px}.brand-name span{font-size:8px}.nav-cta{padding:11px 12px;gap:10px;font-size:10px}h1{font-size:83px}.hero-actions{gap:20px}.visual-centre strong{font-size:105px}.visual-top{top:24px;left:24px}.visual-bottom{left:18px;right:18px;bottom:22px;gap:7px;flex-wrap:wrap}.approach-panel{padding:20px;min-height:380px}.big-method{font-size:75px}.enquiry-copy h2{font-size:82px}.form-frame{padding:19px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+:root{--ink:#141a15;--muted:#68726a;--line:#e7ebe5;--bg:#f7f9f5;--paper:#fff;--mint:#d9fba9;--green:#335f2d;--lime:#b9f06c;--sans:'DM Sans',Arial,sans-serif;--head:'Outfit','DM Sans',sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:94px}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.58 var(--sans);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed}img{max-width:100%}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #457c3a;outline-offset:3px}h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:var(--head)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip-link{position:fixed;z-index:200;top:-100px;left:10px;padding:12px 18px;background:#151a15;color:#fff;border-radius:12px}.skip-link:focus{top:10px}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(16px)}.top-inner{height:74px;max-width:1450px;margin:0 auto;padding:0 35px;display:grid;grid-template-columns:260px minmax(290px,600px) 1fr;gap:32px;align-items:center}.brand{display:inline-flex;gap:9px;align-items:center;white-space:nowrap;width:max-content}.brand-symbol{font:900 31px/1 var(--head);letter-spacing:-.12em;padding:8px 12px 8px 8px;background:#1b291a;color:#f8fff3;border-radius:14px}.brand-symbol span{color:var(--lime)}.brand-label{display:flex;flex-direction:column;gap:1px}.brand-label strong{font:900 18px/1 var(--head);letter-spacing:-.04em}.brand-label small{font-size:9px;font-weight:800;color:#728073;letter-spacing:.09em}.header-search{height:44px;display:flex;align-items:center;gap:9px;border:1px solid #e5e9e4;background:#f4f6f3;border-radius:100px;padding:0 15px}.header-search:focus-within{border-color:#9bc97f;box-shadow:0 0 0 3px #d9f7c7}.header-search svg{width:18px;height:18px;color:#838f83;flex:none}.header-search input{width:100%;background:transparent;border:0;outline:0;color:var(--ink);min-width:0;font-size:13px}.header-search input::placeholder{color:#7b867b}.header-search kbd{color:#9eaaa0;font:600 16px var(--sans)}.header-actions{display:flex;gap:13px;justify-content:flex-end;align-items:center}.header-icon{width:41px;height:41px;border-radius:50%;display:grid;place-items:center;background:#f2f5f0}.header-icon svg{width:22px;height:22px}.header-icon:hover{background:#e7f2e1}.profile-mini{width:39px;height:39px;border-radius:50%;overflow:hidden;border:2px solid #b8e6ac;display:block}.profile-mini img{width:100%;height:100%;object-fit:cover}
+.page-layout{max-width:1450px;margin:0 auto;padding:29px 35px 80px;display:grid;grid-template-columns:240px minmax(0,680px) minmax(240px,300px);gap:32px;align-items:start}.left-sidebar{position:sticky;top:107px;align-self:start}.side-nav{display:grid;gap:4px}.side-link{padding:12px 15px;display:flex;align-items:center;gap:13px;border-radius:13px;color:#414c40;font-weight:750;font-size:13px;transition:background .15s}.side-link:hover,.side-link.selected{background:#e8f3df;color:#233921}.side-glyph{font:600 24px/1 var(--head);width:25px;text-align:center}.side-note{margin:33px 6px 20px;background:#e8f6db;border:1px solid #d8ecc7;padding:20px;border-radius:19px}.note-dot{display:inline-block;width:10px;height:10px;background:#6aa43f;border-radius:50%;margin:0 7px 0 0}.side-note strong{font:750 15px/1.4 var(--head)}.side-note p{color:#50674b;font-size:12px;margin:10px 0 0}.side-footer{display:flex;gap:8px;flex-wrap:wrap;padding:10px;color:#67766a;font-size:11px}.side-footer a:hover{text-decoration:underline}.main-feed{min-width:0}
+.welcome{border-radius:22px;background:#e6f2df;min-height:310px;display:grid;grid-template-columns:1.3fr .7fr;overflow:hidden;box-shadow:0 6px 30px rgba(32,59,22,.04)}.welcome-copy{padding:33px 0 30px 32px;position:relative;z-index:1}.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:.1em;color:#496e40}.welcome-spark{font-size:17px}.welcome h1{font-size:clamp(33px,4vw,49px);line-height:1.04;letter-spacing:-.052em;margin:15px 0}.welcome h1 em{color:#518039;font-style:normal}.welcome p{font-size:13px;line-height:1.72;color:#53694f;max-width:470px;margin:0 0 20px}.welcome p strong{color:#314d2c}.welcome-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn-primary,.btn-quiet,.btn-outline{display:inline-flex;justify-content:center;align-items:center;gap:8px;font-weight:800;font-size:12px;border-radius:10px;min-height:42px;padding:11px 15px}.btn-primary{background:#203e20;color:#fff}.btn-primary:hover{background:#355a31}.btn-quiet{color:#395734}.btn-quiet:hover{text-decoration:underline}.trust-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:19px}.trust-chips span{border-radius:100px;background:#ffffffa6;color:#47603d;padding:5px 9px;font-size:10px;font-weight:800;white-space:nowrap}.welcome-art{position:relative;overflow:hidden;background:radial-gradient(circle at 56% 48%,#d6faaa 0%,#9fc879 48%,#699b5e 100%);min-width:0}.art-ring{position:absolute;border:2px solid #efffda8f;border-radius:50%;aspect-ratio:1}.art-ring-a{width:320px;top:-30px;left:-115px}.art-ring-b{width:260px;right:-100px;bottom:-100px}.art-word{position:absolute;z-index:1;right:15px;top:35%;transform:rotate(-12deg);font:900 clamp(31px,4.5vw,62px)/.9 var(--head);letter-spacing:-.08em;color:#1e421b;text-shadow:4px 5px 0 #e3f8c4}.art-word span{color:#fff}.art-sticker{position:absolute;bottom:22px;right:14px;transform:rotate(-7deg);background:#f6ffdd;border:1px solid #274d24;color:#33582b;padding:7px 12px;border-radius:5px;font-size:9px;font-weight:900;white-space:nowrap}
+.quick-stories{margin-top:27px;padding:23px 25px 15px;border:1px solid var(--line);border-radius:20px;background:var(--paper)}.section-line{display:flex;justify-content:space-between;align-items:center;gap:12px}.section-line h2{font-size:18px;letter-spacing:-.035em;margin:0}.section-line>span{font-size:11px;color:#809080}.story-scroll{display:flex;gap:19px;overflow-x:auto;scrollbar-width:thin;padding:18px 0 7px}.story-link{display:grid;justify-items:center;gap:9px;flex:0 0 86px}.story-ring{width:67px;height:67px;display:grid;place-items:center;border:3px solid #fff;outline:2px solid #aacc8f;border-radius:50%;box-shadow:0 2px 10px #dae9d4}.story-ring>span{font:700 28px var(--head)}.story-ring.green{background:#ddf8ca;color:#2d6a38}.story-ring.peach{background:#ffebd7;color:#994f30}.story-ring.lilac{background:#f2ddfa;color:#754f8d}.story-ring.blue{background:#d9ebff;color:#3c6690}.story-ring.yellow{background:#fff7c9;color:#8b731c}.story-link:hover .story-ring{transform:translateY(-2px)}.story-name{font-size:12px;font-weight:750}
+.feed-section{margin-top:30px}.feed-title-line{padding:0 3px 15px}.mini-label{font-size:10px;color:#758574;font-weight:850;letter-spacing:.1em;margin:0 0 5px}.feed-title-line h2{font-size:28px;line-height:1.1;letter-spacing:-.05em}.spark{color:#87b96b}.daily-note{color:#809080;font-size:11px}.filter-scroll{display:flex;overflow-x:auto;gap:8px;padding:3px 2px 12px;scrollbar-width:thin}.filter{border:1px solid #e2e9df;background:#fff;white-space:nowrap;padding:9px 14px;border-radius:100px;font-size:12px;font-weight:800;color:#627060;flex:none;min-height:40px}.filter:hover{background:#f4f9f0}.filter.active{background:#233a22;color:#fff;border-color:#233a22}.feed-info{font-size:11px;color:#768476;margin:2px 4px 14px}.post-list{display:grid;gap:16px}.post{border-radius:19px;border:1px solid var(--line);background:#fff;padding:23px;box-shadow:0 4px 14px #32432b05}.post[hidden]{display:none!important}.post-header{display:flex;align-items:center;gap:10px}.post-avatar{width:44px;height:44px;flex:none;border-radius:50%;overflow:hidden;border:1px solid #e4e7dc}.post-avatar img{height:100%;width:100%;object-fit:cover}.post-meta{flex:1;min-width:0}.post-author{display:flex;align-items:center;gap:7px;font-size:13px}.verified-meaning{color:#376c2f;background:#def5d1;border-radius:100px;padding:2px 6px;font-size:9px;font-weight:900}.post-subtitle{display:block;color:#839083;font-size:11px;margin-top:1px}.post-type{border:1px solid #e3ebe0;color:#82917f;padding:4px 9px;border-radius:100px;text-transform:capitalize;font-size:10px;font-weight:750}.post-copy{margin:15px 0 17px}.post-copy h3{font-size:21px;letter-spacing:-.038em;line-height:1.3;margin-bottom:7px}.post-copy p{font-size:13px;line-height:1.75;color:#596659;margin:0}.post-media{display:flex;width:100%;height:clamp(170px,32vw,287px);border-radius:14px;overflow:hidden;position:relative}.coach-media{background:#e0e5db;align-items:center;justify-content:center}.coach-media img{height:100%;width:100%;object-fit:cover;object-position:50% 27%;transition:transform .25s}.coach-media:hover img{transform:scale(1.02)}.photo-strap{position:absolute;left:14px;bottom:14px;background:#213421e8;color:#fff;padding:10px 12px;border-radius:8px;font-size:11px;font-weight:900;letter-spacing:.06em}.photo-strap span{color:#d4ffab}.graphic-media{flex-direction:column;justify-content:space-between;padding:23px 25px;color:#1b361f;isolation:isolate}.graphic-kicker{position:relative;z-index:1;font-size:9px;letter-spacing:.13em;font-weight:950}.graphic-kicker span{padding:0 6px}.graphic-media strong{position:relative;z-index:1;font:900 clamp(38px,6vw,72px)/.92 var(--head);letter-spacing:-.075em;max-width:80%;text-wrap:balance}.graphic-sub{position:relative;z-index:1;font-size:10px;font-weight:900;letter-spacing:.12em}.graphic-circle{position:absolute;right:-15%;top:-50%;width:65%;aspect-ratio:1;border:30px solid #ffffff44;border-radius:50%;z-index:0}.graphic-media.beginner{background:linear-gradient(135deg,#dcf9cb,#9dcc9c)}.graphic-media.plans{background:linear-gradient(135deg,#c8f3e2,#a1d5de);color:#1d4e55}.graphic-media.learn{background:linear-gradient(135deg,#ffead8,#e6bba5);color:#694330}.graphic-media.progress{background:linear-gradient(135deg,#ede0fb,#c4b1ea);color:#453063}.graphic-media.member{background:linear-gradient(135deg,#f6f0c9,#ddd0a5);color:#594e28}.post-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px}.post-controls{display:flex;align-items:center;gap:9px}.save-post{border:1px solid #e0e7dd;background:#fff;color:#596759;display:inline-flex;align-items:center;gap:6px;border-radius:9px;padding:9px 11px;font-size:12px;font-weight:800;min-height:40px}.save-post svg{height:18px;width:18px}.save-post.is-saved{color:#315e30;background:#e5f8dc;border-color:#b5dcae}.save-post.is-saved svg{fill:#315e30}.local-note{font-size:10px;color:#8e9b8e}.post-link{font-size:12px;font-weight:850;color:#305c2e;text-align:right}.post-link:hover{text-decoration:underline}.post-secondary{padding-top:10px}.post-secondary a{color:#788679;font-size:11px;font-weight:750}.post-secondary a:hover{text-decoration:underline}.empty-feed{background:white;border:1px dashed #bdd4b6;text-align:center;border-radius:18px;padding:50px 20px}.empty-feed[hidden]{display:none}.empty-symbol{font-size:37px;color:#73906a}.empty-feed h3{font-size:21px;margin:6px 0}.empty-feed p{max-width:360px;margin:0 auto 16px;color:#758575}.empty-feed button{background:#284a25;color:#fff;border:0;border-radius:9px;padding:11px 18px;font-size:12px;font-weight:800}
+.community-card{margin-top:24px;border:1px solid #cee5c0;background:#e6f6df;border-radius:19px;padding:23px;display:grid;grid-template-columns:45px 1fr;gap:15px}.community-icon{width:45px;height:45px;background:#d0ecbe;border:1px solid #bfe1a9;border-radius:13px;display:grid;place-items:center;font-size:29px;color:#37612d}.community-card h2{font-size:19px;letter-spacing:-.03em;margin-bottom:7px}.community-card p{font-size:12px;color:#5d6f58;margin:0}.community-card>.btn-outline{grid-column:2;justify-self:start;border:1px solid #a4c693;color:#284921;background:#fff}.main-footer{padding:25px 5px 0;color:#819081;font-size:11px}.main-footer strong{font-size:14px;color:#344d33}.main-footer>span{display:block;margin-top:2px}.main-footer>div{display:flex;flex-wrap:wrap;gap:15px;margin:13px 0}.main-footer a{text-decoration:underline;text-underline-offset:3px}.main-footer p{font-size:10px;line-height:1.7;max-width:620px;margin:10px 0}
+.right-sidebar{position:sticky;top:108px;display:grid;gap:18px}.coach-panel,.safe-panel{background:#fff;border:1px solid #e4eae1;border-radius:18px;padding:21px}.panel-title{font-size:10px;font-weight:900;color:#73916a;letter-spacing:.09em;display:flex;align-items:center;gap:8px}.panel-dot{width:8px;height:8px;background:#86be62;border-radius:50%}.coach-top{display:flex;gap:12px;align-items:center;margin:15px 0}.coach-top img{width:62px;height:62px;border-radius:15px;object-fit:cover}.coach-top h2{font-size:19px;margin:0;letter-spacing:-.04em}.coach-top p{color:#7a877a;font-size:11px;margin:3px 0 0}.coach-panel>p,.safe-panel>p{color:#6c796b;font-size:12px;line-height:1.75}.coach-panel>a,.safe-panel>a{color:#3e7137;font-size:12px;font-weight:850}.safe-panel{background:#f2f9ed}.safe-symbol{display:grid;place-items:center;height:36px;width:36px;border-radius:50%;background:#d7eccb;color:#346c35;font-size:24px;margin-bottom:11px}.safe-panel h2{font-size:19px;margin:0 0 7px}.safe-panel ul{padding-left:18px;color:#5e6c5b;font-size:12px;line-height:2.1}.malayalam-panel{display:flex;flex-direction:column;gap:6px;padding:20px;background:#252f28;color:#fff;border-radius:18px}.malayalam-panel span{font-size:17px;font-weight:850}.malayalam-panel small{font-size:11px;color:#c2dbb9}.bottom-nav{display:none}
+@media(max-width:1250px){.top-inner{grid-template-columns:210px minmax(250px,600px) auto;gap:22px;padding:0 24px}.page-layout{grid-template-columns:198px minmax(0,680px) 235px;gap:22px;padding-inline:24px}.brand-label small{font-size:8px}.side-link{padding:11px 9px}}
+@media(max-width:1030px){.top-inner{grid-template-columns:190px minmax(230px,1fr) auto}.page-layout{grid-template-columns:200px minmax(0,680px);justify-content:center}.right-sidebar{display:none}}
+@media(max-width:740px){html{scroll-padding-top:72px}.top-inner{height:62px;display:flex;gap:12px;padding:0 16px}.brand-symbol{font-size:25px;border-radius:11px;padding:8px}.brand-label strong{font-size:15px}.brand-label small{font-size:7px}.header-search{margin-left:auto;height:38px;max-width:220px;flex:1;padding:0 10px}.header-search input{font-size:11px}.header-search kbd{display:none}.header-actions{gap:5px}.header-actions .instagram-header{display:none}.header-actions .header-icon{display:none}.profile-mini{height:34px;width:34px}.page-layout{display:block;padding:14px 11px 90px}.left-sidebar{display:none}.main-feed{max-width:680px;margin:0 auto}.welcome{grid-template-columns:1fr minmax(85px,.33fr);border-radius:17px;min-height:258px}.welcome-copy{padding:24px 0 20px 21px}.welcome h1{font-size:clamp(29px,7.1vw,40px);margin:9px 0}.welcome p{font-size:12px;max-width:370px}.welcome-art{opacity:.8}.art-word{right:8px;font-size:30px}.art-sticker{font-size:7px;right:7px;bottom:12px}.trust-chips{margin-top:12px}.trust-chips span{font-size:9px}.quick-stories{margin-top:13px;padding:16px 14px 9px;border-radius:16px}.story-scroll{gap:11px}.story-link{flex-basis:70px}.story-ring{width:58px;height:58px}.section-line h2{font-size:16px}.feed-section{margin-top:23px}.post{padding:15px;border-radius:16px}.post-copy h3{font-size:19px}.post-copy p{font-size:12px}.post-media{height:clamp(174px,44vw,290px)}.graphic-media{padding:15px 18px}.graphic-media strong{font-size:clamp(34px,9vw,59px)}.post-footer{flex-wrap:wrap}.post-link{margin-left:auto}.local-note{display:none}.community-card{padding:15px}.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:80;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;background:#fffffff2;backdrop-filter:blur(15px);border-top:1px solid #e1e8de;padding:7px 4px max(7px,env(safe-area-inset-bottom));box-shadow:0 -6px 20px #2235210a}.bottom-nav a{min-height:50px;display:grid;gap:1px;place-content:center;justify-items:center;color:#6f7b6c}.bottom-nav a[aria-current=page]{color:#2e622d}.bottom-nav a>span{font:700 23px/1.1 var(--head)}.bottom-nav small{font-size:10px;font-weight:850}.bottom-nav .bottom-start{color:#2c5425}.bottom-nav .bottom-start span{background:#d9f5c9;border-radius:10px;min-width:37px;min-height:30px;text-align:center;padding-top:4px}}
+@media(max-width:480px){.welcome{grid-template-columns:1fr;position:relative}.welcome-copy{padding:23px}.welcome-art{position:absolute;inset:auto 0 0 auto;width:115px;height:135px;opacity:.22;border-radius:100% 0 17px 0;pointer-events:none}.welcome h1{font-size:35px}.welcome p{max-width:330px}.welcome-actions{gap:7px}.btn-primary,.btn-quiet{font-size:11px;padding:9px 11px}.trust-chips{gap:5px}.header-search{max-width:160px}.feed-title-line h2{font-size:24px}.section-line>span{font-size:10px}.post-type{display:none}.post-footer{align-items:stretch}.post-link{align-self:center}.graphic-media{height:203px}.story-scroll{gap:9px}.story-link{flex-basis:65px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition-duration:0.01ms!important;animation-duration:0.01ms!important}}
 </style>
