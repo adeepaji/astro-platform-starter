@@ -1,7 +1,8 @@
 // BF GYM Global coach content.
-// The profile facts below were supplied by the owner in earlier fitness CV material.
-// Document-level verification has NOT been performed; do not claim independently
-// verified qualifications, current CPR validity or regulatory accreditation.
+// Original course certificates and earlier CV have been inspected.
+// Awarding bodies have not been contacted for independent verification.
+// Historical certificates must NOT be presented as current licences,
+// registrations or active first aid qualifications. No public dates by request.
 export const trainer = {
   name: 'Adeep Aji',
   displayName: 'Coach Adeep',
@@ -24,12 +25,13 @@ export const trainer = {
     {type:'class', label:'Coaching session', alt:'Adeep Aji leading a fitness session', url: safePhoto(import.meta.env.PUBLIC_BF_CLASS_PHOTO)},
   ],
   qualifications: [
-    {title:'Diploma in Personal Training',body:'K11 School of Fitness Sciences, India (trainer-reported)'},
-    {title:'Level 4 Personal Trainer',body:'Level stated in trainer CV; awarding and registration details to be confirmed'},
-    {title:'Advanced Personal Training',body:'Gold’s Fitness Institute, India (trainer-reported)'},
-    {title:'Female Fitness Training',body:'Gold’s Fitness Institute, India (trainer-reported)'},
-    {title:'Special Population Fitness Training',body:'Gold’s Fitness Institute, India (trainer-reported)'},
-    {title:'CPR & AED Training',body:'Australian lifesaving academy (trainer-reported; current validity not established)'},
+    {title:'Diploma in Personal Training',body:'K11 School of Fitness Sciences, India — certificate copy supplied; issuer verification not completed'},
+    {title:'Advanced Personal Training',body:'Gold’s Gym Fitness Institute, India — historical course completion; not represented as a current credential'},
+    {title:'Female Fitness Training',body:'Gold’s Gym Fitness Institute, India — historical course completion; not represented as a current credential'},
+    {title:'Special Population Fitness Training',body:'Gold’s Gym Fitness Institute, India — historical course completion; not represented as a current credential'},
+    {title:'CPR Training',body:'Australian Life Saving Academy, NSW — historical training certificate; not current'},
+    {title:'AED Training',body:'Australian Life Saving Academy, NSW — historical training certificate; not current'},
+
   ],
 };
 function safePhoto(value: string | undefined) {
