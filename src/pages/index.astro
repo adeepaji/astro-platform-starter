@@ -59,7 +59,7 @@ const steps = [
   <div class="container header-inner">
     <a class="brand" href="/" aria-label="BF GYM Global home"><span class="brand-logo">BF<span>.</span></span><span class="brand-word">GYM <small>GLOBAL</small></span></a>
     <nav class="desktop-links" aria-label="Main navigation">
-      <a href="#programmes">PROGRAMMES</a><a href="#features">FEATURES</a><a href="#how-it-works">HOW IT WORKS</a><a href="#coach">OUR COACH</a>
+      <a href="#programmes">PROGRAMMES</a><a href="#features">FEATURES</a><a href="#how-it-works">HOW IT WORKS</a><a href="#team">MEET THE TEAM</a>
     </nav>
     <a class="header-start" href="/start/">START FREE <span aria-hidden="true">↗</span></a>
     <details class="mobile-menu">
@@ -72,6 +72,7 @@ const steps = [
         <a href="/app/workouts/">EXERCISE VIDEOS</a>
         <a href="/app/dashboard/">MY DASHBOARD</a>
         <a href="#coach">MEET COACH ADEEP</a>
+        <a href="#team">MEET THE TEAM</a>
         <a href="/join/">BF CARD PREVIEW</a>
       </nav>
     </details>
@@ -164,15 +165,27 @@ const steps = [
   <section class="team-section" id="team" aria-labelledby="team-heading">
     <div class="container">
       <h2 id="team-heading">MEET THE TEAM</h2>
-      <article class="team-profile">
-        <img src="/images/team/anandu-satheesh-suit.webp" width="480" height="480" loading="lazy" decoding="async" alt="Anandu Satheesh"/>
-        <div>
-          <h3>Anandu Satheesh</h3>
-          <p class="team-role">Head of Marketing</p>
-          <p>Marketing &amp; Business Development · East London, UK</p>
-          <p class="team-bio">Anandu brings experience in marketing, sales, customer relations and business operations to BF GYM Global. His focus is promoting the brand, building business relationships and helping attract and retain customers.</p>
-        </div>
-      </article>
+      <div class="team-grid">
+        <article class="team-profile">
+          <img src="/images/trainer/adeep-portrait-new.webp" width="600" height="690" loading="lazy" decoding="async" alt="Adeep Aji"/>
+          <div>
+            <h3>Adeep Aji</h3>
+            <p class="team-role">Founder, Head Coach and SEO Lead</p>
+            <p>Based in the UK</p>
+            <p class="team-bio">Adeep founded BF GYM Global to make fitness education more approachable and accessible.</p>
+            <a class="team-link" href="#coach">Meet Coach Adeep</a>
+          </div>
+        </article>
+        <article class="team-profile">
+          <img src="/images/team/anandu-satheesh-suit.webp" width="480" height="480" loading="lazy" decoding="async" alt="Anandu Satheesh"/>
+          <div>
+            <h3>Anandu Satheesh</h3>
+            <p class="team-role">Head of Marketing</p>
+            <p>Marketing &amp; Business Development · East London, UK</p>
+            <p class="team-bio">Anandu brings experience in marketing, sales, customer relations and business operations to BF GYM Global. His focus is promoting the brand, building business relationships and helping attract and retain customers.</p>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
   <section class="card-strip" aria-labelledby="card-heading">
@@ -214,9 +227,11 @@ const steps = [
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
 .team-section { padding: clamp(48px, 7vw, 88px) 0; background: #101610; }
 .team-section h2 { font: 700 clamp(36px, 5vw, 56px)/1 var(--display); margin: 0 0 20px; }
-.team-profile { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; width: fit-content; max-width: 100%; border: 1px solid #3c4739; background: #1b221b; padding: clamp(16px, 3vw, 24px); }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr)); gap: 16px; }
+.team-profile { display: flex; flex-wrap: wrap; align-content: start; align-items: start; gap: 20px; min-width: 0; border: 1px solid #3c4739; background: #1b221b; padding: clamp(16px, 3vw, 24px); }
 .team-profile img { width: 112px; height: 112px; object-fit: cover; }
-.team-profile > div { max-width: 34rem; }
+.team-profile > div { flex: 1 1 14rem; min-width: 0; }
+.team-link { display: inline-block; margin-top: 12px; color: var(--lime); text-decoration: underline; }
 .team-profile .team-bio { margin-top: 10px; line-height: 1.6; }
 .team-profile h3 { font-size: 1.375rem; line-height: 1.25; margin: 0; }
 .team-profile p { font-size: 1rem; margin: 5px 0 0; color: #b9c7b5; }
