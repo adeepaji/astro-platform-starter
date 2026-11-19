@@ -129,13 +129,23 @@ const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.sch
      b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));
    });
  }
- selectors.forEach(btn=>btn.addEventListener('click',()=>{
-   const next=btn.dataset.planSelect||'beginner';selected=next;
-   selectors.forEach(b=>{const active=b===btn;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
+ function selectPlan(next:string, scroll:boolean) {
+   if(!['beginner','intermediate','advanced'].includes(next))return;
+   selected=next;
+   selectors.forEach(b=>{const active=b.dataset.planSelect===next;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
    panels.forEach(p=>{p.hidden=p.dataset.planPanel!==selected;});
    renderPlan(selected);
-   document.getElementById('selected-plan')?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
+   try{localStorage.setItem('bf-gym-last-plan-v1',selected);}catch{/* Privacy mode: no storage available */}
+   if(scroll)document.getElementById('selected-plan')?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+ }
+ selectors.forEach(btn=>btn.addEventListener('click',()=>{
+   selectPlan(btn.dataset.planSelect||'beginner',true);
  }));
+ const queryLevel=new URLSearchParams(window.location.search).get('level');
+ if(queryLevel && ['beginner','intermediate','advanced'].includes(queryLevel))selectPlan(queryLevel,false);
+ else {
+   try{const last=localStorage.getItem('bf-gym-last-plan-v1');if(last && ['beginner','intermediate','advanced'].includes(last))selectPlan(last,false);}catch{/* No storage */}
+ }
  document.querySelectorAll<HTMLButtonElement>('[data-plan-week]').forEach(b=>b.addEventListener('click',()=>{
    const plan=b.dataset.planWeek||'beginner';weeks[plan]=Number(b.dataset.week)||1;renderPlan(plan);
  }));
