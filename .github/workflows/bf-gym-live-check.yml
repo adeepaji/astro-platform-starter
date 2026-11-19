@@ -40,3 +40,10 @@ jobs:
             fi
           done
           echo "All seven public BF GYM paths passed."
+          photo_status="$(curl --location --silent --show-error --max-time 18 --output /tmp/bfgym-trainer-portrait --write-out "%{http_code}" "$base/images/trainer/adeep-portrait.jpg" || echo 000)"
+          photo_type="$(file --brief --mime-type /tmp/bfgym-trainer-portrait 2>/dev/null || echo unknown)"
+          if [ "$photo_status" != "200" ] || [ "$photo_type" != "image/jpeg" ] || [ "$(wc -c </tmp/bfgym-trainer-portrait)" -lt 1000 ]; then
+            echo "::error::Trainer photo did not serve as a valid JPEG: HTTP $photo_status, type $photo_type"
+            exit 1
+          fi
+          echo "Trainer portrait JPEG is accessible on Netlify."
