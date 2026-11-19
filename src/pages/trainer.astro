@@ -1,0 +1,95 @@
+---
+import { trainer } from '../data/trainerProfile';
+const year = new Date().getFullYear();
+const primaryPhoto = trainer.photos[0];
+const extraPhotos = trainer.photos.slice(1);
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#101310"/>
+<meta name="description" content="Meet BF GYM Global trainer Adeep Aji. Discover his training background, strength and conditioning interests, and qualifications awaiting documentary verification."/>
+<title>Meet Coach Adeep | BF GYM Global</title>
+<link rel="icon" href="/bf-icon.svg" type="image/svg+xml"/><link rel="manifest" href="/manifest.webmanifest"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<header class="header wrap">
+  <a class="brand" href="/" aria-label="BF GYM Global homepage">BF<span>.</span> <small>GYM GLOBAL</small></a>
+  <nav aria-label="Profile navigation"><a href="#story">ABOUT</a><a href="#focus">TRAINING FOCUS</a><a href="#credentials">QUALIFICATIONS</a></nav>
+  <a class="top-cta" href="/app/workouts/">FREE WORKOUTS ↗</a>
+</header>
+<main id="main">
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="kicker"><span class="dot"></span> THE TRAINER BEHIND BF GYM GLOBAL</p>
+      <h1 id="hero-title">MEET<br/>COACH<br/><em>ADEEP.</em></h1>
+      <p class="lead">Progress begins when training feels achievable, structured and consistent.</p>
+      <p>I'm <strong>{trainer.name}</strong>, a fitness trainer with over five years of experience in personal and small-group training in India. My focus is practical strength, confidence and sustainable habits.</p>
+      <div class="actions"><a href="#story" class="btn">READ MY STORY <span>↘</span></a><a href="/sample-plan/" class="text-link">VIEW FREE TRAINING PLAN ↗</a></div>
+      <p class="stat"><strong>5+</strong><span>YEARS OF TRAINING EXPERIENCE<br/><small>TRAINER-REPORTED</small></span></p>
+    </div>
+    <div class="portrait">
+      {primaryPhoto.url ? (
+        <img src={primaryPhoto.url} alt={primaryPhoto.alt} width="600" height="760" loading="eager"/>
+      ) : (
+        <div class="placeholder" role="img" aria-label="A trainer portrait photo has not yet been uploaded">
+          <div class="rings" aria-hidden="true"></div><span class="initials">AA<span>.</span></span><small>TRAINER PORTRAIT<br/>AWAITING ORIGINAL PHOTO</small>
+        </div>
+      )}
+      <div class="photo-footer"><span>COACH PROFILE / 001</span><strong>ADEEP AJI</strong></div>
+    </div>
+  </section>
+  <div class="band"><span>STRENGTH</span><span>✳</span><span>FUNCTIONAL FITNESS</span><span>✳</span><span>CONSISTENCY</span><span>✳</span><span>CONFIDENCE</span></div>
+  <section class="section wrap story" id="story" aria-labelledby="story-title">
+    <p class="kicker">01 / MY STORY</p>
+    <div class="twocol">
+      <div><h2 id="story-title">REAL PEOPLE.<br/><em>REAL PROGRESS.</em></h2><p class="lead">Fitness should empower you beyond the gym.</p></div>
+      <div class="copy"><p>My professional background includes personalised fitness programmes, one-to-one sessions and small-group fitness instruction in India. I have worked with clients who wanted to improve fitness, learn movement technique, build strength and develop consistent routines.</p><p>I aim to make exercise approachable: start where you are, choose movements that suit your experience and progress at a manageable pace. Fitness education, practical demonstration and regular habits are at the heart of BF GYM Global.</p><p>Today I'm building a free international fitness learning platform with workouts, cardio and HIIT videos, an example nutrition and training plan, and a mobile-friendly progress tracker.</p><p class="launch">Live paid coaching is planned for the future. This website does not currently accept coaching bookings or payments.</p></div>
+    </div>
+  </section>
+  <section class="section dark" id="focus" aria-labelledby="focus-title">
+    <div class="wrap">
+      <p class="kicker">02 / AREAS OF TRAINING</p>
+      <div class="section-head"><h2 id="focus-title">TRAIN WITH<br/><em>INTENTION.</em></h2><p>Training interests based on my experience, not claims of guaranteed outcomes.</p></div>
+      <div class="specialisms">{trainer.specialisms.map((item,index)=><article><div><span>{String(index+1).padStart(2,'0')}</span><span>BF / FOCUS</span></div><h3>{item}</h3><b aria-hidden="true">↗</b></article>)}</div>
+    </div>
+  </section>
+  <section class="section wrap credentials" id="credentials" aria-labelledby="credentials-title">
+    <p class="kicker">03 / PROFESSIONAL LEARNING</p>
+    <div class="twocol">
+      <div><h2 id="credentials-title">KEEP<br/><em>LEARNING.</em></h2><p>My fitness education includes personal training, advanced exercise study and training for different participant needs.</p><div class="notice"><strong>VERIFICATION STATUS: PENDING</strong><p>These qualifications are taken from my previously supplied trainer CV. Original certificates, issuing bodies, award dates and current validity have not been independently checked. No verified accreditation badge or licence number is claimed.</p></div></div>
+      <div class="qual-list">{trainer.qualifications.map((q,i)=><article><span>{String(i+1).padStart(2,'0')}</span><div><h3>{q.title}</h3><p>{q.body}</p></div></article>)}</div>
+    </div>
+  </section>
+  <section class="section dark" id="gallery" aria-labelledby="gallery-title">
+    <div class="wrap"><p class="kicker">04 / MY GYM MOMENTS</p><div class="section-head"><h2 id="gallery-title">BEHIND THE<br/><em>WORKOUTS.</em></h2><p>Reserved for genuine photographs you choose to publish. Placeholder images do not represent actual coaching sessions.</p></div>
+    <div class="gallery">{extraPhotos.map((photo,i)=><div class="gallery-card">
+      {photo.url ? <img src={photo.url} alt={photo.alt} width="610" height="380" loading="lazy"/> : <div class="gallery-placeholder" role="img" aria-label={photo.label+' image pending'}><strong>{i===0?'TRAIN.':'COACH.'}</strong><small>ORIGINAL PHOTO COMING SOON</small></div>}
+      <div class="gallery-label"><strong>{photo.label}</strong><span>BF GYM GLOBAL</span></div>
+    </div>)}</div></div>
+  </section>
+  <section class="bottom-cta wrap" aria-labelledby="cta-title"><div><p class="kicker">05 / TRAIN SMART</p><h2 id="cta-title">YOUR NEXT<br/><em>MOVE STARTS HERE.</em></h2><p>Try the free workout videos and sample seven-day plan. No membership or payment is required.</p></div><div class="cta-links"><a href="/app/workouts/" class="btn">EXPLORE 400+ EXERCISES ↗</a><a class="text-link" href="/sample-plan/">VIEW SAMPLE WORKOUT &amp; DIET PLAN ↗</a></div></section>
+</main>
+<footer class="footer wrap"><a class="brand" href="/">BF<span>.</span> <small>GYM GLOBAL</small></a><p>© {year} BF GYM Global · UK-based online fitness education</p><div><a href="/privacy/">Privacy</a><a href="/app/">Mobile app</a><a href="/">Home</a></div></footer>
+</body>
+</html>
+<style>
+:root{--bg:#101310;--green:#c7ff52;--text:#f3f4eb;--muted:#b6c3af;--line:#42513b;--body:'DM Sans',Arial,sans-serif;--display:'Oswald',Impact,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.75 var(--body)}a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid var(--green);outline-offset:3px}h1,h2,h3,p{margin-top:0}.wrap{max-width:1200px;width:calc(100% - 46px);margin-inline:auto}.skip{position:absolute;top:-100px;left:10px;background:var(--green);color:#152012;padding:12px;z-index:30}.skip:focus{top:10px}
+.header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-block:22px;border-bottom:1px solid var(--line)}.brand{font:700 30px/.9 var(--display);white-space:nowrap}.brand span{color:var(--green)}.brand small{font:800 12px var(--body);letter-spacing:.1em}.header nav{display:flex;gap:23px}.header nav a,.top-cta{font-size:10px;font-weight:800;letter-spacing:.07em}.header nav a:hover{color:var(--green)}.top-cta{border:1px solid var(--green);padding:13px 15px}
+.hero{display:grid;grid-template-columns:1fr .91fr;gap:36px;padding-block:65px 80px;align-items:center}.hero-copy{padding:15px 0}.kicker{font-size:10px;font-weight:800;letter-spacing:.15em;color:var(--green)}.dot{display:inline-block;height:7px;width:7px;background:var(--green);border-radius:50%;margin-right:8px}h1,h2{font-family:var(--display);font-weight:600;line-height:.99;letter-spacing:-.015em}h1{font-size:clamp(85px,10vw,140px);margin:28px 0}h1 em,h2 em{color:var(--green);font-style:normal}.lead{font-size:20px;line-height:1.5;font-weight:700}.hero-copy>p:not(.kicker):not(.lead):not(.stat){font-size:14px;line-height:1.9;max-width:540px;color:#c3cfbd}.hero-copy strong{color:var(--text)}.actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:28px 0}.btn{display:inline-flex;gap:24px;justify-content:space-between;align-items:center;background:var(--green);color:#152012;padding:17px 20px;font-size:11px;font-weight:800;letter-spacing:.04em}.btn span{font-size:17px}.text-link{font-size:11px;font-weight:800;border-bottom:1px solid #829775;padding:8px 0}.text-link:hover{color:var(--green)}.stat{display:flex;align-items:center;gap:14px;color:var(--muted);font-size:10px;letter-spacing:.09em;margin-top:42px}.stat strong{font:700 42px var(--display);color:var(--green)}.stat small{color:#8fa086}
+.portrait{position:relative;min-height:615px;overflow:hidden;background:linear-gradient(140deg,#30442b,#16241a 78%);border:1px solid #5d784a}.portrait img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.placeholder{height:615px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative}.rings{width:70%;aspect-ratio:1;border:1px solid #c7ff5290;border-radius:50%;box-shadow:0 0 0 45px #c7ff520c,0 0 0 94px #c7ff5207;position:absolute;transform:scaleX(.8) rotate(-20deg)}.initials{font:700 200px/.8 var(--display);color:var(--green);position:relative;letter-spacing:-.05em}.initials span{font-size:.4em;color:#f0f8e9}.placeholder>small{position:absolute;top:32px;left:30px;font-size:10px;line-height:1.7;letter-spacing:.1em;color:#d0e3c6}.photo-footer{position:absolute;bottom:20px;left:28px;right:28px;border-top:1px solid #bad5a866;padding-top:16px;display:flex;justify-content:space-between;gap:12px;font-size:10px;font-weight:800;letter-spacing:.1em}.photo-footer strong{font:600 18px var(--display)}
+.band{background:var(--green);color:#1a2911;display:flex;justify-content:space-around;align-items:center;gap:12px;padding:18px;font:600 clamp(16px,2.1vw,27px) var(--display)}.band span:nth-child(even){font-size:18px}
+.section{padding-block:100px}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:9%}h2{font-size:clamp(54px,6.2vw,87px);margin:0 0 25px}.story .lead{max-width:420px}.copy{padding-top:8px}.copy p{font-size:14px;line-height:1.9;color:#c0cdb9}.copy .launch{border-left:3px solid var(--green);background:#202c1c;padding:16px;color:#e1eed9;font-size:12px}
+.dark{background:#1a2519}.dark>.wrap{max-width:1200px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:38px}.section-head>p{max-width:360px;color:var(--muted);font-size:13px}.specialisms{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.specialisms article{background:#283927;border:1px solid #4a6142;min-height:205px;padding:23px;display:flex;flex-direction:column;justify-content:space-between;position:relative}.specialisms article>div{display:flex;justify-content:space-between;gap:10px;color:var(--green);font-weight:800;font-size:9px;letter-spacing:.1em}.specialisms h3{font:600 26px/1.2 var(--display);max-width:230px;text-transform:uppercase;margin:27px 18px 0 0}.specialisms b{position:absolute;bottom:17px;right:23px;color:var(--green);font-size:23px}
+.credentials>.twocol>div:first-child>p{color:var(--muted);line-height:1.9}.notice{padding:20px;background:#253622;border:1px solid #617b54;margin-top:30px}.notice strong{color:var(--green);font-size:11px}.notice p{font-size:11px;line-height:1.8;color:#cfe0c7;margin:8px 0 0}.qual-list article{display:grid;grid-template-columns:38px 1fr;gap:11px;padding:18px 0;border-top:1px solid var(--line)}.qual-list article>span{font-size:11px;color:var(--green);font-weight:800}.qual-list h3{font:600 23px var(--display);margin-bottom:5px}.qual-list p{font-size:12px;color:var(--muted);margin:0}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px}.gallery-card{border:1px solid #4f6846;background:#243522}.gallery-card img,.gallery-placeholder{width:100%;height:300px;object-fit:cover;display:block}.gallery-placeholder{background:radial-gradient(ellipse at center,#4e633e,#233222 75%);display:flex;align-items:center;justify-content:center;flex-direction:column}.gallery-placeholder strong{font:600 clamp(60px,8vw,100px) var(--display);color:#d5ff9b}.gallery-placeholder small{font-size:10px;color:#d5e2d0;letter-spacing:.12em}.gallery-label{display:flex;justify-content:space-between;gap:10px;padding:17px 19px;color:#bcd2b0;font-size:10px}.gallery-label strong{text-transform:uppercase}
+.bottom-cta{display:flex;align-items:end;justify-content:space-between;gap:30px;background:linear-gradient(120deg,#d7ff89,#a9d84e);color:#192614;margin-top:50px;margin-bottom:70px;padding:45px}.bottom-cta h2 em{color:#f2ffdc}.bottom-cta .kicker{color:#314b1c}.bottom-cta p:not(.kicker){max-width:490px}.cta-links{min-width:270px;display:flex;flex-direction:column;align-items:start;gap:17px}.bottom-cta .btn{background:#172714;color:var(--green)}.footer{display:flex;gap:22px;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-block:26px}.footer p{margin:0;color:var(--muted);font-size:11px}.footer>div{display:flex;gap:12px}.footer>div a{font-size:11px;color:#cbd9c5}
+@media(max-width:950px){.hero{grid-template-columns:1fr 1fr;gap:20px}.hero h1{font-size:clamp(78px,10vw,114px)}.portrait,.placeholder{min-height:550px;height:550px}.specialisms{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:750px){.wrap{width:calc(100% - 32px)}.header nav{display:none}.hero{grid-template-columns:1fr;padding-block:44px}.hero h1{font-size:clamp(83px,17vw,140px)}.portrait,.placeholder{min-height:470px;height:470px}.section{padding-block:68px}.twocol{grid-template-columns:1fr;gap:22px}.section-head{display:block}.section-head>p{margin-top:15px}.bottom-cta{display:block}.cta-links{margin-top:24px}.footer{flex-wrap:wrap}.band{flex-wrap:wrap}}
+@media(max-width:500px){.brand{font-size:27px}.brand small{font-size:10px}.top-cta{font-size:9px;padding:10px}.hero h1{font-size:clamp(75px,18vw,100px)}.lead{font-size:18px}.initials{font-size:140px}.specialisms,.gallery{grid-template-columns:1fr}.specialisms article{min-height:160px}.gallery-card img,.gallery-placeholder{height:245px}.section h2{font-size:clamp(51px,12vw,70px)}.bottom-cta{padding:28px 22px;margin:22px auto 48px}.cta-links{min-width:0}.photo-footer{display:block}.photo-footer strong{display:block;margin-top:5px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
