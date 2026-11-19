@@ -16,8 +16,8 @@ jobs:
         run: |
           set -euo pipefail
           base="https://bfgym.netlify.app"
-          urls=("/" "/start/" "/trainer/" "/programmes/" "/sample-plan/" "/app/" "/app/dashboard/" "/app/membership/" "/app/workouts/" "/manifest.webmanifest")
-          expected=("BF GYM" "MAKE FITNESS" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "MY PROGRAMME" "CONCEPT PREVIEW" "VIDEO LIBRARY" "BF GYM")
+          urls=("/" "/kerala-uk/" "/start/" "/trainer/" "/programmes/" "/sample-plan/" "/app/" "/app/dashboard/" "/app/membership/" "/app/workouts/" "/privacy/" "/manifest.webmanifest")
+          expected=("BF GYM" "MALAYALI FOUNDED" "MAKE FITNESS" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "MY PROGRAMME" "CONCEPT PREVIEW" "VIDEO LIBRARY" "Digital membership card and dashboard demonstration" "BF GYM")
           for i in "${!urls[@]}"; do
             path="${urls[$i]}"
             needle="${expected[$i]}"
@@ -39,7 +39,7 @@ jobs:
               exit 1
             fi
           done
-          echo "All ten public BF GYM paths passed."
+          echo "All twelve public BF GYM paths passed."
           photo_status="$(curl --location --silent --show-error --max-time 18 --output /tmp/bfgym-trainer-portrait --write-out "%{http_code}" "$base/images/trainer/adeep-portrait.jpg" || echo 000)"
           photo_type="$(file --brief --mime-type /tmp/bfgym-trainer-portrait 2>/dev/null || echo unknown)"
           if [ "$photo_status" != "200" ] || [ "$photo_type" != "image/jpeg" ] || [ "$(wc -c </tmp/bfgym-trainer-portrait)" -lt 1000 ]; then
@@ -82,3 +82,35 @@ jobs:
             exit 1
           fi
           echo "Trainer pose strip WEBP is accessible on Netlify."
+
+          # The demo portrait must exist as a real WebP; don't allow a missing-image mockup.
+          demo_photo_ok=0
+          for attempt in 1 2 3 4 5 6; do
+            demo_status="$(curl --location --silent --show-error --max-time 18 --output /tmp/bfgym-member-photo --write-out "%{http_code}" "$base/images/membership/demo-member.webp" || echo 000)"
+            demo_type="$(file --brief --mime-type /tmp/bfgym-member-photo 2>/dev/null || echo unknown)"
+            if [ "$demo_status" = "200" ] && [ "$demo_type" = "image/webp" ] && [ "$(wc -c </tmp/bfgym-member-photo)" -gt 2500 ]; then
+              demo_photo_ok=1
+              break
+            fi
+            echo "Attempt $attempt/6: sample member photo pending: HTTP $demo_status; type $demo_type"
+            if [ "$attempt" -lt 6 ]; then sleep 15; fi
+          done
+          if [ "$demo_photo_ok" -ne 1 ]; then
+            echo "::error::Fictional demo member image is not available on the live website"
+            exit 1
+          fi
+          echo "Demo member WebP image is live."
+          member_html="$(curl --location --silent --show-error --max-time 18 "$base/app/membership/")"
+          if ! grep -Fq 'BF-DEMO-0001' <<< "$member_html"; then
+            echo "::error::Demo member ID is missing"
+            exit 1
+          fi
+          if ! grep -Fq 'NOT SCANNABLE' <<< "$member_html"; then
+            echo "::error::Non-scannable QR placeholder disclosure is missing"
+            exit 1
+          fi
+          if grep -Eqi '<(input|form)([[:space:]>])' <<< "$member_html"; then
+            echo "::error::Demo membership page must not collect user data through a form/input"
+            exit 1
+          fi
+          echo "Demo member identity and no-form guard passed."
