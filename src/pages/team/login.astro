@@ -1,0 +1,124 @@
+---
+import TeamAccess from '../../layouts/TeamAccess.astro';
+---
+<TeamAccess title="Team login">
+  <h1 id="heading">Team login</h1>
+  <p id="help">To register, open the invitation in your email and choose a password.</p>
+  <p id="status" role="status" aria-live="polite"></p>
+  <noscript><p>Enable JavaScript in your browser to use team sign-in.</p></noscript>
+  <form id="access-form" method="post" hidden>
+    <label id="email-label">Email address
+      <input id="email" name="email" type="email" autocomplete="username" required />
+    </label>
+    <label id="password-label"><span id="password-caption">Password</span>
+      <input id="password" name="password" type="password" autocomplete="current-password" required />
+    </label>
+    <button id="submit" type="submit">Log in</button>
+  </form>
+  <button id="switch" class="text-button" type="button" hidden>Forgot your password?</button>
+  <a id="account-link" href="/team/account/" hidden>Open my team account</a>
+</TeamAccess>
+
+<script>
+  import { acceptInvite, getSettings, getUser, login, logout, recoverPassword, requestPasswordRecovery } from '@netlify/identity';
+
+  type Mode = 'login' | 'invite' | 'recover' | 'reset';
+  const form = document.querySelector<HTMLFormElement>('#access-form')!;
+  const email = document.querySelector<HTMLInputElement>('#email')!;
+  const password = document.querySelector<HTMLInputElement>('#password')!;
+  const submit = document.querySelector<HTMLButtonElement>('#submit')!;
+  const toggle = document.querySelector<HTMLButtonElement>('#switch')!;
+  const status = document.querySelector<HTMLElement>('#status')!;
+  const account = document.querySelector<HTMLAnchorElement>('#account-link')!;
+  const views = {
+    login: ['Team login', 'To register, open the invitation in your email and choose a password.', 'Log in'],
+    invite: ['Register your team account', 'Choose a password for the email address that received this invitation.', 'Create my account'],
+    recover: ['Forgot your password?', 'Enter the email address you use for team login.', 'Send reset email'],
+    reset: ['Choose a new password', 'Set a new password for your team account.', 'Save new password'],
+  };
+  const params = new URLSearchParams(location.hash.slice(1));
+  let token = params.get('invite_token') || params.get('recovery_token');
+  let mode: Mode = token ? (params.has('invite_token') ? 'invite' : 'reset') : 'login';
+  if (token) history.replaceState(null, '', location.pathname);
+
+  function show(next: Mode) {
+    mode = next;
+    const choosing = mode === 'invite' || mode === 'reset';
+    const [title, help, action] = views[mode];
+    document.querySelector('#heading')!.textContent = title;
+    document.querySelector('#help')!.textContent = help;
+    document.querySelector<HTMLElement>('#email-label')!.hidden = choosing;
+    document.querySelector<HTMLElement>('#password-label')!.hidden = mode === 'recover';
+    document.querySelector('#password-caption')!.textContent = choosing ? 'New password (at least 12 characters)' : 'Password';
+    email.disabled = choosing;
+    password.disabled = mode === 'recover';
+    password.minLength = choosing ? 12 : 1;
+    password.autocomplete = choosing ? 'new-password' : 'current-password';
+    password.value = '';
+    submit.textContent = action;
+    toggle.textContent = mode === 'login' ? 'Forgot your password?' : 'Back to login';
+    account.hidden = true;
+    form.hidden = false;
+    toggle.hidden = false;
+    status.textContent = '';
+  }
+
+  toggle.addEventListener('click', () => {
+    token = null;
+    show(mode === 'login' ? 'recover' : 'login');
+    email.focus();
+  });
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (submit.disabled) return;
+    submit.disabled = toggle.disabled = true;
+    status.textContent = '';
+    try {
+      if (mode === 'login') {
+        await login(email.value.trim(), password.value);
+        password.value = '';
+        location.replace('/team/account/');
+      } else if (mode === 'recover') {
+        await requestPasswordRecovery(email.value.trim());
+        show('login');
+        status.textContent = 'If that address has an account, a password reset link will arrive by email.';
+      } else if (token) {
+        const wasInvite = mode === 'invite';
+        const user = wasInvite ? await acceptInvite(token, password.value) : await recoverPassword(token, password.value);
+        token = null;
+        await logout();
+        show('login');
+        email.value = user.email || '';
+        status.textContent = wasInvite ? 'Your team account is ready. Log in with your new password.' : 'Your password has been updated. You can now log in.';
+        password.focus();
+      }
+    } catch {
+      if (mode === 'login') {
+        status.textContent = 'Couldn’t log in. Check your email and password, or reset your password.';
+      } else if (mode === 'recover') {
+        status.textContent = 'If that address has an account, check your email for a reset link. Try again later if it hasn’t arrived.';
+      } else {
+        status.textContent = 'Couldn’t use this link. Open the latest email, or request a fresh link.';
+      }
+    } finally {
+      submit.disabled = toggle.disabled = false;
+    }
+  });
+
+  async function initialise() {
+    status.textContent = 'Checking team sign-in…';
+    try {
+      const settings = await getSettings();
+      if (!settings.disableSignup) {
+        status.textContent = 'Team sign-in is awaiting invite-only setup by the site owner.';
+        return;
+      }
+      show(mode);
+      if (mode === 'login' && await getUser()) account.hidden = false;
+    } catch {
+      status.textContent = 'Team sign-in is currently unavailable. Please try again later.';
+    }
+  }
+  initialise();
+</script>

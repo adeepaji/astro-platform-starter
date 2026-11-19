@@ -1,0 +1,47 @@
+---
+import TeamAccess from '../../layouts/TeamAccess.astro';
+export const prerender = false;
+
+// Verify the session with this project's Identity service on every private request.
+const privateHeaders = { 'Cache-Control': 'private, no-store', 'Netlify-CDN-Cache-Control': 'no-store', 'Vary': 'Cookie' };
+const signIn = () => new Response(null, { status: 303, headers: { ...privateHeaders, Location: '/team/login/' } });
+const token = Astro.cookies.get('nf_jwt')?.value;
+if (!token) return signIn();
+const endpoint = new URL('/.netlify/identity/user', process.env.URL || 'https://bfgym.netlify.app');
+let profile: { email?: string; confirmed_at?: string; invited_at?: string } | null = null;
+let unavailable = false;
+try {
+  const result = await fetch(endpoint, {
+    headers: { Authorization: `Bearer ${token}` }, redirect: 'error', cache: 'no-store', signal: AbortSignal.timeout(6000)
+  });
+  if (result.status === 401 || result.status === 403) return signIn();
+  if (!result.ok) throw new Error('Identity service unavailable');
+  profile = await result.json();
+} catch {
+  unavailable = true;
+}
+const hasAccess = !!(profile?.invited_at && profile.confirmed_at && profile.email);
+Object.entries(privateHeaders).forEach(([name, value]) => Astro.response.headers.set(name, value));
+Astro.response.status = unavailable ? 503 : hasAccess ? 200 : 403;
+---
+<TeamAccess title="Team account">
+  <h1>{hasAccess ? 'Your team account' : 'Team access'}</h1>
+  {hasAccess ? <p>Signed in as <strong>{profile?.email}</strong>.</p> :
+    <p>{unavailable ? 'We couldn’t verify your session. Please try again later.' : 'You need an accepted team invitation to access this page.'}</p>}
+  <button type="button" class="primary" id="logout">Log out</button>
+  <p id="status" role="status"></p>
+</TeamAccess>
+<script>
+  import { logout } from '@netlify/identity';
+  const button = document.querySelector<HTMLButtonElement>('#logout')!;
+  button.addEventListener('click', async () => {
+    button.disabled = true;
+    try {
+      await logout();
+      location.replace('/team/login/');
+    } catch {
+      document.querySelector('#status')!.textContent = 'Couldn’t log out. Please try again.';
+      button.disabled = false;
+    }
+  });
+</script>

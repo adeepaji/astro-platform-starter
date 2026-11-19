@@ -20,6 +20,12 @@ const steps = [
 <!doctype html>
 <html lang="en">
 <head>
+  <script is:inline>
+    // Netlify's default invitation and recovery emails point to the homepage.
+    if (/^#(?:invite_token|recovery_token)=/.test(location.hash)) {
+      location.replace('/team/login/' + location.hash);
+    }
+  </script>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <meta name="theme-color" content="#0b0e0b"/>
@@ -73,6 +79,7 @@ const steps = [
         <a href="/app/dashboard/">MY DASHBOARD</a>
         <a href="#coach">MEET COACH ADEEP</a>
         <a href="#team">MEET THE TEAM</a>
+        <a href="/team/login/">TEAM LOGIN</a>
         <a href="/join/">BF CARD PREVIEW</a>
       </nav>
     </details>
@@ -186,6 +193,7 @@ const steps = [
           </div>
         </article>
       </div>
+      <a class="team-link" href="/team/login/">Team login</a>
     </div>
   </section>
   <section class="card-strip" aria-labelledby="card-heading">
@@ -199,10 +207,10 @@ const steps = [
   <div class="container footer-columns">
     <div class="footer-about"><a class="brand" href="/"><span class="brand-logo">BF<span>.</span></span><span class="brand-word">GYM <small>GLOBAL</small></span></a><p>BEST FITNESS. GLOBAL VISION.</p><span>Free fitness learning created in the UK, for everyone.</span></div>
     <div class="footer-group"><h2>EXPLORE</h2><a href="/start/">Start here</a><a href="/programmes/">Free programmes</a><a href="/app/workouts/">Exercise videos</a><a href="/app/dashboard/">Workout dashboard</a></div>
-    <div class="footer-group"><h2>BF GYM</h2><a href="/trainer/">Meet Coach Adeep</a><a href="#team">Meet the team</a><a href="/kerala-uk/">Kerala → UK story</a><a href="/join/">BF card demo</a><a href="/privacy/">Privacy</a></div>
+    <div class="footer-group"><h2>BF GYM</h2><a href="/trainer/">Meet Coach Adeep</a><a href="#team">Meet the team</a><a href="/team/login/">Team login</a><a href="/kerala-uk/">Kerala → UK story</a><a href="/join/">BF card demo</a><a href="/privacy/">Privacy</a></div>
     <div class="footer-group"><h2>FOLLOW</h2><a href="https://www.instagram.com/fitwithaadhi/" target="_blank" rel="noopener noreferrer">Instagram @fitwithaadhi ↗</a><a href="/ml/kerala-uk/" hreflang="ml" lang="ml">മലയാളം ↗</a></div>
   </div>
-  <div class="container footer-bottom"><span>© {year} BF GYM GLOBAL · BEST FITNESS</span><span>Free education only. Paid coaching, real memberships, online accounts and bookings are not active.</span></div>
+  <div class="container footer-bottom"><span>© {year} BF GYM GLOBAL · BEST FITNESS</span><span>Free education only. Paid coaching, public member accounts and bookings are not active.</span></div>
 </footer>
 
 <style is:global>
