@@ -50,6 +50,7 @@ const features = [
     <h1 id="hero-heading">YOUR FITNESS.<br/><em>YOUR IDENTITY.</em></h1>
     <p class="hero-lede">Meet the BF GYM member card concept — an ATM-style fitness identity card with a front, back and a separate private wellness dashboard. Made to feel personal without exposing health information in a QR scan.</p>
     <div class="demo-status"><strong>CONCEPT PREVIEW</strong><span>Fictional member · No real account · No usable QR · No Wallet pass · No payment card</span></div>
+    <a class="interactive-card-link" href="/app/member-card/">TRY THE INTERACTIVE MEMBER CARD + PRIVACY VIEW <span aria-hidden="true">↗</span></a>
   </section>
   <section class="preview-section" id="card-demo" aria-labelledby="card-title">
     <div class="wrap preview-grid">
@@ -176,6 +177,8 @@ dashboardButton?.addEventListener('click',()=>{
 </body>
 </html>
 <style>
+.interactive-card-link{display:inline-flex;align-items:center;justify-content:space-between;gap:18px;background:#c7ff52;color:#152211;padding:17px 20px;font-size:11px;font-weight:900;letter-spacing:.06em;margin-top:20px;max-width:100%;text-decoration:none}.interactive-card-link span{font-size:20px}.interactive-card-link:hover{background:#e3ff9c}
+
 :root{--bg:#111811;--dark:#101710;--lime:#c7ff52;--text:#f4f7ed;--muted:#b5c6ad;--line:#50644a;--panel:#1c2a1c;--font:'DM Sans',sans-serif;--display:'Oswald',Impact,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.75 var(--font);-webkit-font-smoothing:antialiased}button,a{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offset:4px}button:focus-visible{z-index:10}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3{font-family:var(--display);line-height:1.04}em{font-style:normal;color:var(--lime)}[hidden]{display:none!important}.wrap{width:min(1240px,calc(100% - 40px));margin-inline:auto}.skip{position:absolute;left:10px;top:-100px;background:var(--lime);color:#152214;padding:10px;z-index:100}.skip:focus{top:10px}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:84px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:9px;white-space:nowrap;font:700 36px/.9 var(--display)}.brand span,.footer>a span{color:var(--lime)}.brand strong{font:900 16px var(--font);letter-spacing:.12em}.brand small{font-size:9px;color:var(--muted)}.topbar nav{display:flex;gap:24px}.topbar nav a,.nav-cta{font-size:10px;font-weight:900;letter-spacing:.08em}.topbar nav a:hover{color:var(--lime)}.nav-cta{border:1px solid var(--lime);padding:13px 14px}.eyebrow{font-size:11px;letter-spacing:.14em;color:var(--lime);font-weight:900}.live-dot,.fake-dot,.dash-status-dot{display:inline-block;background:var(--lime);width:8px;height:8px;border-radius:50%;margin-right:9px}
