@@ -42,9 +42,9 @@
 
 ## Trainer photos
 
-Your earlier resume headshot is currently the public trainer picture. The new pose photographs uploaded to ChatGPT are suitable candidates for a professional gallery, but they are **not yet hosted in your public repository**. Do not link a sandbox upload URL into a public website; it will not work for normal visitors.
+Your original resume headshot remains the principal portrait. Five of your newly uploaded poses are now displayed as a **small, fast-loading photo strip** at `public/images/trainer/adeep-poses-strip.webp` on `/trainer/`.
 
-To publish approved images, optimise them as WebP/JPEG, remove private metadata and upload them under `public/images/trainer/` using GitHub's **Add file → Upload files**. Then update the images' URLs in `src/data/trainerProfile.ts` and any gallery configuration. Keep the original certificate PDFs private.
+The strip is deliberately small to load quickly on mobiles. To upgrade to larger, sharper standalone photographs later, optimise the owner-approved images as WebP/JPEG, remove private metadata and upload them under `public/images/trainer/` using GitHub's **Add file → Upload files**. Update `src/pages/trainer.astro` to refer to the new standalone files or a higher-resolution strip. Keep original certificate PDFs private.
 
 ## Legal and privacy
 
