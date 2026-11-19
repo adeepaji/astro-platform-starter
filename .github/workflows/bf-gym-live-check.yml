@@ -17,7 +17,7 @@ jobs:
           set -euo pipefail
           base="https://bfgym.netlify.app"
           urls=("/" "/kerala-uk/" "/ml/kerala-uk/" "/join/" "/start/" "/trainer/" "/programmes/" "/sample-plan/" "/app/" "/app/dashboard/" "/app/membership/" "/app/member-card/" "/app/workouts/" "/privacy/" "/manifest.webmanifest" "/images/members/demo-member.svg" "/sitemap.xml")
-          expected=("BF GYM" "MALAYALI FOUNDED" "കേരളത്തിൽ നിന്ന്" "Make it yours" "MAKE FITNESS" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "MY PROGRAMME" "CONCEPT PREVIEW" "ONE CARD" "VIDEO LIBRARY" "Digital membership card and dashboard demonstration" "BF GYM" "data:image/jpeg;base64" "ml/kerala-uk/")
+          expected=("BF GYM" "MALAYALI FOUNDED" "കേരളത്തിൽ നിന്ന്" "YOUR DETAILS" "MAKE FITNESS" "Adeep Aji" "TRAINING PLAN" "YOUR PLAN" "BF GYM" "MY PROGRAMME" "CONCEPT PREVIEW" "ONE CARD" "VIDEO LIBRARY" "Digital membership card and dashboard demonstration" "BF GYM" "data:image/jpeg;base64" "ml/kerala-uk/")
           for i in "${!urls[@]}"; do
             path="${urls[$i]}"
             needle="${expected[$i]}"
@@ -41,29 +41,35 @@ jobs:
           done
           echo "All seventeen public BF GYM paths passed."
 
-          # BF GYM homepage is dating-inspired workout discovery — not real dating or public accounts.
-          dating_home_ready=0
+          # Verify that the published site is the streamlined, professional gym design.
+          professional_home_ready=0
           for attempt in 1 2 3 4 5 6; do
             homepage_html="$(curl --location --silent --show-error --max-time 18 "$base/" || true)"
             join_html="$(curl --location --silent --show-error --max-time 18 "$base/join/" || true)"
-            if grep -Fq 'id="match-card"' <<< "$homepage_html" && grep -Fq 'id="like-match"' <<< "$homepage_html" && grep -Fq 'id="match-data"' <<< "$homepage_html" && grep -Fq 'href="/join/"' <<< "$homepage_html" && grep -Fq 'id="member-form"' <<< "$join_html" && grep -Fq 'id="instagram"' <<< "$join_html" && grep -Fq 'DEMO ONLY' <<< "$join_html" && grep -Fq 'not a registered online member account' <<< "$join_html"; then
-              dating_home_ready=1
+            if grep -Fq 'TRAIN WITH' <<< "$homepage_html" &&
+               grep -Fq 'id="hero-title"' <<< "$homepage_html" &&
+               grep -Fq 'class="route-grid"' <<< "$homepage_html" &&
+               grep -Fq 'class="mobile-nav"' <<< "$homepage_html" &&
+               grep -Fq 'href="/programmes/"' <<< "$homepage_html" &&
+               grep -Fq 'href="/app/workouts/"' <<< "$homepage_html" &&
+               grep -Fq 'href="/app/dashboard/"' <<< "$homepage_html" &&
+               grep -Fq 'href="/join/"' <<< "$homepage_html" &&
+               grep -Fq 'id="member-form"' <<< "$join_html" &&
+               grep -Fq 'id="instagram"' <<< "$join_html" &&
+               grep -Fq 'DEMO ONLY' <<< "$join_html" &&
+               grep -Fq 'Private profile preview' <<< "$join_html" &&
+               ! grep -Fq 'id="match-card"' <<< "$homepage_html"; then
+              professional_home_ready=1
               break
             fi
-            for tag in 'id="match-card"' 'id="like-match"' 'id="match-data"' 'href="/join/"'; do
-              if grep -Fq "$tag" <<< "$homepage_html"; then echo "HOME OK $tag"; else echo "HOME MISSING $tag"; fi
-            done
-            for tag in 'id="member-form"' 'id="instagram"' 'DEMO ONLY' 'not a registered online member account'; do
-              if grep -Fq "$tag" <<< "$join_html"; then echo "JOIN OK $tag"; else echo "JOIN MISSING $tag"; fi
-            done
-            echo "Attempt $attempt/6: dating-inspired homepage and private preview pending deploy"
+            echo "Attempt $attempt/6: BF GYM professional homepage or local card preview still pending publication"
             if [ "$attempt" -lt 6 ]; then sleep 15; fi
           done
-          if [ "$dating_home_ready" -ne 1 ]; then
-            echo "::error::Dating-inspired workout matcher or local profile preview is not live"
+          if [ "$professional_home_ready" -ne 1 ]; then
+            echo "::error::Professional BF GYM homepage or private card preview not yet verified live"
             exit 1
           fi
-          echo "Swipe-style fitness matcher, optional Instagram input, and explicitly non-registered card preview are live."
+          echo "Professional gym homepage, responsive navigation, free workout routes and private card preview are live."
 
           # Google Search Console URL-prefix ownership: verify deployed homepage tag.
           google_tag_ready=0
