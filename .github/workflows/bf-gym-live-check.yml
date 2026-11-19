@@ -1,0 +1,42 @@
+name: Verify public BF GYM website
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  public-site-smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Test published Netlify pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://bfgym.netlify.app"
+          urls=("/" "/sample-plan/" "/app/" "/app/workouts/" "/manifest.webmanifest")
+          expected=("BF GYM" "YOUR PLAN" "BF GYM" "VIDEO LIBRARY" "BF GYM")
+          for i in "${!urls[@]}"; do
+            path="${urls[$i]}"
+            needle="${expected[$i]}"
+            echo "::group::Checking ${base}${path}"
+            success=0
+            for attempt in 1 2 3 4 5 6; do
+              code="$(curl --location --silent --show-error --max-time 18 --output /tmp/bfgym-page --write-out "%{http_code}" "${base}${path}" || echo 000)"
+              if [ "$code" = "200" ] && grep -Fqi "$needle" /tmp/bfgym-page; then
+                echo "PASS ${path}: HTTP 200 and expected page content found"
+                success=1
+                break
+              fi
+              echo "Attempt ${attempt}/6: ${path} yielded HTTP ${code}; expected: ${needle}"
+              if [ "$attempt" -lt 6 ]; then sleep 15; fi
+            done
+            echo "::endgroup::"
+            if [ "$success" -ne 1 ]; then
+              echo "::error::Netlify URL ${base}${path} failed the live check. Confirm Netlify build settings, published deploy, and the main branch."
+              exit 1
+            fi
+          done
+          echo "All five public BF GYM paths passed."
