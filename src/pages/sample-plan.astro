@@ -1,0 +1,191 @@
+---
+const week = [
+  {day:'Mon',label:'Monday',focus:'Upper body + easy cardio',tag:'STRENGTH A',type:'strength',minutes:'50–65 min',items:[
+    ['Warm-up','10 min','Easy walking or cycling, arm circles and gentle joint movement'],
+    ['Dumbbell bench press','3 × 12','Choose a load that allows controlled repetitions'],
+    ['Lat pulldown or band row','3 × 12','Keep shoulders down and return slowly'],
+    ['Dumbbell lateral raise','3 × 12','Light weight, relaxed neck'],
+    ['Biceps curl','3 × 12','Avoid swinging'],
+    ['Twisting crunch or dead bug','3 × 12–15','Work at a comfortable range'],
+    ['Easy treadmill walk','15–20 min','Conversational pace'],
+  ]},
+  {day:'Tue',label:'Tuesday',focus:'Cardio + flexibility',tag:'ACTIVE DAY',type:'cardio',minutes:'40–55 min',items:[
+    ['Warm-up walk','5–10 min','Start gradually'],
+    ['Brisk walk or stationary cycle','25–35 min','Comfortable, low-impact pace'],
+    ['Yoga or flexibility work','10–15 min','Focus on hips, hamstrings and gentle mobility'],
+  ]},
+  {day:'Wed',label:'Wednesday',focus:'Lower body + easy cardio',tag:'STRENGTH B',type:'strength',minutes:'50–65 min',items:[
+    ['Warm-up','10 min','Gentle walking or bike and leg swings'],
+    ['Leg press or supported squat','3 × 12','Choose comfortable depth'],
+    ['Leg extension','3 × 12','Controlled reps, no bouncing'],
+    ['Lying leg curl','3 × 12','Move slowly'],
+    ['Calf raise','3 × 15','Use a full comfortable range'],
+    ['Light deadlift pattern','3 × 10','Prioritise technique; start with a hip-hinge drill'],
+    ['Easy bike or walk','15–20 min','Conversational pace'],
+  ]},
+  {day:'Thu',label:'Thursday',focus:'Steady cardio',tag:'ENDURANCE',type:'cardio',minutes:'30–45 min',items:[
+    ['Walking, cycling or swimming','30–40 min','Low-impact steady pace; adjust as needed'],
+    ['Gentle cool-down','5 min','Gradually slow down'],
+  ]},
+  {day:'Fri',label:'Friday',focus:'Upper body + light cardio',tag:'STRENGTH A',type:'strength',minutes:'50–65 min',items:[
+    ['Warm-up','10 min','Easy treadmill or cycling'],
+    ['Dumbbell bench press','3 × 12','Rest between sets as needed'],
+    ['Lat pulldown or band row','3 × 12','Keep ribs stacked over hips'],
+    ['Dumbbell lateral raise','3 × 12','Avoid shrugging'],
+    ['Biceps curl','3 × 12','Controlled movement'],
+    ['Dead bug or twisting crunch','3 × 12–15','Avoid any painful movement'],
+    ['Easy walk','15–20 min','Comfortable intensity'],
+  ]},
+  {day:'Sat',label:'Saturday',focus:'Cardio + stretching',tag:'OPTIONAL INTERVALS',type:'hiit',minutes:'25–45 min',items:[
+    ['Gentle warm-up','10 min','Easy walk or bike'],
+    ['Steady cardio','20–30 min','Walking, cycling or aerobics'],
+    ['Optional low-impact intervals','8–12 min','Only if comfortable: 30 sec brisk / 90 sec easy × 4–6'],
+    ['Stretching','10 min','Controlled and gentle'],
+  ]},
+  {day:'Sun',label:'Sunday',focus:'Recovery',tag:'ACTIVE REST',type:'recovery',minutes:'10–30 min',items:[
+    ['Light walk or gentle yoga','10–30 min','Rest completely if needed'],
+    ['Sleep and recovery','Aim for 7–9 h','Prioritise quality sleep and manageable stress'],
+  ]},
+];
+const meals = [
+  {slot:'01',name:'Breakfast',time:'Morning',calories:355,foods:['2 boiled or scrambled eggs','2 slices wholegrain toast','Tomato and cucumber'],note:'Protein, slow-release carbohydrates and vegetables.'},
+  {slot:'02',name:'Morning snack',time:'Mid-morning',calories:160,foods:['170 g plain yoghurt','100 g berries'],note:'Choose unsweetened yoghurt where practical.'},
+  {slot:'03',name:'Lunch',time:'Midday',calories:485,foods:['120 g cooked chicken breast','150 g cooked rice','Mixed vegetables and 1 tsp olive oil'],note:'Swap chicken for tofu, lentils or another protein as preferred.'},
+  {slot:'04',name:'Afternoon snack',time:'Afternoon',calories:180,foods:['1 medium apple','15 g almonds'],note:'Easy to pack for a busy day.'},
+  {slot:'05',name:'Dinner',time:'Evening',calories:540,foods:['200 g cooked lentil dal','2 medium chapatis','Cucumber salad, modest cooking oil'],note:'Indian-style option with pulses, wholegrains and vegetables.'},
+];
+const total = meals.reduce((a,m)=>a+m.calories,0);
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#101310"/>
+<meta name="description" content="BF GYM Global example fitness plan with a seven-day training schedule, upper and lower body workouts, cardio, recovery and an illustrative meal day."/>
+<title>Workout & Nutrition Demo | BF GYM Global</title>
+<link rel="icon" href="/bf-icon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="/manifest.webmanifest"/>
+<link rel="apple-touch-icon" href="/app-icon-192.png"/>
+</head>
+<body>
+<div class="site">
+<header class="top"><a class="logo" href="/"><span>BF<b>.</b></span> GYM GLOBAL</a><nav aria-label="Demo navigation"><a href="#workouts">WORKOUTS</a><a href="#nutrition">NUTRITION</a><a href="/app/workouts/">VIDEO LIBRARY ↗</a></nav></header>
+<main>
+<section class="hero" aria-labelledby="main-title">
+  <div class="hero-copy"><p class="eyebrow"><i></i> BF GYM / TRAINING EDUCATION</p>
+  <h1 id="main-title">YOUR PLAN.<br/><em>YOUR PACE.</em></h1>
+  <p class="hero-intro">See how a practical training week and balanced eating day could look. Explore strength training, cardio, recovery and sample meals—all in one easy-to-follow demo.</p>
+  <div class="hero-links"><a href="#workouts" class="primary">EXPLORE WORKOUT WEEK <span>↘</span></a><a href="#nutrition" class="secondary">VIEW SAMPLE MEALS ↓</a></div>
+  </div>
+  <div class="hero-art" aria-hidden="true"><span class="shape-ring"></span><span class="shape-ring shape2"></span><strong>TRAIN<br/><em>SMART.</em></strong><small>MOVE / FUEL / RECOVER</small></div>
+</section>
+<div class="demo-banner"><strong>DEMONSTRATION ONLY</strong><span>These are illustrative figures and general fitness ideas—not an individual assessment, diagnosis or prescribed calorie target. No coaching sale or booking is active.</span></div>
+<section class="insights" aria-labelledby="insights-title">
+  <div class="section-label"><span>01 / EXAMPLE REPORT</span><span>ILLUSTRATIVE VALUES</span></div>
+  <h2 id="insights-title">UNDERSTAND THE <em>STARTING POINT.</em></h2>
+  <p class="section-intro">The example below uses anonymised fictional values supplied for this demo. Body-composition device readings vary, and personal targets depend on age, height, sex, medical history and other factors.</p>
+  <div class="metric-grid">
+    <div class="metric"><span>EXAMPLE BODY FAT</span><strong>44.7<small>%</small></strong><p>Context and measurement method matter.</p></div>
+    <div class="metric"><span>EXAMPLE MUSCLE MASS</span><strong>36.9<small>kg</small></strong><p>Focus on building and maintaining strength.</p></div>
+    <div class="metric"><span>ILLUSTRATIVE GOAL</span><strong>54<small>kg</small></strong><p>Not a recommended target without individual review.</p></div>
+    <div class="metric metric-accent"><span>EXAMPLE ENERGY FIGURE</span><strong>1,739<small>kcal</small></strong><p>This is not a universally appropriate intake.</p></div>
+  </div>
+  <p class="note">A body-fat percentage target such as 22–28% or a proposed 17 kg reduction should not be treated as a general prescription. Safe and appropriate goals need a qualified assessment. There is no deadline or rapid weight-loss promise in this demo.</p>
+</section>
+<section id="workouts" class="workouts" aria-labelledby="workout-title">
+ <div class="section-label"><span>02 / YOUR DEMO ROUTINE</span><span>7-DAY EXAMPLE</span></div>
+ <div class="section-heading"><div><h2 id="workout-title">A WEEK THAT<br/><em>WORKS FOR YOU.</em></h2></div><p>Three strength sessions, enjoyable cardio and recovery. For the next week, alternate the strength emphasis (B / A / B) to balance the routine over time.</p></div>
+ <div class="days" role="tablist" aria-label="Choose a day of the workout programme">
+  {week.map((w,i)=><button id={'day-tab-'+i} type="button" role="tab" aria-controls="day-panel" aria-selected={i===0?'true':'false'} tabindex={i===0?0:-1} class:list={['day',{active:i===0}]} data-day={i}><span>{w.day.toUpperCase()}</span><strong>{String(i+1).padStart(2,'0')}</strong><small>{w.type==='strength'?'LIFT':w.type==='cardio'?'CARDIO':w.type==='hiit'?'MOVE':'REST'}</small></button>)}
+ </div>
+ <div class="day-panel" id="day-panel" role="tabpanel" aria-labelledby="day-tab-0">
+  <div class="day-panel-top"><div><p class="eyebrow" id="current-tag">{week[0].tag}</p><h3 id="current-name">{week[0].label}</h3><p id="current-focus">{week[0].focus}</p></div><div class="day-duration"><span>EST. TIME</span><strong id="current-minutes">{week[0].minutes}</strong></div></div>
+  <div class="table-wrap"><table><thead><tr><th>ACTIVITY</th><th>VOLUME</th><th>COACHING CUE</th><th>DEMO</th></tr></thead><tbody id="exercise-rows">{week[0].items.map(e=><tr><th scope="row">{e[0]}</th><td>{e[1]}</td><td>{e[2]}</td><td><a target="_blank" rel="noopener noreferrer" href={'https://www.youtube.com/results?search_query='+encodeURIComponent(e[0]+' exercise proper form')}>WATCH ↗</a></td></tr>)}</tbody></table></div>
+ </div>
+ <div class="training-notes"><div><strong>WARM UP</strong><p>Aim for approximately 10 minutes of gradual movement before harder exercise.</p></div><div><strong>START LIGHT</strong><p>Choose loads that allow controlled movement. Rest between sets and progress gradually.</p></div><div><strong>RECOVER</strong><p>Build up your training volume at your own pace. Rest or substitute activities when needed.</p></div></div>
+ <a class="outline-link" href="/app/workouts/">EXPLORE 64 CURATED DEMOS + 418 EXERCISE SEARCHES <span aria-hidden="true">↗</span></a>
+</section>
+<section id="nutrition" class="nutrition" aria-labelledby="nutrition-title">
+  <div class="section-label"><span>03 / EXAMPLE NUTRITION</span><span>ONE SAMPLE DAY</span></div>
+  <div class="section-heading"><div><h2 id="nutrition-title">FUEL THE<br/><em>PROGRESS.</em></h2></div><p>A simple example of meals with eggs, yoghurt, chicken, lentils and wholegrains. Quantities and calories are approximate and will vary with products and preparation.</p></div>
+  <div class="food-summary"><div><p>ILLUSTRATIVE DAY TOTAL</p><strong>≈ {total.toLocaleString('en-GB')} <small>kcal</small></strong></div><p>Close to the sample report's 1,739 kcal figure, but not an instruction to eat this amount. Energy needs vary widely; some people will require more.</p></div>
+  <div class="meal-grid">
+    {meals.map(meal=><article class="meal">
+      <div class="meal-top"><span>{meal.slot} / {meal.time.toUpperCase()}</span><span>≈ {meal.calories} KCAL</span></div>
+      <h3>{meal.name}</h3><ul>{meal.foods.map(food=><li>{food}</li>)}</ul>
+      <p>{meal.note}</p>
+    </article>)}
+  </div>
+  <div class="nutrition-bottom"><div><strong>PERSONALISE THE PLATE</strong><p>Adjust portions and foods for your needs, allergies, dietary preferences, budget and culture. Vegetarian swaps can include tofu, beans and lentils; portion size affects total energy and protein.</p></div><div><strong>THE EVERYDAY BASICS</strong><p>Include protein foods, fibre-rich plants and wholegrains; drink regularly (often around 2–2.5 L total fluids daily for adults, depending on needs) and aim for consistent sleep.</p></div></div>
+</section>
+<section class="final-cta"><p class="eyebrow">LEARN BEFORE YOU TRAIN</p><h2>BUILD CONSISTENCY.<br/><em>KEEP IT SUSTAINABLE.</em></h2><p>Use this plan as a layout example. Anyone beginning exercise with health concerns, injuries, pregnancy or other medical considerations should seek advice from an appropriate clinician or qualified professional before following a demanding routine.</p><div><a class="primary" href="/app/workouts/">EXPLORE FREE EXERCISE VIDEOS <span aria-hidden="true">↗</span></a><a href="/" class="secondary">RETURN TO BF GYM GLOBAL</a></div></section>
+</main>
+<footer class="footer"><a href="/">BF<span>.</span> GYM GLOBAL</a><div><a href="/app/">MOBILE APP</a><a href="/privacy/">PRIVACY</a></div></footer>
+</div>
+<script define:vars={{ week }}>
+ const tabs = Array.from(document.querySelectorAll('[data-day]'));
+ const panel = document.querySelector('#day-panel');
+ const tagEl = document.querySelector('#current-tag');
+ const dayName = document.querySelector('#current-name');
+ const focusEl = document.querySelector('#current-focus');
+ const durationEl = document.querySelector('#current-minutes');
+ const rows = document.querySelector('#exercise-rows');
+ function makeRow(exercise) {
+   const row = document.createElement('tr');
+   const title = document.createElement('th');
+   title.scope = 'row'; title.textContent=exercise[0]; row.append(title);
+   const reps = document.createElement('td'); reps.textContent = exercise[1]; row.append(reps);
+   const tip = document.createElement('td'); tip.textContent = exercise[2]; row.append(tip);
+   const watch = document.createElement('td');
+   const a = document.createElement('a');
+   a.textContent='WATCH ↗'; a.href='https://www.youtube.com/results?search_query='+encodeURIComponent(exercise[0]+' exercise proper form');
+   a.target='_blank'; a.rel='noopener noreferrer'; watch.append(a);row.append(watch);
+   return row;
+ }
+ function chooseDay(index,moveFocus=false) {
+   const w=week[index]; if(!w)return;
+   tabs.forEach((tab,i)=>{const active=i===index;tab.classList.toggle('active',active);tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;});
+   if(panel)panel.setAttribute('aria-labelledby','day-tab-'+index);
+   if(tagEl)tagEl.textContent=w.tag;
+   if(dayName)dayName.textContent=w.label;
+   if(focusEl)focusEl.textContent=w.focus;
+   if(durationEl)durationEl.textContent=w.minutes;
+   if(rows)rows.replaceChildren(...w.items.map(makeRow));
+   if(moveFocus)tabs[index].focus();
+ }
+ tabs.forEach((tab,index)=>{
+   tab.addEventListener('click',()=>chooseDay(index));
+   tab.addEventListener('keydown',(e)=>{
+     let target=index;
+     if(e.key==='ArrowRight')target=(index+1)%tabs.length;
+     else if(e.key==='ArrowLeft')target=(index+tabs.length-1)%tabs.length;
+     else if(e.key==='Home')target=0;
+     else if(e.key==='End')target=tabs.length-1;
+     else return;
+     e.preventDefault();chooseDay(target,true);
+   });
+ });
+</script>
+</body>
+</html>
+<style is:global>
+:root{--bg:#101310;--surface:#1d241c;--surface2:#253024;--lime:#c7ff52;--cream:#f1f2e9;--muted:#afbbab;--line:#3f4a3c;--display:Impact,'Arial Narrow',sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:15px}body{background:var(--bg);color:var(--cream);font:14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;margin:0}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+.site{max-width:1250px;margin:auto}em{font-style:normal;color:var(--lime)}.top{height:84px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:22px;padding:0 28px}.logo{display:flex;gap:10px;align-items:center;font-size:13px;font-weight:900;letter-spacing:.12em}.logo>span{font:900 35px/1 var(--display)}.logo b,.footer>a span{color:var(--lime)}.top nav{display:flex;gap:27px;align-items:center}.top nav a{font-size:11px;font-weight:800;letter-spacing:.03em}.top nav a:hover{color:var(--lime)}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin:22px 28px 0;min-height:565px}.hero-copy{padding:55px 28px 60px;background:radial-gradient(ellipse at bottom right,#1d2d1c,#151b14 60%);border:1px solid var(--line)}.eyebrow,.section-label{color:var(--lime);font-size:11px;font-weight:900;letter-spacing:.13em}.eyebrow i{display:inline-block;width:7px;height:7px;background:var(--lime);border-radius:50%;margin-right:8px}.hero h1{font:900 clamp(75px,8vw,122px)/.93 var(--display);letter-spacing:-.02em;margin:66px 0 27px}.hero-intro{font-size:16px;line-height:1.85;color:#c4d2c0;max-width:550px}.hero-links{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-top:35px}.primary{background:var(--lime);padding:17px 20px;color:#162111;font-size:11px;font-weight:900;letter-spacing:.035em;display:inline-flex;justify-content:space-between;align-items:center;gap:22px}.primary span{font-size:18px}.secondary{font-size:11px;font-weight:900;letter-spacing:.04em;border-bottom:1px solid #798d70;padding:10px 0}.secondary:hover{color:var(--lime)}
+.hero-art{position:relative;overflow:hidden;background:linear-gradient(145deg,#31472b,#1c2a1e 65%,#121b15);border:1px solid #56734d;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:45px}.hero-art strong{position:relative;z-index:2;font:900 clamp(75px,7.3vw,110px)/.95 var(--display);text-align:center;letter-spacing:-.05em}.hero-art small{z-index:2;font-size:10px;letter-spacing:.18em;color:#c6dac0;margin-top:45px}.shape-ring{width:480px;height:480px;border:2px solid #c7ff524b;border-radius:50%;position:absolute;transform:rotate(-20deg) scaleX(.85);box-shadow:0 0 0 48px #c7ff5212,0 0 0 96px #c7ff5205}.shape2{width:260px;height:260px;border-color:#c7ff5270}
+.demo-banner{margin:0 28px;background:var(--lime);color:#182115;padding:18px 26px;display:flex;align-items:center;gap:24px}.demo-banner strong{font-size:11px;letter-spacing:.12em;white-space:nowrap}.demo-banner span{font-size:12px;line-height:1.5}
+.insights,.workouts,.nutrition,.final-cta{padding:95px 28px}.section-label{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:23px}.section-label span:last-child{color:#a6b99d}.insights h2,.workouts h2,.nutrition h2,.final-cta h2{font:900 clamp(50px,5.4vw,76px)/1 var(--display);letter-spacing:-.015em;margin:12px 0 22px}.section-intro{max-width:760px;color:var(--muted);line-height:1.8;font-size:14px}.metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:40px}.metric{background:#1d251b;border:1px solid var(--line);padding:22px;min-width:0}.metric>span{font-size:10px;font-weight:900;color:#b9d1af;letter-spacing:.07em}.metric strong{display:block;margin:22px 0 12px;font:900 clamp(37px,4.5vw,63px)/1 var(--display);color:var(--lime)}.metric strong small{font:700 14px Arial,sans-serif;margin-left:5px}.metric p{color:var(--muted);line-height:1.65;font-size:11px;margin:0}.metric-accent{background:#d4ff76;color:#192814;border:0}.metric-accent>span,.metric-accent strong,.metric-accent p{color:#23371c}.note{margin:24px 0 0;font-size:12px;color:#aebba7;line-height:1.85;max-width:920px}
+.workouts{background:#192119}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:40px}.section-heading>p{max-width:330px;font-size:13px;line-height:1.8;color:#bdcdb7;margin:0 0 25px}.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-top:38px}.day{border:1px solid #556d4b;background:#293729;color:#e2eedb;padding:15px 8px;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0}.day>span{font-size:11px;font-weight:900;letter-spacing:.05em}.day strong{font:700 35px/1 var(--display)}.day small{font-size:9px;letter-spacing:.08em;color:#a5c19c;font-weight:800}.day.active,.day[aria-selected=true]{background:var(--lime);border-color:var(--lime);color:#1b2913}.day.active small{color:#475c35}
+.day-panel{border:1px solid #536a4b;background:#223021;margin-top:14px}.day-panel-top{padding:30px;display:flex;justify-content:space-between;align-items:center;gap:25px}.day-panel-top h3{font:800 48px/1 var(--display);margin:15px 0 7px;text-transform:uppercase}.day-panel-top p:last-child{color:#c9d7c4;margin:0}.day-duration{text-align:right}.day-duration span{font-size:10px;color:#b1c7a8;font-weight:800;letter-spacing:.1em}.day-duration strong{display:block;font:800 26px var(--display);margin-top:7px;color:var(--lime)}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left}th,td{padding:16px 24px;border-top:1px solid #425540;font-size:12px}thead th{font-size:10px;color:#bfd3b4;letter-spacing:.12em}tbody th{font-weight:700;min-width:155px}tbody td{color:#c1d1bb}tbody td:nth-child(2){font-weight:800;color:var(--cream);white-space:nowrap}tbody td:last-child a{font-size:10px;color:var(--lime);white-space:nowrap;font-weight:900}
+.training-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:23px 0 34px}.training-notes>div{border-left:2px solid var(--lime);background:#253325;padding:19px}.training-notes strong{font-size:11px;color:var(--lime);letter-spacing:.12em}.training-notes p{font-size:12px;color:#bccdb6;line-height:1.8;margin:9px 0 0}.outline-link{display:inline-flex;align-items:center;gap:20px;padding:16px 18px;border:1px solid #8fab7c;color:var(--lime);font-size:11px;font-weight:900}
+.nutrition{background:#101710}.food-summary{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;background:#d2ff77;color:#182510;padding:29px;margin-top:40px}.food-summary p{font-size:12px;line-height:1.7;margin:0}.food-summary div p{letter-spacing:.12em;font-size:10px;font-weight:900}.food-summary strong{display:block;font:900 65px/1 var(--display);margin-top:11px}.food-summary strong small{font:700 16px Arial,sans-serif}
+.meal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}.meal{background:#1c261a;border:1px solid #40563a;padding:23px;display:flex;flex-direction:column;min-height:255px}.meal-top{display:flex;justify-content:space-between;gap:10px;color:var(--lime);font-weight:900;font-size:10px;letter-spacing:.06em}.meal h3{font:700 31px var(--display);margin:27px 0 10px;text-transform:uppercase}.meal ul{padding-left:18px;margin:0;color:#e1eadd;font-size:12px;line-height:1.85}.meal li::marker{color:var(--lime)}.meal>p{font-size:11px;color:#9fb49b;line-height:1.7;margin-top:auto;padding-top:16px}
+.nutrition-bottom{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.nutrition-bottom>div{padding:23px;border:1px solid #40563a}.nutrition-bottom strong{font-size:12px;letter-spacing:.05em;color:var(--lime)}.nutrition-bottom p{font-size:12px;color:#becfba;line-height:1.8;margin-bottom:0}
+.final-cta{background:#283922;margin:10px 28px 28px;border:1px solid #59764e}.final-cta>p:not(.eyebrow){color:#c0d5b8;line-height:1.8;max-width:780px}.final-cta>div{display:flex;gap:23px;align-items:center;flex-wrap:wrap;margin-top:27px}.footer{display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--line);padding:30px 28px}.footer>a{font-size:17px;font-weight:900}.footer>div{display:flex;gap:23px}.footer>div a{font-size:11px;color:#cad9c1;font-weight:800}
+@media(max-width:980px){.hero{grid-template-columns:1fr}.hero-art{min-height:250px}.hero-art strong{font-size:70px}.shape-ring{width:320px;height:320px}.hero h1{margin:35px 0 20px}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.meal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.top{padding:0 17px;height:70px}.top nav{gap:12px}.top nav a{font-size:9px}.top nav a:nth-child(2){display:none}.hero{margin:14px 14px 0}.hero-copy{padding:37px 20px}.hero h1{font-size:clamp(59px,11.2vw,90px)}.hero-art{min-height:230px}.demo-banner{margin:0 14px;display:block;padding:16px 19px}.demo-banner strong{display:block;margin-bottom:8px}.insights,.workouts,.nutrition{padding:68px 16px}.final-cta{margin:10px 14px 24px;padding:55px 20px}.section-heading{display:block}.section-heading>p{margin:14px 0 0}.days{gap:4px}.day{padding:12px 2px}.day strong{font-size:26px}.day>span{font-size:10px}.day small{font-size:8px}.day-panel-top{padding:22px;display:block}.day-duration{text-align:left;margin-top:17px}.day-panel-top h3{font-size:39px}th,td{padding:13px 12px}.training-notes{grid-template-columns:1fr}.food-summary{display:block}.food-summary>p{margin-top:18px}.meal-grid{grid-template-columns:1fr}.nutrition-bottom{grid-template-columns:1fr}}
+@media(max-width:400px){.logo{gap:6px;letter-spacing:0;font-size:11px}.top nav a{font-size:9px}.top nav{gap:10px}.hero h1{font-size:59px}.metric{padding:17px}.metric strong{font-size:39px}.metric-grid{gap:8px}.day small{display:none}.day strong{font-size:22px}.footer{padding:22px 16px}.footer>div{gap:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
