@@ -1,0 +1,178 @@
+---
+/**
+ * Phase 1 is an entirely public, fictional demo.
+ * No account, personal data capture, scan verification, wallet issuance or payments.
+ */
+const member = {
+  name:'Alex Morgan',
+  id:'BF-DEMO-0001',
+  tier:'FOUNDATION / DEMO MEMBER',
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <meta name="theme-color" content="#111911"/>
+  <meta name="description" content="BF GYM Global interactive demo membership card: flip an ATM-style fitness member pass and preview a private fitness dashboard with fictional details. No registrations, payments or Wallet passes."/>
+  <meta name="robots" content="index,follow"/>
+  <title>Digital Member Card Demo | BF GYM Global</title>
+  <link rel="icon" href="/bf-icon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/manifest.webmanifest"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <a href="#main" class="skip">Skip to demo</a>
+  <header class="top wrap">
+    <a href="/" class="brand" aria-label="BF GYM Global home"><span>BF<b>.</b></span><strong>GYM<small>GLOBAL FITNESS</small></strong></a>
+    <nav aria-label="Main navigation">
+      <a href="/app/">FITNESS APP</a><a href="/app/membership/">MEMBERSHIP VISION</a><a href="/app/dashboard/">FITNESS DASHBOARD</a>
+    </nav>
+    <a href="/trainer/" class="top-cta">MEET THE TRAINER ↗</a>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="main-heading">
+      <div class="hero-text">
+        <div class="eyebrow"><span class="indicator" aria-hidden="true"></span> BF GYM GLOBAL / DIGITAL IDENTITY CONCEPT</div>
+        <h1 id="main-heading">ONE CARD.<br/>YOUR FITNESS.<br/><em>YOUR SPACE.</em></h1>
+        <p>Picture a future BF GYM membership pass in your phone's wallet, paired with a secure personal fitness profile. Explore the interactive concept before real accounts are introduced.</p>
+        <div class="hero-tags"><span>01 / DIGITAL CARD</span><span>02 / FITNESS PROFILE</span><span>03 / PRIVACY FIRST</span></div>
+        <div class="hero-disclaimer"><strong>PHASE 1 — INTERACTIVE DEMO ONLY</strong><p>All names, numbers, photos and fitness measurements on this page are fictional. No active membership or identity credential is issued.</p></div>
+      </div>
+      <div class="card-demo">
+        <div class="floating-label"><span>PREVIEW / 001</span><span>FRONT + BACK</span></div>
+        <div class="card-scene" id="card-scene" aria-label="A fictional BF GYM member card with two sides">
+          <div class="card-rotator" id="card-rotator">
+            <section class="member-card card-front" id="card-front" aria-label="Front of demo member card" aria-hidden="false">
+              <div class="grain" aria-hidden="true"></div>
+              <div class="card-orb card-orb-one" aria-hidden="true"></div><div class="card-orb card-orb-two" aria-hidden="true"></div>
+              <div class="card-header"><div class="card-brand">BF<span>.</span><strong>GYM</strong></div><div class="card-type">GLOBAL<br/>MEMBER PASS</div></div>
+              <div class="identity-line">
+                <img src="/images/members/demo-member.svg" class="member-photo" alt="AI-generated portrait of a fictional BF GYM member" width="91" height="91" loading="eager"/>
+                <div class="member-details"><small>REGISTERED MEMBER · DEMO</small><strong>{member.name}</strong><span>{member.id}</span></div>
+              </div>
+              <div class="card-footer"><span>{member.tier}</span><span class="card-emblem" aria-hidden="true">✳</span></div>
+              <div class="demo-ribbon">SAMPLE · NOT VALID</div>
+            </section>
+            <section class="member-card card-back" id="card-back" aria-label="Back of demo member card" aria-hidden="true">
+              <div class="back-top"><div class="card-brand">BF<span>.</span><strong>GYM</strong></div><span>DEMO PASS / NON-TRANSFERABLE</span></div>
+              <div class="back-centre">
+                <div class="qr-frame" role="img" aria-label="Decorative QR-like graphic, not a functioning or scannable code">
+                  <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                    <rect width="100" height="100" fill="#f8fbf2"/>
+                    <path fill="#122014" fill-rule="evenodd" d="M5 5h27v27H5z M11 11v15h15V11z M68 5h27v27H68z M74 11v15h15V11z M5 68h27v27H5z M11 74v15h15V74z"/>
+                    <path fill="#122014" d="M15 15h7v7h-7z M78 15h7v7h-7z M15 78h7v7h-7z M39 6h8v7h-8z M49 6h8v12h-8z M39 21h6v8h-6z M50 23h12v7H50z M38 38h8v9h-8z M50 35h10v7H50z M63 36h7v12h-7z M75 38h17v8H75z M5 40h9v6H5z M18 39h15v8H18z M7 51h14v7H7z M27 52h10v10H27z M43 52h7v8h-7z M59 53h10v7H59z M73 52h8v9h-8z M85 55h10v7H85z M40 68h9v8h-9z M52 66h6v8h-6z M63 68h11v6H63z M82 70h13v8H82z M39 82h7v13h-7z M49 84h8v8h-8z M61 83h10v12H61z M77 86h7v9h-7z M89 85h6v10h-6z"/>
+                  </svg>
+                  <span>DEMO</span>
+                </div>
+                <div class="qr-copy"><small>MEMBER VERIFICATION</small><strong>QR PREVIEW.</strong><p>No scanning, data sharing or identity checks are connected. The graphic is deliberately not a functional QR code.</p></div>
+              </div>
+              <div class="back-footer"><span>{member.id}</span><strong>NOT AN ID OR PAYMENT CARD</strong></div>
+            </section>
+          </div>
+        </div>
+        <div class="flip-controls">
+          <button class="flip-button" type="button" id="flip-card" aria-pressed="false" aria-controls="card-scene">
+            <span class="flip-icon" aria-hidden="true">↻</span><span>FLIP CARD</span>
+          </button>
+          <span class="flip-hint" id="flip-status" role="status" aria-live="polite">Viewing front of demo card</span>
+        </div>
+        <div class="card-note">ATM-inspired size and styling · <strong>Not a bank card</strong></div>
+      </div>
+    </section>
+
+    <section class="stripe" aria-label="BF GYM membership values"><span>PERSONAL</span><b aria-hidden="true">✳</b><span>SECURE BY DESIGN</span><b aria-hidden="true">✳</b><span>MOBILE FIRST</span><b aria-hidden="true">✳</b><span>FITNESS FOCUSED</span></section>
+
+    <section class="dashboard-section" id="dashboard" aria-labelledby="dashboard-heading">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">02 / FITNESS PROFILE EXPERIENCE</p><h2 id="dashboard-heading">BEYOND<br/><em>THE CARD.</em></h2></div><p>The physical-style card shows only basic membership identity. A future, separately authenticated dashboard could hold health-related details securely.</p></div>
+        <div class="dashboard-shell">
+          <div class="dash-top"><div class="dash-brand"><span>BF<span class="lime">.</span> GYM</span><small>MEMBER PORTAL / DESIGN PREVIEW</small></div><span class="demo-chip">FICTIONAL DATA</span></div>
+          <div class="dash-bar"><span>EXPLORE ACCESS LEVEL</span><div class="view-switch" role="group" aria-label="Preview access level"><button id="member-view-button" class="selected" type="button" aria-pressed="true">MEMBER VIEW</button><button id="staff-view-button" type="button" aria-pressed="false">STAFF SCAN VIEW</button></div></div>
+          <div class="member-view" id="member-view">
+            <div class="member-heading"><div class="avatar-row"><img src="/images/members/demo-member.svg" alt="" width="54" height="54" loading="lazy"/><div><small>WELCOME TO YOUR PERSONAL DASHBOARD</small><h3>{member.name}</h3><span>Fictional profile · Educational example</span></div></div><span class="online-badge">MEMBER VIEW MOCKUP</span></div>
+            <div class="metrics">
+              <div class="metric"><span>BODY WEIGHT</span><strong>78 <small>kg</small></strong><p>Fictional example value</p></div>
+              <div class="metric"><span>HEIGHT</span><strong>175 <small>cm</small></strong><p>Fictional example value</p></div>
+              <div class="metric"><span>BODY MASS INDEX</span><strong>25.5</strong><p>Illustrative calculated BMI</p></div>
+            </div>
+            <div class="dash-bottom">
+              <div class="dash-panel"><div class="dash-panel-head"><span>THIS WEEK / MOCK PROGRESS</span><strong>3 OF 4</strong></div><div class="progress-bar"><span></span></div><div class="weekday" aria-label="Three fictional sessions completed and one remaining"><span class="worked">MON ✓</span><span class="worked">TUE ✓</span><span>WED ·</span><span class="worked">THU ✓</span><span>FRI —</span></div><p>Activity numbers shown here do not come from the site's existing local workout tracker.</p></div>
+              <div class="dash-panel goal-panel"><span>PERSONAL TRAINING GOAL</span><h4>BUILD CONSISTENCY.</h4><p>Future member profiles could connect the plan, training history and private health measurements after secure login.</p></div>
+            </div>
+            <p class="metric-disclaimer">BMI is a limited screening measure, not a diagnosis or a comprehensive measure of health. These values describe no real person.</p>
+          </div>
+          <div id="staff-view" class="staff-view" hidden>
+            <div class="staff-icon" aria-hidden="true">◎</div>
+            <p class="eyebrow">FICTIONAL VERIFICATION SCREEN</p><h3>MEMBER DETAILS<br/><em>PROTECTED.</em></h3>
+            <p>In a real system, a member-card scan would return only a minimal authorised membership result. It would not expose weight, height, BMI or training notes.</p>
+            <div class="staff-fields"><div><span>DEMO ID</span><strong>{member.id}</strong></div><div><span>MEMBERSHIP STATUS</span><strong>NOT ISSUED · DEMO</strong></div><div><span>PRIVATE FITNESS MEASUREMENTS</span><strong>NOT SHARED</strong></div></div>
+            <p class="staff-note">This is a visual explanation of privacy boundaries. There is no real scanner, staff authentication, membership lookup or backend.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="wallet-section wrap" aria-labelledby="wallet-heading">
+      <div class="section-heading"><div><p class="eyebrow">03 / FUTURE WALLET INTEGRATION</p><h2 id="wallet-heading">READY IN<br/><em>THE VISION.</em></h2></div><p>Real passes require appropriate Apple and Google Wallet issuer setup, signing, eligibility review and secure account systems. These actions are intentionally disabled.</p></div>
+      <div class="wallet-grid">
+        <div class="wallet-tile"><div class="wallet-symbol" aria-hidden="true">◈</div><div><h3>Apple Wallet</h3><p>Future digitally signed fitness membership pass.</p></div><button type="button" disabled aria-label="Add to Apple Wallet unavailable in demo">ADD TO WALLET · COMING LATER</button></div>
+        <div class="wallet-tile"><div class="wallet-symbol" aria-hidden="true">▣</div><div><h3>Google Wallet</h3><p>Future Android membership pass for approved members.</p></div><button type="button" disabled aria-label="Add to Google Wallet unavailable in demo">ADD TO WALLET · COMING LATER</button></div>
+      </div>
+    </section>
+    <section class="security wrap" aria-labelledby="security-heading">
+      <p class="eyebrow">04 / BEFORE A REAL LAUNCH</p><h2 id="security-heading">MEMBERSHIP<br/><em>DONE RESPONSIBLY.</em></h2>
+      <div class="security-grid"><article><span>01 / REGISTRATION</span><h3>Secure, opt-in signup</h3><p>Build real identity verification and authentication only after appropriate product and data-protection reviews.</p></article><article><span>02 / HEALTH PRIVACY</span><h3>Keep measurements private</h3><p>Health-related information needs an appropriate lawful basis, safeguards, access controls and special-category data handling where applicable.</p></article><article><span>03 / CARD ISSUANCE</span><h3>Revocable credentials</h3><p>Future passes need secure, non-guessable tokens, revocation and validation. A public member ID alone must never grant access.</p></article></div>
+      <p class="reassurance">THIS DEMO DOES NOT COLLECT CLIENT DETAILS, ACCEPT REGISTRATIONS, STORE HEALTH DATA, ISSUE WALLET PASSES OR TAKE PAYMENTS. THE MEMBER AND QR ARE FICTIONAL.</p>
+    </section>
+  </main>
+  <footer class="footer wrap"><a href="/">BF<span>.</span> GYM GLOBAL</a><div><a href="/app/membership/">Membership vision</a><a href="/app/dashboard/">Free dashboard</a><a href="/privacy/">Privacy</a></div></footer>
+  <script>
+    const flipButton=document.getElementById('flip-card');
+    const cardRotator=document.getElementById('card-rotator');
+    const front=document.getElementById('card-front');
+    const back=document.getElementById('card-back');
+    const flipStatus=document.getElementById('flip-status');
+    if(flipButton && cardRotator && front && back && flipStatus){
+      flipButton.addEventListener('click',()=>{
+        const nowFlipped=cardRotator.classList.toggle('is-flipped');
+        flipButton.setAttribute('aria-pressed',String(nowFlipped));
+        front.setAttribute('aria-hidden',String(nowFlipped));
+        back.setAttribute('aria-hidden',String(!nowFlipped));
+        flipStatus.textContent=nowFlipped?'Viewing back of demo card':'Viewing front of demo card';
+      });
+    }
+    const memberButton=document.getElementById('member-view-button');
+    const staffButton=document.getElementById('staff-view-button');
+    const memberView=document.getElementById('member-view');
+    const staffView=document.getElementById('staff-view');
+    function setView(mode){
+      const isMember=mode==='member';
+      if(memberView)memberView.hidden=!isMember;
+      if(staffView)staffView.hidden=isMember;
+      if(memberButton){memberButton.classList.toggle('selected',isMember);memberButton.setAttribute('aria-pressed',String(isMember));}
+      if(staffButton){staffButton.classList.toggle('selected',!isMember);staffButton.setAttribute('aria-pressed',String(!isMember));}
+    }
+    memberButton?.addEventListener('click',()=>setView('member'));
+    staffButton?.addEventListener('click',()=>setView('staff'));
+  </script>
+</body>
+</html>
+<style>
+:root{--bg:#111911;--bg2:#1a261b;--panel:#213123;--panel2:#293b29;--lime:#c8ff62;--text:#f5f7ef;--muted:#b4c6ae;--line:#40563c;--display:Oswald,Impact,Arial,sans-serif;--body:'DM Sans',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.7 var(--body)}[hidden]{display:none!important}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}button:disabled{cursor:not-allowed}a:focus-visible,button:focus-visible{outline:3px solid var(--lime);outline-offset:4px}h1,h2,h3,h4,p{margin-top:0}.wrap{max-width:1220px;width:calc(100% - 40px);margin-inline:auto}.skip{position:absolute;top:-130px;left:10px;background:var(--lime);color:#142112;padding:10px;z-index:30}.skip:focus{top:10px}.eyebrow{color:var(--lime);font-size:10px;letter-spacing:.12em;font-weight:900}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:23px 0;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:8px}.brand>span{font:750 35px/.9 var(--display)}.brand b,.footer>a span{color:var(--lime)}.brand strong{letter-spacing:.1em;font-size:16px}.brand small{display:block;font-size:8px;color:var(--muted);line-height:1.2}.top nav{display:flex;gap:21px}.top nav a,.top-cta{font-size:10px;font-weight:900;letter-spacing:.09em}.top nav a:hover{color:var(--lime)}.top-cta{border:1px solid var(--lime);padding:13px 16px}.hero{padding-top:81px;padding-bottom:100px;display:grid;grid-template-columns:1fr .98fr;align-items:center;gap:60px}.indicator{width:8px;height:8px;border-radius:50%;background:var(--lime);display:inline-block;margin-right:10px}.hero h1,.section-heading h2,.security h2{font:650 clamp(70px,7.2vw,112px)/.99 var(--display);letter-spacing:-.02em;margin:24px 0}.hero h1 em,h2 em,h3 em{font-style:normal;color:var(--lime)}.hero-text>p:not(.eyebrow){font-size:15px;color:#c5d5c0;max-width:500px;line-height:1.9}.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:25px}.hero-tags span{padding:9px 11px;background:#253624;color:#c5dbbf;border:1px solid #516e47;font-size:9px;letter-spacing:.09em;font-weight:900}.hero-disclaimer{border-left:3px solid var(--lime);background:#263925;padding:17px 19px;margin-top:35px}.hero-disclaimer strong{font-size:10px;color:var(--lime);letter-spacing:.08em}.hero-disclaimer p{font-size:11px;color:#d4e5ce;line-height:1.75;margin:7px 0 0}
+.card-demo{min-width:0}.floating-label{display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:800;letter-spacing:.12em;color:#b0c4a4;margin-bottom:18px}.card-scene{width:100%;perspective:1250px}.card-rotator{position:relative;width:100%;aspect-ratio:1.62;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.18,.8,.26,1)}.card-rotator.is-flipped{transform:rotateY(180deg)}.member-card{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;padding:28px 31px;box-shadow:0 30px 70px #000a;border:1px solid #8fad80}.card-front{background:linear-gradient(145deg,#293d2e 0%,#14241d 46%,#0b1712 100%);display:flex;flex-direction:column;justify-content:space-between}.grain{position:absolute;inset:0;opacity:.25;background-image:radial-gradient(#baf2746e .6px,transparent .7px);background-size:13px 13px;pointer-events:none}.card-orb{position:absolute;border-radius:50%;border:1px solid #ceff8859;pointer-events:none}.card-orb-one{width:92%;aspect-ratio:1;top:-125%;right:-50%;box-shadow:0 0 0 38px #b3e67e0c,0 0 0 90px #b3e67e09}.card-orb-two{width:45%;aspect-ratio:1;bottom:-60%;left:-12%}.card-header,.identity-line,.card-footer{display:flex;position:relative;z-index:1}.card-header{justify-content:space-between;gap:20px;align-items:flex-start}.card-brand{font:700 35px/.8 var(--display);white-space:nowrap}.card-brand span{color:var(--lime)}.card-brand strong{font:900 12px var(--body);letter-spacing:.16em;margin-left:5px}.card-type{text-align:right;font-size:9px;letter-spacing:.13em;color:#d5eacc;font-weight:800;line-height:1.65}.identity-line{gap:15px;align-items:center}.member-photo{width:90px;height:90px;object-fit:cover;border-radius:12px;border:2px solid #c8ff62;background:#385341}.member-details{display:flex;flex-direction:column;gap:3px;min-width:0}.member-details small{font-size:9px;font-weight:900;letter-spacing:.08em;color:#b7e2aa}.member-details strong{font:650 32px/.98 var(--display);text-transform:uppercase}.member-details span{font-size:13px;font-weight:800;letter-spacing:.1em}.card-footer{border-top:1px solid #a9c68f5a;padding-top:13px;justify-content:space-between;align-items:center;font-size:10px;font-weight:900;letter-spacing:.07em}.card-emblem{color:var(--lime);font-size:24px;line-height:.5}.demo-ribbon{position:absolute;right:-45px;bottom:39px;transform:rotate(-38deg);background:#d0ff6c;color:#213717;font-weight:900;font-size:8px;letter-spacing:.08em;padding:5px 39px;z-index:2}
+.card-back{background:linear-gradient(145deg,#243b2a,#121c15);transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:space-between}.back-top,.back-footer{display:flex;justify-content:space-between;align-items:center;gap:15px}.back-top>span{font-size:9px;color:#d4e9cb;letter-spacing:.08em;font-weight:900}.back-centre{display:flex;gap:17px;align-items:center}.qr-frame{position:relative;display:block;background:#fff;border-radius:7px;padding:7px;width:122px;height:122px;flex-shrink:0}.qr-frame svg{width:100%;height:100%;display:block}.qr-frame>span{position:absolute;inset:44% 30%;background:#fff;display:grid;place-items:center;font-size:10px;font-weight:900;color:#111}.qr-copy{min-width:0}.qr-copy small{color:var(--lime);font-size:9px;letter-spacing:.1em;font-weight:900}.qr-copy strong{display:block;font:600 28px var(--display);margin:7px 0}.qr-copy p{font-size:10px;color:#d3e3cb;margin:0;line-height:1.65}.back-footer{border-top:1px solid #8fab7c69;padding-top:12px;font-size:10px}.back-footer strong{color:var(--lime);font-size:9px;text-align:right}.flip-controls{display:flex;align-items:center;gap:20px;justify-content:center;margin-top:22px}.flip-button{background:var(--lime);border:0;padding:13px 20px;display:flex;align-items:center;gap:12px;color:#152515;font-size:11px;font-weight:900;letter-spacing:.07em}.flip-icon{font-size:24px;line-height:.7}.flip-hint{font-size:11px;color:#bacbac}.card-note{text-align:center;color:#82987e;font-size:11px;margin-top:12px}.card-note strong{color:#b9ccaf}
+.stripe{background:var(--lime);color:#182718;display:flex;justify-content:space-around;align-items:center;gap:12px;padding:17px;font:650 clamp(15px,2.3vw,24px) var(--display);flex-wrap:wrap}.stripe b{font-size:17px}
+.dashboard-section{background:var(--bg2);padding:95px 0 110px}.section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:45px;margin-bottom:36px}.section-heading h2{font-size:clamp(58px,6vw,86px)}.section-heading>p{max-width:380px;color:#c6d7bf;font-size:14px;line-height:1.85}.dashboard-shell{border:1px solid #526b4a;background:#1b291d;box-shadow:0 28px 100px #050a0557}.dash-top{display:flex;justify-content:space-between;align-items:center;padding:20px 26px;border-bottom:1px solid #465f40;gap:15px}.dash-brand{display:flex;align-items:center;gap:14px}.dash-brand>span{font:700 25px var(--display)}.lime{color:var(--lime)}.dash-brand small{font-size:10px;letter-spacing:.11em;color:#a7bba0}.demo-chip{background:#385030;border:1px solid #78985d;font-size:10px;font-weight:900;color:#d8ffc2;letter-spacing:.1em;padding:8px 10px}.dash-bar{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 26px;border-bottom:1px solid #465f40}.dash-bar>span{font-size:10px;color:#d3e5c9;font-weight:900;letter-spacing:.09em}.view-switch{display:flex;gap:6px}.view-switch button{border:1px solid #597152;background:transparent;color:#c6d4bd;font-size:10px;font-weight:900;padding:12px 16px}.view-switch button.selected{background:var(--lime);color:#1a2b15;border-color:var(--lime)}.member-view,.staff-view{padding:30px 26px 37px}.member-heading{display:flex;align-items:center;justify-content:space-between;gap:20px}.avatar-row{display:flex;align-items:center;gap:14px}.avatar-row img{width:54px;height:54px;object-fit:cover;border-radius:11px;border:1px solid var(--lime)}.avatar-row small{display:block;color:var(--lime);font-size:9px;letter-spacing:.1em;font-weight:900}.avatar-row h3{font:600 31px var(--display);margin:2px 0}.avatar-row span{font-size:11px;color:#b4cbb1}.online-badge{font-size:9px;font-weight:900;color:#cbebbc;border:1px solid #6f9360;padding:9px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:25px}.metric{background:#283a29;border:1px solid #516f49;padding:24px}.metric>span{display:block;font-size:10px;letter-spacing:.08em;font-weight:900;color:#bddeb0}.metric strong{display:block;font:600 55px/.95 var(--display);margin:16px 0}.metric strong small{font:600 22px var(--display);color:#a6c398}.metric p{font-size:11px;color:#abc2a6;margin:0}.dash-bottom{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-top:14px}.dash-panel{border:1px solid #4b6844;padding:25px;background:#223424}.dash-panel-head{display:flex;align-items:center;justify-content:space-between;gap:15px;font-size:10px;color:#c4d8b8;font-weight:900}.dash-panel-head strong{color:var(--lime)}.progress-bar{height:9px;background:#152216;overflow:hidden;margin:20px 0 14px}.progress-bar span{display:block;width:75%;height:100%;background:var(--lime)}.weekday{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.weekday span{font-size:9px;color:#a3b39b;font-weight:800}.weekday .worked{color:var(--lime)}.dash-panel p{font-size:11px;color:#aebfa7;margin:15px 0 0}.goal-panel>span{font-size:10px;color:var(--lime);font-weight:900;letter-spacing:.08em}.goal-panel h4{font:600 35px var(--display);margin:14px 0}.metric-disclaimer{color:#91a88b;font-size:11px;line-height:1.9;margin:24px 0 0}.staff-view{text-align:center;padding:50px 30px}.staff-icon{font:600 76px var(--display);color:var(--lime);line-height:1}.staff-view h3{font:600 clamp(42px,5vw,70px)/1 var(--display);margin:14px 0}.staff-view>p:not(.eyebrow){max-width:620px;margin:0 auto;color:#cadbc3;font-size:13px;line-height:1.9}.staff-fields{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:left;margin-top:29px}.staff-fields>div{background:#2b3b2c;border:1px solid #566f4e;padding:19px}.staff-fields span{font-size:9px;letter-spacing:.08em;color:#b4cca8;font-weight:900}.staff-fields strong{font-size:12px;display:block;margin-top:10px;color:#f6ffec}.staff-view .staff-note{font-size:11px!important;margin-top:27px!important;color:#a4b79a!important}
+.wallet-section{padding-top:91px;padding-bottom:100px}.wallet-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.wallet-tile{background:#202c20;border:1px solid #536a4e;padding:29px;display:grid;grid-template-columns:70px 1fr;gap:20px;align-items:center}.wallet-symbol{font:600 65px var(--display);color:var(--lime)}.wallet-tile h3{font:600 31px var(--display);margin:0 0 6px}.wallet-tile p{font-size:12px;color:#c7d8bd;margin:0}.wallet-tile button{grid-column:1/-1;background:#2c3c2b;color:#b5c6ad;border:1px solid #647a57;padding:14px 16px;font-size:10px;letter-spacing:.06em;font-weight:900}
+.security{padding-bottom:100px}.security h2{font-size:clamp(54px,6vw,80px)}.security-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.security-grid article{background:#1e2e20;padding:24px;border:1px solid #4d6844}.security-grid article span{font-size:10px;color:var(--lime);letter-spacing:.08em;font-weight:900}.security-grid h3{font:600 25px var(--display);margin:18px 0 9px}.security-grid article p{font-size:12px;color:#c6d9be;line-height:1.8}.reassurance{margin-top:24px;border-left:3px solid var(--lime);background:#293d26;padding:22px;color:#e0f2d7;font-weight:800;font-size:11px;letter-spacing:.03em;line-height:1.8}
+.footer{border-top:1px solid var(--line);padding:29px 0;display:flex;justify-content:space-between;align-items:center;gap:25px}.footer>a{font-size:16px;font-weight:900}.footer>div{display:flex;gap:20px}.footer>div a{font-size:11px;color:#bdd0b5}
+@media(max-width:1100px){.hero{grid-template-columns:1fr;gap:45px}.hero-text{max-width:800px}.card-demo{max-width:550px;width:100%;margin:0 auto}.hero h1{font-size:clamp(75px,9vw,118px)}}
+@media(max-width:800px){.top nav{display:none}.section-heading{display:block}.section-heading>p{max-width:650px}.dash-bottom,.wallet-grid{grid-template-columns:1fr}.staff-fields{grid-template-columns:1fr}}
+@media(max-width:620px){.wrap{width:calc(100% - 28px)}.top{padding:16px 0}.brand>span{font-size:30px}.brand strong{font-size:13px}.top-cta{font-size:9px;padding:10px}.hero{padding-top:58px;padding-bottom:62px}.hero h1{font-size:clamp(64px,13vw,94px)}.hero-text>p:not(.eyebrow){font-size:13px}.hero-tags span{font-size:8px}.member-card{padding:15px 17px;border-radius:15px}.card-brand{font-size:26px}.card-brand strong{font-size:9px}.card-type,.member-details small,.card-footer,.back-top>span{font-size:7px}.identity-line{gap:10px}.member-photo{width:62px;height:62px;border-radius:9px}.member-details strong{font-size:22px}.member-details span{font-size:10px}.card-footer{padding-top:8px}.demo-ribbon{font-size:7px;right:-51px;bottom:30px}.back-centre{gap:10px}.qr-frame{width:83px;height:83px;padding:4px}.qr-frame>span{font-size:7px}.qr-copy strong{font-size:20px;margin:3px 0}.qr-copy p{font-size:8px;line-height:1.5}.qr-copy small,.back-footer strong{font-size:7px}.back-footer{font-size:8px}.flip-controls{flex-wrap:wrap;gap:12px}.dashboard-section{padding:65px 0}.section-heading h2,.security h2{font-size:clamp(55px,11vw,72px)}.dash-top,.dash-bar{padding:17px;flex-wrap:wrap}.dash-brand small{font-size:8px}.view-switch{width:100%}.view-switch button{flex:1;padding:11px 8px;font-size:9px}.member-view,.staff-view{padding:19px 15px}.member-heading{display:block}.online-badge{display:inline-block;margin-top:15px}.metrics{gap:8px}.metric{padding:12px 9px}.metric>span{font-size:8px}.metric strong{font-size:36px;margin:12px 0}.metric strong small{font-size:14px}.metric p{font-size:9px}.dash-panel{padding:18px}.wallet-section{padding:67px 0}.wallet-tile{padding:21px;grid-template-columns:44px 1fr}.wallet-symbol{font-size:43px}.wallet-tile h3{font-size:26px}.security{padding-bottom:70px}.security-grid{grid-template-columns:1fr}.footer{flex-wrap:wrap}.footer>div{gap:12px;flex-wrap:wrap}}
+@media(max-width:390px){.member-card{padding:12px}.member-photo{width:52px;height:52px}.member-details strong{font-size:19px}.member-details span{font-size:9px}.card-type{font-size:6px}.member-details small{font-size:6px}.card-brand{font-size:21px}.card-footer{font-size:6px}.card-orb-one{display:none}.qr-frame{width:72px;height:72px}.qr-copy strong{font-size:17px}.qr-copy p{font-size:7px}.back-centre{gap:7px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card-rotator{transition:none}}
+</style>
