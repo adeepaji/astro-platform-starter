@@ -1,0 +1,55 @@
+# BF GYM Global — quick owner guide
+
+## Your live public pages
+
+- Homepage: https://bfgym.netlify.app/
+- Start Here / two-step plan finder: https://bfgym.netlify.app/start/
+- Free 4-week programmes: https://bfgym.netlify.app/programmes/
+- Videos and exercise searches: https://bfgym.netlify.app/app/workouts/
+- Mobile web app: https://bfgym.netlify.app/app/
+- Trainer profile: https://bfgym.netlify.app/trainer/
+- Example workout and meal day: https://bfgym.netlify.app/sample-plan/
+
+**All these pages are educational. Paid bookings, subscriptions and enquiries remain disabled by default.**
+
+## How you can edit your website without building a new app
+
+1. Sign in to GitHub, open https://github.com/adeepaji/astro-platform-starter .
+2. Choose **main** branch. Navigate to the file below.
+3. Click the pencil (Edit this file), change only the words or link targets, then **Commit changes** to main.
+4. GitHub checks the build; if Netlify is connected to main, it deploys the new published site automatically.
+5. Review the live page on your phone. If a build fails, revert the change from GitHub history.
+
+| To change | Edit this file |
+| --- | --- |
+| Four homepage quick-link cards, descriptions and main free-programme messaging | `src/data/siteContent.ts` |
+| Coach name, specialisms, qualifications and approved photo paths | `src/data/trainerProfile.ts` |
+| Beginner/intermediate/advanced programme text and exercises | `src/data/trainingProgrammes.ts` |
+| Homepage layout and section headings | `src/pages/index.astro` |
+| The two-step finder interface | `src/pages/start.astro` |
+| Mobile app layout and tracker interface | `src/pages/app/index.astro` |
+
+**Note:** GitHub is a developer-oriented editor rather than a protected CMS. Editing data arrays requires correct punctuation. Start with text-only changes until you are comfortable. To avoid mistakes, use GitHub's Preview changes and keep previous file versions available.
+
+## New user experience
+
+- Homepage has **Start training for free** and four Quick Start links.
+- `/start/` offers two questions to suggest a *level* for exploring free example programmes: not medical screening or personalised coaching.
+- The suggested level opens `/programmes/?level=beginner` (or intermediate/advanced) directly.
+- The chosen level can be remembered on the same device. Existing weekly checkmarks remain device-only.
+- Mobile app bottom navigation links to **Start** instead of inactive paid **Book** page.
+- No login, backend account, automatic billing or health-data intake is introduced.
+
+## Trainer photos
+
+Your earlier resume headshot is currently the public trainer picture. The new pose photographs uploaded to ChatGPT are suitable candidates for a professional gallery, but they are **not yet hosted in your public repository**. Do not link a sandbox upload URL into a public website; it will not work for normal visitors.
+
+To publish approved images, optimise them as WebP/JPEG, remove private metadata and upload them under `public/images/trainer/` using GitHub's **Add file → Upload files**. Then update the images' URLs in `src/data/trainerProfile.ts` and any gallery configuration. Keep the original certificate PDFs private.
+
+## Legal and privacy
+
+- A UK-based person delivering paid online training is not made India-based simply by a worldwide site or foreign payment account.
+- Do not enable commercial services until the dependant-visa work restrictions and UK tax/business obligations have been professionally reviewed.
+- Original course certificate copies were inspected, but awarding-body authentication has not been independently confirmed.
+- At the owner's request, do not show certificate award or expiry dates publicly. Historical credentials must never be described as currently valid.
+- The device-only plan picker stores only a level, not personal or medical details.
