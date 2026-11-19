@@ -1,8 +1,8 @@
 {
   "id": "/app/",
-  "name": "BF GYM — Fitness & Coaching",
+  "name": "BF GYM Global — Online Fitness",
   "short_name": "BF GYM",
-  "description": "Fitness classes, online coaching, session requests and a private workout tracker.",
+  "description": "Worldwide fitness education and a personal workout tracker. Online coaching opening later, operated from the UK.",
   "start_url": "/app/",
   "scope": "/",
   "display": "standalone",
