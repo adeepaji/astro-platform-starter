@@ -1,0 +1,59 @@
+---
+import { services } from '../data/services';
+import { publicEnquiriesEnabled } from '../data/businessLaunch';
+const pageTitle = 'Global online coaching launch | BF GYM Global';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101310" /><meta name="description" content="Learn about upcoming online personal training, group fitness and coaching services with BF GYM Global."/>
+  <link rel="icon" href="/bf-icon.svg" type="image/svg+xml" /><title>{pageTitle}</title>
+</head>
+<body>
+  <header><div class="shell top"><a href="/" class="brand">BF<span>.</span> GYM</a><a class="back" href="/#pricing">← BACK TO PROGRAMMES</a></div></header>
+  <main class="shell layout">
+    <section>
+      <p class="eyebrow">GLOBAL FITNESS / PRE-LAUNCH</p><h1>ONLINE<br /><em>WORLDWIDE.</em></h1>
+      <p class="intro">BF GYM Global is developing online personal training, live fitness classes and coaching plans for an international audience. Paid sessions and enrolment are not yet open.</p>
+      <div class="note"><strong>NOT ACCEPTING CLIENT BOOKINGS YET</strong><p>We are reviewing business, immigration, tax and privacy requirements before opening paid coaching. No payment or confirmed appointment is available.</p></div>
+      <div class="availability"><h2>Worldwide online access, once launched</h2><p>Our videos and exercise library remain available to explore now. Live coaching availability will be announced after the launch review.</p>
+        {services.filter((s) => Boolean(s.bookingUrl)).map(s => <p class="quick-link"><a href={s.bookingUrl} target="_blank" rel="noopener noreferrer">CHECK {s.title.toUpperCase()} AVAILABILITY ↗</a></p>)}
+      </div>
+    </section>
+    {publicEnquiriesEnabled ? (<section class="form-panel"><div class="form-head"><strong>SESSION REQUEST</strong><small>BF / BOOKING ENQUIRY</small></div>
+      <form name="bf-gym-booking" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="website">
+        <input type="hidden" name="form-name" value="bf-gym-booking" />
+        <p class="trap"><label>Leave blank <input type="text" name="website" autocomplete="off" tabindex="-1" /></label></p>
+        <div class="form-row"><label>Full name <input name="name" type="text" autocomplete="name" required maxlength="100" placeholder="Your name" /></label><label>Email <input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com" /></label></div>
+        <label>Which service? <select id="selected-service" name="service" required><option value="" selected disabled>Choose one</option>{services.map(s=><option value={s.id}>{s.title}</option>)}</select></label>
+        <label>Where would you like to train? <select name="format" required><option value="" selected disabled>Choose your preference</option><option value="online">Online</option></select></label>
+        <div class="form-row"><label>Preferred date (optional) <input name="preferred_date" id="preferred-date" type="date" /></label><label>Preferred time (optional) <input name="preferred_time" type="time" /></label></div>
+        <label>Alternative availability (optional) <input name="alternative" type="text" maxlength="160" placeholder="e.g. Weekday evenings, Saturday mornings" /></label>
+        <label>Anything else? (optional) <textarea name="notes" rows="4" maxlength="900" placeholder="Experience level or session preferences. Please don't include sensitive health details."></textarea></label>
+        <p class="policy">We will use the information you send only to respond to your booking request. Read our <a href="/privacy/">privacy information</a>. Please do not include medical or other sensitive personal details.</p>
+        <label class="check"><input type="checkbox" name="request_acknowledged" value="yes" required /><span>I understand this is a request and no session is booked until BF GYM confirms it.</span></label>
+        <button type="submit">SEND BOOKING REQUEST <span aria-hidden="true">↗</span></button>
+        <p class="fine">Form delivery requires an active Netlify deployment with Forms enabled.</p>
+      </form>
+    </section>) : (<section class="form-panel"><div class="form-head"><strong>LAUNCH INFORMATION</strong><small>BF / GLOBAL</small></div><h2>COACHING OPENING LATER</h2><p>Until the services are ready for launch, this page does not accept enquiries, bookings or payments. Browse the exercise video directory for free and check back for future updates.</p><p><a class="explore-link" href="/app/workouts/">WATCH FREE WORKOUT DEMONSTRATIONS ↗</a></p><p class="fine">BF GYM Global is UK-operated, with an international online audience planned. No India-based operating company is claimed.</p></section>)}
+  </main>
+  <footer class="shell"><a href="/">BF GYM</a> · <a href="/privacy/">Privacy information</a></footer>
+  <script>
+    const searchParams = new URLSearchParams(window.location.search);
+    const id = searchParams.get('service');
+    const select = document.querySelector<HTMLSelectElement>('#selected-service');
+    if (select && id && ['personal','group','online'].includes(id)) select.value = id;
+    const dateInput = document.querySelector<HTMLInputElement>('#preferred-date');
+    if (dateInput) {
+      const d = new Date();
+      const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+      dateInput.min = local.toISOString().slice(0,10);
+    }
+  </script>
+</body>
+</html>
+<style>
+:root{--bg:#101310;--green:#c7ff52;--white:#f3f4e9;--muted:#b5bdb0}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,sans-serif}.shell{width:min(1120px,calc(100% - 40px));margin:auto}header{border-bottom:1px solid #353b32}.top{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{text-decoration:none;font-weight:900;font-size:22px;color:var(--white)}.brand span,.eyebrow,h1 em{color:var(--green)}.back{font-size:11px;font-weight:700;color:var(--white);text-decoration:none}.layout{padding:92px 0;display:grid;grid-template-columns:.9fr 1.1fr;gap:9%}.eyebrow{font-size:12px;letter-spacing:.17em;font-weight:800}h1{font:800 clamp(70px,8vw,132px)/.95 Impact,'Arial Narrow',sans-serif;letter-spacing:-.03em;margin:25px 0}h1 em{font-style:normal}.intro{color:var(--muted);font-size:17px;line-height:1.8;max-width:480px}.note{border-left:3px solid var(--green);padding:14px 18px;background:#20271c;margin-top:40px;max-width:480px}.note strong{font-size:11px;letter-spacing:.07em}.note p,.availability p{color:var(--muted);line-height:1.6;font-size:13px}.availability{margin-top:50px}.availability h2{font-size:22px}.quick-link a{color:var(--green);font-weight:800}.form-panel{background:#eff0e6;color:#151a13;padding:32px}.form-head{display:flex;justify-content:space-between;border-bottom:1px solid #c2cabd;padding-bottom:22px;gap:14px}.form-head small{font-size:10px;color:#747e6c}form{display:grid;gap:19px;padding-top:26px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{display:grid;gap:8px;font-size:12px;font-weight:700}input,select,textarea{font:inherit;font-size:14px;padding:15px;border:1px solid #bfc9b8;background:#fff;color:#171b14;min-width:0;width:100%;border-radius:0}input:focus,select:focus,textarea:focus{outline:2px solid #83aa32}textarea{resize:vertical}.check{grid-template-columns:20px 1fr;align-items:start;font-weight:400;line-height:1.6}.check input{width:17px;height:17px;margin:0;accent-color:#5a8029}.policy,.fine{color:#586053;font-size:11px;line-height:1.8;margin:0}.policy a{color:#253c08;font-weight:800}button{border:0;cursor:pointer;padding:18px 22px;background:var(--green);font-size:12px;font-weight:800;color:#151a13;display:flex;justify-content:space-between}button span{font-size:18px}.trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}footer{border-top:1px solid #384032;padding:25px 0 45px;color:#8f9989;font-size:12px}footer a{color:inherit;text-decoration:none}@media(max-width:820px){.layout{grid-template-columns:1fr;gap:40px;padding:60px 0}.form-panel{padding:25px}}@media(max-width:460px){.form-row{grid-template-columns:1fr}.form-panel{padding:18px}h1{font-size:72px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+.explore-link{display:inline-block;background:#c7ff52;color:#101310;padding:16px;font-weight:800;font-size:12px;text-decoration:none}.form-panel>h2{font:800 35px Impact,Arial,sans-serif}.form-panel>p{line-height:1.8;color:#44523d}
+</style>

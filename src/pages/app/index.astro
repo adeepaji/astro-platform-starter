@@ -1,0 +1,188 @@
+---
+import { services } from '../../data/services';
+import { commercialServicesEnabled } from '../../data/businessLaunch';
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#101310" />
+  <meta name="description" content="BF GYM Global mobile fitness hub. Learn workouts, explore planned online coaching and privately track your workouts." />
+  <title>BF GYM Global — Fitness App</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/bf-icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/app-icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="BF GYM" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body>
+  <div class="app-shell" id="home">
+    <header class="app-header">
+      <a class="app-logo" href="/app/" aria-label="BF GYM app home"><span>BF<span class="logo-dot">.</span></span><strong>GYM</strong></a>
+      <div class="header-right"><span class="header-label">GLOBAL ONLINE FITNESS</span><a class="header-site" href="/app/workouts/" aria-label="Browse workout demo videos" title="Workout videos">▶</a></div>
+    </header>
+    <main>
+      <section class="hero" aria-labelledby="app-heading">
+        <div class="hero-meta"><span><i aria-hidden="true"></i> YOUR TRAINING STARTS HERE</span><span>BF / 001</span></div>
+        <h1 id="app-heading">MAKE<br/>EVERY DAY<br/><em>COUNT.</em></h1>
+        <p>Explore workouts anywhere. Learn with video demonstrations and track your progress. Online coaching is in preparation.</p>
+        <div class="hero-cta"><a href="/book/" class="primary-cta">EXPLORE COACHING <span aria-hidden="true">↗</span></a><a href="#progress" class="round-link" aria-label="Go to workout tracker">↓</a></div>
+        <div class="hero-geometry" aria-hidden="true"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+      </section>
+      <section class="stats" aria-label="Your workout progress">
+        <div><span class="stat-name">TOTAL LOGGED</span><strong id="total-count">0</strong><small>workouts</small></div>
+        <div><span class="stat-name">THIS WEEK</span><strong id="week-count">0</strong><small>workouts</small></div>
+        <div><span class="stat-name">CURRENT STREAK</span><strong id="streak-count">0</strong><small>days</small></div>
+      </section>
+      <section class="video-feature" aria-labelledby="video-heading"><div><p class="video-eyebrow">NEW / WATCH & LEARN</p><h2 id="video-heading">418 EXERCISES.<br/><em>YOUTUBE DEMOS.</em></h2><p>Explore weights, cardio and HIIT with 418 exercise searches linking to YouTube, plus 64 selected video demos you can watch in the app. Search by movement, level and equipment.</p><a href="/app/workouts/">EXPLORE VIDEO LIBRARY <span aria-hidden="true">↗</span></a></div><span class="video-feature-icon" aria-hidden="true">▶</span></section><section class="section" id="services" aria-labelledby="service-heading">
+        <div class="section-top"><div><span class="section-index">01 / PLANNED ONLINE COACHING</span><h2 id="service-heading">YOUR WAY<br/><em>TO TRAIN.</em></h2></div><span class="mini-mark">✳</span></div>
+        <div class="service-list">
+          {services.map((s,index) => (
+            <article class="service-card">
+              <div class="service-id"><span>0{index+1}</span><span>{s.eyebrow}</span></div>
+              <h3>{s.title}</h3><p>{s.description}</p>
+              <div class="service-footer"><div class:list={['service-price', { 'pending-price': !commercialServicesEnabled }]}>{commercialServicesEnabled ? '£' + s.price : 'OPENING SOON'}<span>{commercialServicesEnabled ? s.unit : 'Online service, details to be announced'}</span></div><a href={s.bookingUrl || '/book/?service=' + s.id} target={s.bookingUrl ? '_blank' : undefined} rel={s.bookingUrl ? 'noopener noreferrer' : undefined} class="service-book" aria-label={'Request ' + s.title}>{s.bookingUrl ? 'BOOK' : commercialServicesEnabled ? 'ENQUIRE' : 'EXPLORE'} <span aria-hidden="true">↗</span></a></div>
+              {s.id==='online' && s.paymentUrl && <a href={s.paymentUrl} class="pay-link" target="_blank" rel="noopener noreferrer">START ONLINE SUBSCRIPTION ↗</a>}
+            </article>
+          ))}
+        </div>
+        <p class="disclaimer">Global online coaching services are in preparation. No active enrolment, client bookings or payments are available yet. Exercise videos and the personal tracker are free.</p>
+      </section>
+      <section class="section tracker-section" id="progress" aria-labelledby="progress-heading">
+        <div class="section-top"><div><span class="section-index">02 / BUILD THE HABIT</span><h2 id="progress-heading">SHOW UP.<br/><em>LOG IT.</em></h2></div></div>
+        <div class="tracker-panel">
+          <div class="tracker-intro"><div><span class="tracker-eyebrow">YOUR PERSONAL TRACKER</span><h3>Keep the streak alive.</h3><p>Mark a workout as completed. Your log is stored only on this device — it isn't linked to your trainer or bookings.</p></div><div class="big-check" aria-hidden="true">✓</div></div>
+          <div class="week-view" id="week-view" aria-label="Workout history this week">
+            {['M','T','W','T','F','S','S'].map((day,index)=><div class="day-cell"><span>{day}</span><strong class:list={['day-dot']} data-day={index} aria-label={'Day '+(index+1)}>·</strong></div>)}
+          </div>
+          <p class="tracker-status" id="tracker-status" role="status" aria-live="polite">Your workout history will appear here.</p>
+          <button type="button" id="log-today" class="log-btn">LOG TODAY'S WORKOUT <span aria-hidden="true">+</span></button>
+          <button type="button" id="remove-today" class="undo-btn" hidden>Undo today's entry</button>
+          <p class="tracker-note">For motivation only. No login, synced account, medical or wearable tracking is included in this version.</p>
+        </div>
+      </section>
+      <section class="section booking-section" id="booking" aria-labelledby="booking-heading">
+        <span class="section-index">03 / UPCOMING ONLINE SESSIONS</span><h2 id="booking-heading">LET'S<br/><em>GET MOVING.</em></h2>
+        <div class="class-card"><div class="class-card-top"><span>GROUP FITNESS</span><span>CLASS TIMETABLE</span></div><strong>COMING SOON</strong><p>International online class dates, time zones and capacity are being planned. No classes are currently offered for booking.</p><a href="/book/?service=group">VIEW PLANNED GROUP CLASSES ↗</a></div>
+        <div class="booking-actions"><a href="/book/?service=personal"><span>01</span><div><strong>Personal training</strong><small>Preview online one-to-one coaching</small></div><span aria-hidden="true">↗</span></a><a href="/book/?service=online"><span>02</span><div><strong>Online coaching</strong><small>Preview online training plans</small></div><span aria-hidden="true">↗</span></a></div>
+      </section>
+      <section class="install-section" id="install" aria-labelledby="install-heading">
+        <span class="section-index">04 / KEEP BF GYM CLOSE</span><h2 id="install-heading">YOUR FITNESS.<br/><em>ONE TAP AWAY.</em></h2><p>Add BF GYM to your phone's Home Screen for an app-like experience. Installation is free; coaching services are separate.</p>
+        <button id="install-btn" class="install-btn" type="button" hidden>INSTALL BF GYM <span aria-hidden="true">↓</span></button>
+        <details id="install-help"><summary>How to add this app to your phone</summary><p><strong>iPhone:</strong> Open this page in Safari, tap the Share icon, then select <strong>Add to Home Screen</strong> (or use Safari's equivalent Add to Home Screen option).</p><p><strong>Android:</strong> Open this page in Chrome, open the browser menu and choose <strong>Install app</strong> or <strong>Add to Home screen</strong>, if available.</p></details>
+      </section>
+    </main>
+    <footer class="footer"><p>BF<span>.</span> GYM <small>© {year}</small></p><div><a href="/">Website</a><a href="/privacy/">Privacy</a></div></footer>
+  </div>
+  <nav class="bottom-nav" aria-label="Mobile app navigation">
+    <a href="#home"><span aria-hidden="true">⌂</span>Home</a>
+    <a href="/app/workouts/"><span aria-hidden="true">▶</span>Videos</a>
+    <a href="#progress"><span aria-hidden="true">◉</span>Progress</a>
+    <a href="#booking"><span aria-hidden="true">↗</span>Book</a>
+  </nav>
+  <script>
+    // Local-only workout log: no personal details are transmitted or shared.
+    const storageKey = 'bf-gym-workouts-v1';
+    const localDateKey = (date: Date): string => {
+      const year = date.getFullYear();
+      return year + '-' + String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0');
+    };
+    function loadLog(): string[] {
+      try {
+        const stored = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        return Array.isArray(stored) ? stored.filter((date: unknown): date is string => typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date)).slice(-2000) : [];
+      } catch { return []; }
+    }
+    let workouts = new Set<string>(loadLog());
+    const today = localDateKey(new Date());
+    const monday = new Date();
+    const mondayShift = (monday.getDay() + 6) % 7;
+    monday.setDate(monday.getDate() - mondayShift);
+    const getStreak = () => {
+      let cursor = new Date();
+      if (!workouts.has(localDateKey(cursor))) cursor.setDate(cursor.getDate()-1);
+      let count = 0;
+      while (workouts.has(localDateKey(cursor)) && count < 2000) {
+        count++;
+        cursor.setDate(cursor.getDate()-1);
+      }
+      return count;
+    };
+    const renderTracker = () => {
+      const days = Array.from({length:7},(_,index)=>{const d = new Date(monday);d.setDate(monday.getDate()+index);return localDateKey(d);});
+      const weekCount = days.filter(key=>workouts.has(key)).length;
+      const totalEl = document.querySelector<HTMLElement>('#total-count');
+      const weekEl = document.querySelector<HTMLElement>('#week-count');
+      const streakEl = document.querySelector<HTMLElement>('#streak-count');
+      if (totalEl) totalEl.textContent = String(workouts.size);
+      if (weekEl) weekEl.textContent = String(weekCount);
+      if (streakEl) streakEl.textContent = String(getStreak());
+      document.querySelectorAll<HTMLElement>('.day-dot').forEach((dot,index)=>{
+        const key = days[index];
+        const marked = workouts.has(key);
+        dot.classList.toggle('done',marked);
+        dot.classList.toggle('today',key===today);
+        dot.textContent = marked ? '✓' : '·';
+        dot.setAttribute('aria-label',new Date(key+'T12:00:00').toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'})+(marked?' workout logged':' no workout logged'));
+      });
+      const logButton = document.querySelector<HTMLButtonElement>('#log-today');
+      const undoButton = document.querySelector<HTMLButtonElement>('#remove-today');
+      const statusEl = document.querySelector<HTMLElement>('#tracker-status');
+      if (logButton) {
+        logButton.disabled = workouts.has(today);
+        logButton.textContent = workouts.has(today) ? 'TODAY’S WORKOUT LOGGED ✓' : "LOG TODAY'S WORKOUT +";
+      }
+      if (undoButton) undoButton.hidden = !workouts.has(today);
+      if (statusEl) statusEl.textContent = workouts.has(today) ? 'Nice work! You logged today’s workout.' : 'Completed a workout today? Add it to your personal log.';
+    };
+    document.querySelector<HTMLButtonElement>('#log-today')?.addEventListener('click',()=>{
+      workouts.add(today);
+      try {localStorage.setItem(storageKey,JSON.stringify([...workouts].sort()));}
+      catch {const status=document.querySelector<HTMLElement>('#tracker-status');if(status)status.textContent='Your browser could not save this workout permanently.';}
+      renderTracker();
+    });
+    document.querySelector<HTMLButtonElement>('#remove-today')?.addEventListener('click',()=>{
+      workouts.delete(today);
+      try {localStorage.setItem(storageKey,JSON.stringify([...workouts].sort()));} catch {}
+      renderTracker();
+    });
+    renderTracker();
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(()=>{}); });
+    }
+    let installPrompt: Event & {prompt?:()=>Promise<void>;userChoice?:Promise<{outcome:string}>} | undefined;
+    const installButton = document.querySelector<HTMLButtonElement>('#install-btn');
+    const isStandalone = () => window.matchMedia('(display-mode: standalone)').matches || (navigator as Navigator & {standalone?:boolean}).standalone === true;
+    window.addEventListener('beforeinstallprompt',(event:Event)=>{
+      event.preventDefault();
+      installPrompt=event;
+      if(installButton && !isStandalone()) installButton.hidden=false;
+    });
+    installButton?.addEventListener('click',async()=>{
+      if (!installPrompt?.prompt) return;
+      await installPrompt.prompt();
+      installButton.hidden = true;
+      installPrompt = undefined;
+    });
+    window.addEventListener('appinstalled',()=>{ if(installButton) installButton.hidden = true;});
+  </script>
+</body>
+</html>
+<style is:global>
+:root{--bg:#101310;--surface:#1d241c;--surface-2:#2a3228;--text:#eff2e9;--muted:#aebaac;--lime:#c7ff52;--line:#3c4b37;--font:Impact,'Arial Narrow',sans-serif}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:75px}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}button:disabled{cursor:default;opacity:.75}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--lime);outline-offset:3px}em{font-style:normal;color:var(--lime)}.app-shell{max-width:750px;margin:auto;min-height:100vh;padding-bottom:80px}.app-header{display:flex;align-items:center;justify-content:space-between;padding:23px 22px;border-bottom:1px solid var(--line)}.app-logo{display:flex;align-items:center;gap:9px}.app-logo>span{font:800 32px/1 var(--font);letter-spacing:-.08em}.app-logo strong{font-size:14px;letter-spacing:.09em}.logo-dot,.footer>p>span{color:var(--lime)}.header-right{display:flex;gap:15px;align-items:center}.header-label{color:#a9b6a0;font-size:9px;font-weight:800;letter-spacing:.13em}.header-site{width:35px;height:35px;border:1px solid #6e865c;display:grid;place-items:center;color:var(--lime);font-size:21px}
+.hero{margin:16px;min-height:480px;padding:27px 24px;position:relative;overflow:hidden;background:linear-gradient(145deg,#344a25,#1e2c1e 58%,#19231a);border:1px solid #506642}.hero-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:9px;letter-spacing:.11em;font-weight:800;position:relative;z-index:2}.hero-meta>span:first-child{color:var(--lime)}.hero-meta>span i{display:inline-block;background:var(--lime);height:6px;width:6px;border-radius:50%;margin-right:6px}.hero h1{position:relative;z-index:1;margin:68px 0 17px;font:800 clamp(57px,10vw,92px)/.95 var(--font);letter-spacing:-.025em}.hero>p{position:relative;z-index:2;color:#e1ebdc;max-width:270px;font-size:13px;line-height:1.8}.hero-cta{display:flex;position:relative;z-index:2;align-items:center;gap:12px;margin-top:34px}.primary-cta{background:var(--lime);color:#121910;display:inline-flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;font-size:11px;font-weight:900;letter-spacing:.04em}.primary-cta span{font-size:18px}.round-link{width:47px;height:47px;border-radius:50%;border:1px solid #8da07b;display:grid;place-items:center;font-size:23px}.hero-geometry{position:absolute;inset:0;pointer-events:none}.orb{position:absolute;border:1px solid #c7ff522c;aspect-ratio:1;border-radius:50%;width:480px;top:-110px;right:-330px;box-shadow:0 0 0 55px #c7ff5207,0 0 0 110px #c7ff5204}.orb2{width:210px;top:140px;right:-150px;border-color:#c7ff526c}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:20px 16px 0;background:#1b221b;border:1px solid var(--line)}.stats>div{padding:21px 13px;text-align:center;display:flex;flex-direction:column;gap:3px}.stats>div+div{border-left:1px solid var(--line)}.stat-name{font-size:9px;font-weight:800;letter-spacing:.05em;color:#afc1a1}.stats strong{font:800 43px/1.1 var(--font);color:var(--lime)}.stats small{color:var(--muted);font-size:10px}
+.section{padding:70px 16px 10px}.section-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:28px}.section-index{font-weight:800;font-size:10px;letter-spacing:.16em;color:var(--lime)}h2{font:800 clamp(47px,9vw,74px)/1 var(--font);letter-spacing:-.02em;margin:16px 0 0}.mini-mark{font-size:42px;color:var(--lime)}.service-list{display:grid;gap:12px}.service-card{background:var(--surface);border:1px solid var(--line);padding:25px}.service-id{display:flex;justify-content:space-between;color:var(--lime);font-weight:800;font-size:10px;letter-spacing:.12em}.service-card h3{margin:28px 0 8px;font:700 clamp(29px,6vw,38px)/1.2 var(--font);text-transform:uppercase}.service-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.8}.service-footer{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:15px}.service-price{font:800 41px/1 var(--font);color:var(--lime)}.service-price.pending-price{font-size:29px;line-height:1.1}.service-price span{display:block;font:700 11px/1.6 Arial,sans-serif;color:#d7dfd2;margin-top:6px}.service-book{background:var(--lime);color:#111a0e;padding:13px 15px;font-size:11px;font-weight:900;white-space:nowrap}.service-book span{margin-left:8px;font-size:17px}.pay-link{display:block;text-align:right;margin-top:20px;color:var(--lime);font-size:10px;font-weight:800}.disclaimer,.tracker-note{margin:20px 0 0;color:#a9b4a4;font-size:11px;line-height:1.8}
+.tracker-section{padding-top:85px}.tracker-panel{background:#d4ff76;color:#1b2613;padding:25px}.tracker-intro{display:flex;justify-content:space-between;gap:18px}.tracker-eyebrow{font-size:10px;font-weight:800;letter-spacing:.11em}.tracker-intro h3{font:700 32px/1.2 var(--font);margin:12px 0 5px;text-transform:uppercase}.tracker-intro p{font-size:12px;max-width:440px;line-height:1.7;color:#40582d}.big-check{font:700 56px var(--font);opacity:.35}.week-view{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;margin:27px 0 17px}.day-cell{text-align:center}.day-cell span{font-size:11px;font-weight:800;display:block;margin-bottom:9px}.day-dot{display:grid;place-items:center;border:1px solid #9fbe69;border-radius:50%;background:#e7ffb4;width:100%;max-width:44px;aspect-ratio:1;margin:auto;font-size:22px}.day-dot.done{background:#1e3117;color:var(--lime);border-color:#1e3117}.day-dot.today{outline:2px solid #304929;outline-offset:3px}.tracker-status{font-weight:800;font-size:12px;min-height:20px;margin:16px 0}.log-btn{width:100%;border:0;background:#1b2718;color:#ddff96;padding:17px 19px;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:900}.log-btn span{font-size:21px}.undo-btn{padding:12px;margin-top:10px;border:0;background:transparent;color:#243f19;text-decoration:underline;font-size:12px;font-weight:700}.tracker-note{color:#37512a}
+.booking-section{padding-top:85px}.class-card{margin-top:30px;padding:27px;background:linear-gradient(140deg,#3c5130,#243322);border:1px solid #5f7950}.class-card-top{display:flex;justify-content:space-between;gap:10px;font-size:10px;letter-spacing:.11em;font-weight:800;color:var(--lime)}.class-card>strong{display:block;margin:53px 0 7px;font:700 53px/1 var(--font)}.class-card p{color:#c5d0c0;font-size:12px;line-height:1.8}.class-card>a{display:inline-block;color:var(--lime);font-weight:800;font-size:11px;margin-top:11px}.booking-actions{margin:19px 0}.booking-actions>a{display:flex;align-items:center;gap:18px;padding:22px 10px;border-bottom:1px solid var(--line)}.booking-actions>a>span:first-child{color:var(--lime);font-weight:900;font-size:11px}.booking-actions>a>div{flex:1}.booking-actions strong{display:block;font-size:15px}.booking-actions small{display:block;margin-top:5px;color:var(--muted);font-size:11px}.booking-actions>a>span:last-child{color:var(--lime);font-size:25px}
+.install-section{background:#20291e;border:1px solid #40543a;margin:70px 16px 30px;padding:30px 24px}.install-section>p{font-size:13px;line-height:1.75;color:#c6d5c1}.install-btn{border:0;background:var(--lime);font-weight:900;padding:16px;display:flex;justify-content:space-between;width:100%;margin:24px 0;color:#15210e}.install-btn[hidden]{display:none}.install-section details{border-top:1px solid var(--line);margin-top:18px;padding-top:16px}.install-section summary{cursor:pointer;font-weight:800;color:var(--lime);font-size:12px}.install-section details p{color:#becab8;font-size:12px;line-height:1.75}
+.footer{display:flex;justify-content:space-between;gap:20px;padding:30px 20px;border-top:1px solid var(--line);align-items:center}.footer p{font-weight:900;font-size:16px;margin:0}.footer p small{font-weight:400;font-size:10px;color:var(--muted);margin-left:6px}.footer>div{display:flex;gap:14px}.footer a{font-size:11px;color:#c6d6be}
+.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;padding:10px max(12px,env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-right));background:#121812f5;border-top:1px solid #384632;display:flex;justify-content:space-around;gap:8px;backdrop-filter:blur(10px)}.bottom-nav>a{display:flex;flex:1;flex-direction:column;align-items:center;gap:2px;font-size:10px;font-weight:700;color:#cedac7;padding:3px 0}.bottom-nav a span{font-size:24px;color:var(--lime);line-height:1.2}
+.video-feature{margin:24px 16px 0;padding:24px 24px 27px;background:linear-gradient(125deg,#30432b,#243021);border:1px solid #5b7850;display:flex;align-items:center;justify-content:space-between;gap:15px}.video-eyebrow{color:var(--lime);letter-spacing:.13em;font-size:9px;font-weight:900;margin:0}.video-feature h2{font:700 clamp(33px,6vw,49px)/1 var(--font);margin:14px 0}.video-feature h2 em{color:var(--lime);font-style:normal}.video-feature p:not(.video-eyebrow){max-width:400px;font-size:12px;color:#d0e0c9;line-height:1.7}.video-feature a{display:inline-flex;align-items:center;gap:18px;padding:13px 16px;background:var(--lime);color:#1a2915;font-size:10px;font-weight:900;margin-top:6px}.video-feature a span{font-size:16px}.video-feature-icon{font-size:60px;color:var(--lime);opacity:.5}
+@media(min-width:750px){.bottom-nav{max-width:750px;margin:auto}.app-shell{border-left:1px solid #293328;border-right:1px solid #293328}.hero h1{font-size:92px}.service-list{grid-template-columns:1fr 1fr}.service-card:last-child{grid-column:span 2}.stats strong{font-size:56px}}
+@media(max-width:370px){.hero{padding:24px 18px}.hero h1{font-size:54px}.hero-meta{font-size:8px}.stat-name{font-size:8px}.stats>div{padding:17px 8px}.stats strong{font-size:36px}.service-card{padding:20px}.tracker-panel{padding:18px}.day-dot{font-size:17px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
