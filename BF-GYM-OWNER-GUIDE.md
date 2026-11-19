@@ -7,6 +7,8 @@
 - Free 4-week programmes: https://bfgym.netlify.app/programmes/
 - Videos and exercise searches: https://bfgym.netlify.app/app/workouts/
 - Mobile web app: https://bfgym.netlify.app/app/
+- Daily workout dashboard: https://bfgym.netlify.app/app/dashboard/
+- Member/coach card concept (NOT a real wallet): https://bfgym.netlify.app/app/membership/
 - Trainer profile: https://bfgym.netlify.app/trainer/
 - Example workout and meal day: https://bfgym.netlify.app/sample-plan/
 
@@ -26,6 +28,8 @@
 | Coach name, specialisms, qualifications and approved photo paths | `src/data/trainerProfile.ts` |
 | Beginner/intermediate/advanced programme text and exercises | `src/data/trainingProgrammes.ts` |
 | Homepage layout and section headings | `src/pages/index.astro` |
+| Personal workout dashboard / local session history | `src/pages/app/dashboard.astro` |
+| Future member-card / coach-wallet concept UI (not active) | `src/pages/app/membership.astro` |
 | The two-step finder interface | `src/pages/start.astro` |
 | Mobile app layout and tracker interface | `src/pages/app/index.astro` |
 
@@ -37,7 +41,8 @@
 - `/start/` offers two questions to suggest a *level* for exploring free example programmes: not medical screening or personalised coaching.
 - The suggested level opens `/programmes/?level=beginner` (or intermediate/advanced) directly.
 - The chosen level can be remembered on the same device. Existing weekly checkmarks remain device-only.
-- Mobile app bottom navigation links to **Start** instead of inactive paid **Book** page.
+- Mobile app now links to **Dashboard**, **History**, and a clearly labelled **Member Preview** instead of inactive paid **Book**. The PWA install launches the new dashboard.
+- The member-card graphic is expressly **not a payment or ATM card**, and has no login, balance, money transfer or withdrawal functionality. Real accounts require a secure backend and regulated financial infrastructure.
 - No login, backend account, automatic billing or health-data intake is introduced.
 
 ## Trainer photos
