@@ -2,6 +2,7 @@ name: BF GYM build check
 on:
   push:
     branches:
+      - main
       - feature/bf-gym-launch-site
   pull_request:
     branches:
