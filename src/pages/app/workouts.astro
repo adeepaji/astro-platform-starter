@@ -1,5 +1,23 @@
 ---
 import { workoutVideos } from '../../data/workoutVideos';
+import { exerciseQueries } from '../../data/exerciseQueries';
+const catalogueCounts = {
+  all: exerciseQueries.length,
+  strength: exerciseQueries.filter(e=>e.category==='strength').length,
+  cardio: exerciseQueries.filter(e=>e.category==='cardio').length,
+  hiit: exerciseQueries.filter(e=>e.category==='hiit').length,
+};
+const groupedExercises = {
+  strength: exerciseQueries.filter(e=>e.category==='strength'),
+  cardio: exerciseQueries.filter(e=>e.category==='cardio'),
+  hiit: exerciseQueries.filter(e=>e.category==='hiit'),
+};
+const exerciseDirectory = Array.from({length:Math.max(groupedExercises.strength.length,groupedExercises.cardio.length,groupedExercises.hiit.length)},(_,i)=>
+  [groupedExercises.strength[i],groupedExercises.cardio[i],groupedExercises.hiit[i]]
+).flat().filter((entry)=>entry!==undefined);
+const focusOptions = [...new Set(exerciseQueries.map(e=>e.focus))].sort();
+const equipmentOptions = [...new Set(exerciseQueries.map(e=>e.equipment))].sort();
+const youtubeQueryUrl = (name:string) => 'https://www.youtube.com/results?search_query='+encodeURIComponent(name+' exercise demonstration proper form');
 const totals = {
   all: workoutVideos.length,
   strength: workoutVideos.filter(w=>w.category==='strength').length,
@@ -29,10 +47,10 @@ const totals = {
       <section class="hero">
         <p class="kicker"><span class="signal"></span> BF GYM / TRAINING EDUCATION</p>
         <h1>LEARN THE<br /><em>MOVEMENT.</em><br />OWN THE REP.</h1>
-        <p>Real exercise demonstrations from fitness educators on YouTube. Browse by training style, equipment and experience level.</p>
+        <p>Explore selected YouTube demonstrations plus a searchable directory of 418 common exercises. Find strength, weight training, cardio and HIIT videos without leaving a movement out of your search.</p>
         <div class="hero-nums">
           <div><strong>{totals.all}</strong><span>CURATED VIDEOS</span></div>
-          <div><strong>03</strong><span>TRAINING TYPES</span></div>
+          <div><strong>{catalogueCounts.all}</strong><span>EXERCISE SEARCHES</span></div>
           <div><strong>FREE</strong><span>TO WATCH</span></div>
         </div>
       </section>
@@ -76,7 +94,48 @@ const totals = {
           ))}
         </div>
         <div class="empty" id="empty-state" hidden><strong>NO MATCHING DEMOS</strong><p>Try a different training type, difficulty or search term.</p><button type="button" id="empty-reset">SHOW ALL VIDEOS</button></div>
-        <div class="more-videos">
+        
+        <section class="exercise-directory" id="exercise-directory" aria-labelledby="directory-heading">
+          <div class="dir-heading"><div><p class="kicker">02 / EXPLORE ALL EXERCISES</p><h2 id="directory-heading">EVERY MUSCLE.<br/><em>MORE MOVEMENTS.</em></h2><p>Browse {catalogueCounts.all} exercise names. Each link opens the latest matching demonstration results on YouTube, so you can explore different instructors and variations. These are searches, not individually checked or hosted videos.</p></div><div class="dir-total"><strong>{catalogueCounts.all}</strong><span>EXERCISES</span></div></div>
+          <div class="dir-search">
+            <label for="directory-search">FIND AN EXERCISE</label>
+            <div class="search-box"><span aria-hidden="true">⌕</span><input id="directory-search" type="search" placeholder="e.g. biceps curl, deadlift, rowing..." maxlength="100" autocomplete="off" /></div>
+          </div>
+          <div class="dir-tabs" role="group" aria-label="Exercise categories">
+            <button type="button" class="dir-tab selected" data-dir-category="all" aria-pressed="true">All <span>{catalogueCounts.all}</span></button>
+            <button type="button" class="dir-tab" data-dir-category="strength" aria-pressed="false">Weight training <span>{catalogueCounts.strength}</span></button>
+            <button type="button" class="dir-tab" data-dir-category="cardio" aria-pressed="false">Cardio <span>{catalogueCounts.cardio}</span></button>
+            <button type="button" class="dir-tab" data-dir-category="hiit" aria-pressed="false">HIIT <span>{catalogueCounts.hiit}</span></button>
+          </div>
+          <div class="dir-selects">
+            <label for="directory-focus">Muscle / workout type
+              <select id="directory-focus"><option value="all">All areas</option>{focusOptions.map(focus=><option value={focus}>{focus}</option>)}</select>
+            </label>
+            <label for="directory-equipment">Equipment
+              <select id="directory-equipment"><option value="all">Any equipment</option>{equipmentOptions.map(equipment=><option value={equipment}>{equipment}</option>)}</select>
+            </label>
+            <label for="directory-level">Level
+              <select id="directory-level"><option value="all">All levels</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
+            </label>
+          </div>
+          <div class="dir-toolbar"><p id="dir-count" role="status" aria-live="polite">Showing 24 of {catalogueCounts.all} exercises</p><button type="button" id="dir-reset">CLEAR FILTERS ↺</button></div>
+          <div class="exercise-grid">
+            {exerciseDirectory.map((exercise,index)=><article class="exercise-card" hidden={index>=24}
+                data-dir-category={exercise.category} data-dir-focus={exercise.focus} data-dir-equipment={exercise.equipment} data-dir-level={exercise.level} data-dir-search={(exercise.name+' '+exercise.focus+' '+exercise.equipment+' '+exercise.level).toLowerCase()}>
+              <div class="exercise-meta"><span>{exercise.category==='strength'?'WEIGHTS / STRENGTH':exercise.category.toUpperCase()}</span><span>{exercise.level}</span></div>
+              <h3>{exercise.name}</h3>
+              <p>{exercise.focus} · {exercise.equipment}</p>
+              <a href={youtubeQueryUrl(exercise.name)} target="_blank" rel="noopener noreferrer" aria-label={'Find '+exercise.name+' demonstrations on YouTube'}>FIND YOUTUBE DEMOS <span aria-hidden="true">↗</span></a>
+            </article>)}
+          </div>
+          <p class="dir-empty" id="dir-empty" hidden>No matching exercise was found. Try a simpler name, or search YouTube for any movement below.</p>
+          <button class="dir-showmore" type="button" id="dir-showmore">LOAD MORE EXERCISES <span aria-hidden="true">↓</span></button>
+          <div class="dir-any">
+            <div><strong>CAN'T FIND YOUR EXERCISE?</strong><p>Type any other exercise, workout, machine, movement or instructor. Open YouTube's live search to see available demonstrations.</p></div>
+            <a id="dir-any-link" href="https://www.youtube.com/results?search_query=exercise+demonstration" target="_blank" rel="noopener noreferrer">SEARCH ALL YOUTUBE ↗</a>
+          </div>
+        </section>
+<div class="more-videos">
           <p class="kicker">KEEP EXPLORING</p>
           <h3>LOOKING FOR A DIFFERENT EXERCISE?</h3>
           <p>Our curated collection covers popular movements, not every exercise ever created. Search YouTube directly for additional demonstrations, or ask about personalised training.</p>
@@ -84,7 +143,7 @@ const totals = {
         </div>
       </section>
       <section class="safety">
-        <p class="kicker">02 / TRAIN SMART</p>
+        <p class="kicker">03 / TRAIN SMART</p>
         <h2>FORM FIRST.<br /><em>EGO LAST.</em></h2>
         <p>These third-party videos are for general fitness education. They are not personalised medical or training advice. Start at a manageable level, warm up, check equipment and stop if you experience pain, dizziness or unusual symptoms. Ask a qualified professional before attempting exercises that may be unsuitable for you.</p>
         <p class="rights">Videos and thumbnail images remain hosted by YouTube and belong to their respective creators. The library provides links and optional standard YouTube embeds; BF GYM does not claim ownership or download and re-host their content. Videos may be removed, restricted or unavailable for embedded playback.</p>
@@ -187,6 +246,73 @@ const totals = {
     });
     dialog?.addEventListener('close',()=>{if(frame)frame.src='about:blank';});
     if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+
+    // Searchable exercise directory: external YouTube search, not automatic hosting or scraping.
+    const dirCards = Array.from(document.querySelectorAll<HTMLElement>('.exercise-card'));
+    const dirTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-dir-category]'));
+    const dirSearch = document.querySelector<HTMLInputElement>('#directory-search');
+    const dirFocus = document.querySelector<HTMLSelectElement>('#directory-focus');
+    const dirEquipment = document.querySelector<HTMLSelectElement>('#directory-equipment');
+    const dirLevel = document.querySelector<HTMLSelectElement>('#directory-level');
+    const dirCount = document.querySelector<HTMLElement>('#dir-count');
+    const dirEmpty = document.querySelector<HTMLElement>('#dir-empty');
+    const dirMore = document.querySelector<HTMLButtonElement>('#dir-showmore');
+    const dirAny = document.querySelector<HTMLAnchorElement>('#dir-any-link');
+    let dirCategory = 'all';
+    let dirLimit = 24;
+    const renderDirectory = () => {
+      const needle = (dirSearch?.value || '').toLowerCase().trim();
+      const focus = dirFocus?.value || 'all';
+      const equipment = dirEquipment?.value || 'all';
+      const level = dirLevel?.value || 'all';
+      let matching=0;
+      let shown=0;
+      for (const card of dirCards) {
+        const match = (dirCategory==='all'||card.dataset.dirCategory===dirCategory) &&
+          (focus==='all'||card.dataset.dirFocus===focus) &&
+          (equipment==='all'||card.dataset.dirEquipment===equipment) &&
+          (level==='all'||card.dataset.dirLevel===level) &&
+          (!needle||(card.dataset.dirSearch||'').includes(needle));
+        if(match) matching++;
+        if(match && shown<dirLimit){shown++;card.hidden=false;}else card.hidden=true;
+      }
+      if(dirCount) dirCount.textContent='Showing '+shown+' of '+matching+' matching exercises';
+      if(dirMore) dirMore.hidden=shown>=matching;
+      if(dirEmpty) dirEmpty.hidden=matching!==0;
+      if(dirAny){
+        const search = needle || 'exercise demonstration';
+        dirAny.href='https://www.youtube.com/results?search_query='+encodeURIComponent(search+' exercise demonstration');
+      }
+    };
+    const updateDirFilter = () => {dirLimit=24;renderDirectory();};
+    dirTabs.forEach(button=>button.addEventListener('click',()=>{
+      dirCategory=button.dataset.dirCategory||'all';
+      for(const tab of dirTabs){
+        const active=tab===button;
+        tab.classList.toggle('selected',active);
+        tab.setAttribute('aria-pressed',String(active));
+      }
+      updateDirFilter();
+    }));
+    dirSearch?.addEventListener('input',updateDirFilter);
+    dirFocus?.addEventListener('change',updateDirFilter);
+    dirEquipment?.addEventListener('change',updateDirFilter);
+    dirLevel?.addEventListener('change',updateDirFilter);
+    dirMore?.addEventListener('click',()=>{dirLimit+=24;renderDirectory();});
+    document.querySelector('#dir-reset')?.addEventListener('click',()=>{
+      dirCategory='all';dirLimit=24;
+      if(dirSearch)dirSearch.value='';
+      if(dirFocus)dirFocus.value='all';
+      if(dirEquipment)dirEquipment.value='all';
+      if(dirLevel)dirLevel.value='all';
+      dirTabs.forEach(button=>{
+        const active=button.dataset.dirCategory==='all';
+        button.classList.toggle('selected',active);
+        button.setAttribute('aria-pressed',String(active));
+      });
+      renderDirectory();
+    });
+    renderDirectory();
     update();
   </script>
 </body>
@@ -207,6 +333,14 @@ const totals = {
 footer{display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid var(--border);padding:25px 0}footer>a{font-size:16px;font-weight:900}footer>div{display:flex;gap:16px}footer>div a{font-size:10px;font-weight:800;color:#bad0b1}
 .mobile-nav{position:fixed;z-index:50;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#121a12ee;backdrop-filter:blur(12px);border-top:1px solid #44583e;padding:9px 8px calc(8px + env(safe-area-inset-bottom))}.mobile-nav a{flex:1;text-align:center;font-size:10px;color:#d2e0ce;font-weight:700;display:grid;justify-items:center;gap:1px}.mobile-nav a span{font-size:22px;line-height:1.3;color:#b9cbb1}.mobile-nav a[aria-current=page] span,.mobile-nav a[aria-current=page]{color:var(--green)}
 .player-dialog{width:min(760px,calc(100vw - 24px));max-height:calc(100dvh - 30px);padding:0;border:1px solid #648659;background:#141a13;color:var(--text);overflow:auto}.player-dialog::backdrop{background:#000d;backdrop-filter:blur(4px)}.player-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px 18px}.player-head small{color:var(--green);font-size:10px;font-weight:800;letter-spacing:.1em}.player-head h2{font:700 28px var(--font);margin:4px 0}.player-head button{background:#2b3628;color:var(--text);border:1px solid #53674b;padding:9px 12px}.frame-container{width:100%;aspect-ratio:16/9;background:#000}.frame-container iframe{border:0;width:100%;height:100%}.player-bottom{padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:20px}.player-bottom p{font-size:11px;color:#becfb7;line-height:1.7}.player-bottom a{font-size:11px;color:var(--green);font-weight:900;white-space:nowrap}
+
+.exercise-directory{margin-top:60px;padding:40px 0 12px;border-top:1px solid #506249}.dir-heading{display:flex;justify-content:space-between;align-items:end;gap:18px}.dir-heading h2{font:800 clamp(39px,6vw,65px)/1 var(--font);margin:15px 0}.dir-heading p:not(.kicker){font-size:13px;color:#b9c9b1;max-width:660px;line-height:1.8}.dir-total{background:#273824;border:1px solid #6b8b55;padding:18px 22px;text-align:center;min-width:123px}.dir-total strong{display:block;font:800 55px/1 var(--font);color:var(--green)}.dir-total span{display:block;color:#d3e5c7;font-size:9px;letter-spacing:.1em;font-weight:800;margin-top:8px}
+.dir-search{margin-top:28px}.dir-search label{display:block;color:#cce0c3;font-size:10px;letter-spacing:.12em;font-weight:900;margin-bottom:10px}.dir-tabs{display:flex;gap:9px;overflow-x:auto;padding:20px 0 14px}.dir-tab{border:1px solid #516448;background:#223021;color:#ecf4e8;white-space:nowrap;font-size:11px;font-weight:900;padding:12px 15px}.dir-tab span{font-size:10px;opacity:.8;margin-left:4px}.dir-tab.selected{background:var(--green);color:#172410;border-color:var(--green)}
+.dir-selects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.dir-selects label{font-size:10px;color:#c0d3b9;font-weight:800}.dir-selects select{width:100%;margin-top:8px;padding:12px;min-width:0;background:#202b1f;border:1px solid #586e50;color:var(--text);border-radius:0}
+.dir-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:25px 0 12px}.dir-toolbar p{color:#bacbb4;font-size:12px;margin:0}.dir-toolbar button{border:0;color:var(--green);background:none;font-size:10px;font-weight:900;white-space:nowrap}
+.exercise-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.exercise-card{border:1px solid #435b3e;background:#202b20;padding:18px 17px;display:flex;flex-direction:column;min-height:178px}.exercise-card[hidden],.dir-empty[hidden],.dir-showmore[hidden]{display:none!important}.exercise-meta{display:flex;justify-content:space-between;gap:8px;color:#badd9f;font-size:9px;font-weight:800;letter-spacing:.06em}.exercise-card h3{font:700 23px/1.15 var(--font);text-transform:uppercase;margin:17px 0 8px}.exercise-card p{color:#b5c3ae;font-size:11px;margin:0 0 20px}.exercise-card a{border-top:1px solid #41563b;color:var(--green);padding-top:12px;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:space-between;margin-top:auto}.exercise-card a span{font-size:17px}.dir-showmore{display:flex;justify-content:space-between;align-items:center;gap:15px;width:100%;background:transparent;color:var(--green);border:1px solid #658b50;margin:22px 0 0;padding:16px;font-size:11px;font-weight:900}.dir-empty{border:1px dashed #5d7851;padding:20px;color:#bcd5ac;font-size:12px}.dir-any{display:flex;justify-content:space-between;align-items:center;gap:25px;margin:30px 0 0;padding:22px;background:#2c4025;border:1px solid #668856}.dir-any strong{font-size:13px}.dir-any p{font-size:11px;color:#c3d4b9;line-height:1.7;max-width:610px;margin:8px 0 0}.dir-any a{white-space:nowrap;color:#172410;background:var(--green);padding:14px;font-size:11px;font-weight:900}
+@media(max-width:900px){.exercise-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.dir-heading{display:block}.dir-total{display:inline-block;margin:12px 0}.exercise-grid{grid-template-columns:1fr}.exercise-card{min-height:160px}.dir-selects{grid-template-columns:1fr 1fr}.dir-selects label:last-child{grid-column:span 2}.dir-any{display:block}.dir-any a{display:inline-block;margin-top:18px}.exercise-directory{margin-top:40px;padding-top:35px}}
 @media(max-width:900px){.video-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{min-height:0}.hero h1{font-size:clamp(62px,9vw,95px)}}
 @media(max-width:600px){.hero{padding:45px 16px 12px}.hero h1{font-size:clamp(49px,11vw,74px)}.hero-nums{gap:22px;margin-top:36px}.hero-nums strong{font-size:25px}.hero-nums span{font-size:8px}.library{padding:50px 0 25px}.section-title{display:block}.mini-book{display:inline-block;margin-top:18px}.video-grid{grid-template-columns:1fr;gap:13px}.video-card{display:grid;grid-template-columns:130px minmax(0,1fr);min-height:171px}.thumb{height:100%;aspect-ratio:auto}.thumb img{height:100%;width:100%;object-fit:cover}.thumb .play span:nth-child(2){display:none}.play>span:first-child{width:42px;height:42px;font-size:17px}.type-chip{font-size:8px}.video-content{padding:14px}.video-content h3{font-size:21px;margin:8px 0}.creator{font-size:9px}.tip{display:none}.actions{margin-top:auto;padding-top:10px}.actions a{font-size:9px}.meta span{font-size:9px;padding:3px 5px}.safety{padding:40px 17px 55px}.more-videos{padding:22px}.player-bottom{display:block}.player-bottom a{display:inline-block;margin-top:8px}.filters{margin-right:-17px}.secondary-filters label{min-width:130px}.hero:after{opacity:.6}}
 @media(max-width:370px){.video-card{grid-template-columns:112px minmax(0,1fr)}.video-content h3{font-size:19px}.creator{font-size:8px}.header .return{font-size:10px}.hero-nums{gap:12px}}
