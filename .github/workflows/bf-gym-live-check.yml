@@ -47,3 +47,20 @@ jobs:
             exit 1
           fi
           echo "Trainer portrait JPEG is accessible on Netlify."
+          # Confirm the five-pose image asset is actually published, not just the trainer HTML.
+          pose_ok=0
+          for attempt in 1 2 3 4 5 6; do
+            pose_status="$(curl --location --silent --show-error --max-time 18 --output /tmp/bfgym-poses --write-out "%{http_code}" "$base/images/trainer/adeep-poses-strip.webp" || echo 000)"
+            pose_type="$(file --brief --mime-type /tmp/bfgym-poses 2>/dev/null || echo unknown)"
+            if [ "$pose_status" = "200" ] && [ "$pose_type" = "image/webp" ] && [ "$(wc -c </tmp/bfgym-poses)" -gt 2000 ]; then
+              pose_ok=1
+              break
+            fi
+            echo "Attempt $attempt/6: pose image is not ready: HTTP $pose_status, type $pose_type"
+            if [ "$attempt" -lt 6 ]; then sleep 15; fi
+          done
+          if [ "$pose_ok" -ne 1 ]; then
+            echo "::error::Trainer five-pose image strip is not yet accessible on the live website"
+            exit 1
+          fi
+          echo "Trainer pose strip WEBP is accessible on Netlify."
