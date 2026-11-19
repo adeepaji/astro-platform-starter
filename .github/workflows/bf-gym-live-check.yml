@@ -114,3 +114,22 @@ jobs:
             exit 1
           fi
           echo "Demo member identity and no-form guard passed."
+
+
+          # Instagram only accepts JPEG/PNG; confirm the dedicated photo endpoint.
+          instagram_ready=0
+          for attempt in 1 2 3 4 5 6; do
+            ig_status="$(curl --location --silent --show-error --max-time 18 --output /tmp/bfgym-instagram-photo --write-out "%{http_code}" "$base/images/trainer/adeep-instagram.jpg" || echo 000)"
+            ig_type="$(file --brief --mime-type /tmp/bfgym-instagram-photo 2>/dev/null || echo unknown)"
+            if [ "$ig_status" = "200" ] && [ "$ig_type" = "image/jpeg" ] && [ "$(wc -c </tmp/bfgym-instagram-photo)" -gt 8000 ]; then
+              instagram_ready=1
+              break
+            fi
+            echo "Attempt $attempt/6: dedicated Instagram image pending (HTTP $ig_status, $ig_type)"
+            if [ "$attempt" -lt 6 ]; then sleep 15; fi
+          done
+          if [ "$instagram_ready" -ne 1 ]; then
+            echo "::error::Instagram-compatible JPEG is not published yet"
+            exit 1
+          fi
+          echo "Instagram-compatible JPEG is live on Netlify."
