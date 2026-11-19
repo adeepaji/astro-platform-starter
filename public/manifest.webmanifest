@@ -1,0 +1,38 @@
+{
+  "id": "/app/",
+  "name": "BF GYM — Fitness & Coaching",
+  "short_name": "BF GYM",
+  "description": "Fitness classes, online coaching, session requests and a private workout tracker.",
+  "start_url": "/app/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#101310",
+  "theme_color": "#101310",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": [
+    "fitness",
+    "health",
+    "lifestyle"
+  ],
+  "lang": "en-GB"
+}
