@@ -1,0 +1,281 @@
+---
+const planOptions = [
+  { id:'beginner', label:'Beginner · Start Strong' },
+  { id:'intermediate', label:'Intermediate · Build Momentum' },
+  { id:'advanced', label:'Advanced · Strength & Conditioning' },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#121a13" />
+<meta name="description" content="BF GYM Global free mobile-first workout dashboard: today's training, exercise demonstrations, a weekly schedule and private progress history." />
+<title>My Fitness Dashboard | BF GYM Global</title>
+<link rel="icon" href="/bf-icon.svg" type="image/svg+xml" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/app-icon-192.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to dashboard</a>
+<div class="app-shell">
+<header class="topbar">
+  <a href="/app/" class="brand" aria-label="BF GYM Global app home"><strong>BF<span>.</span></strong><small>GYM GLOBAL</small></a>
+  <div class="top-actions"><span>FREE FITNESS HUB</span><a class="coach-avatar" href="/trainer/" aria-label="Meet Coach Adeep"><img src="/images/trainer/adeep-portrait.jpg" alt="" width="40" height="40" /></a></div>
+</header>
+<main id="main">
+  <section class="welcome" aria-labelledby="welcome-heading">
+    <div class="eyebrow-row"><span class="eyebrow">YOUR FITNESS / YOUR PACE</span><span class="date-label" id="date-label">TODAY</span></div>
+    <h1 id="welcome-heading">YOUR DAY.<br /><em>YOUR PROGRESS.</em></h1>
+    <p>Everything you need to get moving, all in one place. Start small, stay consistent, and track your wins.</p>
+    <a class="hero-cta" href="#today-workout">VIEW TODAY'S SESSION <span aria-hidden="true">↘</span></a>
+  </section>
+  <section class="overview-stats" aria-label="Your personal progress statistics">
+    <article><small>THIS WEEK</small><strong id="stat-this-week">0/0</strong><span>sessions completed</span></article>
+    <article><small>RECORDED SESSIONS</small><strong id="stat-total">0</strong><span>dashboard history</span></article>
+    <article><small>ACTIVE STREAK</small><strong id="stat-streak">0</strong><span>consecutive logged days</span></article>
+  </section>
+  <section class="panel plan-panel" id="my-plan" aria-labelledby="my-plan-heading">
+    <div class="section-head"><div><p class="kicker">01 / CHOOSE YOUR PATH</p><h2 id="my-plan-heading">MY PROGRAMME</h2></div><a class="subtle-link" href="/programmes/">ALL FREE PLANS ↗</a></div>
+    <label class="field-label" for="level-select">YOUR TRAINING LEVEL</label>
+    <select id="level-select" aria-describedby="plan-description">
+      {planOptions.map(option=><option value={option.id}>{option.label}</option>)}
+    </select>
+    <p id="plan-description" class="plan-description">Choose an experience level that feels manageable.</p>
+    <div class="week-heading"><span>FOUR-WEEK PROGRAMME</span><strong id="week-position">WEEK 1 / 4</strong></div>
+    <div id="week-choices" class="week-choices" role="group" aria-label="Programme week">
+      {[1,2,3,4].map(week=><button type="button" class:list={['week-choice',{selected:week===1}]} data-week={week} aria-pressed={week===1?'true':'false'}>W{week}</button>)}
+    </div>
+    <p class="week-tip" id="week-tip">Choose a programme to see a progression tip.</p>
+    <div class="progress-heading"><span>WEEKLY COMPLETION</span><strong id="progress-percent">0%</strong></div>
+    <div id="weekly-progress" class="progress-track" role="progressbar" aria-label="Weekly sessions completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-fill"></span></div>
+    <p class="local-note">Your selected level and workout ticks are saved in this browser, not in an online account.</p>
+  </section>
+  <section class="panel session-panel" id="today-workout" aria-labelledby="session-title">
+    <div class="section-head"><div><p class="kicker">02 / TRAINING SESSION</p><h2 id="session-title">TODAY'S WORKOUT</h2></div><span id="selected-day-label" class="small-pill">TODAY</span></div>
+    <div class="weekday-tabs" id="weekday-tabs" role="group" aria-label="Select a day of the weekly workout programme">
+      {['MON','TUE','WED','THU','FRI','SAT','SUN'].map((day,i)=><button type="button" data-day={i} class="weekday-tab" aria-pressed="false"><small>{day}</small><strong>{i+1}</strong><i aria-hidden="true"></i></button>)}
+    </div>
+    <div class="workout-heading"><div><span id="session-type" class="kicker">STRENGTH</span><h3 id="session-name">YOUR SESSION</h3><p id="session-notes">Select a day to see your exercises.</p></div><span id="session-duration" class="duration-pill">—</span></div>
+    <div id="exercise-list" class="exercise-list" aria-live="polite"><p class="empty">Loading your programme…</p></div>
+    <div class="complete-footer"><button id="complete-session" type="button" class="complete-button">MARK SESSION COMPLETE <span aria-hidden="true">✓</span></button><p id="completion-status" role="status" aria-live="polite">No account or subscription required.</p></div>
+  </section>
+  <section class="panel history-panel" id="progress" aria-labelledby="history-title">
+    <div class="section-head"><div><p class="kicker">03 / YOUR JOURNEY</p><h2 id="history-title">PROGRESS HISTORY</h2></div><span class="privacy-label">ON THIS DEVICE</span></div>
+    <p class="supporting">Recent completed sessions, newest first. Existing marks in your free programmes are also included in your weekly progress.</p>
+    <div id="history-list" class="history-list" aria-live="polite"><p class="empty">Your first workout will show here after you complete a session.</p></div>
+    <details class="data-help"><summary>How are my workouts saved?</summary><p>Workout history and programme completion are stored in this browser's local storage only. They are not synced between devices. If you clear browser data or change phones, the history may be lost.</p><p>If you previously logged workouts in the original BF GYM app, those dates can contribute to your activity streak but are not individually labelled with an exercise name.</p></details>
+    <button type="button" id="clear-history" class="history-clear">CLEAR DASHBOARD SESSION HISTORY</button>
+  </section>
+  <section class="next-links panel" id="explore" aria-labelledby="explore-title">
+    <div class="section-head"><div><p class="kicker">04 / KEEP EXPLORING</p><h2 id="explore-title">WHAT'S NEXT?</h2></div></div>
+    <div class="quick-links">
+      <a href="/app/workouts/"><span class="quick-icon">▶</span><span><strong>EXERCISE VIDEO LIBRARY</strong><small>Weight training, cardio and HIIT demonstrations</small></span><b aria-hidden="true">↗</b></a>
+      <a href="/sample-plan/"><span class="quick-icon">◉</span><span><strong>WORKOUT & MEAL DEMO</strong><small>Illustrative training and nutrition examples</small></span><b aria-hidden="true">↗</b></a>
+      <a href="/app/membership/"><span class="quick-icon">♧</span><span><strong>FUTURE MEMBER BENEFITS</strong><small>Concept preview only — no wallet or payments active</small></span><b aria-hidden="true">↗</b></a>
+      <a href="/trainer/"><span class="quick-icon">✳</span><span><strong>MEET COACH ADEEP</strong><small>Background and training approach</small></span><b aria-hidden="true">↗</b></a>
+    </div>
+  </section>
+  <p class="health-disclaimer">These are free general fitness examples, not personalised exercise or medical advice. Stop activities that cause pain and seek appropriate professional guidance if you have injuries or health concerns. YouTube links open searches; individual videos are not independently verified.</p>
+</main>
+<footer class="footer"><a href="/">BF<span>.</span> GYM GLOBAL</a><a href="/privacy/">PRIVACY</a></footer>
+</div>
+<nav class="bottom-nav" aria-label="App navigation">
+<a href="/app/dashboard/" aria-current="page"><span aria-hidden="true">⌂</span>Home</a>
+<a href="#today-workout"><span aria-hidden="true">▤</span>Workout</a>
+<a href="#progress"><span aria-hidden="true">◉</span>History</a>
+<a href="/app/membership/"><span aria-hidden="true">♧</span>Member</a>
+</nav>
+<script>
+import { trainingProgrammes, programmeVideoSearch } from '../../data/trainingProgrammes';
+
+const historyKey='bf-gym-dashboard-history-v1';
+const programmeKey='bf-gym-training-programme-progress-v1';
+const legacyKey='bf-gym-workouts-v1';
+const lastLevelKey='bf-gym-last-plan-v1';
+const lastWeekKey='bf-gym-dashboard-week-v1';
+const weekNames=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const today=new Date();
+const selectedDayToday=(today.getDay()+6)%7;
+const dateId=(date:Date)=>date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');
+const fmtDate=(value:string)=>new Date(value+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+const find=(selector:string)=>document.querySelector<HTMLElement>(selector);
+const data={level:'beginner',week:1,day:selectedDayToday,progress:{} as Record<string,boolean>,history:[] as Array<{key:string,level:string,week:number,day:string,date:string,title:string}>,legacy:[] as string[]};
+function getJson(key:string,fallback:unknown){
+  try{const value=localStorage.getItem(key);return value?JSON.parse(value):fallback;}catch{return fallback;}
+}
+function save(key:string,value:unknown){
+  try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{return false;}
+}
+function safePlan(id:string){return trainingProgrammes.find(p=>p.id===id)||trainingProgrammes[0];}
+function dayKey(level:string,week:number,day:string){return level+':'+week+':'+day;}
+function validDate(value:unknown){return typeof value==='string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(new Date(value+'T12:00:00').getTime());}
+const savedProgress=getJson(programmeKey,{});
+if(savedProgress&&typeof savedProgress==='object'&&!Array.isArray(savedProgress)){
+  for(const [key,value] of Object.entries(savedProgress)){if(typeof value==='boolean')data.progress[key]=value;}
+}
+const savedHistory=getJson(historyKey,[]);
+if(Array.isArray(savedHistory)){
+  data.history=savedHistory.filter((x)=>x&&typeof x==='object'&&typeof x.key==='string'&&typeof x.level==='string'&&typeof x.day==='string'&&validDate(x.date)&&Number.isInteger(x.week)&&x.week>=1&&x.week<=4&&typeof x.title==='string').slice(-1000);
+}
+const oldLog=getJson(legacyKey,[]);
+if(Array.isArray(oldLog))data.legacy=oldLog.filter(validDate).slice(-2000);
+try{const last=localStorage.getItem(lastLevelKey);if(last&&trainingProgrammes.some(p=>p.id===last))data.level=last;const w=Number(localStorage.getItem(lastWeekKey));if(Number.isInteger(w)&&w>=1&&w<=4)data.week=w;}catch{}
+const query=new URLSearchParams(location.search);
+const requested=query.get('level');
+if(requested&&trainingProgrammes.some(p=>p.id===requested))data.level=requested;
+const levelSelect=document.querySelector<HTMLSelectElement>('#level-select');
+if(levelSelect)levelSelect.value=data.level;
+const dateLabel=find('#date-label');
+if(dateLabel)dateLabel.textContent=today.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short'}).toUpperCase();
+const greeting=find('#welcome-heading');
+function setupGreeting(){const hour=today.getHours();const word=hour<12?'GOOD MORNING.':hour<17?'GOOD AFTERNOON.':'GOOD EVENING.';const first=greeting?.querySelector('span');if(first)first.textContent=word;}
+if(greeting){const a=document.createElement('span');a.textContent='';greeting.prepend(a);const firstText=greeting.firstChild?.nextSibling;if(firstText?.nodeType===Node.TEXT_NODE)firstText.textContent='';setupGreeting();}
+function current(){return safePlan(data.level);}
+function currentDay(){return current().schedule[data.day];}
+function setText(selector:string,text:string){const item=find(selector);if(item)item.textContent=text;}
+function getTrainDays(){return current().schedule.filter(d=>d.kind==='Strength'||d.kind==='Cardio');}
+function historyRecordedKey(id:string){return id;}
+function totalSessions(){return data.history.length;}
+function countStreak(){
+  const dates=new Set<string>(data.history.map(h=>h.date).concat(data.legacy).filter(validDate));
+  const cursor=new Date(today);
+  if(!dates.has(dateId(cursor)))cursor.setDate(cursor.getDate()-1);
+  let count=0;
+  while(dates.has(dateId(cursor))&&count<2000){count++;cursor.setDate(cursor.getDate()-1);}
+  return count;
+}
+function drawPlan(){
+  const plan=current();
+  if(levelSelect)levelSelect.value=data.level;
+  setText('#plan-description',plan.description);
+  setText('#week-position','WEEK '+data.week+' / 4');
+  setText('#week-tip',plan.weeks[data.week-1]||'Progress gradually.');
+  document.querySelectorAll<HTMLButtonElement>('[data-week]').forEach(button=>{const active=Number(button.dataset.week)===data.week;button.classList.toggle('selected',active);button.setAttribute('aria-pressed',String(active));});
+  const days=getTrainDays();const complete=days.filter(day=>data.progress[dayKey(data.level,data.week,day.day)]).length;
+  const percent=days.length?Math.round(100*complete/days.length):0;
+  setText('#progress-percent',String(percent)+'%');
+  setText('#stat-this-week',complete+'/'+days.length);
+  setText('#stat-total',String(totalSessions()));
+  setText('#stat-streak',String(countStreak()));
+  const bar=find('#weekly-progress');if(bar)bar.setAttribute('aria-valuenow',String(percent));
+  const fill=find('#progress-fill');if(fill)fill.style.width=percent+'%';
+}
+function createExercise(exercise:{name:string,volume:string,tip:string},index:number){
+  const row=document.createElement('article');row.className='exercise-item';
+  const head=document.createElement('div');head.className='exercise-head';
+  const number=document.createElement('span');number.className='exercise-number';number.textContent=String(index+1).padStart(2,'0');
+  const title=document.createElement('div');title.className='exercise-title';
+  const name=document.createElement('h4');name.textContent=exercise.name;
+  const vol=document.createElement('span');vol.textContent=exercise.volume;
+  title.append(name,vol);head.append(number,title);
+  const tip=document.createElement('p');tip.textContent=exercise.tip;
+  const link=document.createElement('a');link.href=programmeVideoSearch(exercise.name);link.target='_blank';link.rel='noopener noreferrer';link.textContent='FIND DEMONSTRATION ↗';
+  row.append(head,tip,link);return row;
+}
+function drawSession(){
+  const plan=current(),day=currentDay(),rest=day.kind==='Rest'||day.kind==='Recovery';
+  const weekdays=document.querySelectorAll<HTMLButtonElement>('[data-day]');
+  weekdays.forEach((button,index)=>{
+    const item=plan.schedule[index];
+    const selected=index===data.day;
+    button.classList.toggle('active',selected);button.setAttribute('aria-pressed',String(selected));
+    const dot=button.querySelector('i');if(dot)dot.classList.toggle('done',Boolean(data.progress[dayKey(data.level,data.week,item.day)]));
+    const number=button.querySelector('strong');if(number)number.textContent=index===selectedDayToday?'●':String(index+1);
+  });
+  setText('#selected-day-label',day.day.toUpperCase());
+  setText('#session-type',day.kind.toUpperCase());
+  setText('#session-name',day.label.toUpperCase());
+  setText('#session-notes',day.notes||'Work at a comfortable pace and prioritise technique.');
+  setText('#session-duration',day.time);
+  const list=find('#exercise-list');
+  if(list){
+    list.replaceChildren();
+    if(day.exercises.length)day.exercises.forEach((exercise,index)=>list.append(createExercise(exercise,index)));
+    else{const p=document.createElement('p');p.className='empty';p.textContent='Recovery is part of the programme. Take a break or enjoy gentle movement as comfortable.';list.append(p);}
+  }
+  const button=document.querySelector<HTMLButtonElement>('#complete-session');
+  if(button){
+    button.hidden=rest;
+    const done=Boolean(data.progress[dayKey(data.level,data.week,day.day)]);
+    button.classList.toggle('completed',done);
+    button.setAttribute('aria-pressed',String(done));
+    button.textContent=done?'✓ SESSION COMPLETED · UNDO':'✓ MARK SESSION COMPLETE';
+  }
+  setText('#completion-status',rest?'Recovery day — no session to mark.':'Your completion is saved locally on this device.');
+}
+function drawHistory(){
+  const list=find('#history-list');if(!list)return;
+  list.replaceChildren();
+  const recent=[...data.history].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,12);
+  if(!recent.length){const p=document.createElement('p');p.className='empty';p.textContent='No dashboard sessions recorded yet. Mark one complete to see your progress here.';list.append(p);return;}
+  recent.forEach(entry=>{
+    const row=document.createElement('div');row.className='history-item';
+    const check=document.createElement('span');check.className='history-check';check.textContent='✓';
+    const text=document.createElement('div');const strong=document.createElement('strong');strong.textContent=entry.title;
+    const details=document.createElement('small');details.textContent=(safePlan(entry.level)?.name||'Training')+' · Week '+entry.week+' · '+entry.day;
+    text.append(strong,details);
+    const date=document.createElement('time');date.dateTime=entry.date;date.textContent=fmtDate(entry.date);
+    row.append(check,text,date);list.append(row);
+  });
+}
+function draw(){drawPlan();drawSession();drawHistory();}
+function persist(){
+  const okProgress=save(programmeKey,data.progress),okHistory=save(historyKey,data.history);
+  if(!okProgress||!okHistory)setText('#completion-status','This browser blocked permanent storage. Changes may be lost after you close it.');
+}
+levelSelect?.addEventListener('change',()=>{
+  const value=levelSelect.value;
+  if(!trainingProgrammes.some(p=>p.id===value))return;
+  data.level=value;
+  try{localStorage.setItem(lastLevelKey,value);}catch{}
+  draw();
+});
+document.querySelectorAll<HTMLButtonElement>('[data-week]').forEach(button=>button.addEventListener('click',()=>{
+  const week=Number(button.dataset.week);if(!Number.isInteger(week)||week<1||week>4)return;
+  data.week=week;try{localStorage.setItem(lastWeekKey,String(week));}catch{}
+  draw();
+}));
+document.querySelectorAll<HTMLButtonElement>('[data-day]').forEach(button=>button.addEventListener('click',()=>{
+  const idx=Number(button.dataset.day);if(!Number.isInteger(idx)||idx<0||idx>6)return;
+  data.day=idx;drawSession();
+}));
+document.querySelector<HTMLButtonElement>('#complete-session')?.addEventListener('click',()=>{
+  const plan=current(),day=currentDay();
+  if(day.kind==='Rest'||day.kind==='Recovery')return;
+  const key=dayKey(data.level,data.week,day.day);
+  const done=Boolean(data.progress[key]);
+  if(done){delete data.progress[key];data.history=data.history.filter(x=>x.key!==historyRecordedKey(key));}
+  else{
+    data.progress[key]=true;
+    data.history=data.history.filter(x=>x.key!==historyRecordedKey(key));
+    data.history.push({key:historyRecordedKey(key),level:data.level,week:data.week,day:day.day,date:dateId(new Date()),title:day.label});
+    if(data.history.length>1000)data.history=data.history.slice(-1000);
+  }
+  persist();draw();
+});
+document.querySelector<HTMLButtonElement>('#clear-history')?.addEventListener('click',()=>{
+  if(!confirm('Remove dashboard session history? This will not erase your existing weekly completion marks.'))return;
+  data.history=[];save(historyKey,data.history);draw();
+});
+draw();
+</script>
+</body>
+</html>
+<style is:global>
+:root{--bg:#111812;--panel:#202c22;--line:#3b513d;--accent:#cbff63;--cream:#f5f6ee;--subtle:#b8c7b2;--display:Oswald,Impact,sans-serif;--body:'DM Sans',Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;background:var(--bg);color:var(--cream);font:14px/1.6 var(--body)}a{color:inherit;text-decoration:none}button,select{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.skip{position:absolute;top:-100px;left:12px;background:var(--accent);color:#182318;padding:10px;z-index:9}.skip:focus{top:12px}[hidden]{display:none!important}.app-shell{max-width:900px;min-height:100vh;margin:auto;padding-bottom:100px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;border-bottom:1px solid var(--line)}.brand{text-decoration:none;display:flex;align-items:center;gap:10px}.brand strong{font:700 32px/.9 var(--display)}.brand strong span,.footer>a span{color:var(--accent)}.brand small{font-size:10px;font-weight:900;letter-spacing:.1em}.top-actions{display:flex;gap:14px;align-items:center}.top-actions>span{font-size:9px;color:var(--subtle);letter-spacing:.1em;font-weight:900}.coach-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid var(--accent);display:block}.coach-avatar img{object-fit:cover;width:100%;height:100%}
+.welcome{padding:40px 23px 35px;background:radial-gradient(circle at 85% 20%,#344e2c 0,#172919 42%,transparent 70%)}.eyebrow-row{display:flex;justify-content:space-between;gap:15px;align-items:center}.eyebrow,.kicker{color:var(--accent);font-size:10px;letter-spacing:.12em;font-weight:900}.date-label{color:#d2e1cb;font-size:10px;font-weight:800}.welcome h1{font:700 clamp(49px,8vw,76px)/1 var(--display);margin:25px 0 15px;letter-spacing:-.01em}.welcome h1 em{font-style:normal;color:var(--accent)}.welcome p{font-size:14px;color:#c6d6c0;line-height:1.8;max-width:510px}.hero-cta{display:inline-flex;background:var(--accent);color:#1b2b18;padding:15px 17px;gap:25px;justify-content:space-between;align-items:center;text-decoration:none;font-size:11px;font-weight:900;margin-top:14px}.hero-cta span{font-size:17px}
+.overview-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:0 16px;margin-top:12px}.overview-stats article{background:#2b3a2d;border:1px solid #526a50;border-radius:16px;padding:16px;min-width:0}.overview-stats small{display:block;color:#d3e6ca;font-size:9px;font-weight:900;letter-spacing:.09em}.overview-stats strong{display:block;margin:9px 0 2px;color:var(--accent);font:700 clamp(28px,5vw,40px) var(--display)}.overview-stats span{font-size:10px;color:#bbccaf}
+.panel{margin:17px 16px;background:var(--panel);border:1px solid var(--line);border-radius:21px;padding:22px}.section-head{display:flex;justify-content:space-between;align-items:start;gap:16px;margin-bottom:18px}.section-head h2{font:700 clamp(27px,5vw,38px)/1 var(--display);margin:8px 0 0}.kicker{margin:0}.subtle-link{font-size:10px;font-weight:900;color:var(--accent);text-decoration:none;white-space:nowrap;margin-top:18px}.field-label{display:block;font-size:10px;letter-spacing:.1em;font-weight:900;margin-bottom:8px;color:#ced9c8}#level-select{width:100%;border:1px solid #73936e;background:#142216;color:var(--cream);padding:15px 16px;border-radius:13px;font-weight:800;min-height:52px}.plan-description,.week-tip{font-size:12px;line-height:1.75;color:#b9cdb4;margin:13px 0}.week-heading,.progress-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px;color:#d0dfc8;font-size:10px;font-weight:900;letter-spacing:.06em}.week-choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:11px}.week-choice{background:#142318;color:#d6e7ce;border:1px solid #59734f;border-radius:10px;padding:13px 9px;font-weight:900}.week-choice.selected{background:var(--accent);color:#162713;border-color:var(--accent)}.week-tip{border-left:3px solid var(--accent);padding:8px 12px;background:#2c402b}.progress-heading{margin-top:21px}.progress-heading strong{color:var(--accent)}.progress-track{height:10px;background:#122014;border-radius:9px;overflow:hidden;margin-top:10px}.progress-track>span{display:block;width:0;height:100%;background:var(--accent);border-radius:9px;transition:width .2s}.local-note{font-size:10px;color:#99ae94;margin:14px 0 0}
+.small-pill,.privacy-label{padding:8px 11px;background:#354d31;color:#d4eac9;border-radius:999px;font-size:10px;font-weight:900;white-space:nowrap}.weekday-tabs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.weekday-tab{border:1px solid #506c4c;background:#132017;color:#d5e4cb;border-radius:12px;padding:11px 2px;display:flex;align-items:center;flex-direction:column;gap:7px;min-width:0}.weekday-tab small{font-size:9px;font-weight:900}.weekday-tab strong{font-size:14px}.weekday-tab i{width:5px;height:5px;border-radius:50%;background:#61755e}.weekday-tab i.done{background:#c7ff63}.weekday-tab.active{background:var(--accent);color:#183014;border-color:var(--accent)}.weekday-tab.active i{background:#294c1e}.weekday-tab.active i.done{background:#294c1e}.workout-heading{display:flex;justify-content:space-between;gap:14px;align-items:start;border-bottom:1px solid #425c43;padding:24px 0 17px}.workout-heading h3{font:700 30px/1.1 var(--display);margin:8px 0 7px}.workout-heading p{font-size:12px;color:#b7cdb2;margin:0;line-height:1.7}.duration-pill{font-size:11px;background:#354b34;color:#d2e2c9;padding:8px;border-radius:8px;white-space:nowrap}.exercise-list{display:grid;gap:11px;padding-top:14px}.exercise-item{background:#152319;border:1px solid #3c543a;border-radius:15px;padding:16px}.exercise-head{display:flex;align-items:start;gap:13px}.exercise-number{color:var(--accent);font:800 24px var(--display)}.exercise-title{flex:1}.exercise-title h4{font:700 21px/1.13 var(--display);margin:2px 0 6px}.exercise-title span{font-weight:900;font-size:11px;color:#d4e4ca}.exercise-item p{font-size:11px;line-height:1.7;color:#aebfa9;margin:12px 0}.exercise-item a{display:inline-flex;color:var(--accent);font-size:10px;font-weight:900;text-decoration:none;gap:9px}.empty{padding:20px 10px;color:#b4c3ad;line-height:1.8;font-size:12px}.complete-footer{margin-top:20px}.complete-button{background:var(--accent);color:#1b2c18;border:0;width:100%;padding:16px 12px;border-radius:12px;font-weight:900;font-size:11px;display:flex;justify-content:center;gap:14px}.complete-button.completed{background:#44613c;color:#ebffdd;border:1px solid #9ac47e}.save-status{font-size:11px;color:#a9baa3;text-align:center;margin:11px 0 0}
+.supporting{font-size:12px;color:#bdcfb6;line-height:1.75}.history-list{display:grid;gap:9px;margin:18px 0}.history-item{display:flex;align-items:center;gap:12px;background:#152219;border:1px solid #3b5438;border-radius:13px;padding:14px}.history-check{width:30px;height:30px;flex-shrink:0;display:grid;place-items:center;border-radius:50%;background:#385b32;color:var(--accent);font-weight:900}.history-item>div{flex:1}.history-item strong{display:block;font-size:12px}.history-item small{color:#a2b69c;font-size:10px}.history-item time{color:#c2d4b8;font-size:10px;white-space:nowrap}.data-help{border-top:1px solid #435941;padding:16px 0}.data-help summary{cursor:pointer;color:var(--accent);font-size:11px;font-weight:900}.data-help p{font-size:11px;color:#b1c4a9;line-height:1.8}.history-clear{background:transparent;border:1px solid #617858;color:#d4e3ca;border-radius:9px;padding:11px 13px;font-size:10px;font-weight:800}
+.quick-links{display:grid;gap:8px}.quick-links>a{display:flex;align-items:center;gap:12px;text-decoration:none;padding:13px;border-radius:12px;background:#16251a;border:1px solid #3c5439}.quick-links a .quick-icon{display:grid;place-items:center;flex-shrink:0;border-radius:10px;width:42px;height:42px;background:#395633;color:var(--accent);font-size:17px}.quick-links a>span:nth-child(2){flex:1}.quick-links strong{font-size:11px;display:block}.quick-links small{font-size:10px;color:#b0c1aa;display:block;margin-top:4px}.quick-links b{color:var(--accent);font-size:15px}.health-disclaimer{margin:24px;padding:0 2px;color:#9bac95;line-height:1.75;font-size:11px}.footer{display:flex;align-items:center;justify-content:space-between;padding:25px 18px;border-top:1px solid #3f5540}.footer>a{font-size:11px;font-weight:900;text-decoration:none}.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:40;display:flex;justify-content:space-around;align-items:center;padding:8px max(6px,env(safe-area-inset-left)) calc(9px + env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-right));background:#0d150eed;border-top:1px solid #4d6848;backdrop-filter:blur(10px)}.bottom-nav a{display:grid;gap:4px;text-align:center;color:#c3d6ba;min-width:65px;font-size:10px;font-weight:800;text-decoration:none}.bottom-nav a span{font-size:21px}.bottom-nav a[aria-current=page]{color:var(--accent)}
+@media(min-width:780px){.app-shell{padding-bottom:42px}.bottom-nav{max-width:900px;margin:auto;border-left:1px solid #456245;border-right:1px solid #456245}.welcome{border-radius:0 0 24px 24px;padding:48px}.panel{margin:20px 24px;padding:28px}.overview-stats{padding:0 24px}.welcome h1{font-size:80px}}
+@media(max-width:460px){.top-actions>span{display:none}.welcome{padding:34px 18px 30px}.overview-stats{gap:6px;padding:0 9px}.overview-stats article{padding:11px}.overview-stats small{font-size:8px}.overview-stats strong{font-size:27px}.overview-stats span{font-size:9px}.panel{margin:12px 9px;padding:17px}.section-head h2{font-size:26px}.weekday-tabs{gap:3px}.weekday-tab{padding:10px 0}.weekday-tab small{font-size:8px}.history-item{padding:11px}.history-item time{font-size:9px}.privacy-label{font-size:8px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress-track>span{transition:none}}
+</style>
