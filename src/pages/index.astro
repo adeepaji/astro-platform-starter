@@ -1,4 +1,12 @@
 ---
+import { trainingProgrammes } from '../data/trainingProgrammes';
+
+const beginnerSchedule = trainingProgrammes[0].schedule;
+const starterSessions = [
+  beginnerSchedule.find(session => session.label === 'Full-body foundations A')!,
+  beginnerSchedule.find(session => session.kind === 'Cardio')!,
+  beginnerSchedule.find(session => session.label === 'Full-body foundations B')!
+];
 const year = new Date().getFullYear();
 const programmes = [
   {number:'01',name:'BEGINNER',label:'BUILD THE FOUNDATION',description:'Get comfortable with the basics. Follow a simple four-week example and build consistency.',detail:'FREE 4-WEEK PLAN',href:'/programmes/?level=beginner',tone:'beginner'},
@@ -94,10 +102,10 @@ const steps = [
       <div class="hero-content">
         <p class="eyebrow"><span class="line" aria-hidden="true"></span> BF GYM GLOBAL / BEST FITNESS</p>
         <h1 id="hero-title">TRAIN WITH<br/><span>PURPOSE.</span><br/>START FREE.</h1>
-        <p class="hero-lead">Your fitness journey, your pace. Explore free workout plans, learn new movements and track your progress — wherever you train.</p>
+        <p class="hero-lead">Build strength with a plan that fits your life. Start with three beginner sessions you can move around work, family or night shifts.</p>
         <div class="hero-actions">
-          <a class="button button-lime" href="/start/">FIND MY FREE PLAN <span aria-hidden="true">↗</span></a>
-          <a class="button button-outline" href="/programmes/">EXPLORE PROGRAMMES <span aria-hidden="true">↗</span></a>
+          <a class="button button-lime" href="#starter-plan">TRY THE FREE 3-DAY PLAN</a>
+          <a class="button button-outline" href="#coaching-enquiries">ASK ABOUT COACHING</a>
         </div>
         <div class="hero-assurance"><span><b>✓</b> FREE PROGRAMMES</span><span><b>✓</b> ALL EXPERIENCE LEVELS</span><span><b>✓</b> NO REGISTRATION</span></div>
       </div>
@@ -162,10 +170,35 @@ const steps = [
     </div>
   </section>
 
+  <section class="section" id="starter-plan" aria-labelledby="starter-heading">
+    <div class="container">
+      <h2 id="starter-heading" class="starter-heading">FREE 3-DAY STARTER PLAN</h2>
+      <p>Pick three days that suit your week. Leave at least one day between the strength sessions. Start with the lower end of each range and use light resistance while learning the movements.</p>
+      <div class="starter-grid">
+        {starterSessions.map((session, index) => (
+          <article class="starter-session">
+            <p class="starter-day">DAY {index + 1} · {session.time}</p>
+            <h3>{session.label}</h3>
+            <ul>
+              {session.exercises.map(exercise => (
+                <li><strong>{exercise.name}</strong> · {exercise.volume}<br />{exercise.tip}</li>
+              ))}
+            </ul>
+            <p>{session.notes}</p>
+          </article>
+        ))}
+      </div>
+      <div class="coach-links">
+        <a class="button button-lime" href="/programmes/?level=beginner">OPEN THE FREE 4-WEEK PLAN</a>
+        <a class="button button-outline" href="#coaching-enquiries">ASK ABOUT COACHING</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section coach-section" id="coach" aria-labelledby="coach-heading">
     <div class="container coach-layout">
       <div class="coach-image"><img src="/images/trainer/adeep-portrait-new.webp" width="600" height="690" loading="lazy" alt="Coach Adeep Aji, founder of BF GYM Global"/><div class="coach-img-tag"><strong>COACH ADEEP AJI</strong><span>KERALA, INDIA → UNITED KINGDOM</span></div></div>
-      <div class="coach-copy"><p class="kicker"><span>04 /</span> BEHIND THE BRAND</p><h2 id="coach-heading">BUILT ON<br/><span>REAL PASSION.</span></h2><p class="coach-lead">I'm Coach Adeep Aji, founder, Head Coach and SEO Lead at BF GYM Global. I'm a Malayali fitness trainer from Kerala, now based in the UK.</p><p>I created BF GYM Global — Best Fitness Gym Global — to make fitness education more approachable, practical and accessible. Explore the tools, learn a little every day and build a routine that works for you.</p><div class="coach-links"><a class="button button-lime" href="/trainer/">MEET THE COACH <span aria-hidden="true">↗</span></a><a class="coach-story" href="/ml/kerala-uk/" hreflang="ml" lang="ml">മലയാളത്തിൽ വായിക്കാം ↗</a></div></div>
+      <div class="coach-copy" id="coaching-enquiries"><p class="kicker"><span>04 /</span> BEHIND THE BRAND</p><h2 id="coach-heading">BUILT ON<br/><span>REAL PASSION.</span></h2><p class="coach-lead">I'm Coach Adeep Aji, founder, Head Coach and SEO Lead at BF GYM Global. I'm a Malayali fitness trainer from Kerala, now based in the UK.</p><p>I created BF GYM Global — Best Fitness Gym Global — to make fitness education more approachable, practical and accessible. I have over five years of experience in personal and small-group fitness training in India. If you’re new to the gym or train around shifts, message me with your goal, your experience and how many days you can train.</p><div class="coach-links"><a class="button button-lime" href="https://ig.me/m/fitwithaadhi">MESSAGE COACH ADEEP ON INSTAGRAM</a><a class="button button-outline" href="/trainer/">VIEW COACH PROFILE</a><a class="coach-story" href="/ml/kerala-uk/" hreflang="ml" lang="ml">മലയാളത്തിൽ വായിക്കാം ↗</a></div></div>
     </div>
   </section>
 
@@ -214,6 +247,14 @@ const steps = [
 </footer>
 
 <style is:global>
+.starter-heading{font-family:Oswald,sans-serif;font-size:clamp(2rem,5vw,3.75rem);line-height:1.1}
+.starter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin-block:1.5rem}
+.starter-session{border:1px solid #465142;background:#101710;padding:1.25rem}
+.starter-session h3{font-size:1.35rem;margin-block:.25rem .75rem}
+.starter-session ul{padding-inline-start:1.25rem}
+.starter-session li+li{margin-top:.6rem}
+.starter-day{color:#c5f565;font-weight:700}
+
 :root{--bg:#0a0d0a;--surface:#111511;--raised:#161b16;--line:#292f29;--lime:#cafa52;--lime-hover:#ddff91;--white:#f5f7f1;--muted:#a5aea3;--display:Oswald,Impact,'Arial Narrow',sans-serif;--body:'DM Sans',Arial,sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}body{margin:0;color:var(--white);background:var(--bg);font:14px/1.65 var(--body);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}img{max-width:100%}h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:var(--display)}a:focus-visible,summary:focus-visible{outline:3px solid var(--lime);outline-offset:4px}.container{width:min(1240px,calc(100% - 60px));margin-inline:auto}.skip-link{position:fixed;top:-80px;left:12px;padding:13px 20px;z-index:999;background:var(--lime);color:#101710;font-weight:900}.skip-link:focus{top:12px}
 .announcement{background:#d4ff65;color:#243414}.announcement .container{height:31px;display:flex;justify-content:center;align-items:center;gap:13px;font-size:9px;font-weight:850;letter-spacing:.12em}.announcement strong{font-weight:900}.status-dot{height:7px;width:7px;border-radius:50%;background:#24451c}.announcement-separator{opacity:.5}
