@@ -1,5 +1,5 @@
 ---
-import { trainingProgrammes } from '../data/trainingProgrammes';
+import { programmeVideoSearch, trainingProgrammes } from '../data/trainingProgrammes';
 
 const beginnerSchedule = trainingProgrammes[0].schedule;
 const starterSessions = [
@@ -95,26 +95,54 @@ const steps = [
 </header>
 
 <main id="main">
-  <section class="hero" aria-labelledby="hero-title">
-    <img class="hero-photo" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&amp;fit=crop&amp;w=2200&amp;q=82" width="1500" height="1000" fetchpriority="high" alt="Free weights on a rack in a training gym, illustrative photography"/>
-    <div class="hero-shade" aria-hidden="true"></div>
-    <div class="container hero-inner">
-      <div class="hero-content">
-        <p class="eyebrow"><span class="line" aria-hidden="true"></span> BF GYM GLOBAL / BEST FITNESS</p>
-        <h1 id="hero-title">TRAIN WITH<br/><span>PURPOSE.</span><br/>START FREE.</h1>
-        <p class="hero-lead">Build strength with a plan that fits your life. Start with three beginner sessions you can move around work, family or night shifts.</p>
+  <section class="hero welcome" aria-labelledby="hero-title">
+    <div class="container welcome-layout">
+      <div>
+        <p class="welcome-name">Coach Adeep Aji · BF GYM Global</p>
+        <h1 id="hero-title">Let’s build a routine that fits your life.</h1>
+        <p class="hero-lead">New to training or working around shifts? I’m Adeep. Start with three simple sessions you can fit into your week.</p>
         <div class="hero-actions">
-          <a class="button button-lime" href="#starter-plan">TRY THE FREE 3-DAY PLAN</a>
-          <a class="button button-outline" href="#coaching-options">ASK ABOUT COACHING</a>
+          <a class="button button-lime" href="#starter-plan">Try a free workout</a>
+          <a class="button button-outline" href="https://ig.me/m/fitwithaadhi">Message Coach Adeep</a>
         </div>
-        <div class="hero-assurance"><span><b>✓</b> FREE PROGRAMMES</span><span><b>✓</b> ALL EXPERIENCE LEVELS</span><span><b>✓</b> NO REGISTRATION</span></div>
       </div>
-      <div class="hero-side-note" aria-hidden="true"><span>DISCIPLINE</span><i></i><span>CONSISTENCY</span><i></i><span>PROGRESS</span></div>
+      <img class="welcome-portrait" src="/images/trainer/adeep-portrait-new.webp" width="600" height="690" fetchpriority="high" alt="Coach Adeep Aji smiling and giving two thumbs up" />
     </div>
-    <div class="hero-bottom container"><span>KERALA ROOTS · UK BASED · GLOBAL ACCESS</span><a href="#programmes">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
   </section>
 
-  <div class="marquee" aria-label="Workout categories"><div class="container marquee-inner"><span>STRENGTH</span><b aria-hidden="true">✳</b><span>CARDIO</span><b aria-hidden="true">✳</b><span>HIIT</span><b aria-hidden="true">✳</b><span>CONSISTENCY</span><b aria-hidden="true">✳</b><span>BEST FITNESS</span></div></div>
+  <section class="section" id="starter-plan" aria-labelledby="starter-heading">
+    <div class="container">
+      <h2 id="starter-heading" class="starter-heading">FREE 3-DAY STARTER PLAN</h2>
+      <p>Pick three days that suit your week. Leave at least one day between the strength sessions. Start with the lower end of each range and use light resistance while learning the movements.</p>
+      <div class="starter-days" role="group" aria-label="Choose a workout day" hidden>
+        {starterSessions.map((_, index) => (
+          <button type="button" aria-pressed={index === 0 ? 'true' : 'false'} aria-controls={`starter-day-${index + 1}`}>Day {index + 1}</button>
+        ))}
+      </div>
+      <div class="starter-workouts">
+        {starterSessions.map((session, index) => (
+          <article class="starter-session" id={`starter-day-${index + 1}`}>
+            <p class="starter-day">DAY {index + 1} · {session.time}</p>
+            <h3>{session.label}</h3>
+            <ul>
+              {session.exercises.map(exercise => (
+                <li>
+                  <strong>{exercise.name}</strong> · {exercise.volume}<br />
+                  {exercise.tip}<br />
+                  <a href={programmeVideoSearch(exercise.name)} target="_blank" rel="noopener noreferrer" aria-label={`Find technique videos for ${exercise.name} on YouTube`}>Find technique videos</a>
+                </li>
+              ))}
+            </ul>
+            <p>{session.notes}</p>
+          </article>
+        ))}
+      </div>
+      <div class="coach-links">
+        <a class="button button-lime" href="/programmes/?level=beginner">OPEN THE FREE 4-WEEK PLAN</a>
+        <a class="button button-outline" href="#coaching-options">ASK ABOUT COACHING</a>
+      </div>
+    </div>
+  </section>
 
   <section class="section programmes-section" id="programmes" aria-labelledby="programmes-heading">
     <div class="container">
@@ -166,31 +194,6 @@ const steps = [
         {steps.map(step=>(
           <div class="step"><span class="step-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.description}</p></div><span class="step-marker" aria-hidden="true">↗</span></div>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="starter-plan" aria-labelledby="starter-heading">
-    <div class="container">
-      <h2 id="starter-heading" class="starter-heading">FREE 3-DAY STARTER PLAN</h2>
-      <p>Pick three days that suit your week. Leave at least one day between the strength sessions. Start with the lower end of each range and use light resistance while learning the movements.</p>
-      <div class="starter-grid">
-        {starterSessions.map((session, index) => (
-          <article class="starter-session">
-            <p class="starter-day">DAY {index + 1} · {session.time}</p>
-            <h3>{session.label}</h3>
-            <ul>
-              {session.exercises.map(exercise => (
-                <li><strong>{exercise.name}</strong> · {exercise.volume}<br />{exercise.tip}</li>
-              ))}
-            </ul>
-            <p>{session.notes}</p>
-          </article>
-        ))}
-      </div>
-      <div class="coach-links">
-        <a class="button button-lime" href="/programmes/?level=beginner">OPEN THE FREE 4-WEEK PLAN</a>
-        <a class="button button-outline" href="#coaching-options">ASK ABOUT COACHING</a>
       </div>
     </div>
   </section>
@@ -268,6 +271,25 @@ const steps = [
   <div class="container footer-bottom"><span>© {year} BF GYM GLOBAL · BEST FITNESS</span><span>Free education only. Paid coaching, public member accounts and bookings are not active.</span></div>
 </footer>
 
+<script>
+  const days = document.querySelector<HTMLElement>('.starter-days');
+  const dayButtons = Array.from(days?.querySelectorAll('button') ?? []);
+  const sessions = document.querySelectorAll<HTMLElement>('.starter-workouts .starter-session');
+
+  function showDay(selectedIndex: number) {
+    dayButtons.forEach((button, index) => {
+      const selected = index === selectedIndex;
+      button.setAttribute('aria-pressed', String(selected));
+      sessions[index].hidden = !selected;
+    });
+  }
+
+  if (days && dayButtons.length === sessions.length && sessions.length > 0) {
+    dayButtons.forEach((button, index) => button.addEventListener('click', () => showDay(index)));
+    showDay(0);
+    days.hidden = false;
+  }
+</script>
 <style is:global>
 .starter-heading{font-family:Oswald,sans-serif;font-size:clamp(2rem,5vw,3.75rem);line-height:1.1}
 .starter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin-block:1.5rem}
@@ -309,4 +331,21 @@ const steps = [
 .team-profile h3 { font-size: 1.375rem; line-height: 1.25; margin: 0; }
 .team-profile p { font-size: 1rem; margin: 5px 0 0; color: #b9c7b5; }
 .team-profile .team-role { color: var(--lime); font-weight: 700; }
+.hero.welcome{min-height:0;padding:clamp(2.5rem,7vw,6rem) 0;background:#141b14}
+.welcome-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(13rem,.65fr);gap:clamp(1.75rem,6vw,6rem);align-items:center}
+.welcome-name{color:var(--lime);font-size:1rem;font-weight:700;margin:0 0 1rem}
+.welcome h1{font-family:inherit;font-size:clamp(2.25rem,5.5vw,4.75rem);line-height:1.07;letter-spacing:-.035em;text-transform:none;margin:0}
+.welcome .hero-lead{font-size:1.125rem;max-width:38ch}
+.welcome-portrait{display:block;width:100%;height:auto;max-height:30rem;aspect-ratio:4/4.5;object-fit:cover;object-position:center 35%;border-radius:1rem}
+.welcome .button,.starter-days button{font-size:.9375rem}
+#starter-plan{padding-block:clamp(2.5rem,6vw,5rem)}
+#starter-plan .container>p{font-size:1rem;max-width:64ch}
+.starter-days{display:flex;gap:.5rem;margin:1.5rem 0 .75rem}
+.starter-days[hidden]{display:none}
+.starter-days button{border:1px solid #62755b;border-radius:.5rem;color:inherit;background:#1c281c;padding:.65rem 1rem;min-height:44px;cursor:pointer}
+.starter-days button[aria-pressed=true]{background:var(--lime);color:#152013;border-color:var(--lime);font-weight:800}
+.starter-workouts{max-width:48rem;margin-bottom:1.25rem}
+.starter-workouts .starter-session{margin-top:.75rem;border-radius:.75rem;font-size:1rem}
+.starter-workouts .starter-session a{color:var(--lime);text-decoration:underline;text-underline-offset:.2em}
+@media(max-width:690px){.welcome-layout{grid-template-columns:1fr}.welcome-portrait{max-height:19rem;object-position:center 37%}.welcome .hero-actions{margin-top:1.25rem}}
 </style>

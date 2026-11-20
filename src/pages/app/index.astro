@@ -24,24 +24,38 @@ const year = new Date().getFullYear();
       <a class="app-logo" href="/app/" aria-label="BF GYM app home"><span>BF<span class="logo-dot">.</span></span><strong>GYM</strong></a>
       <div class="header-right"><span class="header-label">GLOBAL ONLINE FITNESS</span><a class="header-site" href="/app/workouts/" aria-label="Browse workout demo videos" title="Workout videos">▶</a></div>
     </header>
-    <nav class="bottom-nav" aria-label="Fitness hub navigation">
-    <a href="/app/dashboard/"><span aria-hidden="true">⌂</span>Home</a>
-    <a href="/app/workouts/"><span aria-hidden="true">▶</span>Videos</a>
-    <a href="/app/dashboard/#progress"><span aria-hidden="true">◉</span>History</a>
-    <a href="/app/member-card/"><span aria-hidden="true">♧</span>Member</a>
-  </nav>
     <main>
-      <section class="hero" aria-labelledby="app-heading">
-        <div class="hero-meta"><span><i aria-hidden="true"></i> YOUR TRAINING STARTS HERE</span><span>BF / 001</span></div>
-        <h1 id="app-heading">MAKE<br/>EVERY DAY<br/><em>COUNT.</em></h1>
-        <p>Explore workouts anywhere. Learn with video demonstrations and track your progress. Online coaching is in preparation.</p>
-        <div class="hero-cta"><a href="/app/dashboard/" class="primary-cta">OPEN MY WORKOUT DASHBOARD <span aria-hidden="true">↗</span></a><a href="#progress" class="round-link" aria-label="Go to workout tracker">↓</a></div>
-        <div class="hero-geometry" aria-hidden="true"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+      <section class="hub-welcome" aria-labelledby="app-heading">
+        <h1 id="app-heading">Fitness Hub</h1>
+        <p>Pick a workout, browse meal ideas or see the sessions you’ve completed.</p>
+        <nav class="hub-choices" aria-label="Main fitness tools">
+          <a href="/#starter-plan"><strong>Workouts</strong><span>Start a beginner session</span></a>
+          <a href="/sample-plan/#nutrition"><strong>Meals</strong><span>Browse a sample day</span></a>
+          <a href="/app/dashboard/#progress"><strong>Progress</strong><span>View your session history</span></a>
+        </nav>
+        <div class="hub-links">
+          <a href="/app/dashboard/#today-workout">Open my workout dashboard</a>
+          <a href="/app/workouts/">Exercise videos</a>
+          <a href="/app/member-card/">Member card demo</a>
+        </div>
       </section>
       <section class="stats" aria-label="Your workout progress">
         <div><span class="stat-name">TOTAL LOGGED</span><strong id="total-count">0</strong><small>workouts</small></div>
         <div><span class="stat-name">THIS WEEK</span><strong id="week-count">0</strong><small>workouts</small></div>
         <div><span class="stat-name">CURRENT STREAK</span><strong id="streak-count">0</strong><small>days</small></div>
+      </section>
+      <section class="section tracker-section" id="progress" aria-labelledby="progress-heading">
+        <div class="section-top"><div><span class="section-index">02 / BUILD THE HABIT</span><h2 id="progress-heading">SHOW UP.<br/><em>LOG IT.</em></h2></div></div>
+        <div class="tracker-panel">
+          <div class="tracker-intro"><div><span class="tracker-eyebrow">YOUR PERSONAL TRACKER</span><h3>Keep the streak alive.</h3><p>Mark a workout as completed. Your log is stored only on this device — it isn't linked to your trainer or bookings.</p></div><div class="big-check" aria-hidden="true">✓</div></div>
+          <div class="week-view" id="week-view" aria-label="Workout history this week">
+            {['M','T','W','T','F','S','S'].map((day,index)=><div class="day-cell"><span>{day}</span><strong class:list={['day-dot']} data-day={index} aria-label={'Day '+(index+1)}>·</strong></div>)}
+          </div>
+          <p class="tracker-status" id="tracker-status" role="status" aria-live="polite">Your workout history will appear here.</p>
+          <button type="button" id="log-today" class="log-btn">LOG TODAY'S WORKOUT <span aria-hidden="true">+</span></button>
+          <button type="button" id="remove-today" class="undo-btn" hidden>Undo today's entry</button>
+          <p class="tracker-note">For motivation only. No login, synced account, medical or wearable tracking is included in this version.</p>
+        </div>
       </section>
       <section class="dashboard-promo" aria-labelledby="dashboard-promo-heading"><div><p class="video-eyebrow">NEW / YOUR DAILY TRAINING</p><h2 id="dashboard-promo-heading">MY WORKOUT.<br/><em>MY PROGRESS.</em></h2><p>One screen for today's exercises, technique demo links, your weekly sessions and local workout history. No account required.</p><a href="/app/dashboard/">OPEN PERSONAL DASHBOARD <span aria-hidden="true">↗</span></a></div><span class="dashboard-promo-graphic" aria-hidden="true">◉</span></section><section class="one-tap" aria-label="Find your starting plan"><div><span class="video-eyebrow">GET STARTED / NO SIGNUP</span><h2>TWO TAPS.<br/><em>YOUR PLAN.</em></h2><p>Choose your training experience and available days, then open a free four-week routine.</p></div><a href="/start/#plan-finder">FIND MY PLAN <span aria-hidden="true">↗</span></a></section><section class="free-plans-feature" aria-labelledby="free-plans-heading">
   <div class="free-plans-content"><p class="video-eyebrow">FREE / TRAIN AT YOUR LEVEL</p><h2 id="free-plans-heading">3 LEVELS.<br/><em>4 WEEKS.</em></h2><p>Beginner, intermediate or advanced: open a free weekly strength, cardio and recovery programme with exercise demos and device-only progress marking.</p><a href="/programmes/">EXPLORE FREE TRAINING PLANS <span aria-hidden="true">↗</span></a></div>
@@ -60,19 +74,6 @@ const year = new Date().getFullYear();
           ))}
         </div>
         <p class="disclaimer">Global online coaching services are in preparation. No active enrolment, client bookings or payments are available yet. Exercise videos and the personal tracker are free.</p>
-      </section>
-      <section class="section tracker-section" id="progress" aria-labelledby="progress-heading">
-        <div class="section-top"><div><span class="section-index">02 / BUILD THE HABIT</span><h2 id="progress-heading">SHOW UP.<br/><em>LOG IT.</em></h2></div></div>
-        <div class="tracker-panel">
-          <div class="tracker-intro"><div><span class="tracker-eyebrow">YOUR PERSONAL TRACKER</span><h3>Keep the streak alive.</h3><p>Mark a workout as completed. Your log is stored only on this device — it isn't linked to your trainer or bookings.</p></div><div class="big-check" aria-hidden="true">✓</div></div>
-          <div class="week-view" id="week-view" aria-label="Workout history this week">
-            {['M','T','W','T','F','S','S'].map((day,index)=><div class="day-cell"><span>{day}</span><strong class:list={['day-dot']} data-day={index} aria-label={'Day '+(index+1)}>·</strong></div>)}
-          </div>
-          <p class="tracker-status" id="tracker-status" role="status" aria-live="polite">Your workout history will appear here.</p>
-          <button type="button" id="log-today" class="log-btn">LOG TODAY'S WORKOUT <span aria-hidden="true">+</span></button>
-          <button type="button" id="remove-today" class="undo-btn" hidden>Undo today's entry</button>
-          <p class="tracker-note">For motivation only. No login, synced account, medical or wearable tracking is included in this version.</p>
-        </div>
       </section>
       <section class="section booking-section" id="booking" aria-labelledby="booking-heading">
         <span class="section-index">03 / UPCOMING ONLINE SESSIONS</span><h2 id="booking-heading">LET'S<br/><em>GET MOVING.</em></h2>
@@ -201,4 +202,17 @@ const year = new Date().getFullYear();
 @media(min-width:750px){.bottom-nav{max-width:750px;margin:auto}.app-shell{border-left:1px solid #293328;border-right:1px solid #293328}.hero h1{font-size:92px}.service-list{grid-template-columns:1fr 1fr}.service-card:last-child{grid-column:span 2}.stats strong{font-size:56px}}
 @media(max-width:370px){.hero{padding:24px 18px}.hero h1{font-size:54px}.hero-meta{font-size:8px}.stat-name{font-size:8px}.stats>div{padding:17px 8px}.stats strong{font-size:36px}.service-card{padding:20px}.tracker-panel{padding:18px}.day-dot{font-size:17px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.hub-welcome{padding:clamp(1.5rem,6vw,3rem) 1rem 0}
+.hub-welcome h1{margin:0;font-size:clamp(2.25rem,7vw,3.5rem);line-height:1.1;letter-spacing:-.04em}
+.hub-welcome p{font-size:1rem;color:var(--muted);margin:.75rem 0 1.25rem}
+.hub-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.hub-choices a{display:grid;align-content:start;gap:.3rem;background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1rem;min-height:44px}
+.hub-choices a:first-child{border-color:var(--lime)}
+.hub-choices a:hover{background:var(--surface-2)}
+.hub-choices strong{font-size:1.125rem;color:var(--lime)}
+.hub-choices span,.hub-links a{font-size:.875rem;color:var(--text)}
+.hub-links{display:flex;flex-wrap:wrap;gap:.25rem 1rem;margin-top:.75rem}
+.hub-links a{padding:.5rem 0;text-decoration:underline;text-underline-offset:.2em}
+.tracker-section{padding-top:2.5rem}
+@media(max-width:430px){.hub-choices{grid-template-columns:1fr}.hub-choices a{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap}}
 </style>
