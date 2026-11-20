@@ -105,7 +105,7 @@ const steps = [
         <p class="hero-lead">Build strength with a plan that fits your life. Start with three beginner sessions you can move around work, family or night shifts.</p>
         <div class="hero-actions">
           <a class="button button-lime" href="#starter-plan">TRY THE FREE 3-DAY PLAN</a>
-          <a class="button button-outline" href="#coaching-enquiries">ASK ABOUT COACHING</a>
+          <a class="button button-outline" href="#coaching-options">ASK ABOUT COACHING</a>
         </div>
         <div class="hero-assurance"><span><b>✓</b> FREE PROGRAMMES</span><span><b>✓</b> ALL EXPERIENCE LEVELS</span><span><b>✓</b> NO REGISTRATION</span></div>
       </div>
@@ -190,8 +190,30 @@ const steps = [
       </div>
       <div class="coach-links">
         <a class="button button-lime" href="/programmes/?level=beginner">OPEN THE FREE 4-WEEK PLAN</a>
-        <a class="button button-outline" href="#coaching-enquiries">ASK ABOUT COACHING</a>
+        <a class="button button-outline" href="#coaching-options">ASK ABOUT COACHING</a>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="coaching-options" aria-labelledby="coaching-options-heading">
+    <div class="container">
+      <h2 id="coaching-options-heading" class="starter-heading">COACHING OPTIONS</h2>
+      <div class="starter-grid">
+        <article class="starter-session coaching-featured">
+          <h3>Shift-Worker Fitness</h3>
+          <p>For people working nights or rotating shifts. Build a flexible routine around your roster, with shorter sessions for busy weeks.</p>
+          <p><strong>Example week</strong> Strength on Monday before your shift, an easy walk on Wednesday, and strength on Friday after you’ve rested.</p>
+        </article>
+        <article class="starter-session">
+          <h3>Beginner Strength</h3>
+          <p>For people new to the gym or returning after a break. Learn the basic movements, build a simple routine and increase the difficulty as you gain confidence.</p>
+        </article>
+        <article class="starter-session">
+          <h3>Personalised Online Coaching</h3>
+          <p>For people training towards a specific goal. Tell Coach Adeep about your experience, equipment and available time so you can discuss a plan and the support that would help you follow it.</p>
+        </article>
+      </div>
+      <a class="button button-lime" href="https://ig.me/m/fitwithaadhi">ASK ABOUT COACHING ON INSTAGRAM</a>
     </div>
   </section>
 
@@ -250,6 +272,8 @@ const steps = [
 .starter-heading{font-family:Oswald,sans-serif;font-size:clamp(2rem,5vw,3.75rem);line-height:1.1}
 .starter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem;margin-block:1.5rem}
 .starter-session{border:1px solid #465142;background:#101710;padding:1.25rem}
+#coaching-options{background:#111611}
+.coaching-featured{border-color:var(--lime)}
 .starter-session h3{font-size:1.35rem;margin-block:.25rem .75rem}
 .starter-session ul{padding-inline-start:1.25rem}
 .starter-session li+li{margin-top:.6rem}
