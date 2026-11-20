@@ -108,7 +108,7 @@ const total = meals.reduce((a,m)=>a+m.calories,0);
 </section>
 <section id="nutrition" class="nutrition" aria-labelledby="nutrition-title">
   <div class="section-label"><span>03 / EXAMPLE NUTRITION</span><span>ONE SAMPLE DAY</span></div>
-  <div class="section-heading"><div><h2 id="nutrition-title">FUEL THE<br/><em>PROGRESS.</em></h2></div><p>A simple example of meals with eggs, yoghurt, chicken, lentils and wholegrains. Quantities and calories are approximate and will vary with products and preparation.</p></div>
+  <div class="section-heading"><div><h2 id="nutrition-title">Sample meals for a day</h2></div><p>A simple example of meals with eggs, yoghurt, chicken, lentils and wholegrains. Quantities and calories are approximate and will vary with products and preparation.</p></div>
   <div class="food-summary"><div><p>ILLUSTRATIVE DAY TOTAL</p><strong>≈ {total.toLocaleString('en-GB')} <small>kcal</small></strong></div><p>Close to the sample report's 1,739 kcal figure, but not an instruction to eat this amount. Energy needs vary widely; some people will require more.</p></div>
   <div class="meal-grid">
     {meals.map(meal=><article class="meal">
@@ -121,7 +121,7 @@ const total = meals.reduce((a,m)=>a+m.calories,0);
 </section>
 <section class="final-cta"><p class="eyebrow">LEARN BEFORE YOU TRAIN</p><h2>BUILD CONSISTENCY.<br/><em>KEEP IT SUSTAINABLE.</em></h2><p>Use this plan as a layout example. Anyone beginning exercise with health concerns, injuries, pregnancy or other medical considerations should seek advice from an appropriate clinician or qualified professional before following a demanding routine.</p><div><a class="primary" href="/app/workouts/">EXPLORE FREE EXERCISE VIDEOS <span aria-hidden="true">↗</span></a><a href="/" class="secondary">RETURN TO BF GYM GLOBAL</a></div></section>
 </main>
-<footer class="footer"><a href="/">BF<span>.</span> GYM GLOBAL</a><div><a href="/app/">MOBILE APP</a><a href="/privacy/">PRIVACY</a></div></footer>
+<footer class="footer"><a href="/">BF<span>.</span> GYM GLOBAL</a><div><a href="/app/">Fitness Hub</a><a href="/#starter-plan">Free starter workout</a><a href="/privacy/">PRIVACY</a></div></footer>
 </div>
 <script define:vars={{ week }}>
  const tabs = Array.from(document.querySelectorAll('[data-day]'));

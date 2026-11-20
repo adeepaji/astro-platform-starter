@@ -1,5 +1,5 @@
 /* BF GYM PWA: cache public app shell only. Never intercept POST or third-party payments. */
-const CACHE = 'bf-gym-shell-v2';
+const CACHE = 'bf-gym-shell-v3';
 const PRECACHE = ['/app/', '/app/dashboard/', '/app/membership/', '/offline/', '/manifest.webmanifest', '/app-icon-192.png', '/app-icon-512.png', '/bf-icon.svg'];
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(PRECACHE)).then(() => self.skipWaiting()));

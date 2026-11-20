@@ -37,6 +37,7 @@ const year = new Date().getFullYear();
           <a href="/app/dashboard/#today-workout">Open my workout dashboard</a>
           <a href="/app/workouts/">Exercise videos</a>
           <a href="/app/member-card/">Member card demo</a>
+          <a href="/book/">Ask about coaching</a>
         </div>
       </section>
       <section class="stats" aria-label="Your workout progress">
@@ -45,9 +46,9 @@ const year = new Date().getFullYear();
         <div><span class="stat-name">CURRENT STREAK</span><strong id="streak-count">0</strong><small>days</small></div>
       </section>
       <section class="section tracker-section" id="progress" aria-labelledby="progress-heading">
-        <div class="section-top"><div><span class="section-index">02 / BUILD THE HABIT</span><h2 id="progress-heading">SHOW UP.<br/><em>LOG IT.</em></h2></div></div>
+        <div class="section-top"><div><h2 id="progress-heading">Log a workout</h2></div></div>
         <div class="tracker-panel">
-          <div class="tracker-intro"><div><span class="tracker-eyebrow">YOUR PERSONAL TRACKER</span><h3>Keep the streak alive.</h3><p>Mark a workout as completed. Your log is stored only on this device — it isn't linked to your trainer or bookings.</p></div><div class="big-check" aria-hidden="true">✓</div></div>
+          <div class="tracker-intro"><div><p>Mark a workout as completed. Your log is stored only on this device — it isn't linked to your trainer or bookings.</p></div><div class="big-check" aria-hidden="true">✓</div></div>
           <div class="week-view" id="week-view" aria-label="Workout history this week">
             {['M','T','W','T','F','S','S'].map((day,index)=><div class="day-cell"><span>{day}</span><strong class:list={['day-dot']} data-day={index} aria-label={'Day '+(index+1)}>·</strong></div>)}
           </div>
@@ -57,6 +58,8 @@ const year = new Date().getFullYear();
           <p class="tracker-note">For motivation only. No login, synced account, medical or wearable tracking is included in this version.</p>
         </div>
       </section>
+      <details class="hub-more">
+        <summary>More from BF GYM Global</summary>
       <section class="dashboard-promo" aria-labelledby="dashboard-promo-heading"><div><p class="video-eyebrow">NEW / YOUR DAILY TRAINING</p><h2 id="dashboard-promo-heading">MY WORKOUT.<br/><em>MY PROGRESS.</em></h2><p>One screen for today's exercises, technique demo links, your weekly sessions and local workout history. No account required.</p><a href="/app/dashboard/">OPEN PERSONAL DASHBOARD <span aria-hidden="true">↗</span></a></div><span class="dashboard-promo-graphic" aria-hidden="true">◉</span></section><section class="one-tap" aria-label="Find your starting plan"><div><span class="video-eyebrow">GET STARTED / NO SIGNUP</span><h2>TWO TAPS.<br/><em>YOUR PLAN.</em></h2><p>Choose your training experience and available days, then open a free four-week routine.</p></div><a href="/start/#plan-finder">FIND MY PLAN <span aria-hidden="true">↗</span></a></section><section class="free-plans-feature" aria-labelledby="free-plans-heading">
   <div class="free-plans-content"><p class="video-eyebrow">FREE / TRAIN AT YOUR LEVEL</p><h2 id="free-plans-heading">3 LEVELS.<br/><em>4 WEEKS.</em></h2><p>Beginner, intermediate or advanced: open a free weekly strength, cardio and recovery programme with exercise demos and device-only progress marking.</p><a href="/programmes/">EXPLORE FREE TRAINING PLANS <span aria-hidden="true">↗</span></a></div>
   <div class="free-plans-mark" aria-hidden="true"><strong>04</strong><span>WEEKS</span></div>
@@ -80,6 +83,7 @@ const year = new Date().getFullYear();
         <div class="class-card"><div class="class-card-top"><span>GROUP FITNESS</span><span>CLASS TIMETABLE</span></div><strong>COMING SOON</strong><p>International online class dates, time zones and capacity are being planned. No classes are currently offered for booking.</p><a href="/book/?service=group">VIEW PLANNED GROUP CLASSES ↗</a></div>
         <div class="booking-actions"><a href="/book/?service=personal"><span>01</span><div><strong>Personal training</strong><small>Preview online one-to-one coaching</small></div><span aria-hidden="true">↗</span></a><a href="/book/?service=online"><span>02</span><div><strong>Online coaching</strong><small>Preview online training plans</small></div><span aria-hidden="true">↗</span></a></div>
       </section>
+      </details>
       <section class="install-section" id="install" aria-labelledby="install-heading">
         <span class="section-index">04 / KEEP BF GYM CLOSE</span><h2 id="install-heading">YOUR FITNESS.<br/><em>ONE TAP AWAY.</em></h2><p>Add BF GYM to your phone's Home Screen for an app-like experience. Installation is free; coaching services are separate.</p>
         <button id="install-btn" class="install-btn" type="button" hidden>INSTALL BF GYM <span aria-hidden="true">↓</span></button>
@@ -90,6 +94,17 @@ const year = new Date().getFullYear();
   </div>
   
   <script>
+    const more = document.querySelector<HTMLDetailsElement>('.hub-more');
+    function revealLinkedTool() {
+      const target = document.getElementById(location.hash.slice(1));
+      if (more && target && more.contains(target)) {
+        more.open = true;
+        target.scrollIntoView();
+      }
+    }
+    window.addEventListener('hashchange', revealLinkedTool);
+    revealLinkedTool();
+
     // Local-only workout log: no personal details are transmitted or shared.
     const storageKey = 'bf-gym-workouts-v1';
     const localDateKey = (date: Date): string => {
@@ -215,4 +230,7 @@ const year = new Date().getFullYear();
 .hub-links a{padding:.5rem 0;text-decoration:underline;text-underline-offset:.2em}
 .tracker-section{padding-top:2.5rem}
 @media(max-width:430px){.hub-choices{grid-template-columns:1fr}.hub-choices a{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap}}
+.hub-more{margin:1.5rem 1rem;border:1px solid var(--line);border-radius:.75rem}
+.hub-more>summary{cursor:pointer;color:var(--lime);font-size:1rem;font-weight:700;padding:1rem}
+.tracker-section h2{font:700 clamp(1.5rem,5vw,2rem)/1.2 system-ui,sans-serif;margin:0}
 </style>
