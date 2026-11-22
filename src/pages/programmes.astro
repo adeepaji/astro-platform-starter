@@ -1,7 +1,7 @@
 ---
 import { trainingProgrammes, programmeVideoSearch } from '../data/trainingProgrammes';
 const k11Masterclass = 'https://projectbattlefit.com/the-masterclass-of-muscle/';
-const kaizzadBenchPress = 'https://www.youtube.com/watch?v=qVL4EDqCqfM';
+const barbellBenchPressDemo = 'https://www.youtube.com/watch?v=qVL4EDqCqfM';
 const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.schedule.filter(d=>d.kind==='Strength'||d.kind==='Cardio').length ?? 0;
 ---
 <!doctype html>
@@ -62,8 +62,8 @@ const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.sch
      <aside class="technique-guide" aria-label="Exercise technique resources">
        <h3>Learn the movements</h3>
        <p>Open a training day for sets, reps and a form tip for each exercise. Use the video link to see the movement before trying it.</p>
-       <p>For a closer look at the barbell squat, deadlift and bench press, explore this public series featuring K11 co-founder Kaizzad Capadia. Follow the exercise variation in your plan.</p>
-       <a href={k11Masterclass} target="_blank" rel="noopener noreferrer">Watch the Kaizzad Capadia technique series</a>
+       <p>For a closer look at the barbell squat, deadlift and bench press, explore this public technique series. Follow the exercise variation in your plan.</p>
+       <a href={k11Masterclass} target="_blank" rel="noopener noreferrer">Watch squat, deadlift and bench press technique videos</a>
      </aside>
      <div class="schedule-label"><h3>YOUR WEEKLY TRAINING</h3><p>Select each day for exercises and demonstration links. Rest days are included, but don't count toward the training-day total.</p></div>
      <div class="schedule-grid">
@@ -76,7 +76,7 @@ const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.sch
               <div><strong>{exercise.name}</strong><span>{exercise.volume}</span></div>
               <p>{exercise.tip}</p>
               <a href={programmeVideoSearch(exercise.name)} target="_blank" rel="noopener noreferrer">Find technique videos for {exercise.name}</a>
-              {exercise.name === 'Barbell Bench Press' && <a class="direct-demo" href={kaizzadBenchPress} target="_blank" rel="noopener noreferrer">Watch Kaizzad Capadia demonstrate the barbell bench press</a>}
+              {exercise.name === 'Barbell Bench Press' && <a class="direct-demo" href={barbellBenchPressDemo} target="_blank" rel="noopener noreferrer">Watch the barbell bench press demonstration</a>}
            </li>)}</ul> : <p class="rest-text">Take a restful day or only gentle movement, depending on how you feel.</p>}
            {day.notes && <p class="day-note">{day.notes}</p>}
          </details>
