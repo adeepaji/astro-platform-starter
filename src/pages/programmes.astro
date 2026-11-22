@@ -1,5 +1,7 @@
 ---
 import { trainingProgrammes, programmeVideoSearch } from '../data/trainingProgrammes';
+const k11Masterclass = 'https://projectbattlefit.com/the-masterclass-of-muscle/';
+const kaizzadBenchPress = 'https://www.youtube.com/watch?v=qVL4EDqCqfM';
 const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.schedule.filter(d=>d.kind==='Strength'||d.kind==='Cardio').length ?? 0;
 ---
 <!doctype html>
@@ -57,6 +59,12 @@ const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.sch
        <div><strong>YOUR PERSONAL PROGRESS</strong><p><span data-completed={plan.id}>0</span> of {countTrainable(plan.id)} training days completed in this selected week</p><div class="meter" role="progressbar" aria-label={plan.name+' weekly session completion'} aria-valuemin="0" aria-valuemax={countTrainable(plan.id)} aria-valuenow="0" data-progress={plan.id}><div class="meter-fill"></div></div></div>
        <button class="clear-progress" type="button" data-clear-plan={plan.id}>RESET THIS WEEK</button>
      </div>
+     <aside class="technique-guide" aria-label="Exercise technique resources">
+       <h3>Learn the movements</h3>
+       <p>Open a training day for sets, reps and a form tip for each exercise. Use the video link to see the movement before trying it.</p>
+       <p>For a closer look at the barbell squat, deadlift and bench press, explore this public series featuring K11 co-founder Kaizzad Capadia. Follow the exercise variation in your plan.</p>
+       <a href={k11Masterclass} target="_blank" rel="noopener noreferrer">Watch the Kaizzad Capadia technique series</a>
+     </aside>
      <div class="schedule-label"><h3>YOUR WEEKLY TRAINING</h3><p>Select each day for exercises and demonstration links. Rest days are included, but don't count toward the training-day total.</p></div>
      <div class="schedule-grid">
        {plan.schedule.map((day,dayIndex)=><article class="day" data-kind={day.kind}>
@@ -67,7 +75,8 @@ const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.sch
            {day.exercises.length ? <ul>{day.exercises.map(exercise=><li>
               <div><strong>{exercise.name}</strong><span>{exercise.volume}</span></div>
               <p>{exercise.tip}</p>
-              <a href={programmeVideoSearch(exercise.name)} target="_blank" rel="noopener noreferrer">FIND YOUTUBE DEMOS <span aria-hidden="true">↗</span></a>
+              <a href={programmeVideoSearch(exercise.name)} target="_blank" rel="noopener noreferrer">Find technique videos for {exercise.name}</a>
+              {exercise.name === 'Barbell Bench Press' && <a class="direct-demo" href={kaizzadBenchPress} target="_blank" rel="noopener noreferrer">Watch Kaizzad Capadia demonstrate the barbell bench press</a>}
            </li>)}</ul> : <p class="rest-text">Take a restful day or only gentle movement, depending on how you feel.</p>}
            {day.notes && <p class="day-note">{day.notes}</p>}
          </details>
@@ -90,7 +99,7 @@ const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.sch
    <p>The NHS Eatwell Guide recommends variety and balance across food groups. Individual energy needs are different, so this site deliberately does not set a one-size-fits-all calorie target.</p>
  </div>
  <div class="source-links"><a href="https://www.gov.uk/government/publications/physical-activity-guidelines-adults-and-older-adults/physical-activity-for-adults-and-older-adults-19-and-over-text-of-the-infographic" rel="noopener noreferrer" target="_blank">UK ACTIVITY GUIDANCE ↗</a><a href="https://www.nhs.uk/live-well/eat-well/food-guidelines-and-food-labels/the-eatwell-guide/" rel="noopener noreferrer" target="_blank">NHS EATWELL GUIDE ↗</a></div>
- <p class="privacy">Your selected level, week and completed-day marks are stored only in this browser's local storage. They are not synced to an account and can be lost if browser data is cleared. This site does not collect personal health details from this feature. YouTube links open third-party search results; individual videos are not endorsed or verified by BF GYM Global.</p>
+ <p class="privacy">Your selected level, week and completed-day marks are stored only in this browser's local storage. They are not synced to an account and can be lost if browser data is cleared. This site does not collect personal health details from this feature. Exercise search links open YouTube results. The named demonstrations are hosted by their original publishers.</p>
 </section>
 <section class="cta wrap"><div><p class="eyebrow">BF GYM / TRAIN WITH PURPOSE</p><h2>KEEP SHOWING UP.<br/><em>ONE WEEK AT A TIME.</em></h2><p>All free. No sales, membership or coach booking required.</p></div><div><a href="/app/" class="cta-button">OPEN MOBILE FITNESS APP ↗</a><a href="/trainer/" class="cta-text">MEET COACH ADEEP ↗</a></div></section>
 </main>
@@ -189,4 +198,9 @@ const countTrainable = (id:string) => trainingProgrammes.find(p=>p.id===id)?.sch
 @media(max-width:600px){.wrap{width:calc(100% - 28px)}.top{min-height:69px}.brand>span{font-size:30px}.brand strong{font-size:11px}.brand small{font-size:8px}.mobile-link{font-size:9px;padding:10px}.hero{padding:54px 0 40px}.hero h1{font-size:clamp(64px,12.5vw,92px)}.intro{font-size:14px}.hero-metrics{gap:13px;justify-content:space-between}.hero-metrics>div{display:block}.hero-metrics strong{font-size:29px}.hero-metrics span{display:block;font-size:9px}.ribbon{flex-wrap:wrap;gap:9px;font-size:18px}.content,.notes-section{padding:55px 0}.heading-row h2,.notes-section h2{font-size:clamp(50px,11vw,65px)}.level-grid{grid-template-columns:1fr}.level-card:last-child{grid-column:auto}.level-card{min-height:190px}.safety{display:block}.safety strong{display:block;margin-bottom:8px}.programme-area{padding:60px 0}.plan-summary{margin-top:20px}.weeks{padding:16px}.week-buttons{width:100%}.week{flex:1;min-width:0;padding:10px 8px}.progress-row,.schedule-label{display:block}.clear-progress{margin-top:20px}.schedule-label p{margin-top:10px}.day{padding:17px}.day h4{font-size:28px}.guidance-grid,.notes-grid{grid-template-columns:1fr}.cta{padding:30px 20px}.cta h2{font-size:53px}.footer{flex-wrap:wrap}.footer>div{gap:12px}}
 @media print{body{background:white;color:black;font-size:11px}.top,.ribbon,.hero,.content,.notes-section,.cta,.footer,.resource-row,.clear-progress,.done,.week-buttons{display:none!important}.programme-area{background:white;padding:0}.plan-panel[hidden]{display:none!important}.plan-panel{display:block!important}.heading-row h2,.programme-title h2{font-size:34px;color:black}.schedule-grid{grid-template-columns:1fr 1fr;gap:10px}.day{background:white!important;border:1px solid #ccc;break-inside:avoid;padding:12px}.exercise-details{display:block}.exercise-details>ul{display:block}.exercise-details li a{display:none}.guidance-grid{grid-template-columns:1fr 1fr}.guidance{background:white;color:black}.day h4,.day-name,.day-note,.guidance li{color:black}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+.technique-guide{margin:1.5rem 0;padding:1.25rem;border:1px solid #51644d;border-radius:.75rem;background:#182218}
+.technique-guide h3{margin:0;font-size:1.4rem}
+.technique-guide p{max-width:65ch;font-size:1rem}
+.technique-guide a,.exercise-details .direct-demo{display:inline-block;color:#c7ff52;font-size:1rem;text-decoration:underline;text-underline-offset:.2em}
+.exercise-details .direct-demo{display:block;margin-top:.5rem}
 </style>
