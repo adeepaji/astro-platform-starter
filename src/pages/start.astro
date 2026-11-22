@@ -1,4 +1,6 @@
 ---
+import { trainingProgrammes } from "../data/trainingProgrammes";
+
 const links = [
   {number:'01',title:'Find my free plan',description:'Choose your experience and get a suitable starting-level example.',url:'#plan-finder',icon:'✳'},
   {number:'02',title:'Watch demonstrations',description:'Look up weights, cardio and HIIT movements.',url:'/app/workouts/',icon:'▶'},
@@ -13,7 +15,7 @@ const links = [
 <head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="theme-color" content="#101310"/>
-<meta name="description" content="Start free fitness learning with BF GYM Global. Find an example workout level in two taps, open the video library and continue your device-only workout progress."/>
+<meta name="description" content="Start free fitness learning with BF GYM Global. Check your adult BMI, choose a workout level and open a free four-week plan."/>
 <title>Start Here — BF GYM Global</title>
 <link rel="manifest" href="/manifest.webmanifest"/><link rel="icon" href="/bf-icon.svg" type="image/svg+xml"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -24,43 +26,63 @@ const links = [
 <div class="shell">
 <header class="header"><a href="/" class="logo">BF<span>.</span> GYM <small>GLOBAL</small></a><nav aria-label="Site navigation"><a href="/programmes/">FREE PLANS</a><a href="/app/workouts/">EXERCISES</a><a href="/trainer/">TRAINER</a><a href="/kerala-uk/">KERALA → UK</a></nav><a class="app-link" href="/app/">OPEN APP ↗</a></header>
 <main id="main">
-<section class="hero"><p class="eyebrow"><span aria-hidden="true">●</span> BF GYM GLOBAL / START HERE</p><h1>MAKE FITNESS<br/><em>SIMPLE.</em></h1><p>New here? Start with a free plan, watch exercise demonstrations or log your training. No login, membership or payment needed.</p><a class="primary" href="#plan-finder">FIND MY STARTING LEVEL <span aria-hidden="true">↓</span></a></section>
-<div class="trust"><span>FREE FITNESS EDUCATION</span><span>NO ACCOUNT REQUIRED</span><span>DEVICE-ONLY PROGRESS</span></div>
-<section class="shortcuts" aria-labelledby="shortcuts-title"><p class="eyebrow">01 / QUICK ACCESS</p><div class="section-head"><h2 id="shortcuts-title">WHERE DO YOU<br/><em>WANT TO GO?</em></h2><p>Everything important is within one tap. You can return here from the homepage or mobile app.</p></div>
-<div class="shortcut-grid">{links.map(link=><a href={link.url} class="shortcut"><div class="shortcut-head"><span>{link.number} / BF GYM</span><span class="shortcut-icon" aria-hidden="true">{link.icon}</span></div><h3>{link.title}</h3><p>{link.description}</p><span class="shortcut-arrow">OPEN →</span></a>)}</div></section>
 <section id="plan-finder" class="finder" aria-labelledby="finder-title">
 <div class="finder-inner">
-<div class="finder-copy"><p class="eyebrow">02 / SIMPLE PLAN FINDER</p><h2 id="finder-title">TWO CHOICES.<br/><em>ONE START.</em></h2><p>This tool suggests which *general fitness education plan* you might find easiest to explore, based on your experience and training availability—not on medical or personal information.</p><div class="finder-note"><strong>NOT A FITNESS ASSESSMENT</strong><p>The suggested plan is not a personalised prescription. If you have health conditions, injuries or other concerns, get appropriate professional advice before starting activity.</p></div></div>
+<div class="finder-copy">
+  <h1 id="finder-title">Find your workout plan</h1>
+  <p>Check your adult BMI and find a free workout plan that suits your training experience.</p>
+  <p><a class="assessment-link" href="/programmes/">Browse all workout plans without entering details</a></p>
+  <div class="finder-note">
+    <p>This BMI check is for adults aged 18 and over. BMI is a rough measure and cannot distinguish muscle from fat. For eligibility and help interpreting your result, see the <a class="assessment-link" href="https://www.nhs.uk/health-assessment-tools/calculate-your-body-mass-index/calculate-bmi-for-adults">NHS adult BMI guide</a>.</p>
+  </div>
+</div>
 <div class="finder-panel">
-<form id="level-form">
-<fieldset><legend><span>STEP 1 / 2</span> How experienced are you with gym exercises?</legend>
+<noscript><p>Enable JavaScript to calculate BMI, or use the link above to browse the workout plans.</p></noscript>
+<form id="level-form" hidden>
+<fieldset aria-describedby="measurement-note">
+  <legend>Your details</legend>
+  <div class="measurement-grid">
+    <label for="bmi-height">Height (cm)<input id="bmi-height" type="number" inputmode="decimal" min="0.1" step="any" required /></label>
+    <label for="bmi-weight">Weight (kg)<input id="bmi-weight" type="number" inputmode="decimal" min="0.1" step="any" required /></label>
+    <label for="bmi-age">Age (years)<input id="bmi-age" type="number" inputmode="numeric" min="18" step="1" required /></label>
+    <label for="bmi-sex">Sex (optional)<select id="bmi-sex"><option value="">Prefer not to say</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select></label>
+  </div>
+  <p id="measurement-note">Height and weight are used to calculate BMI. Your details stay on this page and are never saved or sent.</p>
+</fieldset>
+<fieldset><legend>How experienced are you with gym exercises?</legend>
 <label class="choice"><input type="radio" name="experience" value="new" checked/><span><strong>Starting out</strong><small>New to training or restarting after a break</small></span></label>
 <label class="choice"><input type="radio" name="experience" value="some"/><span><strong>Some experience</strong><small>Comfortable with a few regular gym exercises</small></span></label>
 <label class="choice"><input type="radio" name="experience" value="regular"/><span><strong>Very experienced</strong><small>Confident training frequently with good technique</small></span></label>
 </fieldset>
-<fieldset><legend><span>STEP 2 / 2</span> How many days can you usually train?</legend>
+<fieldset><legend>How many days can you usually train?</legend>
 <label class="choice"><input type="radio" name="days" value="few" checked/><span><strong>2–3 days a week</strong><small>Keep it flexible and simple</small></span></label>
 <label class="choice"><input type="radio" name="days" value="many"/><span><strong>4 or more days a week</strong><small>Regular exercise fits my routine</small></span></label>
 </fieldset>
-<button type="submit" class="submit">SHOW MY STARTING PLAN <span aria-hidden="true">↗</span></button>
+<button type="submit" class="submit">Show my BMI and workout plan</button>
 </form>
-<div class="result" id="recommendation" hidden aria-live="polite" tabindex="-1">
+<div class="result" id="recommendation" hidden tabindex="-1" aria-labelledby="result-title">
+<p class="bmi-reading">Your BMI <strong id="bmi-result"></strong> <span>kg/m²</span></p>
 <p class="result-kicker">YOUR SUGGESTED STARTING POINT</p><h3 id="result-title">START STRONG</h3><p id="result-text"></p>
-<div class="result-actions"><a id="result-link" class="primary" href="/programmes/?level=beginner">OPEN FREE 4-WEEK PLAN ↗</a><a href="/sample-plan/">VIEW SAMPLE MEAL DAY ↗</a></div>
-<p class="result-note">Suggestions and your last selected level stay in this browser; no account or health details are collected.</p>
+<div class="result-actions"><a id="result-link" class="primary" href="/programmes/?level=beginner#selected-plan">Open my free 4-week plan</a><a href="/sample-plan/">VIEW SAMPLE MEAL DAY ↗</a></div>
+<p class="result-note">Your experience and training availability guide this suggestion. You can choose a different level below.</p>
+<nav class="assessment-levels" aria-label="All workout levels">
+  {trainingProgrammes.map(plan => <a href={`/programmes/?level=${plan.id}#selected-plan`}>{plan.level}</a>)}
+</nav>
 </div>
 </div>
 </div>
 </section>
 <section class="last-plan" aria-labelledby="last-title"><div><p class="eyebrow">03 / CONTINUE WHERE YOU STOPPED</p><h2 id="last-title">YOUR NEXT<br/><em>MOVE.</em></h2><p id="last-description">Already started one of our plans? The site can remember your last selected *level* on this device. Weekly completion ticks are managed on the programme page.</p></div><div class="last-actions"><a class="primary" id="continue-link" href="/programmes/">OPEN FREE PROGRAMMES ↗</a><a href="/app/workouts/">EXPLORE EXERCISES →</a></div></section>
+<section class="shortcuts" aria-labelledby="shortcuts-title"><p class="eyebrow">01 / QUICK ACCESS</p><div class="section-head"><h2 id="shortcuts-title">WHERE DO YOU<br/><em>WANT TO GO?</em></h2><p>Everything important is within one tap. You can return here from the homepage or mobile app.</p></div>
+<div class="shortcut-grid">{links.map(link=><a href={link.url} class="shortcut"><div class="shortcut-head"><span>{link.number} / BF GYM</span><span class="shortcut-icon" aria-hidden="true">{link.icon}</span></div><h3>{link.title}</h3><p>{link.description}</p><span class="shortcut-arrow">OPEN →</span></a>)}</div></section>
 </main>
 <footer class="footer"><a class="logo" href="/">BF<span>.</span> GYM <small>GLOBAL</small></a><p>Free educational workouts and examples · Paid bookings disabled</p><a href="/privacy/">PRIVACY</a></footer>
 </div>
 <script>
  const titles={
-   beginner:{name:'START STRONG',text:'The beginner plan focuses on simple strength movements, enjoyable low-impact cardio and manageable rest days. You can go at your own pace.'},
-   intermediate:{name:'BUILD MOMENTUM',text:'The intermediate plan introduces more gym exercises and regular cardio while keeping technique and recovery at the centre.'},
-   advanced:{name:'STRENGTH & CONDITIONING',text:'The advanced example is for people already confident with frequent exercise, with training volume adjusted to the individual.'}
+   beginner:{name:'Beginner · Start Strong',text:'The beginner plan focuses on simple strength movements, enjoyable low-impact cardio and manageable rest days. You can go at your own pace.'},
+   intermediate:{name:'Intermediate · Build Momentum',text:'The intermediate plan introduces more gym exercises and regular cardio while keeping technique and recovery at the centre.'},
+   advanced:{name:'Advanced · Strength & Conditioning',text:'The advanced example is for people already confident with frequent exercise, with training volume adjusted to the individual.'}
  };
  const key='bf-gym-last-plan-v1';
  function remember(level){
@@ -71,11 +93,26 @@ const links = [
    if(experience==='regular' && days==='many')return 'advanced';
    return 'intermediate';
  }
- const form=document.getElementById('level-form');
+ const form=document.querySelector<HTMLFormElement>('#level-form');
  const result=document.getElementById('recommendation');
- if(form && result){
+ const height = document.querySelector<HTMLInputElement>('#bmi-height');
+ const weight = document.querySelector<HTMLInputElement>('#bmi-weight');
+ const bmiOutput = document.getElementById('bmi-result');
+ if(form && result && height && weight && bmiOutput){
+   form.hidden = false;
+   form.addEventListener('input', () => { result.hidden = true; });
+   height.addEventListener('input', () => height.setCustomValidity(''));
+   weight.addEventListener('input', () => weight.setCustomValidity(''));
    form.addEventListener('submit',(event)=>{
      event.preventDefault();
+     const heightMetres = height.valueAsNumber / 100;
+     const bmi = weight.valueAsNumber / (heightMetres * heightMetres);
+     if (!Number.isFinite(bmi) || bmi <= 0) {
+       height.setCustomValidity('Enter your height in centimetres and check your weight in kilograms.');
+       height.reportValidity();
+       return;
+     }
+     bmiOutput.textContent = bmi.toFixed(1);
      const fd=new FormData(form);
      const experience=String(fd.get('experience')||'new');
      const days=String(fd.get('days')||'few');
@@ -86,7 +123,7 @@ const links = [
      const link=document.getElementById('result-link');
      if(title)title.textContent=titles[level].name;
      if(description)description.textContent=titles[level].text;
-     if(link)link.href='/programmes/?level='+level;
+     if(link)link.href='/programmes/?level='+level+'#selected-plan';
      result.hidden=false;
      result.focus();
      updateContinue(level);
@@ -121,4 +158,17 @@ const links = [
 @media(max-width:680px){.shell{padding:0 16px}.header{min-height:68px}.header nav{display:none}.logo{font-size:24px}.logo small{font-size:9px}.app-link{padding:10px;font-size:9px}.hero{padding:62px 0 45px}.hero h1{font-size:clamp(59px,11vw,82px)}.trust{gap:10px;padding:14px 16px;font-size:9px}.shortcuts{padding:60px 0}.section-head{display:block}.shortcut-grid{gap:9px}.shortcut{padding:15px;min-height:235px}.shortcut h3{font-size:24px}.shortcut p{font-size:11px}.finder{padding:60px 16px}.finder-panel{padding:17px}.finder h2,.section-head h2,.last-plan h2{font-size:54px}.last-plan{padding:30px 20px;display:block;margin:40px 0}.last-actions{min-width:0;margin-top:26px}.footer{flex-wrap:wrap}}
 @media(max-width:440px){.shortcut-grid{grid-template-columns:1fr}.shortcut{min-height:180px}.trust{font-size:8px}.hero h1{font-size:57px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.shortcut{transition:none}}
+#plan-finder{margin-top:1.5rem}
+.finder-copy h1{font-size:clamp(2.3rem,5vw,4rem);line-height:1.06;margin:0 0 1rem;text-transform:none}
+.finder-copy p,.finder-note p,#measurement-note{font-size:1rem}
+.assessment-link,.assessment-levels a{text-decoration:underline;text-underline-offset:.2em}
+#level-form[hidden],#recommendation[hidden]{display:none}
+.measurement-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+.measurement-grid label{display:grid;gap:.35rem;font-size:1rem}
+.measurement-grid input,.measurement-grid select{font:inherit;width:100%;min-width:0;min-height:44px;border:1px solid #71856a;border-radius:.4rem;background:#161f16;color:#f4f7ef;padding:.5rem}
+.bmi-reading{font-size:1.1rem}
+.bmi-reading strong{font-size:1.5rem}
+.assessment-levels{display:flex;gap:.75rem;flex-wrap:wrap}
+.assessment-levels a{font-size:1rem;padding:.65rem 0}
+@media(max-width:390px){.measurement-grid{grid-template-columns:1fr}}
 </style>
