@@ -99,19 +99,28 @@ const steps = [
 <main id="main">
   <section class="hero welcome" aria-labelledby="hero-title">
     <div class="container welcome-layout">
-      <div>
-        <p class="welcome-name">Coach Adeep Aji · BF GYM Global</p>
-        <h1 id="hero-title">Let’s build a routine that fits your life.</h1>
-        <p class="hero-lead">New to training or working around shifts? I’m Adeep. Start with three simple sessions you can fit into your week.</p>
+      <div class="welcome-copy">
+        <p class="welcome-name">Hi, I’m Coach Adeep.</p>
+        <h1 id="hero-title">Find a way to move that <span>fits your life.</span></h1>
+        <p class="hero-lead">New to the gym, getting back into a routine, or working around shifts? I’ll help you find a place to start.</p>
         <div class="hero-actions">
-          <a class="button button-lime" href="/start/#plan-finder">Check BMI &amp; find my plan</a>
-          <a class="button button-outline" href="https://ig.me/m/fitwithaadhi">Message Coach Adeep</a>
-          <a class="button button-outline" href="#starter-plan">Try the free 3-day workout</a>
+          <a class="button button-lime" href="#starter-plan">Try a free workout</a>
+          <a class="welcome-message" href="https://ig.me/m/fitwithaadhi">Message me on Instagram</a>
         </div>
+        <p class="welcome-access">Free to explore. No account needed.</p>
       </div>
-      <img class="welcome-portrait" src="/images/trainer/adeep-portrait-new.webp" width="600" height="690" fetchpriority="high" alt="Coach Adeep Aji smiling and giving two thumbs up" />
+      <figure class="welcome-figure">
+        <img class="welcome-portrait" src="/images/trainer/adeep-portrait-new.webp" width="600" height="690" fetchpriority="high" alt="Coach Adeep Aji smiling and giving two thumbs up" />
+        <figcaption><strong>Adeep Aji</strong><span>Head Coach, BF GYM Global</span></figcaption>
+      </figure>
     </div>
   </section>
+
+  <nav class="container home-entry" aria-label="Find your starting point">
+    <a href="/start/#plan-finder"><strong>Find my workout plan</strong><span>Check your BMI and choose a training level.</span></a>
+    <a href="/app/"><strong>Open the Fitness Hub</strong><span>Browse exercises and meals, or log a workout.</span></a>
+    <a href="#coaching-options"><strong>Explore coaching</strong><span>Get support that fits your goals and schedule.</span></a>
+  </nav>
 
   <section class="section" id="starter-plan" aria-labelledby="starter-heading">
     <div class="container">
@@ -343,13 +352,23 @@ const steps = [
 .team-profile h3 { font-size: 1.375rem; line-height: 1.25; margin: 0; }
 .team-profile p { font-size: 1rem; margin: 5px 0 0; color: #b9c7b5; }
 .team-profile .team-role { color: var(--lime); font-weight: 700; }
-.hero.welcome{min-height:0;padding:clamp(2.5rem,7vw,6rem) 0;background:#141b14}
-.welcome-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(13rem,.65fr);gap:clamp(1.75rem,6vw,6rem);align-items:center}
-.welcome-name{color:var(--lime);font-size:1rem;font-weight:700;margin:0 0 1rem}
-.welcome h1{font-family:inherit;font-size:clamp(2.25rem,5.5vw,4.75rem);line-height:1.07;letter-spacing:-.035em;text-transform:none;margin:0}
+.hero.welcome{min-height:0;padding:clamp(2rem,6vw,5rem) 0;background:radial-gradient(ellipse at 90% 30%,#455c30 0%,#1e2d20 42%,#141d15 78%)}
+.welcome-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(13rem,.85fr);gap:clamp(1.5rem,5vw,5rem);align-items:center}
+.welcome-name{color:#d6f28a;font-size:1.125rem;font-weight:700;margin:0 0 .85rem}
+.welcome h1{font-family:inherit;font-size:clamp(2.45rem,6.25vw,5.3rem);line-height:1.02;letter-spacing:-.055em;text-transform:none;margin:0;max-width:13ch}
+.welcome h1 span{color:#d6f28a}
 .welcome .hero-lead{font-size:1.125rem;max-width:38ch}
-.welcome-portrait{display:block;width:100%;height:auto;max-height:30rem;aspect-ratio:4/4.5;object-fit:cover;object-position:center 35%;border-radius:1rem}
+.welcome-figure{margin:0;position:relative;padding:clamp(.4rem,1vw,.8rem);background:#d8e6bc;border-radius:1.5rem;box-shadow:0 14px 45px #0e170d70}
+.welcome-portrait{display:block;width:100%;height:auto;max-height:29rem;aspect-ratio:4/4.5;object-fit:cover;object-position:center 35%;border-radius:1rem}
+.welcome-figure figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:.15rem .7rem;padding:.65rem .35rem .15rem;color:#23331d;font-size:.9rem}
+.welcome-figure strong{font-size:1.05rem}
+.welcome-message{font-size:1rem;color:#eff4e5;text-decoration:underline;text-underline-offset:.25em;padding:.7rem 0}
+.welcome-access{font-size:.9375rem;color:#d2dfc9;margin:1rem 0 0}
 .welcome .button,.starter-days button{font-size:.9375rem}
+.home-entry{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85rem;padding-block:1.25rem}
+.home-entry a{display:grid;align-content:start;gap:.35rem;padding:1.25rem;border:1px solid #43533c;border-radius:.85rem;background:#1b251b;color:#cddbc6;font-size:1rem;line-height:1.5}
+.home-entry a:hover{border-color:#d6f28a;background:#243323}
+.home-entry strong{color:#e6f7c0;font-size:1.15rem}
 #starter-plan{padding-block:clamp(2.5rem,6vw,5rem)}
 #starter-plan .container>p{font-size:1rem;max-width:64ch}
 .starter-days{display:flex;gap:.5rem;margin:1.5rem 0 .75rem}
@@ -359,5 +378,5 @@ const steps = [
 .starter-workouts{max-width:48rem;margin-bottom:1.25rem}
 .starter-workouts .starter-session{margin-top:.75rem;border-radius:.75rem;font-size:1rem}
 .starter-workouts .starter-session a{color:var(--lime);text-decoration:underline;text-underline-offset:.2em}
-@media(max-width:690px){.welcome-layout{grid-template-columns:1fr}.welcome-portrait{max-height:19rem;object-position:center 37%}.welcome .hero-actions{margin-top:1.25rem}}
+@media(max-width:690px){.welcome-layout,.home-entry{grid-template-columns:1fr}.welcome-figure{max-width:34rem}.welcome-portrait{max-height:19rem;object-position:center 30%}.welcome .hero-actions{margin-top:1.25rem}.home-entry a{padding:1rem}}
 </style>
