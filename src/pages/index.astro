@@ -191,11 +191,11 @@ const steps = [
         </div>
         <a href="/app/" class="button button-lime features-cta">OPEN THE FREE FITNESS HUB <span aria-hidden="true">↗</span></a>
       </div>
-      <div class="features-visual">
+      <a class="features-visual workout-photo-link" href="/programmes/" aria-label="Browse free workout programmes">
         <img src="https://images.unsplash.com/photo-1752911681648-3bd4732048d6?auto=format&amp;fit=crop&amp;w=1100&amp;q=78" loading="lazy" width="730" height="1000" alt="An athlete exercising in a gym, illustrative fitness photography"/>
-        <div class="features-visual-overlay"></div>
-        <div class="visual-label"><span>BF / GYM GLOBAL</span><strong>BUILD YOUR<br/>OWN ROUTINE.</strong></div>
-      </div>
+        <div class="features-visual-overlay" aria-hidden="true"></div>
+        <div class="visual-label"><span>BEGINNER · INTERMEDIATE · ADVANCED</span><strong>Browse workouts</strong></div>
+      </a>
     </div>
   </section>
 
@@ -379,4 +379,8 @@ const steps = [
 .starter-workouts .starter-session{margin-top:.75rem;border-radius:.75rem;font-size:1rem}
 .starter-workouts .starter-session a{color:var(--lime);text-decoration:underline;text-underline-offset:.2em}
 @media(max-width:690px){.welcome-layout,.home-entry{grid-template-columns:1fr}.welcome-figure{max-width:34rem}.welcome-portrait{max-height:19rem;object-position:center 30%}.welcome .hero-actions{margin-top:1.25rem}.home-entry a{padding:1rem}}
+.workout-photo-link{display:block;isolation:isolate}
+.workout-photo-link img{transition:filter .2s ease}
+.workout-photo-link:hover img,.workout-photo-link:focus-visible img{filter:brightness(1.12)}
+.workout-photo-link:focus-visible{outline:3px solid var(--lime);outline-offset:4px}
 </style>
