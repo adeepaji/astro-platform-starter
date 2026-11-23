@@ -1,6 +1,7 @@
 ---
-import { services } from '../data/services';
+import { approvedUrl, services } from '../data/services';
 import { publicEnquiriesEnabled } from '../data/businessLaunch';
+const launchCheckout = approvedUrl(import.meta.env.PUBLIC_BF_STRIPE_COACHING_LAUNCH, 'stripe');
 const pageTitle = 'Coaching Enquiries | BF GYM Global';
 ---
 <!doctype html>
@@ -16,6 +17,21 @@ const pageTitle = 'Coaching Enquiries | BF GYM Global';
     <section>
       <h1>Let’s talk about <em>your training.</em></h1>
       <p class="intro">I’m Coach Adeep. If you’re just starting, getting back into training or working around changing shifts, tell me what you’d like to achieve.</p>
+      <section class="launch-offer" aria-labelledby="launch-offer-heading">
+        <h2 id="launch-offer-heading">Four weeks of online coaching</h2>
+        <p class="launch-price">£79 <span>for four weeks · one-time payment</span></p>
+        <p>For beginners and shift workers who want a routine they can follow around work and family.</p>
+        <ul>
+          <li>A short introductory call to discuss your goals</li>
+          <li>A workout plan built around your schedule and equipment</li>
+          <li>One check-in each week to review progress and adjust the plan</li>
+        </ul>
+        {launchCheckout ? (
+          <a class="explore-link" href={launchCheckout}>Pay £79 with Stripe</a>
+        ) : (
+          <p>Message Coach Adeep on Instagram to ask about availability. Checkout is currently closed.</p>
+        )}
+      </section>
       <div class="availability"><h2>Start with a free workout</h2><p>Try the three-day beginner routine and see how it fits into your week.</p><p class="quick-link"><a href="/#starter-plan">Try the free 3-day plan</a></p></div>
     </section>
     {publicEnquiriesEnabled ? (<section class="form-panel"><div class="form-head"><strong>SESSION REQUEST</strong><small>BF / BOOKING ENQUIRY</small></div>
@@ -38,7 +54,7 @@ const pageTitle = 'Coaching Enquiries | BF GYM Global';
       <p>Tell me your main goal, how many days you can train and whether you train at home or at a gym.</p>
       <blockquote>Hi Adeep, my goal is ___. I can train ___ days a week and I train at ___.</blockquote>
       <p><a class="explore-link" href="https://ig.me/m/fitwithaadhi">Message @fitwithaadhi on Instagram</a></p>
-      <p>Paid bookings are currently closed.</p>
+
     </section>)}
   </main>
   <footer class="shell"><a href="/">BF GYM</a> · <a href="/privacy/">Privacy information</a></footer>
@@ -61,4 +77,10 @@ const pageTitle = 'Coaching Enquiries | BF GYM Global';
 .explore-link{display:inline-block;background:#c7ff52;color:#101310;padding:16px;font-weight:800;font-size:12px;text-decoration:none}.form-panel>h2{font:800 35px Impact,Arial,sans-serif}.form-panel>p{line-height:1.8;color:#44523d}
 h1{font-size:clamp(2.75rem,7vw,5.5rem);line-height:1.05}
 .form-panel blockquote{margin:1rem 0;border-inline-start:2px solid #c7ff52;padding:.75rem 1rem}
+.launch-offer{margin-block:1.5rem;padding:1.25rem;border:1px solid #53644a;border-radius:.75rem;background:#1c261b;font-size:1rem;line-height:1.55}
+.launch-offer h2{margin:0;font-size:1.5rem}
+.launch-offer ul{padding-inline-start:1.25rem}
+.launch-offer li+li{margin-top:.4rem}
+.launch-price{font-size:1.75rem;font-weight:800;color:var(--green);margin:.45rem 0}
+.launch-price span{font-size:.9375rem;font-weight:500;color:var(--white)}
 </style>

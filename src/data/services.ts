@@ -3,7 +3,7 @@
 import { commercialServicesEnabled } from './businessLaunch';
 export type ServiceId = 'personal' | 'group' | 'online';
 
-function approvedUrl(value: string | undefined, provider: 'calendly' | 'stripe'): string {
+export function approvedUrl(value: string | undefined, provider: 'calendly' | 'stripe'): string {
   if (!commercialServicesEnabled || !value) return '';
   try {
     const url = new URL(value.trim());
