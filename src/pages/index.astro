@@ -9,20 +9,20 @@ const starterSessions = [
 ];
 const year = new Date().getFullYear();
 const programmes = [
-  {number:'01',name:'BEGINNER',label:'BUILD THE FOUNDATION',description:'Get comfortable with the basics. Follow a simple four-week example and build consistency.',detail:'FREE 4-WEEK PLAN',href:'/programmes/?level=beginner',tone:'beginner'},
-  {number:'02',name:'INTERMEDIATE',label:'BUILD MOMENTUM',description:'Explore more structured sessions and keep developing your strength and fitness.',detail:'FREE 4-WEEK PLAN',href:'/programmes/?level=intermediate',tone:'intermediate'},
-  {number:'03',name:'ADVANCED',label:'TRAIN WITH INTENT',description:'Take a look at more demanding example workouts and refine your training approach.',detail:'FREE 4-WEEK PLAN',href:'/programmes/?level=advanced',tone:'advanced'}
+  { id: 'beginner', name: 'Beginner', description: 'Start with simple strength exercises, easy cardio and time to recover.' },
+  { id: 'intermediate', name: 'Intermediate', description: 'Build on the basics with more structured gym sessions and regular cardio.' },
+  { id: 'advanced', name: 'Advanced', description: 'Follow a more demanding strength and conditioning routine if you already train regularly.' }
 ];
 const features = [
-  {number:'01',icon:'▤',title:'Structured workout plans',description:'Beginner to advanced four-week examples, all free to explore.',url:'/programmes/'},
-  {number:'02',icon:'▶',title:'Exercise demonstrations',description:'Explore curated videos and search hundreds of exercises to learn the movement.',url:'/app/workouts/'},
-  {number:'03',icon:'◉',title:'Private progress tracker',description:'Mark workouts as complete. Your history stays in this browser on your device.',url:'/app/dashboard/'},
-  {number:'04',icon:'↗',title:'Start without signing up',description:'No login gate, payment details or active paid coaching required to begin.',url:'/start/'}
+  {title:'Exercise videos',description:'See how movements are done before you try them.',url:'/app/workouts/'},
+  {title:'Sample meals',description:'Browse a day of meal ideas for your training week.',url:'/sample-plan/#nutrition'},
+  {title:'Workout tracker',description:'Record completed sessions on this device.',url:'/app/dashboard/#progress'}
 ];
-const steps = [
-  {number:'01',title:'FIND YOUR STARTING POINT',description:'Choose the experience level that makes sense for you, with no pressure to be perfect.'},
-  {number:'02',title:'LEARN THE MOVEMENT',description:'Use the exercise library to understand technique before putting it into practice.'},
-  {number:'03',title:'BUILD YOUR OWN CONSISTENCY',description:'Explore a routine and record your completed workouts privately on this device.'}
+const questions = [
+  { question: 'Do I need an account?', answer: 'You can use the starter workout, all three training programmes and the Fitness Hub without an account.' },
+  { question: 'Which level should I choose?', answer: 'Beginner is a good starting point if you’re new to training or returning after a break. The workout finder can suggest a level based on your experience and how often you train.' },
+  { question: 'Can I train around night shifts?', answer: 'Yes. Pick the days that work for you and leave a day between the two strength sessions in the starter plan.' },
+  { question: 'How do I ask about personal coaching?', answer: 'Open the coaching page to see what the four-week offer includes. You can message Coach Adeep on Instagram about your goals and availability.' }
 ];
 ---
 <!doctype html>
@@ -67,7 +67,7 @@ const steps = [
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
-<div class="announcement"><div class="container"><span class="status-dot" aria-hidden="true"></span><span>BEST FITNESS / GLOBAL</span><span class="announcement-separator" aria-hidden="true">•</span><strong>FREE FITNESS LEARNING · NO LOGIN NEEDED</strong></div></div>
+
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="/" aria-label="BF GYM Global home"><span class="brand-logo">BF<span>.</span></span><span class="brand-word">GYM <small>GLOBAL</small></span></a>
@@ -107,7 +107,7 @@ const steps = [
           <a class="button button-lime" href="#starter-plan">Try a free workout</a>
           <a class="welcome-message" href="https://ig.me/m/fitwithaadhi">Message me on Instagram</a>
         </div>
-        <p class="welcome-access">Free to explore. No account needed.</p>
+        <p class="welcome-access">Two strength sessions and one easy cardio day. No account needed.</p>
       </div>
       <figure class="welcome-figure">
         <img class="welcome-portrait" src="/images/trainer/adeep-portrait-new.webp" width="600" height="690" fetchpriority="high" alt="Coach Adeep Aji smiling and giving two thumbs up" />
@@ -124,8 +124,8 @@ const steps = [
 
   <section class="section" id="starter-plan" aria-labelledby="starter-heading">
     <div class="container">
-      <h2 id="starter-heading" class="starter-heading">FREE 3-DAY STARTER PLAN</h2>
-      <p>Pick three days that suit your week. Leave at least one day between the strength sessions. Start with the lower end of each range and use light resistance while learning the movements.</p>
+      <h2 id="starter-heading" class="starter-heading">Your first three workouts</h2>
+      <p>Pick three days that suit your week. Leave at least one day between the strength sessions, and start with light resistance.</p>
       <div class="starter-days" role="group" aria-label="Choose a workout day" hidden>
         {starterSessions.map((_, index) => (
           <button type="button" aria-pressed={index === 0 ? 'true' : 'false'} aria-controls={`starter-day-${index + 1}`}>Day {index + 1}</button>
@@ -158,16 +158,14 @@ const steps = [
 
   <section class="section programmes-section" id="programmes" aria-labelledby="programmes-heading">
     <div class="container">
-      <div class="section-intro">
-        <div><p class="kicker"><span>01 /</span> TRAIN YOUR WAY</p><h2 id="programmes-heading">FIND YOUR<br/><span>PROGRAMME.</span></h2></div>
-        <div class="section-description"><p>Choose a starting level that works for you. Each programme offers a free four-week example you can explore at your own pace.</p><a class="text-link" href="/programmes/">VIEW ALL WORKOUT PLANS <span aria-hidden="true">↗</span></a></div>
-      </div>
+      <h2 id="programmes-heading" class="starter-heading">Choose your training level</h2>
+      <p class="home-section-note">Each programme gives you four weeks of workouts and exercise guidance.</p>
       <div class="programme-grid">
-        {programmes.map(item=>(
-          <a class:list={['programme-card',item.tone]} href={item.href}>
-            <div class="programme-card-top"><span>{item.number} / 03</span><span aria-hidden="true">↗</span></div>
-            <div class="programme-card-center"><p>{item.label}</p><h3>{item.name}</h3><p class="programme-card-description">{item.description}</p></div>
-            <div class="programme-card-bottom"><span>{item.detail}</span><span>EXPLORE <b aria-hidden="true">↗</b></span></div>
+        {programmes.map(plan => (
+          <a class:list={['programme-card', plan.id]} href={`/programmes/?level=${plan.id}#selected-plan`}>
+            <h3>{plan.name}</h3>
+            <p class="programme-card-description">{plan.description}</p>
+            <span class="programme-link">View plan</span>
           </a>
         ))}
       </div>
@@ -177,19 +175,14 @@ const steps = [
   <section class="section features-section" id="features" aria-labelledby="features-heading">
     <div class="container features-layout">
       <div class="features-copy">
-        <p class="kicker"><span>02 /</span> EVERYTHING YOU NEED TO BEGIN</p>
-        <h2 id="features-heading">TRAIN SMARTER.<br/><span>NOT HARDER.</span></h2>
-        <p class="features-lede">Your training tools are ready when you are. No expensive subscription or complicated sign-up process.</p>
+        <h2 id="features-heading" class="starter-heading">Make the most of your workout</h2>
         <div class="feature-list">
-          {features.map(feature=>(
+          {features.map(feature => (
             <a class="feature-item" href={feature.url}>
-              <span class="feature-icon" aria-hidden="true">{feature.icon}</span>
-              <div><span class="feature-number">{feature.number} / BF FITNESS</span><h3>{feature.title}</h3><p>{feature.description}</p></div>
-              <span class="feature-arrow" aria-hidden="true">↗</span>
+              <div><h3>{feature.title}</h3><p>{feature.description}</p></div>
             </a>
           ))}
         </div>
-        <a href="/app/" class="button button-lime features-cta">OPEN THE FREE FITNESS HUB <span aria-hidden="true">↗</span></a>
       </div>
       <a class="features-visual workout-photo-link" href="/programmes/" aria-label="Browse free workout programmes">
         <img src="https://images.unsplash.com/photo-1752911681648-3bd4732048d6?auto=format&amp;fit=crop&amp;w=1100&amp;q=78" loading="lazy" width="730" height="1000" alt="An athlete exercising in a gym, illustrative fitness photography"/>
@@ -199,20 +192,9 @@ const steps = [
     </div>
   </section>
 
-  <section class="section process-section" id="how-it-works" aria-labelledby="process-heading">
-    <div class="container process-layout">
-      <div class="process-heading"><p class="kicker"><span>03 /</span> SIMPLE FROM DAY ONE</p><h2 id="process-heading">HOW IT<br/><span>WORKS.</span></h2><p>Build a fitness habit without a complicated process. It's your journey, and you choose the pace.</p><a href="/start/" class="button button-outline">START HERE <span aria-hidden="true">↗</span></a></div>
-      <div class="steps">
-        {steps.map(step=>(
-          <div class="step"><span class="step-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.description}</p></div><span class="step-marker" aria-hidden="true">↗</span></div>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <section class="section" id="coaching-options" aria-labelledby="coaching-options-heading">
     <div class="container">
-      <h2 id="coaching-options-heading" class="starter-heading">COACHING OPTIONS</h2>
+      <h2 id="coaching-options-heading" class="starter-heading">Coaching that fits your week</h2>
       <div class="starter-grid">
         <article class="starter-session coaching-featured">
           <h3>Shift-Worker Fitness</h3>
@@ -228,7 +210,7 @@ const steps = [
           <p>For people training towards a specific goal. Tell Coach Adeep about your experience, equipment and available time so you can discuss a plan and the support that would help you follow it.</p>
         </article>
       </div>
-      <a class="button button-lime" href="/book/">ASK ABOUT COACHING</a>
+      <a class="button button-lime" href="/book/">See the four-week coaching offer</a>
     </div>
   </section>
 
@@ -278,7 +260,14 @@ const steps = [
     <div class="container card-strip-inner"><div><p class="kicker"><span>05 /</span> OPTIONAL EXTRAS</p><h2 id="card-heading">YOUR FITNESS.<br/><span>YOUR BF CARD.</span></h2><p>Create a private sample card with a nickname, fitness interest and optional Instagram handle. It's an on-device preview, not a registered membership.</p><a class="text-link" href="/join/">EXPLORE THE CARD DEMO <span aria-hidden="true">↗</span></a></div><div class="sample-card" aria-label="Decorative BF GYM card demonstration"><div class="sample-card-top"><strong>BF<span>.</span> GYM</strong><small>DEMO ONLY</small></div><div><span>PERSONAL CARD PREVIEW</span><strong>BEST FITNESS<br/>GLOBAL</strong></div><div class="sample-card-bottom"><span>DEVICE-ONLY PREVIEW</span><span>BF / 001</span></div></div></div>
   </section>
 
-  <section class="final-cta" aria-labelledby="cta-heading"><div class="container"><p class="kicker">YOUR NEXT STEP STARTS HERE</p><h2 id="cta-heading">READY WHEN<br/><span>YOU ARE.</span></h2><p>Start with one session. The free BF GYM Global resources are ready to explore.</p><div class="final-actions"><a href="/start/" class="button button-lime">START TRAINING FREE <span aria-hidden="true">↗</span></a><a href="/app/workouts/" class="button button-outline">WATCH EXERCISE VIDEOS <span aria-hidden="true">↗</span></a></div></div></section>
+  <section class="section home-faq" id="how-it-works" aria-labelledby="process-heading">
+    <div class="container">
+      <h2 id="process-heading" class="starter-heading">Questions before you start?</h2>
+      {questions.map(({question, answer}) => (
+        <details><summary>{question}</summary><p>{answer}</p></details>
+      ))}
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -383,4 +372,21 @@ const steps = [
 .workout-photo-link img{transition:filter .2s ease}
 .workout-photo-link:hover img,.workout-photo-link:focus-visible img{filter:brightness(1.12)}
 .workout-photo-link:focus-visible{outline:3px solid var(--lime);outline-offset:4px}
+.section{padding-block:clamp(2.75rem,6vw,5.5rem)}
+.home-section-note{font-size:1rem;margin:0 0 1.25rem;color:#cad6c4}
+.programme-card{min-height:0;justify-content:start;gap:.8rem;border-radius:.85rem}
+.programme-card:after{content:none}
+.programme-card h3{font-family:inherit;font-weight:700;font-size:1.65rem;line-height:1.15;margin:0}
+.programme-card-description{font-size:1rem;max-width:none}
+.programme-link{margin-top:auto;padding-top:.4rem;color:var(--lime);font-size:.9375rem;font-weight:800;text-decoration:underline;text-underline-offset:.2em}
+.features-copy h2.starter-heading{font-size:clamp(2rem,5vw,3.75rem)}
+.features-copy .feature-list{grid-template-columns:1fr;margin:1.25rem 0 0}
+.features-copy .feature-item{display:block;padding:1rem 0}
+.features-copy .feature-item h3{font-size:1.125rem}
+.features-copy .feature-item p{font-size:1rem}
+.home-faq details{max-width:52rem;border-bottom:1px solid #43533c}
+.home-faq summary{padding:1rem 0;min-height:44px;cursor:pointer;font-size:1.05rem;font-weight:700}
+.home-faq details p{margin:0 0 1rem;font-size:1rem;color:#cddbc6}
+.home-faq summary:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.programme-card,.workout-photo-link img{transition:none}.programme-card:hover{transform:none}}
 </style>
